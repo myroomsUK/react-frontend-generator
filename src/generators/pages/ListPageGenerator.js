@@ -31,7 +31,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
 import ListPageFilterBar from "./utils/ListPageFilterBar";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
@@ -235,19 +235,8 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
     const [selected, setSelected] = React.useState([]);
     const {urlResourceName} = useParams();
     const resourceNameToUse = useMemo(()=>{return (inheritedResourceName) ? inheritedResourceName : urlResourceName;},[urlResourceName, inheritedResourceName])
-    const [model, setModel] = useState({properties:[]});
-    const [table, setTable] = useState([]);
-    const [resourceName, setResourceName] = useState("");
-    const [title, setTitle] = useState("");
-    //const {model,resourceName, title} = useMemo(()=>getResourceModel(resourceNameToUse),[resourceNameToUse]);
 
-    useEffect(()=>{
-        const {model, resourceName, title, table} = getResourceModel(resourceNameToUse)
-        setModel(model);
-        setResourceName(resourceName);
-        setTitle(title);
-        setTable(table);
-    },[resourceNameToUse])
+    const {model, resourceName, title, table, tableActions:customActions} = useGetResourceModel(resourceNameToUse)
 
 
     let headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {

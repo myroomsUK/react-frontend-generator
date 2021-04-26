@@ -2,7 +2,7 @@ import * as ActionTypes from '../../actions/app/actions';
 import _ from 'lodash';
 import {mainTheme} from "../../../rendering/themes/themes";
 
-const initialState = {resource:null, theme: mainTheme, statusBar:{message: undefined, severity:"info"}, resourceBuffer:new Set(), listings: new Map()};
+const initialState = {resource:null, theme: mainTheme, statusBar:{message: undefined, severity:"info"}, resourceBuffer:new Set(), listings: new Map(), registry:[]};
 
 
 const appReducer = (state = initialState, action) => {
@@ -45,6 +45,13 @@ const appReducer = (state = initialState, action) => {
                     listings: action.listingsMap
                 }
             }
+            case ActionTypes.SET_REGISTRY:{
+                return {
+                    ...state,
+                    registry: action.registry
+                }
+            }
+
             default: return state;
 
 

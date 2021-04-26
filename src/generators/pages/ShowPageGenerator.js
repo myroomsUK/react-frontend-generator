@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import {push} from "connected-react-router";
 import {useDispatch} from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useGetOne} from "../../redux/actions/verbs/get_one";
 import {ShowContent} from "../fields/ShowContent";
 
@@ -11,7 +11,7 @@ import {ShowContent} from "../fields/ShowContent";
 export function Show(){
     const {urlResourceName, id} = useParams();
     const initialValue = useRef({});
-    const resourceModel = getResourceModel(urlResourceName);
+    const resourceModel = useGetResourceModel(urlResourceName);
     const {model, resourceName, showPage} = resourceModel;
     const [record, setRecord] = useState(initialValue.current);
     const {data:downloadedRecord, getOne} = useGetOne();

@@ -6,6 +6,7 @@ export const SWITCH_THEME = "SWITCH_THEME";
 export const FEEDBACK_MESSAGE = "FEEDBACK_MESSAGE";
 export const RESET_RESOURCE_BUFFER = "RESET_RESOURCE_BUFFER";
 export const UPDATE_RESOURCE_LISTINGS = "UPDATE_RESOURCE_LISTINGS";
+export const SET_REGISTRY = "SET_REGISTRY";
 
 export const changeResource = (resource) =>{
     return {
@@ -46,5 +47,12 @@ export const updateResourceListings = (listings) => {
     return {
         type: UPDATE_RESOURCE_LISTINGS,
         listingsMap: listings
+    }
+}
+
+export const updateRegistry = (registry) => {
+    return {
+        type: SET_REGISTRY,
+        registry: registry
     }
 }

@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Resource} from "../../resource-models/Resource";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useCreate} from "../../redux/actions/verbs/create";
 import {FormGeneratorPropsObject} from "../forms/FormGeneratorProps";
 import {FormGenerator} from "../forms/FormGenerator";
@@ -19,7 +18,7 @@ interface CreateRouteParams{
 export const Create: React.FC<Props> = ({propResourceName}) => {
     const {urlResourceName} = useParams<CreateRouteParams>();
     const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
-    const {model, resourceName, createPage} = useMemo<Resource>(()=> getResourceModel(resourceNameToUse),[resourceNameToUse])
+    const {model, resourceName, createPage} = useGetResourceModel(resourceNameToUse);
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState({});
     const {create, errors} = useCreate();

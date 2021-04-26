@@ -1,13 +1,13 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getResourceModel} from "../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../resource-models/modelsRegistry";
 import {useGetListing, useGetListingGroup} from "../redux/actions/verbs/get_listing";
 import {getReferenceKeys, initializeReferenceFields} from "../generators/forms/formHelpers";
 import {updateResourceListings} from "../redux/actions/app/actions";
 
 export function useGetReferenceFieldsMap(resourceName, resource=null){
-
-    const {model} = useMemo(()=> (resource) ? resource : getResourceModel(resourceName),[resource, resourceName])  ;
+    const resourceFromRegistry = useGetResourceModel(resourceName)
+    const {model} =  (resource) ? resource : resourceFromRegistry ;
     const {getListing} = useGetListing();
     const [trueResourceName, setTrueResourceName] = useState(resourceName);
 //Looking for reference resources

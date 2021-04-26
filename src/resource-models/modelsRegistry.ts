@@ -1,17 +1,32 @@
 import {Resource} from "./Resource";
-import {ResourceRegistry} from "./ResourceRegistry";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {updateRegistry} from "../redux/actions/app/actions";
+import _ from 'lodash';
 
-const totalModel = {}
-const overrideRegistry = {}; //TODO
 
-export const registry:object = {...totalModel, ...overrideRegistry};
+export function useGetResourceModel(resourceName:string): Resource{
 
-export function getResourceModel(resourceName:string): Resource{
-    const classRegistry = ResourceRegistry.get();
-    const resource = classRegistry.getResource(resourceName);
-    if(resource){
-        return resource;
-    }
-    throw Error(`Resource ${resourceName} does not exist.`)
+    const state = useSelector(state=>state);
+    // @ts-ignore
+    return state.appReducer.registry.find(({resource, name}: any) => name === resourceName)?.resource;
 
+}
+
+export function useSetResourceModel(overrideRegistry:any, route ="/resources"){
+    const [modelLoaded, setModelLoaded] = useState(false);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        fetch(route).then(response => response.json().then(retrieved => retrieved)).then(retrieved => {
+            const registry = override(retrieved,overrideRegistry);
+            const arrayRegistry = Object.keys(registry).map(resourceName => {return{name: resourceName, resource: new Resource(registry[resourceName]) } });
+            dispatch(updateRegistry(arrayRegistry))
+            setModelLoaded(true);
+        })
+    },[])
+    return modelLoaded;
+}
+
+export function override(original:any, overrideElement:any){
+    return _.merge(original,overrideElement)
 }

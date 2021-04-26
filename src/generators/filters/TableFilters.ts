@@ -1,11 +1,10 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import _ from "lodash";
 import {replace} from "connected-react-router";
 import {FilterList} from "./FilterList";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
-
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 
 
 interface RouteParams{
@@ -82,7 +81,7 @@ export const TableFilters: (resourceNameToUse:string, presetFilters:any) => { co
 
 
         const clearFilters = ()=>setFilterObject({});
-        const {model, filters:modelFilters} = useMemo(()=> getResourceModel(resourceNameToUse),[resourceNameToUse]);
+        const {model, filters:modelFilters} = useGetResourceModel(resourceNameToUse);
         const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject}},[model, modelFilters, filterObject]);
         return {filters:filterObject, components:FilterList(propsFiltersList), clearFilters:clearFilters}
 

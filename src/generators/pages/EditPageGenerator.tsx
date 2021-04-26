@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useParams} from "react-router-dom";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useGetOne} from "../../redux/actions/verbs/get_one";
 import {useEdit} from "../../redux/actions/verbs/edit";
 import {getFormValueFromRecord} from "../forms/formHelpers";
@@ -16,7 +16,7 @@ interface EditRouteParams{
 
 export const Edit: React.FC = () => {
     const {urlResourceName, id} = useParams<EditRouteParams>();
-    const {model, resourceName, editPage} = useMemo(()=>{return getResourceModel(urlResourceName); },[urlResourceName])
+    const {model, resourceName, editPage} = useGetResourceModel(urlResourceName);
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);

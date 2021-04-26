@@ -1,9 +1,10 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {FormContent} from "./FormContent";
 
 export default function NestedFormContent({model, form, setParentFormValue, formValue, errors, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler}){
-    const resource = useMemo(()=> model.resource ?? getResourceModel(model.resourceName),[model]);
+    const resourceFromRegistry = useGetResourceModel(model.resourceName)
+    const resource = useMemo(()=> model.resource ?? resourceFromRegistry ,[model]);
     const embModel = useMemo(()=> resource.model,[resource])
     const [localFormValue, setLocalFormValue] = useState({});
 

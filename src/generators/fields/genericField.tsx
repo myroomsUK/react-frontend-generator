@@ -22,7 +22,7 @@ import {PropertyModel} from "../../resource-models/PropertyModel";
 import chipGenerator from "./outputs/chips/chipGenerator";
 import ShowFileList from "./ShowFileList";
 import {ShowContent} from "./ShowContent";
-import {getResourceModel} from "../../resource-models/modelsRegistry";
+import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {IterableShowContent} from "./IterableShowContent";
 import {showDate} from "../../utils/timeUtils";
 
@@ -40,6 +40,7 @@ export const GenericField: React.FC<GenericField> = ({propertyRecord, propertyMo
     const dispatch = useDispatch();
 
     const {type, optionText, resourceName, label, options} = propertyModel;
+    const embeddedResource = useGetResourceModel(resourceName);
     switch(type){
         case REFERENCE: {
             const embResourceName = resourceName;
@@ -76,8 +77,7 @@ export const GenericField: React.FC<GenericField> = ({propertyRecord, propertyMo
         }
         case EMBEDDED_MULTIPLE:{
             if(table){
-                const embeddeedResource = getResourceModel(resourceName);
-                const embeddedPropertyModel = embeddeedResource.model.getPropertyByResourceName(originalResourceName);
+                const embeddedPropertyModel = embeddedResource.model.getPropertyByResourceName(originalResourceName);
                 const name = embeddedPropertyModel.id;
                 return <Button variant="contained" color="primary" onClick={()=>dispatch(push(`/${resourceName}?${name}=${originalId}`))}>{`VIEW ${label}`}</Button>
             }
