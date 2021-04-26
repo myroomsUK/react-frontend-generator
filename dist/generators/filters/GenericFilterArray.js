@@ -1,0 +1,61 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from "react";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import ListItemText from "@material-ui/core/ListItemText";
+import TextField from "@material-ui/core/TextField";
+import BooleanFilter from "./inputs/BooleanFilter";
+import ReferenceFilter from "./inputs/ReferenceFilter";
+import TextFilter from "./inputs/TextFilter";
+import { AutoCompleteFilter } from "./inputs/AutoCompleteFilter";
+export const GenericFilterArray = ({ model, modelFilters, inputFieldOnChange, referencesMap, filterValue }) => {
+    const getFiltersByType = (type) => {
+        switch (type) {
+            case "boolean": {
+                return modelFilters[type].map((name) => {
+                    return {
+                        name: name,
+                        type: "boolean",
+                        component: _jsx(BooleanFilter, { value: filterValue[name], name: name, type: type, inputFieldOnChange: inputFieldOnChange }, name)
+                    };
+                });
+            }
+            case "text": {
+                return modelFilters[type].map((name, index) => {
+                    const propertyModel = model.getProperty(name);
+                    if (propertyModel.type === "reference") {
+                        const options = referencesMap.get(propertyModel.resourceName);
+                        return {
+                            name: name,
+                            component: _jsx(ReferenceFilter, { inputFieldOnChange: inputFieldOnChange, text: name, modelItem: propertyModel, options: options, inheritedValue: filterValue[name] }, name)
+                        };
+                    }
+                    else {
+                        return {
+                            name: name,
+                            component: _jsx(TextFilter, { label: propertyModel.label, name: name, type: type, inputFieldOnChange: inputFieldOnChange, value: filterValue[name] }, name)
+                        };
+                    }
+                });
+            }
+            case "enum": {
+                return modelFilters[type].map((name, index) => {
+                    const propertyModel = model.getProperty(name);
+                    const { options } = propertyModel;
+                    return {
+                        name: name,
+                        component: _jsx(AutoCompleteFilter, { name: name, inputFieldOnChange: inputFieldOnChange, options: options, value: filterValue[name] }, name)
+                    };
+                });
+            }
+            default: {
+                return modelFilters[type].map((text) => _jsxs(React.Fragment, { children: [_jsxs(ListItem, Object.assign({ button: true }, { children: [_jsx(ListItemIcon, { children: _jsx(InboxIcon, {}, void 0) }, void 0),
+                                _jsx(ListItemText, { primary: text }, void 0)] }), void 0),
+                        _jsx(ListItem, { children: _jsx(TextField, { id: text, name: text, onChange: inputFieldOnChange, value: filterValue[text] }, void 0) }, void 0)] }, text));
+            }
+        }
+    };
+    const reducer = (accumulator, type) => [...getFiltersByType(type), ...accumulator];
+    return (modelFilters) ? Object.keys(modelFilters).reduce(reducer, []) : [];
+};

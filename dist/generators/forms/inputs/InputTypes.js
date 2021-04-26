@@ -1,0 +1,15 @@
+export const BOOLEAN = "boolean";
+export const REFERENCE = "reference";
+export const EMBEDDED_SINGLE = "embedded_single";
+export const EMBEDDED_MULTIPLE = "embedded_multiple";
+export const FILE_SINGLE = "file_single";
+export const FILE_MULTIPLE = "file_multiple";
+export const INTEGER = "integer";
+export const DATE = "date";
+export const FLOAT = "float";
+export const ENUM = "enum";
+export const STRING = "string";
+export const PHONE = "phone";
+export const MONEY = "money";
+export const ARRAY = "array";
+export const TEXT = "text";
