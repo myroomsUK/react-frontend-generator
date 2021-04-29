@@ -8,15 +8,24 @@ import {FormGenerator} from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import {UpdateListings} from "../../utils/referenceFieldUtils";
 
+interface Props{
+    propResourceName?:string,
+    propEditPage?:any,
+    propId?:number
+}
+
 
 interface EditRouteParams{
     urlResourceName:string,
     id: string
 }
 
-export const Edit: React.FC = () => {
+export const Edit: React.FC<Props> = ({propResourceName, propId, propEditPage}) => {
     const {urlResourceName, id} = useParams<EditRouteParams>();
-    const {model, resourceName, editPage} = useGetResourceModel(urlResourceName);
+    const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
+    const {model, resourceName, editPage} = useGetResourceModel(resourceNameToUse);
+    const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
+    const idToUse:string = useMemo(()=> propId ? propId.toString(): id,[propId, id])
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);
@@ -26,8 +35,8 @@ export const Edit: React.FC = () => {
     const {edit, errors} = useEdit();
 
     const getNewResource = useCallback(()=>{
-        getOne(resourceName,id);
-    },[resourceName,id])
+        getOne(resourceName,idToUse);
+    },[resourceName,idToUse])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
 
@@ -44,7 +53,7 @@ export const Edit: React.FC = () => {
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
-    const submitHandler = async (formValue:any)=> edit(resourceName,id, formValue).then(response => {
+    const submitHandler = async (formValue:any)=> edit(resourceName,idToUse, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
         return response;
     }).catch(response => {
@@ -61,15 +70,15 @@ export const Edit: React.FC = () => {
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
-            resourceId: id,
+            resourceId: idToUse,
 
         }
-    },[model,referencesMap, formValue, resourceName, id])
+    },[model,referencesMap, formValue, resourceName, idToUse])
 
 
     useEffect(()=>{
         if(formValue!==initialValue.current){
-            if(editPage){
+            if(createEditPageToUse){
                 setGenericEditRender(<GenericForm  {...editFormProps} page={editPage} errors={errors}  />)
             }else{
                 setGenericEditRender(<FormGenerator {...editFormProps} errors={errors} text="Save"/>)
