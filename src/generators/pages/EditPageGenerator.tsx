@@ -79,7 +79,7 @@ export const Edit: React.FC<Props> = ({propResourceName, propId, propEditPage}) 
     useEffect(()=>{
         if(formValue!==initialValue.current){
             if(createEditPageToUse){
-                setGenericEditRender(<GenericForm  {...editFormProps} page={editPage} errors={errors}  />)
+                setGenericEditRender(<GenericForm  {...editFormProps} page={createEditPageToUse} errors={errors}  />)
             }else{
                 setGenericEditRender(<FormGenerator {...editFormProps} errors={errors} text="Save"/>)
             }

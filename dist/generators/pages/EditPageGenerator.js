@@ -66,7 +66,7 @@ export const Edit = ({ propResourceName, propId, propEditPage }) => {
     useEffect(() => {
         if (formValue !== initialValue.current) {
             if (createEditPageToUse) {
-                setGenericEditRender(_jsx(GenericForm, Object.assign({}, editFormProps, { page: editPage, errors: errors }), void 0));
+                setGenericEditRender(_jsx(GenericForm, Object.assign({}, editFormProps, { page: createEditPageToUse, errors: errors }), void 0));
             }
             else {
                 setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { errors: errors, text: "Save" }), void 0));
