@@ -17,12 +17,9 @@ import { getFormValueFromRecord } from "../forms/formHelpers";
 import { FormGenerator } from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
-export const Edit = ({ propResourceName, propEditPage, propId }) => {
+export const Edit = () => {
     const { urlResourceName, id } = useParams();
-    const resourceNameToUse = useMemo(() => propResourceName ? propResourceName : urlResourceName, [urlResourceName, propResourceName]);
-    const { model, resourceName, editPage } = useGetResourceModel(resourceNameToUse);
-    const editPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
-    const idToUse = useMemo(() => propId ? propId : id, [propId, id]);
+    const { model, resourceName, editPage } = useGetResourceModel(urlResourceName);
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);
@@ -30,8 +27,8 @@ export const Edit = ({ propResourceName, propEditPage, propId }) => {
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const { edit, errors } = useEdit();
     const getNewResource = useCallback(() => {
-        getOne(resourceName, idToUse);
-    }, [resourceName, idToUse]);
+        getOne(resourceName, id);
+    }, [resourceName, id]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => getNewResource(), []);
     useEffect(() => {
@@ -43,7 +40,7 @@ export const Edit = ({ propResourceName, propEditPage, propId }) => {
     useEffect(() => setFormValue(getFormValueFromRecord(record, model)), [record]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
-        return edit(resourceName, idToUse, formValue).then(response => {
+        return edit(resourceName, id, formValue).then(response => {
             setFormValue(getFormValueFromRecord(response, model));
             return response;
         }).catch(response => {
@@ -60,13 +57,13 @@ export const Edit = ({ propResourceName, propEditPage, propId }) => {
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,
             resourceName: resourceName,
-            resourceId: idToUse,
+            resourceId: id,
         };
-    }, [model, referencesMap, formValue, resourceName, idToUse]);
+    }, [model, referencesMap, formValue, resourceName, id]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
-            if (editPageToUse) {
-                setGenericEditRender(_jsx(GenericForm, Object.assign({}, editFormProps, { page: editPageToUse, errors: errors }), void 0));
+            if (editPage) {
+                setGenericEditRender(_jsx(GenericForm, Object.assign({}, editFormProps, { page: editPage, errors: errors }), void 0));
             }
             else {
                 setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { errors: errors, text: "Save" }), void 0));

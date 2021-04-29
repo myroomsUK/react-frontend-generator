@@ -14,19 +14,9 @@ interface EditRouteParams{
     id: string
 }
 
-interface Props{
-    propResourceName?:string,
-    propEditPage?:any,
-    propId ?: any
-}
-
-export const Edit: React.FC<Props> = ({propResourceName, propEditPage, propId}) => {
+export const Edit: React.FC = () => {
     const {urlResourceName, id} = useParams<EditRouteParams>();
-    const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
-
-    const {model, resourceName, editPage} = useGetResourceModel(resourceNameToUse);
-    const editPageToUse = useMemo(()=>propEditPage ? propEditPage : editPage,[propEditPage, editPage])
-    const idToUse = useMemo(()=>propId ? propId : id,[propId, id])
+    const {model, resourceName, editPage} = useGetResourceModel(urlResourceName);
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);
@@ -36,8 +26,8 @@ export const Edit: React.FC<Props> = ({propResourceName, propEditPage, propId}) 
     const {edit, errors} = useEdit();
 
     const getNewResource = useCallback(()=>{
-        getOne(resourceName,idToUse);
-    },[resourceName,idToUse])
+        getOne(resourceName,id);
+    },[resourceName,id])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
 
@@ -54,7 +44,7 @@ export const Edit: React.FC<Props> = ({propResourceName, propEditPage, propId}) 
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
-    const submitHandler = async (formValue:any)=> edit(resourceName,idToUse, formValue).then(response => {
+    const submitHandler = async (formValue:any)=> edit(resourceName,id, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
         return response;
     }).catch(response => {
@@ -71,16 +61,16 @@ export const Edit: React.FC<Props> = ({propResourceName, propEditPage, propId}) 
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
-            resourceId: idToUse,
+            resourceId: id,
 
         }
-    },[model,referencesMap, formValue, resourceName, idToUse])
+    },[model,referencesMap, formValue, resourceName, id])
 
 
     useEffect(()=>{
         if(formValue!==initialValue.current){
-            if(editPageToUse){
-                setGenericEditRender(<GenericForm  {...editFormProps} page={editPageToUse} errors={errors}  />)
+            if(editPage){
+                setGenericEditRender(<GenericForm  {...editFormProps} page={editPage} errors={errors}  />)
             }else{
                 setGenericEditRender(<FormGenerator {...editFormProps} errors={errors} text="Save"/>)
             }
