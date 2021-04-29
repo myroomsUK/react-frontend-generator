@@ -1,2 +1,8 @@
 import React from "react";
-export declare const Edit: React.FC;
+interface Props {
+    propResourceName?: string;
+    propEditPage?: any;
+    propId?: any;
+}
+export declare const Edit: React.FC<Props>;
+export {};

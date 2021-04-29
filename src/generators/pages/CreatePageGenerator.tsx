@@ -8,17 +8,19 @@ import GenericForm from "../forms/genericForm";
 import {UpdateListings} from "../../utils/referenceFieldUtils";
 
 interface Props{
-    propResourceName?:string
+    propResourceName?:string,
+    propCreatePage?:any
 }
 
 interface CreateRouteParams{
     urlResourceName:string
 }
 
-export const Create: React.FC<Props> = ({propResourceName}) => {
+export const Create: React.FC<Props> = ({propResourceName, propCreatePage}) => {
     const {urlResourceName} = useParams<CreateRouteParams>();
     const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
     const {model, resourceName, createPage} = useGetResourceModel(resourceNameToUse);
+    const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState({});
     const {create, errors} = useCreate();
@@ -53,8 +55,8 @@ export const Create: React.FC<Props> = ({propResourceName}) => {
 
     useEffect(()=>{
 
-        if(createPage){
-            setGenericCreateRender(<GenericForm {...createFormProps} page={createPage} errors={errors}/>)
+        if(createPageToUse){
+            setGenericCreateRender(<GenericForm {...createFormProps} page={createPageToUse} errors={errors}/>)
         }else{
             setGenericCreateRender(<FormGenerator {...createFormProps} />)
         }
