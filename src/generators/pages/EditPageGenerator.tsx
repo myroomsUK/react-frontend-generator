@@ -25,7 +25,7 @@ export const Edit: React.FC<Props> = ({propResourceName, propId, propEditPage}) 
     const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
     const {model, resourceName, editPage} = useGetResourceModel(resourceNameToUse);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
-    const idToUse:string = useMemo(()=> propId ? propId.toString(): id,[propId, id])
+    const idToUse:any = useMemo(()=> propId ? propId: id,[propId, id])
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);
@@ -70,7 +70,7 @@ export const Edit: React.FC<Props> = ({propResourceName, propId, propEditPage}) 
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
-            resourceId: idToUse,
+            resourceId: idToUse.toString(),
 
         }
     },[model,referencesMap, formValue, resourceName, idToUse])

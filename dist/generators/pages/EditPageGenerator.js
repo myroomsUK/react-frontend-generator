@@ -22,7 +22,7 @@ export const Edit = ({ propResourceName, propId, propEditPage }) => {
     const resourceNameToUse = useMemo(() => propResourceName ? propResourceName : urlResourceName, [urlResourceName, propResourceName]);
     const { model, resourceName, editPage } = useGetResourceModel(resourceNameToUse);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
-    const idToUse = useMemo(() => propId ? propId.toString() : id, [propId, id]);
+    const idToUse = useMemo(() => propId ? propId : id, [propId, id]);
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [record, setRecord] = useState(initialValue.current);
@@ -60,7 +60,7 @@ export const Edit = ({ propResourceName, propId, propEditPage }) => {
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,
             resourceName: resourceName,
-            resourceId: idToUse,
+            resourceId: idToUse.toString(),
         };
     }, [model, referencesMap, formValue, resourceName, idToUse]);
     useEffect(() => {
