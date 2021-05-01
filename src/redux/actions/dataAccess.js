@@ -19,7 +19,7 @@ export function fetch(id, options = {}) {
     )
         options.headers.set('Content-Type', (options.method==="PATCH") ? PATCH_MIME_TYPE : MIME_TYPE)
 
-    return global.fetch(new URL(id, ENTRYPOINT), options).then(response => {
+    return global.fetch(new URL(id, process.env.ENTRYPOINT), options).then(response => {
         if (response.ok) return response;
 
         return response.json().then(
@@ -61,7 +61,7 @@ export function ldfetch(id, options = {}) {
     )
         options.headers.set('Content-Type', (options.method==="PATCH") ? PATCH_MIME_TYPE : LD_MIME_TYPE)
 
-    return global.fetch(new URL(id, ENTRYPOINT), options).then(response => {
+    return global.fetch(new URL(id, process.env.ENTRYPOINT), options).then(response => {
         if (response.ok) return response;
 
         return response.json().then(
