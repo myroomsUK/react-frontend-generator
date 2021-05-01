@@ -22,6 +22,17 @@ export function useSetResourceModel(overrideRegistry, route = "/resources") {
     }, []);
     return modelLoaded;
 }
+export function useSetRegistry(registry) {
+    const [modelLoaded, setModelLoaded] = useState(false);
+    const arrayRegistry = Object.keys(registry).map(resourceName => { return { name: resourceName, resource: new Resource(registry[resourceName]) }; });
+    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log("dispatching");
+        dispatch(updateRegistry(arrayRegistry));
+        setModelLoaded(true);
+    }, []);
+    return modelLoaded;
+}
 export function override(original, overrideElement) {
     return _.merge(original, overrideElement);
 }

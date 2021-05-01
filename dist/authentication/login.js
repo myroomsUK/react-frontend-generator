@@ -10,8 +10,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from "react-redux";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
@@ -39,12 +37,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function SignIn() {
-    const location = useLocation();
-    const dispatch = useDispatch();
-    let url = "/";
-    if (location.state) {
-        url = location.state.referrer;
-    }
     const [formValue, setFormValue] = useState({});
     const [errorMessage, setErrorMessage] = useState("ERRORE");
     const [open, setOpen] = React.useState(false);

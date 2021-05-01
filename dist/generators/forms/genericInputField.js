@@ -63,7 +63,7 @@ export const InputField = ({ type, resourceName, resourceId, onClick, requestedN
             return _jsx(MoneyInput, Object.assign({}, model, { value: value, onClick: onClick }), void 0);
         }
         case STRING: {
-            return _jsx(StringInput, { onClick: onClick, hasError: hasError, model: model, errorMessage: errorMessage, label: label, value: value, adornment: adornment }, void 0);
+            return _jsx(StringInput, { onClick: onClick, hasError: hasError, model: model, errorMessage: errorMessage, label: label, value: value !== null && value !== void 0 ? value : "", adornment: adornment }, void 0);
         }
         default: {
             return _jsx(CustomTextValidator, { autoComplete: "nope", error: hasError, errorMessage: errorMessage, variant: "outlined", label: label, name: model.id, id: model.id, onChange: onClick, value: value, style: { width: "100%" }, InputProps: {

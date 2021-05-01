@@ -11,6 +11,12 @@ interface Props{
 
 export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
 
+    const record = useEditPage(resourceName, propId);
+
+    return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
+}
+
+export function useEditPage(resourceName:string, propId:number){
     const initialValue = useRef({});
     const [record, setRecord] = useState(initialValue.current);
     const {data:downloadedRecord, getOne} = useGetOne();
@@ -23,6 +29,5 @@ export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId
             setRecord(downloadedRecord)
         }
     },[downloadedRecord])
-
-    return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
+    return record;
 }

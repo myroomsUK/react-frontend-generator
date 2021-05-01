@@ -146,7 +146,7 @@ export const InputField: React.FC<InputField> = ({type, resourceName,resourceId,
                 model={model}
                 errorMessage={errorMessage}
                 label={label}
-                value={value}
+                value={value ?? ""}
                 adornment={adornment}
 
             />

@@ -51,14 +51,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
 
-    const location = useLocation();
-    const dispatch = useDispatch();
-
-    let url = "/";
-    if(location.state){
-       url = location.state.referrer;
-    }
-
     const [formValue, setFormValue] = useState({});
     const [errorMessage, setErrorMessage] = useState("ERRORE");
     const [open, setOpen] = React.useState(false);

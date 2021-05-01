@@ -5,4 +5,5 @@ interface Props {
     propEditPage?: any;
 }
 export declare const EditPage: React.FC<Props>;
+export declare function useEditPage(resourceName: string, propId: number): {};
 export {};
