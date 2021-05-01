@@ -6,11 +6,13 @@ import {getFormValueFromRecord} from "../../forms/formHelpers";
 import GenericForm from "../../forms/genericForm";
 import {FormGenerator} from "../../forms/FormGenerator";
 
-interface EditFormGeneratorProps{
-    propResourceName:string,
-    propId:number,
+interface EditFormGeneratorProps {
+    propResourceName: string,
+    propId: number,
     record: any,
-    propEditPage?:any,
+    propEditPage?: any,
+    thenFunction?: any,
+    catchfunction?: any
 }
 
 /**
@@ -19,11 +21,13 @@ interface EditFormGeneratorProps{
  * @param propId
  * @param propResourceName
  * @param propEditPage
+ * @param catchfunction
+ * @param thenFunction
  * @constructor
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage}) => {
+export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
     console.log(record);
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
@@ -42,9 +46,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
     const submitHandler = async (formValue:any)=> edit(resourceName,propId, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
         return response;
-    }).catch(response => {
-        //throw new Error();
-    } );
+    }).then(thenFunction).catch(catchfunction);
 
     const editFormProps = useMemo(()=>{
         return {

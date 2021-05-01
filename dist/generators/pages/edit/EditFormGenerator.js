@@ -21,11 +21,13 @@ import { FormGenerator } from "../../forms/FormGenerator";
  * @param propId
  * @param propResourceName
  * @param propEditPage
+ * @param catchfunction
+ * @param thenFunction
  * @constructor
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm = ({ record, propId, propResourceName, propEditPage }) => {
+export const EditForm = ({ record, propId, propResourceName, propEditPage, catchfunction = () => { }, thenFunction = () => { } }) => {
     console.log(record);
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
@@ -40,9 +42,7 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage }) => 
         return edit(resourceName, propId, formValue).then(response => {
             setFormValue(getFormValueFromRecord(response, model));
             return response;
-        }).catch(response => {
-            //throw new Error();
-        });
+        }).then(thenFunction).catch(catchfunction);
     });
     const editFormProps = useMemo(() => {
         return {
