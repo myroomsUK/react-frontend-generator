@@ -1,5 +1,4 @@
 import { SubmissionError } from 'redux-form';
-import { ENTRYPOINT } from "../../config/entrypoint";
 const MIME_TYPE = 'application/json';
 const LD_MIME_TYPE = 'application/ld+json';
 const PATCH_MIME_TYPE = 'application/merge-patch+json';
@@ -14,7 +13,7 @@ export function fetch(id, options = {}) {
         !(options.body instanceof FormData) &&
         null === options.headers.get('Content-Type'))
         options.headers.set('Content-Type', (options.method === "PATCH") ? PATCH_MIME_TYPE : MIME_TYPE);
-    return global.fetch(new URL(id, ENTRYPOINT), options).then(response => {
+    return global.fetch(new URL(id, process.env.ENTRYPOINT), options).then(response => {
         if (response.ok)
             return response;
         return response.json().then(json => {
@@ -45,7 +44,7 @@ export function ldfetch(id, options = {}) {
         !(options.body instanceof FormData) &&
         null === options.headers.get('Content-Type'))
         options.headers.set('Content-Type', (options.method === "PATCH") ? PATCH_MIME_TYPE : LD_MIME_TYPE);
-    return global.fetch(new URL(id, ENTRYPOINT), options).then(response => {
+    return global.fetch(new URL(id, process.env.ENTRYPOINT), options).then(response => {
         if (response.ok)
             return response;
         return response.json().then(json => {
