@@ -22,21 +22,17 @@ interface Props{
 
 export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, referencesMap, filterValue}:Props) => {
 
-        const getFiltersByType = (type: string) => {
+        const getFilter = (name:string, type: string) => {
             switch (type) {
                 case "boolean": {
-                    return modelFilters[type].map((name: string) => {
                         return {
                             name: name,
                             type: "boolean",
                             component: <BooleanFilter value={filterValue[name]} key={name} name={name} type={type}
                                                       inputFieldOnChange={inputFieldOnChange}/>
                         }
-
-                    })
                 }
                 case "text": {
-                    return modelFilters[type].map((name: string, index: number) => {
                         const propertyModel = model.getProperty(name);
                         if (propertyModel.type === "reference") {
                             const options = referencesMap.get(propertyModel.resourceName);
@@ -54,10 +50,8 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                                                        value={filterValue[name]}/>
                             }
                         }
-                    })
                 }
                 case "enum": {
-                    return modelFilters[type].map((name: string, index: number) => {
                         const propertyModel = model.getProperty(name);
                         const {options} = propertyModel;
                         return {
@@ -66,26 +60,24 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                                                            inputFieldOnChange={inputFieldOnChange} options={options}
                                                            value={filterValue[name]}/>
                         }
-                    })
                 }
                 default: {
-                    return modelFilters[type].map((text: string) => <React.Fragment key={text}>
+                    return  <React.Fragment key={name}>
                         <ListItem button>
                             <ListItemIcon><InboxIcon/></ListItemIcon>
-                            <ListItemText primary={text}/>
+                            <ListItemText primary={name}/>
                         </ListItem>
                         <ListItem>
-                            <TextField id={text} name={text} onChange={inputFieldOnChange} value={filterValue[text]}>
+                            <TextField id={name} name={name} onChange={inputFieldOnChange} value={filterValue[name]}>
                             </TextField>
                         </ListItem>
-                    </React.Fragment>)
+                    </React.Fragment>
                 }
             }
         }
 
-        const reducer = (accumulator: any, type: string) => [...getFiltersByType(type), ...accumulator];
 
-    return (modelFilters) ? Object.keys(modelFilters).reduce(reducer, []) : [];
+    return (modelFilters) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
 
 };
 
