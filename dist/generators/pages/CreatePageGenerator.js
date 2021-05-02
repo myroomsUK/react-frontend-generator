@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -7,7 +16,7 @@ import { FormGeneratorPropsObject } from "../forms/FormGeneratorProps";
 import { FormGenerator } from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
-export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {} }) => {
+export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {}, thenFunction = () => { }, catchFunction = () => { } }) => {
     const { urlResourceName } = useParams();
     const resourceNameToUse = useMemo(() => propResourceName ? propResourceName : urlResourceName, [urlResourceName, propResourceName]);
     const { model, resourceName, createPage } = useGetResourceModel(resourceNameToUse);
@@ -32,7 +41,7 @@ export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {} 
     }, [referencesMap]);
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
-    const submitHandler = () => create(resourceName, formValue);
+    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue).then(thenFunction).catch(catchFunction); });
     const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, resourceName: resourceName, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, resourceName, errors, lockedFormValue]);
     useEffect(() => {
         if (createPageToUse) {

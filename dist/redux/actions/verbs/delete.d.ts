@@ -11,5 +11,5 @@ export function success(deleted: any): {
     deleted: any;
 };
 export function useDelete(resourceName: any): {
-    remove: (id: any) => void;
+    remove: (id: any) => Promise<void>;
 };
