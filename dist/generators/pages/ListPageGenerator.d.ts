@@ -1,4 +1,4 @@
-export function GenericList({ inheritedResourceName, filters: presetFilters }: {
-    inheritedResourceName: any;
+export function GenericList({ resourceName, filters: presetFilters }: {
+    resourceName: any;
     filters: any;
 }): JSX.Element;

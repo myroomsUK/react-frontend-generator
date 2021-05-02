@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -17,14 +17,11 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { push } from "connected-react-router";
-import { useParams } from 'react-router-dom';
 import { useDebouncedCallback } from "use-debounce";
 import _ from 'lodash';
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -135,17 +132,15 @@ function getRandomInt(min, max) {
 function randomArray() {
     return new Array(getRandomInt(3, 7)).fill(1);
 }
-export function GenericList({ inheritedResourceName, filters: presetFilters }) {
+export function GenericList({ resourceName, filters: presetFilters }) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
-    const { urlResourceName } = useParams();
-    const resourceNameToUse = useMemo(() => { return (inheritedResourceName) ? inheritedResourceName : urlResourceName; }, [urlResourceName, inheritedResourceName]);
-    const { model, resourceName, title, table, tableActions: customActions } = useGetResourceModel(resourceNameToUse);
+    const { model, title, table, tableActions: customActions } = useGetResourceModel(resourceName);
     let headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
-    const { filters, components, clearFilters } = TableFilters(resourceNameToUse, presetFilters);
+    const { filters, components, clearFilters } = TableFilters(resourceName, presetFilters);
     //get Data as a first step.
     const dispatch = useDispatch();
     const { data, get, loading } = useList();
@@ -164,11 +159,11 @@ export function GenericList({ inheritedResourceName, filters: presetFilters }) {
     useEffect(() => {
         setRows([]);
         setSelected([]);
-    }, [resourceNameToUse]);
+    }, [resourceName]);
     const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
     useEffect(() => {
         setLocalLoading(true);
-        debounced.callback();
+        debounced();
         setLocalLoading(false);
     }, [resourceName, filters, page]);
     useEffect(() => {
@@ -214,38 +209,36 @@ export function GenericList({ inheritedResourceName, filters: presetFilters }) {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
     const showClearFilters = !!components.length;
-    return (_jsx(_Fragment, { children: _jsxs("div", Object.assign({ className: classes.root }, { children: [!inheritedResourceName && _jsx("div", Object.assign({ style: { display: "flex", justifyContent: "flex-end", marginBottom: 5 } }, { children: _jsx(Button, Object.assign({ color: "primary", variant: "contained", onClick: goToNew }, { children: "New" }), void 0) }), void 0),
-                _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(EnhancedTableToolbar, { numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters }, void 0),
-                        _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { classes: classes, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells, filters: components }, void 0),
-                                    _jsxs(TableBody, { children: [localLoading ?
-                                                (randomArray()).map((value, index) => _jsxs(TableRow, Object.assign({ hover: true, 
-                                                    //onClick={(event) => handleClick(event, row.id)}
-                                                    role: "checkbox", tabIndex: -1 }, { children: [_jsx(TableCell, { padding: "checkbox" }, void 0),
-                                                        table.map((tableItem, index) => _jsxs(TableCell, { children: [_jsx(Skeleton, { variant: "text" }, void 0), " "] }, index)),
-                                                        _jsx(TableCell, { align: "right" }, void 0)] }), index))
-                                                :
-                                                    stableSort(rows, getComparator(order, orderBy))
-                                                        .slice(0, rowsPerPage)
-                                                        .map((row, index) => {
-                                                        const isItemSelected = isSelected(row.id);
-                                                        const labelId = `enhanced-table-checkbox-${index}`;
-                                                        return (_jsxs(TableRow, Object.assign({ hover: true, 
-                                                            //onClick={(event) => handleClick(event, row.id)}
-                                                            role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
-                                                                table.map(({ id, label }) => {
-                                                                    const split = _.split(id, ".");
-                                                                    const reducer = (start, value) => (start) ? start[value] : undefined;
-                                                                    const record = split.reduce(reducer, row);
-                                                                    const propertyModel = model.getProperty(id);
-                                                                    propertyModel.label = label;
-                                                                    return { propertyModel: propertyModel, record: record };
-                                                                }).map(({ propertyModel, record }, localIndex) => {
-                                                                    return _jsx(TableCell, { children: _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0) }, localIndex);
-                                                                }),
-                                                                _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsxs(ButtonsHorizontalList, { children: [_jsx(Button, Object.assign({ variant: "contained", color: "primary", onClick: () => goToShow(row.id) }, { children: "Show" }), void 0),
-                                                                            _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: () => goToEdit(row.id) }, { children: "Edit" }), void 0)] }, void 0) }), void 0)] }), index));
-                                                    }),
-                                            false && emptyRows > 0 && (_jsx(TableRow, Object.assign({ style: { height: (dense ? 33 : 53) * emptyRows } }, { children: _jsx(TableCell, { colSpan: 6 }, void 0) }), void 0))] }, void 0)] }), void 0) }, void 0),
-                        _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0),
-                false && _jsx(FormControlLabel, { control: _jsx(Switch, { checked: dense, onChange: handleChangeDense }, void 0), label: "Dense padding" }, void 0)] }), void 0) }, void 0));
+    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(EnhancedTableToolbar, { numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters }, void 0),
+                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { classes: classes, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells, filters: components }, void 0),
+                                _jsxs(TableBody, { children: [localLoading ?
+                                            (randomArray()).map((value, index) => _jsxs(TableRow, Object.assign({ hover: true, 
+                                                //onClick={(event) => handleClick(event, row.id)}
+                                                role: "checkbox", tabIndex: -1 }, { children: [_jsx(TableCell, { padding: "checkbox" }, void 0),
+                                                    table.map((tableItem, index) => _jsxs(TableCell, { children: [_jsx(Skeleton, { variant: "text" }, void 0), " "] }, index)),
+                                                    _jsx(TableCell, { align: "right" }, void 0)] }), index))
+                                            :
+                                                stableSort(rows, getComparator(order, orderBy))
+                                                    .slice(0, rowsPerPage)
+                                                    .map((row, index) => {
+                                                    const isItemSelected = isSelected(row.id);
+                                                    const labelId = `enhanced-table-checkbox-${index}`;
+                                                    return (_jsxs(TableRow, Object.assign({ hover: true, 
+                                                        //onClick={(event) => handleClick(event, row.id)}
+                                                        role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
+                                                            table.map(({ id, label }) => {
+                                                                const split = _.split(id, ".");
+                                                                const reducer = (start, value) => (start) ? start[value] : undefined;
+                                                                const record = split.reduce(reducer, row);
+                                                                const propertyModel = model.getProperty(id);
+                                                                propertyModel.label = label;
+                                                                return { propertyModel: propertyModel, record: record };
+                                                            }).map(({ propertyModel, record }, localIndex) => {
+                                                                return _jsx(TableCell, { children: _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0) }, localIndex);
+                                                            }),
+                                                            _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsxs(ButtonsHorizontalList, { children: [_jsx(Button, Object.assign({ variant: "contained", color: "primary", onClick: () => goToShow(row.id) }, { children: "Show" }), void 0),
+                                                                        _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: () => goToEdit(row.id) }, { children: "Edit" }), void 0)] }, void 0) }), void 0)] }), index));
+                                                }),
+                                        false && emptyRows > 0 && (_jsx(TableRow, Object.assign({ style: { height: (dense ? 33 : 53) * emptyRows } }, { children: _jsx(TableCell, { colSpan: 6 }, void 0) }), void 0))] }, void 0)] }), void 0) }, void 0),
+                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
 }

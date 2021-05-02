@@ -230,13 +230,11 @@ function randomArray(){
 }
 
 
-export function GenericList({inheritedResourceName, filters:presetFilters}) {
+export function GenericList({resourceName, filters:presetFilters}) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
-    const {urlResourceName} = useParams();
-    const resourceNameToUse = useMemo(()=>{return (inheritedResourceName) ? inheritedResourceName : urlResourceName;},[urlResourceName, inheritedResourceName])
 
-    const {model, resourceName, title, table, tableActions:customActions} = useGetResourceModel(resourceNameToUse)
+    const {model, title, table, tableActions:customActions} = useGetResourceModel(resourceName)
 
 
     let headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
@@ -244,7 +242,7 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
     })
     headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
 
-    const {filters, components, clearFilters} = TableFilters(resourceNameToUse,presetFilters);
+    const {filters, components, clearFilters} = TableFilters(resourceName,presetFilters);
     //get Data as a first step.
     const dispatch = useDispatch();
     const {data, get, loading} = useList();
@@ -271,7 +269,7 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
     useEffect(()=>{
         setRows([])
         setSelected([])
-    }, [resourceNameToUse])
+    }, [resourceName])
 
     const debounced = useDebouncedCallback(
         ()=>get(resourceName,page+1, filters),
@@ -280,7 +278,7 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
 
     useEffect(()=>{
         setLocalLoading(true);
-        debounced.callback();
+        debounced();
         setLocalLoading(false)
     },[resourceName, filters, page])
 
@@ -343,9 +341,6 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
     return  (
         <>
             <div className={classes.root}>
-                {!inheritedResourceName && <div style={{display: "flex", justifyContent: "flex-end", marginBottom: 5}}>
-                    <Button color="primary" variant="contained" onClick={goToNew}>New</Button>
-                </div>}
                 <Paper className={classes.paper}>
                     <EnhancedTableToolbar numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters}/>
                     <TableContainer>
@@ -449,10 +444,6 @@ export function GenericList({inheritedResourceName, filters:presetFilters}) {
                         onChangePage={handleChangePage}
                     />
                 </Paper>
-                {false && <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense}/>}
-                    label="Dense padding"
-                />}
             </div>
         </>
 
