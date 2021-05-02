@@ -10,7 +10,7 @@ import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHor
 import {genericError} from "../../redux/actions/verbs/edit";
 
 
-export const FormGenerator: React.FC<FormGeneratorProps> = ({submitHandler, resourceName,resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue,  errors:inheritedErrors, text= "Salva", showButton=true }) => {
+export const FormGenerator: React.FC<FormGeneratorProps> = ({submitHandler, resourceName,resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue,  errors:inheritedErrors, text= "Salva", showButton=true }) => {
 
     const classes = useFormStyles();
     const dispatch = useDispatch();
@@ -49,11 +49,10 @@ export const FormGenerator: React.FC<FormGeneratorProps> = ({submitHandler, reso
     }
 
     return <ValidatorForm ref={ref} className={classes.form} onSubmit={validationSubmitHandler} onError={()=>dispatch(genericError("Validation Error"))}>
-        <FormContent model={model} resourceName={resourceName} resourceId={resourceId} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue}  errors={inheritedErrors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
+        <FormContent model={model} resourceName={resourceName} resourceId={resourceId} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} lockedFormValue={lockedFormValue}  errors={inheritedErrors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
         {showButton && <div style={{margin: "10px 0"}}>
             <ButtonsHorizontalList>
                 <Button style={{float: "right"}} variant="contained" color="secondary" onClick={onClickHandler}>{text}</Button>
-                <Button style={{float: "right"}} variant="contained" color="secondary" onClick={onClickGoBackHandler}>{text} and back</Button>
             </ButtonsHorizontalList>
         </div>}
     </ValidatorForm>

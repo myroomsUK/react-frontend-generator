@@ -5,6 +5,7 @@ import { Errors } from "../errors/Errors";
 export interface GenericInput {
     requestedName: string;
     formValue: any;
+    lockedFormValue: any;
     form?: React.DetailedReactHTMLElement<any, any>;
     model: PropertyModel | Model;
     referencesMap: Map<string, any>;

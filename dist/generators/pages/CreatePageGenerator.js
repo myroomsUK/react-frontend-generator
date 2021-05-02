@@ -7,7 +7,7 @@ import { FormGeneratorPropsObject } from "../forms/FormGeneratorProps";
 import { FormGenerator } from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
-export const Create = ({ propResourceName, propCreatePage }) => {
+export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {} }) => {
     const { urlResourceName } = useParams();
     const resourceNameToUse = useMemo(() => propResourceName ? propResourceName : urlResourceName, [urlResourceName, propResourceName]);
     const { model, resourceName, createPage } = useGetResourceModel(resourceNameToUse);
@@ -33,7 +33,7 @@ export const Create = ({ propResourceName, propCreatePage }) => {
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
     const submitHandler = () => create(resourceName, formValue);
-    const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, resourceName: resourceName, errors: errors }), [model, referencesMap, formValue, resourceName, errors]);
+    const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, resourceName: resourceName, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, resourceName, errors, lockedFormValue]);
     useEffect(() => {
         if (createPageToUse) {
             setGenericCreateRender(_jsx(GenericForm, Object.assign({}, createFormProps, { page: createPageToUse, errors: errors }), void 0));

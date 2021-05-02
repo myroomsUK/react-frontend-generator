@@ -53,6 +53,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
             referencesMap:referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
+            lockedFormValue: {},
             setFormValue: setFormValue,
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,

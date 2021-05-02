@@ -7,6 +7,7 @@ interface FormContentProps {
     referencesMap: any;
     refreshReferencesMap: () => void;
     formValue: object;
+    lockedFormValue: object;
     errors: object;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
     form?: React.DetailedReactHTMLElement<any, any>;

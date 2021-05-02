@@ -9,14 +9,15 @@ import {UpdateListings} from "../../utils/referenceFieldUtils";
 
 interface Props{
     propResourceName?:string,
-    propCreatePage?:any
+    propCreatePage?:any,
+    lockedFormValue?:any,
 }
 
 interface CreateRouteParams{
     urlResourceName:string
 }
 
-export const Create: React.FC<Props> = ({propResourceName, propCreatePage}) => {
+export const Create: React.FC<Props> = ({propResourceName, propCreatePage, lockedFormValue={}}) => {
     const {urlResourceName} = useParams<CreateRouteParams>();
     const resourceNameToUse:string = useMemo(()=>propResourceName ? propResourceName : urlResourceName,[urlResourceName, propResourceName])
     const {model, resourceName, createPage} = useGetResourceModel(resourceNameToUse);
@@ -50,8 +51,8 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage}) => {
 
     const submitHandler = ()=>create(resourceName, formValue);
 
-    const createFormProps = useMemo(()=> new FormGeneratorPropsObject({model: model, referencesMap:referencesMap, refreshReferencesMap: refreshReferencesMap, formValue:formValue, setFormValue:setFormValue, submitHandler: submitHandler, partialSubmitHandler:submitHandler, resourceName:resourceName, errors:errors})
-    ,[model, referencesMap, formValue, resourceName, errors])
+    const createFormProps = useMemo(()=> new FormGeneratorPropsObject({model: model, referencesMap:referencesMap, refreshReferencesMap: refreshReferencesMap, formValue:formValue, setFormValue:setFormValue, submitHandler: submitHandler, partialSubmitHandler:submitHandler, resourceName:resourceName, errors:errors, lockedFormValue:lockedFormValue})
+    ,[model, referencesMap, formValue, resourceName, errors, lockedFormValue])
 
     useEffect(()=>{
 

@@ -11,6 +11,7 @@ export interface FormGeneratorProps{
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     formValue: any;
+    lockedFormValue:any;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
     text?:string;
     errors: object;
@@ -25,12 +26,13 @@ export class FormGeneratorPropsObject{
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     formValue: any;
+    lockedFormValue:any;
     setFormValue:any;
     text?:string;
     errors: object;
     showButton?:boolean;
 
-    constructor({resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton}:FormGeneratorProps) {
+    constructor({resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue}:FormGeneratorProps) {
         this.resourceName = resourceName;
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
@@ -38,6 +40,7 @@ export class FormGeneratorPropsObject{
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;
         this.formValue = formValue;
+        this.lockedFormValue = lockedFormValue;
         this.setFormValue = setFormValue;
         this.text = text;
         this.errors = errors;

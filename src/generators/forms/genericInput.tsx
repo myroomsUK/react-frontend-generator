@@ -11,6 +11,7 @@ import {useEdit} from "../../redux/actions/verbs/edit";
 export interface GenericInput{
     requestedName: string;
     formValue: any;
+    lockedFormValue: any;
     form?:React.DetailedReactHTMLElement<any, any>;
     model: PropertyModel|Model;
     referencesMap:Map<string, any>;
@@ -24,7 +25,7 @@ export interface GenericInput{
 }
 
 
-export const GenericInput: React.FC<GenericInput> = ({requestedName, resourceName, resourceId, setFormValue, model, formValue, referencesMap,refreshReferencesMap, errors, partialSubmitHandler, submitHandler, form}) => {
+export const GenericInput: React.FC<GenericInput> = ({requestedName, resourceName, resourceId, setFormValue, model, formValue, lockedFormValue, referencesMap,refreshReferencesMap, errors, partialSubmitHandler, submitHandler, form}) => {
     const inputOnChangeHandler: (type:string) => ((variables: any[])=>void)
         = (type:string) =>{return (...vars:any[])=> onChangeHandler({type:type, setFormValue:setFormValue, formValue: formValue, vars: vars});}
 
@@ -41,6 +42,8 @@ export const GenericInput: React.FC<GenericInput> = ({requestedName, resourceNam
     if(propertyModel){
         const type = propertyModel.type;
         const usedForm = form ?? propertyModel.form;
+
+        if(requestedName in lockedFormValue) return <></>;
 
         if(type===EMBEDDED_MULTIPLE){
 

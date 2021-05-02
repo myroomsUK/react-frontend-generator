@@ -18,7 +18,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx } from "react/jsx-runtime";
+import { Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { InputField } from "./genericInputField";
 import { Model } from "../../resource-models/Model";
@@ -26,7 +26,7 @@ import { Errors, Error } from "../errors/Errors";
 import { onChangeHandler } from "./inputHandlers";
 import { EMBEDDED_MULTIPLE, EMBEDDED_SINGLE } from "./inputs/InputTypes";
 import { useEdit } from "../../redux/actions/verbs/edit";
-export const GenericInput = ({ requestedName, resourceName, resourceId, setFormValue, model, formValue, referencesMap, refreshReferencesMap, errors, partialSubmitHandler, submitHandler, form }) => {
+export const GenericInput = ({ requestedName, resourceName, resourceId, setFormValue, model, formValue, lockedFormValue, referencesMap, refreshReferencesMap, errors, partialSubmitHandler, submitHandler, form }) => {
     const inputOnChangeHandler = (type) => { return (...vars) => onChangeHandler({ type: type, setFormValue: setFormValue, formValue: formValue, vars: vars }); };
     const { _error } = errors, errorFields = __rest(errors, ["_error"]);
     const newErrors = (errors instanceof Errors) ? errors : new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
@@ -36,6 +36,8 @@ export const GenericInput = ({ requestedName, resourceName, resourceId, setFormV
     if (propertyModel) {
         const type = propertyModel.type;
         const usedForm = form !== null && form !== void 0 ? form : propertyModel.form;
+        if (requestedName in lockedFormValue)
+            return _jsx(_Fragment, {}, void 0);
         if (type === EMBEDDED_MULTIPLE) {
             const nestedErrors = newErrors.nestedErrorExtrapolator(formValue, requestedName);
             return _jsx(InputField, { type: type, requestedName: requestedName, onClick: inputOnChangeHandler(type), model: propertyModel, value: formValue[requestedName], parentFormValue: formValue, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setParentFormValue: setParentFormValue, errors: nestedErrors, partialSubmitHandler: partialSubmitHandler, form: usedForm, submitHandler: submitHandler, hasError: false, resourceName: resourceName, resourceId: resourceId }, void 0);

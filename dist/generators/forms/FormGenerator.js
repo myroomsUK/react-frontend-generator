@@ -8,7 +8,7 @@ import { goBack } from "connected-react-router";
 import { useFormStyles } from "../../rendering/styles/formStyles";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { genericError } from "../../redux/actions/verbs/edit";
-export const FormGenerator = ({ submitHandler, resourceName, resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, errors: inheritedErrors, text = "Salva", showButton = true }) => {
+export const FormGenerator = ({ submitHandler, resourceName, resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors: inheritedErrors, text = "Salva", showButton = true }) => {
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -38,7 +38,6 @@ export const FormGenerator = ({ submitHandler, resourceName, resourceId, partial
         onClickHandler(e);
         dispatch(goBack());
     };
-    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { model: model, resourceName: resourceName, resourceId: resourceId, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, errors: inheritedErrors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0),
-            showButton && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsxs(ButtonsHorizontalList, { children: [_jsx(Button, Object.assign({ style: { float: "right" }, variant: "contained", color: "secondary", onClick: onClickHandler }, { children: text }), void 0),
-                        _jsxs(Button, Object.assign({ style: { float: "right" }, variant: "contained", color: "secondary", onClick: onClickGoBackHandler }, { children: [text, " and back"] }), void 0)] }, void 0) }), void 0)] }), void 0);
+    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { model: model, resourceName: resourceName, resourceId: resourceId, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, lockedFormValue: lockedFormValue, errors: inheritedErrors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0),
+            showButton && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsx(ButtonsHorizontalList, { children: _jsx(Button, Object.assign({ style: { float: "right" }, variant: "contained", color: "secondary", onClick: onClickHandler }, { children: text }), void 0) }, void 0) }), void 0)] }), void 0);
 };

@@ -49,6 +49,7 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
+            lockedFormValue: {},
             setFormValue: setFormValue,
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,

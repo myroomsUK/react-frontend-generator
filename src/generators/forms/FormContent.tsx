@@ -11,6 +11,7 @@ interface FormContentProps {
     referencesMap: any;
     refreshReferencesMap: () => void;
     formValue: object;
+    lockedFormValue:object;
     errors: object;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
     form?:React.DetailedReactHTMLElement<any, any>;
@@ -18,16 +19,16 @@ interface FormContentProps {
     resourceId?: string;
 }
 
-export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, setFormValue, errors, form}) => {
+export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form}) => {
     if(form){
-        const props = {model:model, formValue:formValue, referencesMap:referencesMap, refreshReferencesMap:refreshReferencesMap, setFormValue:setFormValue, errors:errors, partialSubmitHandler:partialSubmitHandler, submitHandler:submitHandler}
+        const props = {model:model, formValue:formValue, lockedFormValue:lockedFormValue, referencesMap:referencesMap, refreshReferencesMap:refreshReferencesMap, setFormValue:setFormValue, errors:errors, partialSubmitHandler:partialSubmitHandler, submitHandler:submitHandler}
         return React.cloneElement(form, props);
     }
 
     return <Grid container spacing={2}>
         {model.properties.filter((propertyModel:PropertyModel) => propertyModel.write === true).map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, setFormValue, errors, form};
+                const props = {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form};
                 return <Grid item xs={xs} md={md} key={index}>
                     <GenericInput {...props} resourceName={resourceName} resourceId={resourceId} requestedName={propertyModel.id} />
                 </Grid>
