@@ -420,7 +420,7 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
                                                 })}
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, onClick,text}) => <Button variant={"contained"} color={color} onClick={onClick}>{text}</Button>)}
+                                                        {itemOperations.map(({color, onClick,text}) => <Button variant={"contained"} color={color} onClick={()=>onClick(row.id)}>{text}</Button>)}
                                                     </ButtonsHorizontalList>
                                                 </TableCell>
                                             </TableRow>
