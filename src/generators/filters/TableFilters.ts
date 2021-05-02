@@ -11,78 +11,121 @@ interface RouteParams{
     urlResourceName:string
 }
 
-export const TableFilters: (resourceNameToUse:string, presetFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceNameToUse, presetFilters) => {
-        const {urlResourceName} = useParams<RouteParams>();
-        const location = useLocation<any>();
-        const [routeFilters, setRouteFilters] = useState<any>({});
-        const [inheritedFilters, setInheritedFilters] = useState<any>({});
-        const [filterObject, setFilterObject] = useState<any>({});
-        const dispatch = useDispatch();
+export const RouteTableFilters: (resourceNameToUse:string, presetFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceNameToUse, presetFilters) => {
+    const {urlResourceName} = useParams<RouteParams>();
+    const location = useLocation<any>();
+    const [routeFilters, setRouteFilters] = useState<any>({});
+    const [inheritedFilters, setInheritedFilters] = useState<any>({});
+    const [filterObject, setFilterObject] = useState<any>({});
+    const dispatch = useDispatch();
 
-        const isEmbeddedTable = resourceNameToUse!==urlResourceName;
+    const isEmbeddedTable = resourceNameToUse!==urlResourceName;
 
-        const getFiltersFromLocation = (location:any) => {
-            const searchParams = new URLSearchParams(location.search);
-            const routeFilters = {};
+    const getFiltersFromLocation = (location:any) => {
+        const searchParams = new URLSearchParams(location.search);
+        const routeFilters = {};
+        // @ts-ignore
+        for(let key:string of searchParams.keys()) {
             // @ts-ignore
-            for(let key:string of searchParams.keys()) {
-                // @ts-ignore
-                routeFilters[key] = searchParams.get(key);
+            routeFilters[key] = searchParams.get(key);
+        }
+        return routeFilters;
+    }
+
+    useEffect(()=>{
+        setInheritedFilters(presetFilters)},[presetFilters])
+
+    useEffect(()=>{
+        if(inheritedFilters){
+            setFilterObject(inheritedFilters);
+        }
+    },[inheritedFilters])
+
+
+    useEffect(()=>{
+        const filtersFromLocation = getFiltersFromLocation(location);
+        if(!_.isEqual(routeFilters, filtersFromLocation)){
+            setRouteFilters(filtersFromLocation);
+        }
+    }, [location])
+
+    useEffect(()=> {
+        if(!isEmbeddedTable){
+            if(!_.isEqual(routeFilters, filterObject)){
+                setFilterObject(routeFilters);
             }
-            return routeFilters;
+        }
+    },[routeFilters])
+
+    const checkIfFiltersEqualToRouteFilters = useCallback(()=>{
+        return _.isEqual(filterObject, routeFilters)
+    },[filterObject,routeFilters])
+
+    useEffect(()=> {
+        if(!isEmbeddedTable){
+            if(!checkIfFiltersEqualToRouteFilters()){
+                let route = location.pathname+"?";
+                Object.keys(filterObject).forEach((key,index)=> {
+                    if(index===0){
+                        route = route.concat(`${key}=${filterObject[key]}`);
+                    }else{
+                        route = route.concat(`&${key}=${filterObject[key]}`);
+                    }
+
+                })
+                dispatch(replace(route));
+            }
         }
 
-        useEffect(()=>{
-            setInheritedFilters(presetFilters)},[presetFilters])
-
-        useEffect(()=>{
-            if(inheritedFilters){
-                setFilterObject(inheritedFilters);
-            }
-        },[inheritedFilters])
+    },[filterObject])
 
 
-        useEffect(()=>{
-            const filtersFromLocation = getFiltersFromLocation(location);
-            if(!_.isEqual(routeFilters, filtersFromLocation)){
-                setRouteFilters(filtersFromLocation);
-            }
-        }, [location])
+    const clearFilters = ()=>setFilterObject({});
+    const {model, filters:modelFilters} = useGetResourceModel(resourceNameToUse);
+    const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject}},[model, modelFilters, filterObject]);
+    return {filters:filterObject, components:FilterList(propsFiltersList), clearFilters:clearFilters}
 
-        useEffect(()=> {
-            if(!isEmbeddedTable){
-                if(!_.isEqual(routeFilters, filterObject)){
-                    setFilterObject(routeFilters);
-                }
-            }
-        },[routeFilters])
+}
 
-        const checkIfFiltersEqualToRouteFilters = useCallback(()=>{
-            return _.isEqual(filterObject, routeFilters)
-        },[filterObject,routeFilters])
+export const TableFilters: (resourceName:string, propLockedFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceName, propLockedFilters) => {
 
-        useEffect(()=> {
-            if(!isEmbeddedTable){
-                if(!checkIfFiltersEqualToRouteFilters()){
-                    let route = location.pathname+"?";
-                    Object.keys(filterObject).forEach((key,index)=> {
-                        if(index===0){
-                            route = route.concat(`${key}=${filterObject[key]}`);
-                        }else{
-                            route = route.concat(`&${key}=${filterObject[key]}`);
-                        }
+    const [lockedFilters, setLockedFilters] = useState<any>({});
+    const [filters, setFilters] = useState<any>({});
 
-                    })
-                    dispatch(replace(route));
-                }
-            }
+    useEffect(()=>{setLockedFilters(propLockedFilters)},[propLockedFilters])
 
-        },[filterObject])
+    useEffect(()=>{
+            setFilters(lockedFilters);
+    },[lockedFilters])
 
+    const clearFilters = ()=>setFilters(lockedFilters);
+    const {model, filters:modelFilters} = useGetResourceModel(resourceName);
 
-        const clearFilters = ()=>setFilterObject({});
-        const {model, filters:modelFilters} = useGetResourceModel(resourceNameToUse);
-        const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject}},[model, modelFilters, filterObject]);
-        return {filters:filterObject, components:FilterList(propsFiltersList), clearFilters:clearFilters}
+    const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: getFinalFilters(modelFilters, lockedFilters), filters: filters, setFilters: setFilters}},[model, modelFilters, filters, lockedFilters]);
+    return {filters:filters, components:FilterList(propsFiltersList), clearFilters:clearFilters}
 
+}
+
+function removeLockedFiltersFromModelFilters(filters:any, lockedFilters:any ){
+    Object.keys(lockedFilters).forEach(key => delete filters[key]);
+    return filters;
+}
+
+function getFiltersAsKeyType(filters:any){
+
+    let finalFilters = {};
+    Object.keys(filters).forEach(filterType => {
+        const filterKeys = filters[filterType];
+        filterKeys.forEach((filterKey:any) => {
+            // @ts-ignore
+            finalFilters[filterKey] = filterType;
+        } );
+    } )
+
+    return finalFilters;
+}
+
+function getFinalFilters(filters:any, lockedFilters:any ){
+    const reorderedFilters = getFiltersAsKeyType(filters);
+    return removeLockedFiltersFromModelFilters(reorderedFilters, lockedFilters);
 }

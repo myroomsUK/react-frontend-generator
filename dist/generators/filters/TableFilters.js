@@ -5,7 +5,7 @@ import _ from "lodash";
 import { replace } from "connected-react-router";
 import { FilterList } from "./FilterList";
 import { useGetResourceModel } from "../../resource-models/modelsRegistry";
-export const TableFilters = (resourceNameToUse, presetFilters) => {
+export const RouteTableFilters = (resourceNameToUse, presetFilters) => {
     const { urlResourceName } = useParams();
     const location = useLocation();
     const [routeFilters, setRouteFilters] = useState({});
@@ -68,3 +68,34 @@ export const TableFilters = (resourceNameToUse, presetFilters) => {
     const propsFiltersList = useMemo(() => { return { model: model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject }; }, [model, modelFilters, filterObject]);
     return { filters: filterObject, components: FilterList(propsFiltersList), clearFilters: clearFilters };
 };
+export const TableFilters = (resourceName, propLockedFilters) => {
+    const [lockedFilters, setLockedFilters] = useState({});
+    const [filters, setFilters] = useState({});
+    useEffect(() => { setLockedFilters(propLockedFilters); }, [propLockedFilters]);
+    useEffect(() => {
+        setFilters(lockedFilters);
+    }, [lockedFilters]);
+    const clearFilters = () => setFilters(lockedFilters);
+    const { model, filters: modelFilters } = useGetResourceModel(resourceName);
+    const propsFiltersList = useMemo(() => { return { model: model, modelFilters: getFinalFilters(modelFilters, lockedFilters), filters: filters, setFilters: setFilters }; }, [model, modelFilters, filters, lockedFilters]);
+    return { filters: filters, components: FilterList(propsFiltersList), clearFilters: clearFilters };
+};
+function removeLockedFiltersFromModelFilters(filters, lockedFilters) {
+    Object.keys(lockedFilters).forEach(key => delete filters[key]);
+    return filters;
+}
+function getFiltersAsKeyType(filters) {
+    let finalFilters = {};
+    Object.keys(filters).forEach(filterType => {
+        const filterKeys = filters[filterType];
+        filterKeys.forEach((filterKey) => {
+            // @ts-ignore
+            finalFilters[filterKey] = filterType;
+        });
+    });
+    return finalFilters;
+}
+function getFinalFilters(filters, lockedFilters) {
+    const reorderedFilters = getFiltersAsKeyType(filters);
+    return removeLockedFiltersFromModelFilters(reorderedFilters, lockedFilters);
+}

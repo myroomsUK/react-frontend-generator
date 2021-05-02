@@ -1,4 +1,9 @@
-export declare const TableFilters: (resourceNameToUse: string, presetFilters: any) => {
+export declare const RouteTableFilters: (resourceNameToUse: string, presetFilters: any) => {
+    components: any;
+    filters: any;
+    clearFilters: () => void;
+};
+export declare const TableFilters: (resourceName: string, propLockedFilters: any) => {
     components: any;
     filters: any;
     clearFilters: () => void;

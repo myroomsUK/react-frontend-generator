@@ -230,7 +230,7 @@ function randomArray(){
 }
 
 
-export function GenericList({resourceName, filters:presetFilters}) {
+export function GenericList({resourceName, filters:lockedFilters}) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
 
@@ -449,89 +449,3 @@ export function GenericList({resourceName, filters:presetFilters}) {
 
     );
 }
-
-/*function TableFilters(resourceNameToUse, presetFilters){
-    console.log("passing through table filters");
-
-    let {urlResourceName} = useParams();
-    const location = useLocation();
-    const [routeFilters, setRouteFilters] = useState({});
-    const [inheritedFilters, setInheritedFilters] = useState({});
-    const [filterObject, setFilterObject] = useState({});
-    const dispatch = useDispatch();
-
-    const isEmbeddedTable = resourceNameToUse!==urlResourceName;
-
-    const getFiltersFromLocation = (location) => {
-        const searchParams = new URLSearchParams(location.search);
-        const routeFilters = {};
-        for(let key of searchParams.keys()) {
-            routeFilters[key] = searchParams.get(key);
-        }
-        return routeFilters;
-    }
-
-    useEffect(()=>{
-        console.log("preset filters changed");
-        setInheritedFilters(presetFilters)},[presetFilters])
-
-    useEffect(()=>{
-        console.log("inherited filters changed");
-        if(inheritedFilters){
-            setFilterObject(inheritedFilters);
-        }
-    },[inheritedFilters])
-
-
-    useEffect(()=>{
-        console.log("location");
-        const filtersFromLocation = getFiltersFromLocation(location);
-        if(!_.isEqual(routeFilters, filtersFromLocation)){
-            setRouteFilters(filtersFromLocation);
-        }
-    }, [location])
-
-    useEffect(()=> {
-        console.log("route filters changed");
-        if(!isEmbeddedTable){
-            if(!_.isEqual(routeFilters, filterObject)){
-                setFilterObject(routeFilters);
-            }
-        }
-
-    },[routeFilters])
-
-    const checkIfFiltersEqualToRouteFilters = useCallback(()=>{
-        return _.isEqual(filterObject, routeFilters)
-    },[filterObject,routeFilters])
-
-    useEffect(()=> {
-        console.log("filter object");
-        if(!isEmbeddedTable){
-            if(!checkIfFiltersEqualToRouteFilters()){
-                let route = location.pathname+"?";
-                Object.keys(filterObject).forEach((key,index)=> {
-                    if(index===0){
-                        route = route.concat(`${key}=${filterObject[key]}`);
-                    }else{
-                        route = route.concat(`&${key}=${filterObject[key]}`);
-                    }
-
-                })
-                dispatch(replace(route));
-            }
-        }
-
-    },[filterObject])
-
-
-    const clearFilters = ()=>setFilterObject({});
-    const {model, filters:modelFilters} = useMemo(()=> getResourceModel(resourceNameToUse),[resourceNameToUse]);
-    const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject}},[model, modelFilters, filterObject]);
-    return {filters:filterObject, components:FilterList(propsFiltersList), clearFilters:clearFilters}
-
-}*/
-
-
-
-

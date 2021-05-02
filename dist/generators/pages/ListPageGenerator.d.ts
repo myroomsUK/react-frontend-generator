@@ -1,4 +1,4 @@
-export function GenericList({ resourceName, filters: presetFilters }: {
+export function GenericList({ resourceName, filters: lockedFilters }: {
     resourceName: any;
     filters: any;
 }): JSX.Element;

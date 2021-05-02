@@ -132,7 +132,7 @@ function getRandomInt(min, max) {
 function randomArray() {
     return new Array(getRandomInt(3, 7)).fill(1);
 }
-export function GenericList({ resourceName, filters: presetFilters }) {
+export function GenericList({ resourceName, filters: lockedFilters }) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
     const { model, title, table, tableActions: customActions } = useGetResourceModel(resourceName);
