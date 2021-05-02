@@ -28,7 +28,6 @@ interface EditFormGeneratorProps {
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
 export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
-    console.log(record);
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef({});
