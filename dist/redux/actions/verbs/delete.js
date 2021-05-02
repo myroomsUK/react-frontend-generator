@@ -22,7 +22,7 @@ export function useDelete(resourceName) {
     const dispatch = useDispatch();
     const remove = (id) => __awaiter(this, void 0, void 0, function* () {
         dispatch(loading(true));
-        fetch(`/api/${resourceName}/${id}`, { method: 'DELETE' })
+        return fetch(`/api/${resourceName}/${id}`, { method: 'DELETE' })
             .then(() => {
             dispatch(loading(false));
             dispatch(success(id));

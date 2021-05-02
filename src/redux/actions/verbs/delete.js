@@ -18,7 +18,7 @@ export function useDelete(resourceName) {
 
   const remove = async (id) => {
     dispatch(loading(true));
-    fetch(`/api/${resourceName}/${id}`, { method: 'DELETE' })
+    return fetch(`/api/${resourceName}/${id}`, { method: 'DELETE' })
         .then(() => {
           dispatch(loading(false));
           dispatch(success(id));
