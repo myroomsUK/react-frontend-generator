@@ -140,7 +140,7 @@ export function GenericList({ resourceName, filters: lockedFilters }) {
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
-    const { filters, components, clearFilters } = TableFilters(resourceName, presetFilters);
+    const { filters, components, clearFilters } = TableFilters(resourceName, lockedFilters);
     //get Data as a first step.
     const dispatch = useDispatch();
     const { data, get, loading } = useList();
