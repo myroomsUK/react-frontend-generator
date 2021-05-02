@@ -132,7 +132,7 @@ function getRandomInt(min, max) {
 function randomArray() {
     return new Array(getRandomInt(3, 7)).fill(1);
 }
-export function GenericList({ resourceName, filters: lockedFilters }) {
+export function GenericList({ resourceName, filters: lockedFilters, itemOperations }) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
     const { model, title, table, tableActions: customActions } = useGetResourceModel(resourceName);
@@ -236,8 +236,7 @@ export function GenericList({ resourceName, filters: lockedFilters }) {
                                                             }).map(({ propertyModel, record }, localIndex) => {
                                                                 return _jsx(TableCell, { children: _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0) }, localIndex);
                                                             }),
-                                                            _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsxs(ButtonsHorizontalList, { children: [_jsx(Button, Object.assign({ variant: "contained", color: "primary", onClick: () => goToShow(row.id) }, { children: "Show" }), void 0),
-                                                                        _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: () => goToEdit(row.id) }, { children: "Edit" }), void 0)] }, void 0) }), void 0)] }), index));
+                                                            _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, onClick, text }) => _jsx(Button, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: text }), void 0)) }, void 0) }), void 0)] }), index));
                                                 }),
                                         false && emptyRows > 0 && (_jsx(TableRow, Object.assign({ style: { height: (dense ? 33 : 53) * emptyRows } }, { children: _jsx(TableCell, { colSpan: 6 }, void 0) }), void 0))] }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));

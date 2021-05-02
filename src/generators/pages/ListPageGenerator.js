@@ -230,7 +230,7 @@ function randomArray(){
 }
 
 
-export function GenericList({resourceName, filters:lockedFilters}) {
+export function GenericList({resourceName, filters:lockedFilters, itemOperations}) {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = React.useState([]);
 
@@ -420,8 +420,7 @@ export function GenericList({resourceName, filters:lockedFilters}) {
                                                 })}
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        <Button variant="contained" color="primary" onClick={()=>goToShow(row.id)}>Show</Button>
-                                                        <Button variant="contained" color="secondary" onClick={()=>goToEdit(row.id)}>Edit</Button>
+                                                        {itemOperations.map(({color, onClick,text}) => <Button variant={"contained"} color={color} onClick={onClick}>{text}</Button>)}
                                                     </ButtonsHorizontalList>
                                                 </TableCell>
                                             </TableRow>
