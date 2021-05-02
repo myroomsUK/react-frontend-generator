@@ -23,7 +23,7 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage, locke
     const {model, resourceName, createPage} = useGetResourceModel(resourceNameToUse);
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
-    const [formValue, setFormValue] = useState({});
+    const [formValue, setFormValue] = useState(lockedFormValue);
     const {create, errors} = useCreate();
     const location = useLocation<object>();
 

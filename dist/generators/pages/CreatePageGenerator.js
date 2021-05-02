@@ -13,7 +13,7 @@ export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {} 
     const { model, resourceName, createPage } = useGetResourceModel(resourceNameToUse);
     const createPageToUse = useMemo(() => propCreatePage ? propCreatePage : createPage, [createPage, propCreatePage]);
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
-    const [formValue, setFormValue] = useState({});
+    const [formValue, setFormValue] = useState(lockedFormValue);
     const { create, errors } = useCreate();
     const location = useLocation();
     const changeFromLocation = useCallback(() => {
