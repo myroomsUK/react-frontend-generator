@@ -77,7 +77,7 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
         }
 
 
-    return (modelFilters) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
+    return (Object.keys(modelFilters).length!==0) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
 
 };
 

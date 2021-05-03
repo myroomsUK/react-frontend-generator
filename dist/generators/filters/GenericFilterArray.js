@@ -50,5 +50,5 @@ export const GenericFilterArray = ({ model, modelFilters, inputFieldOnChange, re
             }
         }
     };
-    return (modelFilters) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
+    return (Object.keys(modelFilters).length !== 0) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
 };
