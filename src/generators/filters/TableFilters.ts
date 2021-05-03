@@ -114,14 +114,15 @@ function removeLockedFiltersFromModelFilters(filters:any, lockedFilters:any ){
 function getFiltersAsKeyType(filters:any){
 
     let finalFilters = {};
-    Object.keys(filters).forEach(filterType => {
-        const filterKeys = filters[filterType];
-        filterKeys.forEach((filterKey:any) => {
-            // @ts-ignore
-            finalFilters[filterKey] = filterType;
-        } );
-    } )
-
+    if(filters){
+        Object.keys(filters).forEach(filterType => {
+            const filterKeys = filters[filterType];
+            filterKeys.forEach((filterKey:any) => {
+                // @ts-ignore
+                finalFilters[filterKey] = filterType;
+            } );
+        } )
+    }
     return finalFilters;
 }
 

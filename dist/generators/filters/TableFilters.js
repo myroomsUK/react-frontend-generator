@@ -86,13 +86,15 @@ function removeLockedFiltersFromModelFilters(filters, lockedFilters) {
 }
 function getFiltersAsKeyType(filters) {
     let finalFilters = {};
-    Object.keys(filters).forEach(filterType => {
-        const filterKeys = filters[filterType];
-        filterKeys.forEach((filterKey) => {
-            // @ts-ignore
-            finalFilters[filterKey] = filterType;
+    if (filters) {
+        Object.keys(filters).forEach(filterType => {
+            const filterKeys = filters[filterType];
+            filterKeys.forEach((filterKey) => {
+                // @ts-ignore
+                finalFilters[filterKey] = filterType;
+            });
         });
-    });
+    }
     return finalFilters;
 }
 function getFinalFilters(filters, lockedFilters) {
