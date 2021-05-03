@@ -19,7 +19,7 @@ interface FormContentProps {
     resourceId?: string;
 }
 
-export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form}) => {
+export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, form}) => {
     if(form){
         const props = {model:model, formValue:formValue, lockedFormValue:lockedFormValue, referencesMap:referencesMap, refreshReferencesMap:refreshReferencesMap, setFormValue:setFormValue, errors:errors, partialSubmitHandler:partialSubmitHandler, submitHandler:submitHandler}
         return React.cloneElement(form, props);

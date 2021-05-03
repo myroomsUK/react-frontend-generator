@@ -2,7 +2,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { GenericInput } from "./genericInput";
-export const FormContent = ({ partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form }) => {
+export const FormContent = ({ partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue = {}, setFormValue, errors, form }) => {
     if (form) {
         const props = { model: model, formValue: formValue, lockedFormValue: lockedFormValue, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler };
         return React.cloneElement(form, props);
