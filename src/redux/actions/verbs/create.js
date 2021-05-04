@@ -46,8 +46,8 @@ export function useCreate() {
                   setErrors(e.errors);
               }else{
                   dispatch(genericError(e.message))
-                  throw new Error(e.message);
               }
+              throw new Error(e.message);
           });
   }
   return {data, create, errors};

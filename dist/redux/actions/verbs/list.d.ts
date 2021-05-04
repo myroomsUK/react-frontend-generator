@@ -18,7 +18,10 @@ export function useList(): {
         list: never[];
         totalItems: number;
     };
-    get: (resource: any, page: any, filters?: any[]) => void;
+    get: (resource: any, page: any, filters?: any[]) => Promise<void | {
+        data: any;
+        totalItems: any;
+    }>;
     loading: boolean;
 };
 export function reset(eventSource: any): (dispatch: any) => void;

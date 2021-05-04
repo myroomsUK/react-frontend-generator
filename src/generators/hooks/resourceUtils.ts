@@ -7,7 +7,9 @@ export function useResource(resourceName:string, propId:number){
     const [record, setRecord] = useState(initialValue.current);
     const {data:downloadedRecord, getOne} = useGetOne();
     const getNewResource = useCallback(()=>getOne(resourceName,propId),[resourceName,propId]);
-    useEffect(()=> getNewResource(),[])
+    useEffect(()=> {
+        getNewResource()
+    },[])
 
     useEffect(()=>{
         if(downloadedRecord!==undefined){
@@ -23,7 +25,9 @@ export function useResources(resourceName:string){
     const [record, setRecord] = useState(initialValue.current);
     const {data:downloadedRecord, get} = useList();
     const getNewResource = useCallback(()=>get(resourceName),[resourceName,]);
-    useEffect(()=> getNewResource(),[])
+    useEffect(()=> {
+        getNewResource()
+    },[])
 
     useEffect(()=>{
         if(downloadedRecord!==undefined){

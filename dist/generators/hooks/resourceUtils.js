@@ -6,7 +6,9 @@ export function useResource(resourceName, propId) {
     const [record, setRecord] = useState(initialValue.current);
     const { data: downloadedRecord, getOne } = useGetOne();
     const getNewResource = useCallback(() => getOne(resourceName, propId), [resourceName, propId]);
-    useEffect(() => getNewResource(), []);
+    useEffect(() => {
+        getNewResource();
+    }, []);
     useEffect(() => {
         if (downloadedRecord !== undefined) {
             // @ts-ignore
@@ -20,7 +22,9 @@ export function useResources(resourceName) {
     const [record, setRecord] = useState(initialValue.current);
     const { data: downloadedRecord, get } = useList();
     const getNewResource = useCallback(() => get(resourceName), [resourceName,]);
-    useEffect(() => getNewResource(), []);
+    useEffect(() => {
+        getNewResource();
+    }, []);
     useEffect(() => {
         if (downloadedRecord !== undefined) {
             // @ts-ignore

@@ -33,17 +33,13 @@ export function useList() {
             route = route.concat(`&page=${page}`);
         }
         setLoading(true);
-        ldfetch(route)
-            .then(response => {
-            return response
-                .json()
-                .then(retrieved => {
-                return ({ data: retrieved["hydra:member"], totalItems: retrieved["hydra:totalItems"] });
-            });
-        })
+        return ldfetch(route)
+            .then(response => response.json())
+            .then(retrieved => { return ({ data: retrieved["hydra:member"], totalItems: retrieved["hydra:totalItems"] }); })
             .then(({ data, totalItems }) => {
             setData({ list: data, totalItems: totalItems });
             setLoading(false);
+            return { data, totalItems };
         })
             .catch(e => {
             dispatch(loading(resource, false));

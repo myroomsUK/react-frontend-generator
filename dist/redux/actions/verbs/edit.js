@@ -50,10 +50,8 @@ export function useEdit() {
             }
             else {
                 dispatch(genericError(e.message));
-                throw new Error(e.message);
             }
-        }).catch(e => {
-            throw new Error();
+            throw new Error(e.message);
         });
     });
     return { data, edit, errors };
