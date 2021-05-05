@@ -137,8 +137,8 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     });
     const { filters, components, clearFilters } = useTableFilters(resourceName, lockedFilters);
     const { data, get, loading } = useList();
-    const [selected, setSelected] = React.useState([]);
-    const [page, setPage] = React.useState(0);
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
     const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
     useEffect(() => {
         debounced();
@@ -157,7 +157,7 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     });
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
-export function GenericList({ data, totalItems, getDataHandler, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
+export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
     const [rows, setRows] = useState([]);
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
     //get Data as a first step.
@@ -226,11 +226,11 @@ export function GenericList({ data, totalItems, getDataHandler, loading, page, s
                                                     //onClick={(event) => handleClick(event, row.id)}
                                                     role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                         columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, reloadData }) => getOperationButton({
+                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text }) => getOperationButton({
                                                                     color: color,
                                                                     text: text,
                                                                     icon: icon,
-                                                                    onClick: (reloadData) ? () => onClick(row).then(() => getDataHandler()) : () => onClick(row)
+                                                                    onClick: () => onClick(row)
                                                                 })) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));

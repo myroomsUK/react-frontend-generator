@@ -4,10 +4,9 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     itemOperations?: any[] | undefined;
     collectionOperations?: any[] | undefined;
 }): JSX.Element;
-export function GenericList({ data, totalItems, getDataHandler, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns }: {
+export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns }: {
     data: any;
     totalItems: any;
-    getDataHandler: any;
     loading: any;
     page: any;
     setPage: any;
