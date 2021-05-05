@@ -140,7 +140,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected,clearFilters, components, showClearFilters } = props;
+    const { numSelected,clearFilters, components, showClearFilters, collectionOperations, selected } = props;
 
     const [expanded, setExpanded] = useState(false);
 
@@ -162,11 +162,11 @@ const EnhancedTableToolbar = (props) => {
                             <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                                 {numSelected} selected
                             </Typography>
-                            <Tooltip title="Delete">
-                                <IconButton aria-label="delete">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Tooltip>
+                                {collectionOperations.map(({title, icon, onClick}) =>
+                                    <Tooltip title={title}>
+                                        <IconButton onClick={()=>onClick(selected)}>{icon}</IconButton>
+                                    </Tooltip>
+                                )}
                             </Paper>
                         ) : (
                             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
@@ -229,47 +229,16 @@ function randomArray(){
     return new Array(getRandomInt(3,7)).fill(1);
 }
 
-
-export function GenericList({resourceName, filters:lockedFilters, itemOperations}) {
-    const [rows, setRows] = useState([]);
-    const [selected, setSelected] = React.useState([]);
-
-    const {model, title, table, tableActions:customActions} = useGetResourceModel(resourceName)
-
-
+export function ResourceList({resourceName, filters:lockedFilters,  itemOperations, collectionOperations}){
+    const {model, title, table} = useGetResourceModel(resourceName)
     let headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
-    headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
-
     const {filters, components, clearFilters} = TableFilters(resourceName,lockedFilters);
-    //get Data as a first step.
-    const dispatch = useDispatch();
     const {data, get, loading} = useList();
     const {list, totalItems} = data;
-    const [localLoading, setLocalLoading] = useState(false);
-
-    useEffect(()=>{setLocalLoading(loading)},[loading])
-
-    const goToNew = ()=> dispatch(push(`/${resourceName}/new`))
-    const goToEdit = (id)=> dispatch(push(`/${resourceName}/${id}/edit`))
-    const goToShow = (id)=> dispatch(push(`/${resourceName}/${id}/show`))
-
-
-
-    const classes = useStyles();
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
-
+    const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [dense, setDense] = React.useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(30);
-
-
-    useEffect(()=>{
-        setRows([])
-        setSelected([])
-    }, [resourceName])
 
     const debounced = useDebouncedCallback(
         ()=>get(resourceName,page+1, filters),
@@ -277,14 +246,72 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
     );
 
     useEffect(()=>{
-        setLocalLoading(true);
         debounced();
-        setLocalLoading(false)
     },[resourceName, filters, page])
+
+    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
+
+    const showClearFilters = !!components.length;
+
+
+    const columns = (row) => table.map(({id, label}) =>
+    {
+        const split = _.split(id, ".");
+        const reducer = (start, value) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, row);
+        const propertyModel = model.getProperty(id);
+        propertyModel.label = label;
+        return {propertyModel: propertyModel , record: record}
+    }).map(({propertyModel, record}, localIndex) => {
+        return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
+    })
+
+    return <GenericList
+        data={data.list}
+        totalItems={data.totalItems}
+        loading={loading}
+        page={page}
+        setPage={setPage}
+        selected={selected}
+        setSelected={setSelected}
+        title={title}
+        clearFilters={clearFilters}
+        filterBarComponents={filterBarComponents}
+        showClearFilters={showClearFilters}
+        components={components}
+        columns={columns}
+
+    />
+
+}
+
+export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns}) {
+    const [rows, setRows] = useState([]);
+
+    headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
+
+    //get Data as a first step.
+    const dispatch = useDispatch();
+    const [localLoading, setLocalLoading] = useState(false);
+    useEffect(()=>{setLocalLoading(loading)},[loading])
+
+    const classes = useStyles();
+    const [order, setOrder] = React.useState('asc');
+    const [orderBy, setOrderBy] = React.useState('calories');
+    const [dense, setDense] = React.useState(false);
+    const [rowsPerPage, setRowsPerPage] = React.useState(30);
+
+
+    /*useEffect(()=>{
+        setRows([])
+        setSelected([])
+    }, [resourceName])*/
+
+
 
 
     useEffect(()=>{
-        setRows(data.list);
+        setRows(data);
     }, [data]);
 
     const handleRequestSort = (event, property) => {
@@ -322,27 +349,16 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
         setSelected(newSelected);
     };
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };//const [rows, setRows] = useState([]);
-
-    const handleChangeDense = (event) => {
-        setDense(event.target.checked);
-    };
+    const handleChangePage = (event, newPage) => setPage(newPage)
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
-
-    const showClearFilters = !!components.length;
 
     return  (
         <>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    <EnhancedTableToolbar numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters}/>
+                    <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations}/>
                     <TableContainer>
                         <Table
                             className={classes.table}
@@ -374,7 +390,7 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
 
                                         </TableCell>
                                         {
-                                            table.map((tableItem, index) => <TableCell key={index}><Skeleton variant="text"/> </TableCell>)
+                                            columns.map((column, index) => <TableCell key={index}><Skeleton variant="text"/> </TableCell>)
                                         }
                                         <TableCell align="right">
 
@@ -405,19 +421,12 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
                                                     />
                                                 </TableCell>
                                                 {
-                                                    table.map(({id, label}) =>
-                                                    {
-                                                        const split = _.split(id, ".");
-                                                        const reducer = (start, value) => (start) ? start[value] : undefined;
-                                                        const record = split.reduce(reducer, row);
-                                                        const propertyModel = model.getProperty(id);
-                                                        propertyModel.label = label;
-                                                        return {propertyModel: propertyModel , record: record}
-                                                    }).map(({propertyModel, record}, localIndex) => {
-                                                    return <TableCell key={localIndex}>
-                                                        <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
-                                                    </TableCell>
-                                                })}
+                                                    columns(row).map((column, localIndex)=>
+                                                        <TableCell key={localIndex}>
+                                                            {column}
+                                                        </TableCell>
+                                                    )
+                                                }
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
                                                         {itemOperations.map(({color, onClick,text}) => <Button variant={"contained"} color={color} onClick={()=>onClick(row.id)}>{text}</Button>)}
@@ -426,11 +435,6 @@ export function GenericList({resourceName, filters:lockedFilters, itemOperations
                                             </TableRow>
                                         );
                                     })}
-                                {false && emptyRows > 0 && (
-                                    <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                                        <TableCell colSpan={6} />
-                                    </TableRow>
-                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
