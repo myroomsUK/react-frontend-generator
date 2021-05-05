@@ -24,7 +24,7 @@ export function useResources(resourceName:string){
     const initialValue = useRef({});
     const [record, setRecord] = useState(initialValue.current);
     const {data:downloadedRecord, get} = useList();
-    const getNewResource = useCallback(()=>get(resourceName),[resourceName,]);
+    const getNewResource = useCallback(()=>get(resourceName),[resourceName]);
     useEffect(()=> {
         getNewResource()
     },[])

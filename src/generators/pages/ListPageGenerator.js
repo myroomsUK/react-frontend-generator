@@ -431,7 +431,7 @@ export function GenericList({data, totalItems, getDataHandler, loading, page, se
                                                             color:color,
                                                             text:text,
                                                             icon:icon,
-                                                            onClick: (reloadData) ? ()=>onClick(row).then(()=> getDataHandler()) : onClick(row)
+                                                            onClick: (reloadData) ? ()=>onClick(row).then(()=> getDataHandler()) : () => onClick(row)
                                                         })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>

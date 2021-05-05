@@ -230,7 +230,7 @@ export function GenericList({ data, totalItems, getDataHandler, loading, page, s
                                                                     color: color,
                                                                     text: text,
                                                                     icon: icon,
-                                                                    onClick: (reloadData) ? () => onClick(row).then(() => getDataHandler()) : onClick(row)
+                                                                    onClick: (reloadData) ? () => onClick(row).then(() => getDataHandler()) : () => onClick(row)
                                                                 })) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
