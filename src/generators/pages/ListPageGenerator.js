@@ -162,9 +162,11 @@ const EnhancedTableToolbar = (props) => {
                             <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                                 {numSelected} selected
                             </Typography>
-                                {collectionOperations.map(({title, icon, onClick}) =>
-                                    <Tooltip title={title}>
-                                        <IconButton onClick={()=>onClick(selected)}>{icon}</IconButton>
+                                {collectionOperations.map(({color, text, icon, onClick}) =>
+                                    <Tooltip title={text}>
+                                        {
+                                            getOperationButton({color:color, text:text, icon:icon, onClick: ()=>onClick(selected)})
+                                        }
                                     </Tooltip>
                                 )}
                             </Paper>
@@ -229,9 +231,9 @@ function randomArray(){
     return new Array(getRandomInt(3,7)).fill(1);
 }
 
-export function ResourceList({resourceName, filters:lockedFilters,  itemOperations, collectionOperations}){
+export function ResourceList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
     const {model, title, table} = useGetResourceModel(resourceName)
-    let headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
+    const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
     const {filters, components, clearFilters} = TableFilters(resourceName,lockedFilters);
@@ -280,12 +282,14 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
         showClearFilters={showClearFilters}
         components={components}
         columns={columns}
-
+        headCells={headCells}
+        itemOperations={itemOperations}
+        collectionOperations={collectionOperations}
     />
 
 }
 
-export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns}) {
+export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns}) {
     const [rows, setRows] = useState([]);
 
     headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
@@ -429,7 +433,12 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
                                                 }
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, onClick,text}) => <Button variant={"contained"} color={color} onClick={()=>onClick(row.id)}>{text}</Button>)}
+                                                        {itemOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                                            color:color,
+                                                            text:text,
+                                                            icon:icon,
+                                                            onClick: ()=>onClick(row)
+                                                        })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>
                                             </TableRow>
@@ -451,4 +460,11 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
         </>
 
     );
+}
+
+function getOperationButton({color, onClick,text, icon}){
+    if(icon){
+        return <IconButton variant="contained" color={color} onClick={onClick}>{icon}</IconButton>
+    }
+    return <Button variant="contained" color={color} onClick={onClick}/>
 }

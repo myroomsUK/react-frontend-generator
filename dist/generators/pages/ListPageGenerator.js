@@ -91,7 +91,7 @@ const EnhancedTableToolbar = (props) => {
     return (_jsx(_Fragment, { children: _jsxs(Accordion, Object.assign({ expanded: expanded, elevation: 0 }, { children: [_jsx(AccordionSummary, Object.assign({ "aria-controls": "panel1a-content", id: "panel1a-header" }, { children: _jsxs(Toolbar, Object.assign({ className: classes.root }, { children: [numSelected > 0 ? (_jsxs(Paper, Object.assign({ elevation: 0, className: clsx(classes.paper, {
                                     [classes.highlight]: numSelected > 0,
                                 }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0),
-                                    collectionOperations.map(({ title, icon, onClick }) => _jsx(Tooltip, Object.assign({ title: title }, { children: _jsx(IconButton, Object.assign({ onClick: () => onClick(selected) }, { children: icon }), void 0) }), void 0))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: props.title }), void 0)),
+                                    collectionOperations.map(({ color, text, icon, onClick }) => _jsx(Tooltip, Object.assign({ title: text }, { children: getOperationButton({ color: color, text: text, icon: icon, onClick: () => onClick(selected) }) }), void 0))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: props.title }), void 0)),
                             (showClearFilters) && (_jsx(Button, Object.assign({ onClick: clearFilters }, { children: "Clear filters" }), void 0)),
                             (!!components.length) && _jsx(Tooltip, Object.assign({ title: "Filter list" }, { children: _jsx(IconButton, Object.assign({ "aria-label": "filter list", onClick: handleChange }, { children: _jsx(FilterListIcon, {}, void 0) }), void 0) }), void 0)] }), void 0) }), void 0),
                 _jsx(AccordionDetails, { children: _jsx(ListPageFilterBar, { components: components }, void 0) }, void 0)] }), void 0) }, void 0));
@@ -130,9 +130,9 @@ function getRandomInt(min, max) {
 function randomArray() {
     return new Array(getRandomInt(3, 7)).fill(1);
 }
-export function ResourceList({ resourceName, filters: lockedFilters, itemOperations, collectionOperations }) {
+export function ResourceList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
     const { model, title, table } = useGetResourceModel(resourceName);
-    let headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
+    const headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
     const { filters, components, clearFilters } = TableFilters(resourceName, lockedFilters);
@@ -156,9 +156,9 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     }).map(({ propertyModel, record }, localIndex) => {
         return _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0);
     });
-    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns }, void 0);
+    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
-export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns }) {
+export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
     const [rows, setRows] = useState([]);
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
     //get Data as a first step.
@@ -227,7 +227,18 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
                                                     //onClick={(event) => handleClick(event, row.id)}
                                                     role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                         columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, onClick, text }) => _jsx(Button, Object.assign({ variant: "contained", color: color, onClick: () => onClick(row.id) }, { children: text }), void 0)) }, void 0) }), void 0)] }), index));
+                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text }) => getOperationButton({
+                                                                    color: color,
+                                                                    text: text,
+                                                                    icon: icon,
+                                                                    onClick: () => onClick(row)
+                                                                })) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
+}
+function getOperationButton({ color, onClick, text, icon }) {
+    if (icon) {
+        return _jsx(IconButton, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: icon }), void 0);
+    }
+    return _jsx(Button, { variant: "contained", color: color, onClick: onClick }, void 0);
 }
