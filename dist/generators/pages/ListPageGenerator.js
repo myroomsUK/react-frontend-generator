@@ -215,7 +215,7 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
                                         (randomArray()).map((value, index) => _jsxs(TableRow, Object.assign({ hover: true, 
                                             //onClick={(event) => handleClick(event, row.id)}
                                             role: "checkbox", tabIndex: -1 }, { children: [_jsx(TableCell, { padding: "checkbox" }, void 0),
-                                                columns.map((column, index) => _jsxs(TableCell, { children: [_jsx(Skeleton, { variant: "text" }, void 0), " "] }, index)),
+                                                headCells.map((headcell, index) => _jsxs(TableCell, { children: [_jsx(Skeleton, { variant: "text" }, void 0), " "] }, index)),
                                                 _jsx(TableCell, { align: "right" }, void 0)] }), index))
                                         :
                                             stableSort(rows, getComparator(order, orderBy))

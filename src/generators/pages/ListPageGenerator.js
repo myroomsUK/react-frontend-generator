@@ -394,7 +394,7 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
 
                                         </TableCell>
                                         {
-                                            columns.map((column, index) => <TableCell key={index}><Skeleton variant="text"/> </TableCell>)
+                                            headCells.map((headcell, index) => <TableCell key={index}><Skeleton variant="text"/> </TableCell>)
                                         }
                                         <TableCell align="right">
 
