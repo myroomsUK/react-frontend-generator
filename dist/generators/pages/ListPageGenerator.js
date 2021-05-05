@@ -240,5 +240,5 @@ function getOperationButton({ color, onClick, text, icon }) {
     if (icon) {
         return _jsx(IconButton, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: icon }), void 0);
     }
-    return _jsx(Button, { variant: "contained", color: color, onClick: onClick }, void 0);
+    return _jsx(Button, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: text }), void 0);
 }

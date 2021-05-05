@@ -466,5 +466,5 @@ function getOperationButton({color, onClick,text, icon}){
     if(icon){
         return <IconButton variant="contained" color={color} onClick={onClick}>{icon}</IconButton>
     }
-    return <Button variant="contained" color={color} onClick={onClick}/>
+    return <Button  variant="contained" color={color} onClick={onClick}>{text}</Button>
 }
