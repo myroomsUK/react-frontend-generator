@@ -3,7 +3,7 @@ export declare const RouteTableFilters: (resourceNameToUse: string, presetFilter
     filters: any;
     clearFilters: () => void;
 };
-export declare const TableFilters: (resourceName: string, propLockedFilters: any) => {
+export declare const useTableFilters: (resourceName: string, propLockedFilters: any) => {
     components: any;
     filters: any;
     clearFilters: () => void;

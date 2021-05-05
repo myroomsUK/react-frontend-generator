@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles} from '@material-ui/core/styles';
@@ -16,15 +16,9 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import {useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
-import {push} from "connected-react-router";
-
-import {useParams} from 'react-router-dom';
 import {useDebouncedCallback} from "use-debounce";
 import _ from 'lodash';
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -36,7 +30,7 @@ import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import {GenericField} from "../fields/genericField";
-import {TableFilters} from "../filters/TableFilters";
+import {useTableFilters} from "../filters/TableFilters";
 
 
 function EnhancedTableHead(props) {
@@ -236,9 +230,8 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
     const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
-    const {filters, components, clearFilters} = TableFilters(resourceName,lockedFilters);
+    const {filters, components, clearFilters} = useTableFilters(resourceName,lockedFilters);
     const {data, get, loading} = useList();
-    const {list, totalItems} = data;
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
 
@@ -271,6 +264,7 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
     return <GenericList
         data={data.list}
         totalItems={data.totalItems}
+        getDataHandler={debounced}
         loading={loading}
         page={page}
         setPage={setPage}
@@ -289,7 +283,7 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
 
 }
 
-export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns}) {
+export function GenericList({data, totalItems, getDataHandler, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns}) {
     const [rows, setRows] = useState([]);
 
     headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
@@ -433,11 +427,11 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
                                                 }
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                                        {itemOperations.map(({color, icon, onClick,text, reloadData}) => getOperationButton({
                                                             color:color,
                                                             text:text,
                                                             icon:icon,
-                                                            onClick: ()=>onClick(row)
+                                                            onClick: (reloadData) ? ()=>onClick(row).then(()=> getDataHandler()) : onClick(row)
                                                         })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>

@@ -30,7 +30,7 @@ import { useList } from "../../redux/actions/verbs/list";
 import { getComparator, stableSort } from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { GenericField } from "../fields/genericField";
-import { TableFilters } from "../filters/TableFilters";
+import { useTableFilters } from "../filters/TableFilters";
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters } = props;
     const createSortHandler = (property) => (event) => {
@@ -135,9 +135,8 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     const headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
-    const { filters, components, clearFilters } = TableFilters(resourceName, lockedFilters);
+    const { filters, components, clearFilters } = useTableFilters(resourceName, lockedFilters);
     const { data, get, loading } = useList();
-    const { list, totalItems } = data;
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
@@ -156,9 +155,9 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     }).map(({ propertyModel, record }, localIndex) => {
         return _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0);
     });
-    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
+    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
-export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
+export function GenericList({ data, totalItems, getDataHandler, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
     const [rows, setRows] = useState([]);
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
     //get Data as a first step.
@@ -227,11 +226,11 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
                                                     //onClick={(event) => handleClick(event, row.id)}
                                                     role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                         columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text }) => getOperationButton({
+                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, reloadData }) => getOperationButton({
                                                                     color: color,
                                                                     text: text,
                                                                     icon: icon,
-                                                                    onClick: () => onClick(row)
+                                                                    onClick: (reloadData) ? () => onClick(row).then(() => getDataHandler()) : onClick(row)
                                                                 })) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));

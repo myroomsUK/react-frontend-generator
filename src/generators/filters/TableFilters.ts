@@ -87,23 +87,12 @@ export const RouteTableFilters: (resourceNameToUse:string, presetFilters:any) =>
 
 }
 
-export const TableFilters: (resourceName:string, propLockedFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceName, propLockedFilters) => {
-
-    const [lockedFilters, setLockedFilters] = useState<any>({});
-    const [filters, setFilters] = useState<any>({});
-
-    useEffect(()=>{setLockedFilters(propLockedFilters)},[propLockedFilters])
-
-    useEffect(()=>{
-            setFilters(lockedFilters);
-    },[lockedFilters])
-
-    const clearFilters = ()=>setFilters(lockedFilters);
+export const useTableFilters: (resourceName:string, propLockedFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceName, propLockedFilters) => {
+    const [filters, setFilters] = useState<any>(propLockedFilters);
     const {model, filters:modelFilters} = useGetResourceModel(resourceName);
-
-    const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: getFinalFilters(modelFilters, lockedFilters), filters: filters, setFilters: setFilters}},[model, modelFilters, filters, lockedFilters]);
+    const clearFilters = ()=>setFilters(propLockedFilters);
+    const propsFiltersList = useMemo(()=> {return {model:model, modelFilters: getFinalFilters(modelFilters, propLockedFilters), filters: filters, setFilters: setFilters}},[model, modelFilters, filters, propLockedFilters]);
     return {filters:filters, components:FilterList(propsFiltersList), clearFilters:clearFilters}
-
 }
 
 function removeLockedFiltersFromModelFilters(filters:any, lockedFilters:any ){
