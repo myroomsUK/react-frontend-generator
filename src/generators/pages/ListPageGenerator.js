@@ -283,13 +283,12 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
 
 }
 
+
 export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns}) {
     const [rows, setRows] = useState([]);
-
     headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
 
     //get Data as a first step.
-    const dispatch = useDispatch();
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(()=>{setLocalLoading(loading)},[loading])
 
@@ -298,14 +297,6 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(30);
-
-
-    /*useEffect(()=>{
-        setRows([])
-        setSelected([])
-    }, [resourceName])*/
-
-
 
 
     useEffect(()=>{

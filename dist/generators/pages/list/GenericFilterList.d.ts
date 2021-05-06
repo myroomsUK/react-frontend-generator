@@ -13,7 +13,7 @@ export function useListHelpers(resourceName: any, filters: any): {
         totalItems: any;
     }>>;
 };
-export function GenericFilterList({ resourceName, data, loading, page, setPage, selected, setSelected, filters: lockedFilters, itemOperations, collectionOperations }: {
+export function GenericFilterList({ resourceName, data, loading, page, setPage, selected, setSelected, components, clearFilters, itemOperations, collectionOperations }: {
     resourceName: any;
     data: any;
     loading: any;
@@ -21,7 +21,8 @@ export function GenericFilterList({ resourceName, data, loading, page, setPage, 
     setPage: any;
     selected: any;
     setSelected: any;
-    filters: any;
+    components: any;
+    clearFilters: any;
     itemOperations?: any[] | undefined;
     collectionOperations?: any[] | undefined;
 }): JSX.Element;

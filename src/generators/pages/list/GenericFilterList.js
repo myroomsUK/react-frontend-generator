@@ -20,12 +20,14 @@ export function useListHelpers(resourceName, filters){
     return {page, setPage, selected, setSelected, data, loading, getData}
 }
 
-export function GenericFilterList({resourceName, data, loading, page, setPage, selected, setSelected, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
+
+//const {filters, components, clearFilters} = useTableFilters(resourceName,lockedFilters);
+export function GenericFilterList({resourceName, data, loading, page, setPage, selected, setSelected, components,clearFilters, itemOperations = [], collectionOperations = []}){
     const {model, title, table} = useGetResourceModel(resourceName)
     const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
-    const {filters, components, clearFilters} = useTableFilters(resourceName,lockedFilters);
+
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
 
     const showClearFilters = !!components.length;

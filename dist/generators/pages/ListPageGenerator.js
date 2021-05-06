@@ -18,7 +18,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { useDebouncedCallback } from "use-debounce";
 import _ from 'lodash';
@@ -161,7 +160,6 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
     const [rows, setRows] = useState([]);
     headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
     //get Data as a first step.
-    const dispatch = useDispatch();
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(() => { setLocalLoading(loading); }, [loading]);
     const classes = useStyles();
@@ -169,10 +167,6 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(30);
-    /*useEffect(()=>{
-        setRows([])
-        setSelected([])
-    }, [resourceName])*/
     useEffect(() => {
         setRows(data);
     }, [data]);
