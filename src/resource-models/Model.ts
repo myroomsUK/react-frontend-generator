@@ -1,5 +1,6 @@
 import {PropertyModel} from "./PropertyModel";
 import _ from 'lodash';
+import {PropertyModelRegistry} from "./PropertyModelRegistry";
 
 export interface Model{
     properties: PropertyModel[]
@@ -10,6 +11,11 @@ export class Model{
         this.properties = properties;
     }
 
+
+    /**
+     * This method allows to fetch the property Model from the Model. It accepts a dotted name, as it can get inside nested properties.
+     * @param name
+     */
     getProperty(name:string): PropertyModel {
 
         const split = _.split(name, ".");
@@ -53,7 +59,7 @@ export class Model{
     }
 
     static createFromJson(jsonModel:any):Model{
-        const properties =  Object.keys(jsonModel).map(key =>  PropertyModel.get(key, jsonModel[key]));
+        const properties =  Object.keys(jsonModel).map(key =>  PropertyModelRegistry.get(key, jsonModel[key]));
         return new Model(properties);
     }
 

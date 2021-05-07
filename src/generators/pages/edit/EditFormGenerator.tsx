@@ -29,6 +29,7 @@ interface EditFormGeneratorProps {
  */
 export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
+    console.log("model",model);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);

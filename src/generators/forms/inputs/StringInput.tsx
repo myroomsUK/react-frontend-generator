@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import {CustomTextValidator} from "../formHelpers";
-import {PropertyModel} from "../../../resource-models/PropertyModel";
+import {StringModel} from "../../../resource-models/propertyModels/StringModel";
 
 interface Props{
     hasError:boolean;
-    model:PropertyModel;
+    model:StringModel;
     errorMessage?:string;
     label:string;
     onClick:(e:any)=>void;

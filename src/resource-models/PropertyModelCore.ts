@@ -26,6 +26,9 @@ export interface PropertyModelCore{
     listDataTransformer?:any
 }
 
+/**
+ * this class maps ALL attributes the set of property Models might need
+ */
 export class PropertyModelCore{
     type:InputType;
     label:string;

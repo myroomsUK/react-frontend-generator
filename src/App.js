@@ -6,8 +6,9 @@ import SignIn from "./authentication/login";
 import {MainPage} from "./rendering/templates/MainPage";
 import {Create} from "./generators/pages/CreatePageGenerator";
 import {GenericList} from "./generators/pages/ListPageGenerator";
-import {Edit} from "./generators/pages/EditPageGenerator";
+import {EditPage} from "./generators/pages/EditPageGenerator";
 import {Show} from "./generators/pages/ShowPageGenerator";
+import Test from "./Test";
 
 function App() {
 
@@ -17,9 +18,9 @@ function App() {
 
     const authenticatedRoutes = <Switch>
         <Route path="/login" render={() => <SignIn/>}/>
-        <Route path="/:urlResourceName/new" exact render={() => <MainPage main={<Create />}  />}/>
+        <Route path="/test" render={() => <Test/>}/>
         <Route path="/:urlResourceName" exact render={() => <MainPage main={<GenericList />}/>} />
-        <Route path="/:urlResourceName/:id/edit" exact render={() => <MainPage main={<Edit />} />}/>
+        <Route path="/:urlResourceName/:id/edit" exact render={() => <MainPage main={<EditPage  />} />}/>
         <Route path="/:urlResourceName/:id/show" exact render={() => <MainPage main={<Show />} />}/>
         <Route path="/" render={() => <MainPage main={<div>dashboard</div>} />}/>
     </Switch>
@@ -37,8 +38,9 @@ function App() {
                 />
             </Route>
         </Switch>
+    return <Test/>
 
-    return (tokenValid) ? authenticatedRoutes : unauthenticatedRoutes;
+    return  authenticatedRoutes;
 
 }
 
