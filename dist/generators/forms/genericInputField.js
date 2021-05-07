@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import _ from "lodash";
 import { useSelector } from "react-redux";
-import { BOOLEAN, DATE, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM, FILE_MULTIPLE, FILE_SINGLE, FLOAT, INTEGER, MONEY, PHONE, REFERENCE, STRING } from "./inputs/InputTypes";
+import { BOOLEAN, TEXTAREA, DATE, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM, FILE_MULTIPLE, FILE_SINGLE, FLOAT, INTEGER, MONEY, PHONE, REFERENCE, STRING } from "./inputs/InputTypes";
 import BooleanInput from "./inputs/BooleanInput";
 import NumberInput from "./inputs/NumberInput";
 import { FloatInput } from "./inputs/FloatInput";
@@ -15,6 +15,7 @@ import PhoneInput from "./inputs/PhoneInput";
 import MoneyInput from "./inputs/MoneyInput";
 import { StringInput } from "./inputs/StringInput";
 import { CustomTextValidator } from "./formHelpers";
+import { TextareaInput } from "./inputs/TextareaInput";
 export const InputField = ({ type, resourceName, resourceId, onClick, requestedName, model, value, form, referencesMap, parentFormValue, refreshReferencesMap, setParentFormValue, hasError = false, errorMessage, errors, partialSubmitHandler, submitHandler }) => {
     var _a;
     const label = _.startCase(model.label);
@@ -49,7 +50,7 @@ export const InputField = ({ type, resourceName, resourceId, onClick, requestedN
             return _jsx(SingleFileInput, { file: value, id: model.id, label: label, onChange: onClick, resourceName: resourceName, resourceId: resourceId }, void 0);
         }
         case FILE_MULTIPLE: {
-            return _jsx(FileListInput, { partialSubmitHandler: partialSubmitHandler, id: model.id, resourceName: resourceName, files: value, multiple: true, label: label, onChange: onClick, resourceId: resourceId }, void 0);
+            return _jsx(FileListInput, { partialSubmitHandler: partialSubmitHandler, id: model.id, resourceName: resourceName, files: value, multiple: true, label: label, onChange: onClick, resourceId: resourceId, areImages: model.areImages }, void 0);
         }
         case ENUM: {
             const options = model["options"];
@@ -64,6 +65,9 @@ export const InputField = ({ type, resourceName, resourceId, onClick, requestedN
         }
         case STRING: {
             return _jsx(StringInput, { onClick: onClick, hasError: hasError, model: model, errorMessage: errorMessage, label: label, value: value !== null && value !== void 0 ? value : "", adornment: adornment }, void 0);
+        }
+        case TEXTAREA: {
+            return _jsx(TextareaInput, { onClick: onClick, hasError: hasError, model: model, errorMessage: errorMessage, label: label, value: value !== null && value !== void 0 ? value : "", adornment: adornment }, void 0);
         }
         default: {
             return _jsx(CustomTextValidator, { autoComplete: "nope", error: hasError, errorMessage: errorMessage, variant: "outlined", label: label, name: model.id, id: model.id, onChange: onClick, value: value, style: { width: "100%" }, InputProps: {

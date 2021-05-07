@@ -1,7 +1,7 @@
 import React from "react";
 import { PropertyModel } from "../../resource-models/PropertyModel";
 import { Errors } from "../errors/Errors";
-export declare type InputType = "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array";
+export declare type InputType = "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea";
 interface InputField {
     type: InputType;
     model: PropertyModel;

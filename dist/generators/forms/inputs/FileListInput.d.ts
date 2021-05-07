@@ -1,5 +1,4 @@
-export default function FileListInput({ files, resourceName, resourceId, multiple, onChange, id, partialSubmitHandler, ...rest }: {
-    [x: string]: any;
+export default function FileListInput({ files, resourceName, resourceId, multiple, onChange, id, partialSubmitHandler, areImages, label }: {
     files: any;
     resourceName: any;
     resourceId: any;
@@ -7,4 +6,6 @@ export default function FileListInput({ files, resourceName, resourceId, multipl
     onChange: any;
     id: any;
     partialSubmitHandler: any;
+    areImages?: boolean | undefined;
+    label: any;
 }): JSX.Element;

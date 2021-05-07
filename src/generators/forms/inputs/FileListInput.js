@@ -4,8 +4,9 @@ import CustomDeleteButton from "../../../rendering/components/buttons/CustomDele
 import {createArrayFromMap, createMapFromArray} from "../../../utils/mapUtils";
 import {useDeleteFile} from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
+import FileList from "../../../rendering/components/others/FileList";
 
-export default function FileListInput({files, resourceName, resourceId, multiple = false, onChange,id, partialSubmitHandler, ...rest}) {
+export default function FileListInput({files, resourceName, resourceId, multiple = false, onChange,id, partialSubmitHandler, areImages=true, label}) {
 
     const {remove} = useDeleteFile(resourceName);
     const creationTime = useRef(Date.now());
@@ -70,11 +71,14 @@ export default function FileListInput({files, resourceName, resourceId, multiple
         }).catch(e => console.log(e));
     }
 
-    const imageGridList = <ImageGrid images={filesList} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
+    const list = areImages ?
+        <ImageGrid images={filesList} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
+        :
+        <FileList list={filesList} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
 
     return <Grid container>
         <Grid md={12} xs={12} item>
-            {imageGridList}
+            {list}
         </Grid>
     </Grid>
 }

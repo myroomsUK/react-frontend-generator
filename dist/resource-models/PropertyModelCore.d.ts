@@ -45,5 +45,6 @@ export declare class PropertyModelCore {
     read?: boolean;
     listValue?: any;
     listDataTransformer?: any;
-    constructor({ type, label, validators, errorMessages, resourceName, optionText, single, resource, form, options, xs, md, adornment, showElement, modifyOnlyLastElement, editabilityRule, write, read, listValue, listDataTransformer }: any);
+    areImages?: boolean;
+    constructor({ type, label, validators, errorMessages, resourceName, optionText, single, resource, form, options, xs, md, adornment, showElement, modifyOnlyLastElement, editabilityRule, write, read, listValue, listDataTransformer, areImages }: any);
 }

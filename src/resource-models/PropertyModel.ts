@@ -26,7 +26,8 @@ export interface PropertyModel{
     write?:boolean,
     read?:boolean,
     listValue?:any,
-    listDataTransformer?:any
+    listDataTransformer?:any,
+    areImages?: boolean;
 }
 
 export type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
@@ -60,9 +61,10 @@ export class PropertyModel{
     read?:boolean;
     listValue?:any;
     listDataTransformer?:any;
+    areImages?: boolean;
 
     constructor(id:string, rest:PropertyModelCore ) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement=false, editabilityRule = (() => {return true}), write=false, read=false, listValue, listDataTransformer} = rest;
+        const {type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement=false, editabilityRule = (() => {return true}), write=false, read=false, listValue, listDataTransformer, areImages} = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -84,6 +86,7 @@ export class PropertyModel{
         this.read = read;
         this.listValue = listValue;
         this.listDataTransformer = listDataTransformer;
+        this.areImages = areImages;
     }
 
     static get(id:string,others:PropertyModelCore):PropertyModel{

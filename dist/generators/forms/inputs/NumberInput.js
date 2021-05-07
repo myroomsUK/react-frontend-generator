@@ -13,6 +13,6 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { TextValidator } from "react-material-ui-form-validator";
 export default function (_a) {
     var { name, onClick, value, label } = _a, rest = __rest(_a, ["name", "onClick", "value", "label"]);
-    const trueValue = value ? parseInt(value) : null;
-    return _jsx(TextValidator, Object.assign({}, rest, { label: label, onChange: onClick, value: trueValue, style: { width: "100%" }, type: "number" }), void 0);
+    const trueValue = (value !== undefined) ? parseInt(value) : 0;
+    return _jsx(TextValidator, { label: label, onChange: onClick, value: trueValue, style: { width: "100%" }, type: "number" }, void 0);
 }

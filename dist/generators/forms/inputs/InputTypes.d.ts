@@ -13,3 +13,4 @@ export const PHONE: "phone";
 export const MONEY: "money";
 export const ARRAY: "array";
 export const TEXT: "text";
+export const TEXTAREA: "textarea";

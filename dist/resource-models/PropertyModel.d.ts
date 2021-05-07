@@ -23,6 +23,7 @@ export interface PropertyModel {
     read?: boolean;
     listValue?: any;
     listDataTransformer?: any;
+    areImages?: boolean;
 }
 export declare type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
 export declare type Option = {
@@ -54,6 +55,7 @@ export declare class PropertyModel {
     read?: boolean;
     listValue?: any;
     listDataTransformer?: any;
+    areImages?: boolean;
     constructor(id: string, rest: PropertyModelCore);
     static get(id: string, others: PropertyModelCore): PropertyModel;
     static createReferenceElement(name: string, resourceName: string): PropertyModel;

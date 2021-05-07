@@ -3,10 +3,9 @@ import React from "react";
 
 export default function ({name, onClick, value, label,...rest}){
 
-    const trueValue = value ? parseInt(value): null;
+    const trueValue = (value!==undefined) ? parseInt(value) : 0;
 
     return <TextValidator
-        {...rest}
         label={label}
         onChange={onClick}
         value={trueValue}

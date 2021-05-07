@@ -1,14 +1,3 @@
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
 import Grid from "@material-ui/core/Grid";
@@ -16,8 +5,8 @@ import CustomDeleteButton from "../../../rendering/components/buttons/CustomDele
 import { createArrayFromMap, createMapFromArray } from "../../../utils/mapUtils";
 import { useDeleteFile } from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
-export default function FileListInput(_a) {
-    var { files, resourceName, resourceId, multiple = false, onChange, id, partialSubmitHandler } = _a, rest = __rest(_a, ["files", "resourceName", "resourceId", "multiple", "onChange", "id", "partialSubmitHandler"]);
+import FileList from "../../../rendering/components/others/FileList";
+export default function FileListInput({ files, resourceName, resourceId, multiple = false, onChange, id, partialSubmitHandler, areImages = true, label }) {
     const { remove } = useDeleteFile(resourceName);
     const creationTime = useRef(Date.now());
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);
@@ -75,6 +64,9 @@ export default function FileListInput(_a) {
             setUploadedLocalFiles([]);
         }).catch(e => console.log(e));
     };
-    const imageGridList = _jsx(ImageGrid, { images: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0);
-    return _jsx(Grid, Object.assign({ container: true }, { children: _jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: imageGridList }), void 0) }), void 0);
+    const list = areImages ?
+        _jsx(ImageGrid, { images: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0)
+        :
+            _jsx(FileList, { list: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0);
+    return _jsx(Grid, Object.assign({ container: true }, { children: _jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: list }), void 0) }), void 0);
 }

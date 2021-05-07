@@ -47,8 +47,9 @@ export class PropertyModelCore{
     read?:boolean;
     listValue?:any;
     listDataTransformer?:any;
+    areImages?:boolean;
 
-    constructor({type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement=false, editabilityRule, write=false, read=false, listValue, listDataTransformer}:any) {
+    constructor({type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement=false, editabilityRule, write=false, read=false, listValue, listDataTransformer, areImages}:any) {
         this.type = type;
         this.label = label;
         this.validators = validators;
@@ -69,5 +70,6 @@ export class PropertyModelCore{
         this.read = read;
         this.listValue = listValue;
         this.listDataTransformer = listDataTransformer;
+        this.areImages = areImages;
     }
 }

@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import {useSelector} from "react-redux";
 import {
-    BOOLEAN,
+    BOOLEAN,TEXTAREA,
     DATE,
     EMBEDDED_MULTIPLE,
     EMBEDDED_SINGLE,
@@ -31,8 +31,9 @@ import PhoneInput from "./inputs/PhoneInput";
 import MoneyInput from "./inputs/MoneyInput";
 import {StringInput} from "./inputs/StringInput";
 import {CustomTextValidator} from "./formHelpers";
+import {TextareaInput} from "./inputs/TextareaInput";
 
-export type InputType = "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array";
+export type InputType = "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea";
 
 interface InputField{
 
@@ -125,6 +126,7 @@ export const InputField: React.FC<InputField> = ({type, resourceName,resourceId,
                 label={label}
                 onChange={onClick}
                 resourceId={resourceId}
+                areImages={model.areImages}
             />
         }
         case ENUM: {
@@ -150,6 +152,18 @@ export const InputField: React.FC<InputField> = ({type, resourceName,resourceId,
                 adornment={adornment}
 
             />
+        }
+
+        case TEXTAREA: {
+            return <TextareaInput
+                onClick={onClick}
+                hasError={hasError}
+                model={model}
+                errorMessage={errorMessage}
+                label={label}
+                value={value ?? ""}
+                adornment={adornment}
+                />
         }
 
         default: {

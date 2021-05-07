@@ -1,6 +1,6 @@
 import { Resource } from "./Resource";
 export class PropertyModelCore {
-    constructor({ type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement = false, editabilityRule, write = false, read = false, listValue, listDataTransformer }) {
+    constructor({ type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement = false, editabilityRule, write = false, read = false, listValue, listDataTransformer, areImages }) {
         this.type = type;
         this.label = label;
         this.validators = validators;
@@ -21,5 +21,6 @@ export class PropertyModelCore {
         this.read = read;
         this.listValue = listValue;
         this.listDataTransformer = listDataTransformer;
+        this.areImages = areImages;
     }
 }

@@ -7,7 +7,7 @@ import { EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, REFERENCE } from "../generators/for
  */
 export class PropertyModel {
     constructor(id, rest) {
-        const { type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement = false, editabilityRule = (() => { return true; }), write = false, read = false, listValue, listDataTransformer } = rest;
+        const { type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement = false, editabilityRule = (() => { return true; }), write = false, read = false, listValue, listDataTransformer, areImages } = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -29,6 +29,7 @@ export class PropertyModel {
         this.read = read;
         this.listValue = listValue;
         this.listDataTransformer = listDataTransformer;
+        this.areImages = areImages;
     }
     static get(id, others) {
         return new PropertyModel(id, others);
