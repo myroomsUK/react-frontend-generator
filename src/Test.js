@@ -23,9 +23,13 @@ export default function Test(){
         },
     })
 
-    const modelLoaded = useSetRegistry({"courses":{"filters":{"text":["title"]},"model":{"id":{"id":"id","label":"id"},
-                "title":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"},"description":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"description","label":"description"},"published":{"id":"published","label":"published"},"courseImages":{"id":"courseImages","label":"courseImages"},"lessons":{"id":"lessons","label":"lessons"},"days":{"id":"days","label":"days", "write":true, type:"integer"},
-                "months":{"id":"months","label":"months", "write":true, type:"integer"}},"title":"Courses","resourceName":"courses"}});
+    const modelLoaded = useSetRegistry({"courses":{"filters":{"text":["title"]},
+            "model":{
+        "title":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"},
+                "description":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"description","label":"description"},
+                "days":{"id":"days","label":"days", "write":true, type:"integer"},
+                "months":{"id":"months","label":"months", "write":true, type:"integer"}},"title":"Courses","resourceName":"courses"}
+    });
 
 
     const render = <div>

@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import {CustomTextValidator} from "../formHelpers";
 import {StringModel} from "../../../resource-models/propertyModels/StringModel";
+import {MyInputProps, PropertyModel} from "../../../resource-models/PropertyModel";
 
-interface Props{
+export interface StringInput extends MyInputProps{
     hasError:boolean;
-    model:StringModel;
+    model:PropertyModel;
     errorMessage?:string;
     label:string;
     onClick:(e:any)=>void;
@@ -14,7 +15,7 @@ interface Props{
 
 }
 
-export const StringInput: React.FC<Props> = ({model, label, onClick, value, hasError, errorMessage, adornment}) => {
+export const StringInput: React.FC<StringInput> = ({model, label, onClick, value, hasError, errorMessage, adornment}) => {
 
     const [localValue, setLocalValue] = useState(value);
     useEffect(()=>setLocalValue(value),[value])

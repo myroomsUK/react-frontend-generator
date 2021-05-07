@@ -9,10 +9,16 @@ interface Props{
 
 }
 
+/**
+ * This component is entitled to create a form and populate it with data
+ * @param resourceName Resource that we get from the model
+ * @param propId which id
+ * @param propEditPage custom page
+ * @constructor
+ */
 export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
 
     const {record} = useResource(resourceName, propId);
-
     return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
 }
 

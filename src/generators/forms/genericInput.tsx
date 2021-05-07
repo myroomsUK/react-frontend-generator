@@ -112,6 +112,8 @@ export const GenericInput: React.FC<GenericInput> = ({requestedName, resourceNam
             errorMessage={errorMessage}
             resourceName={resourceName}
             resourceId={resourceId}
+            formValue={formValue}
+            setFormValue={setFormValue}
             />
     }else{
         return <div>{requestedName}</div>

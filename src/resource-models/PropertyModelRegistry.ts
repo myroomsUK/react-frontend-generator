@@ -22,7 +22,7 @@ export class PropertyModelRegistry{
                 return new NumberModel(id, others);
             }
             default:{
-                return new PropertyModel(id, others);
+                throw new Error();
             }
         }
 

@@ -53,11 +53,13 @@ interface InputField{
     submitHandler: (e:any) => Promise<any>;
     hasError:boolean,
     resourceName:string,
-    resourceId?:string
+    resourceId?:string,
+    formValue?:object,
+    setFormValue?:any
 
 }
 
-export const InputField: React.FC<InputField> = ({type, resourceName,resourceId, onClick, requestedName, model, value, form, referencesMap, parentFormValue, refreshReferencesMap, setParentFormValue, hasError=false, errorMessage, errors, partialSubmitHandler, submitHandler}) => {
+export const InputField: React.FC<InputField> = ({type, resourceName,resourceId, onClick, requestedName, model, value, form, referencesMap, parentFormValue, refreshReferencesMap, setParentFormValue, hasError=false, errorMessage, errors, partialSubmitHandler, submitHandler, formValue, setFormValue}) => {
 
     const label = _.startCase(model.label);
     const adornment = model.adornment;
@@ -76,6 +78,13 @@ export const InputField: React.FC<InputField> = ({type, resourceName,resourceId,
             return <BooleanInput {...basicProps} name={model.id} checked={value}  />
         }
         case INTEGER: {
+            return model.getInputField({
+                formValue:formValue,
+                setFormValue:setFormValue,
+                hasError:hasError,
+                errorMessage:errorMessage,
+                value:value
+            });
             return <NumberInput {...basicProps} value={value} />
         }
         case FLOAT: {
@@ -142,6 +151,13 @@ export const InputField: React.FC<InputField> = ({type, resourceName,resourceId,
             return <MoneyInput {...model} value={value} onClick={onClick}/>
         }
         case STRING: {
+            return model.getInputField({
+                formValue:formValue,
+                setFormValue:setFormValue,
+                hasError:hasError,
+                errorMessage:errorMessage,
+                value:value
+            });
             return <StringInput
                 onClick={onClick}
                 hasError={hasError}

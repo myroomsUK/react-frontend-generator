@@ -1,6 +1,6 @@
 import {Resource} from "./Resource";
 import _ from "lodash";
-import React from "react";
+import React, {ReactElement} from "react";
 import {PropertyModelCore} from "./PropertyModelCore";
 import {InputType} from "../generators/forms/genericInputField";
 import {EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, REFERENCE} from "../generators/forms/inputs/InputTypes";
@@ -39,7 +39,7 @@ export type Option = {
 /**
  * @Property {id} - Name of the property
  */
-export class PropertyModel{
+export abstract class PropertyModel{
     id:string;
     type:InputType;
     label:string;
@@ -97,19 +97,6 @@ export class PropertyModel{
         this.areImages = areImages;
     }*/
 
-    /**
-     * This is used when converting the data from the fetch to an object.
-     * @param id
-     * @param others
-     */
-    static get(id:string,others:PropertyModelCore):PropertyModel{
-        return new PropertyModel(id, others);
-    }
-
-    static createReferenceElement(name:string, resourceName:string):PropertyModel{
-
-        return new PropertyModel(name, new PropertyModelCore({type:REFERENCE, resourceName: resourceName}))
-    }
 
     addPropertiesToRequestedElement(propertiesObject:any, resourceName:string):any{
         return _.merge(propertiesObject, this);
@@ -124,5 +111,7 @@ export class PropertyModel{
         return [EMBEDDED_SINGLE, EMBEDDED_MULTIPLE].includes(this.type);
     }
 
-
+    abstract getInputField(props:any):ReactElement<any,any>|null;
 }
+
+export interface MyInputProps{}
