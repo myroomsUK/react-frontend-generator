@@ -7,25 +7,30 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import {makeStyles} from "@material-ui/core";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeResourceBuffer} from "../../../redux/actions/app/actions";
 import {Create} from "../../pages/CreatePageGenerator";
 
 
-export function AutocompleteInput({model, options, refreshReferencesMap, valuePositionInOptions, createNew=true, onChange}){
+export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, createNew=true, onChange}){
 
     const {id, label, resourceName:modalResourceName, optionText:optionTextModelItem} = useMemo(()=>{return model},[model]);
     const [open, setOpen] = React.useState(false);
     const [localOptions, setLocalOptions] = useState( []);
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
+    const {listings} = useSelector(({appReducer})=>appReducer);
+
 
     const dispatch = useDispatch();
     useEffect(()=>{
         if(modalResourceName){
+            console.log("dispatch change resource buffer")
             dispatch(changeResourceBuffer(modalResourceName))
         }
     },[])
+
+
 
 
     const handleOpen = (e) => {
@@ -37,23 +42,25 @@ export function AutocompleteInput({model, options, refreshReferencesMap, valuePo
         refreshReferencesMap()
     };
 
-    useEffect(()=>{setLocalOptions((value)=> (createNew)? [{button: <Button style={{width:"100%"}} onClick={handleOpen}>Add a new one</Button>, label:""}, ...options] : [...options] )}, [options])
+    useEffect(()=>{
+        const options = listings.get(model.resourceName) ?? [];
+        setLocalOptions((value)=> (createNew)? [{button: <Button style={{width:"100%"}} onClick={handleOpen}>Add a new one</Button>, label:""}, ...options] : [...options] )
+    }, [listings])
 
     useEffect(()=>{
+        const valuePositionInOptions = getAutocompleteValuePosition(inheritedValue, localOptions);
         const localOptionsLengthCondition = (createNew) ? localOptions.length!==1 : localOptions.length!==0;
         const truePosition = (createNew) ? valuePositionInOptions+1 : valuePositionInOptions;
 
-        if(valuePositionInOptions!==-1 && localOptionsLengthCondition){
-            setValue(localOptions[truePosition]);
-        }}, [valuePositionInOptions, localOptions, createNew])
+    if(valuePositionInOptions!==-1 && localOptionsLengthCondition){
+        setValue(localOptions[truePosition]);
+    }}, [ localOptions, createNew])
 
-    //const autocompleteOnChange = (item)=> onChange(id, (cardinality ===1 ) ?  parseInt(item.id) : item.map(singleItem => singleItem.id))
     const autocompleteOnChange = (item)=> onChange(id,parseInt(item.id))
 
     return <>
         <Autocomplete
             value={value}
-            //multiple={!(cardinality===1)}
             inputValue={inputValue}
             disableClearable
             options={localOptions}

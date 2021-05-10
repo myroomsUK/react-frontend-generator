@@ -1,6 +1,7 @@
 import {PropertyModel} from "./PropertyModel";
 import _ from 'lodash';
 import {PropertyModelRegistry} from "./PropertyModelRegistry";
+import {NestedPropertyModel} from "./propertyModels/NestedPropertyModel";
 
 export interface Model{
     properties: PropertyModel[]
@@ -26,7 +27,7 @@ export class Model{
                 if(propertyModel) return propertyModel;
                 throw new Error(`Undefined model for ${value} and name was ${name}`);
             }else{
-                if(accumulator.getResource()){
+                if(accumulator instanceof NestedPropertyModel){
                     const propertyModel = accumulator.getResource().getModel().getProperty(value);
                     if(propertyModel) return propertyModel;
                     throw new Error(`Undefined model for ${value}`);

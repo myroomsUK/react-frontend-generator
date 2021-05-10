@@ -1,5 +1,6 @@
 import React from 'react';
 import {Model} from "../../resource-models/Model";
+import {Errors} from "../errors/Errors";
 
 
 export interface FormGeneratorProps{
@@ -14,12 +15,13 @@ export interface FormGeneratorProps{
     lockedFormValue:any;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
     text?:string;
-    errors: object;
+    errors: Errors;
     showButton?:boolean;
 }
 
 export class FormGeneratorPropsObject{
     resourceName:string;
+    resourceId?:string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
     model:Model;
@@ -32,7 +34,7 @@ export class FormGeneratorPropsObject{
     errors: object;
     showButton?:boolean;
 
-    constructor({resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue}:FormGeneratorProps) {
+    constructor({resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }:FormGeneratorProps) {
         this.resourceName = resourceName;
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
@@ -45,5 +47,6 @@ export class FormGeneratorPropsObject{
         this.text = text;
         this.errors = errors;
         this.showButton = showButton;
+        this.resourceId = resourceId;
     }
 }

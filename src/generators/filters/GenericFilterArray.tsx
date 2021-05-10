@@ -33,7 +33,7 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                         }
                 }
                 case "text": {
-                        const propertyModel = model.getProperty(name);
+                       /* const propertyModel = model.getProperty(name);
                         if (propertyModel.type === "reference") {
                             const options = referencesMap.get(propertyModel.resourceName);
                             return {
@@ -49,17 +49,19 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                                                        inputFieldOnChange={inputFieldOnChange}
                                                        value={filterValue[name]}/>
                             }
-                        }
+                        }*/
+                    return{name:"boh", component:<div></div>}
                 }
                 case "enum": {
-                        const propertyModel = model.getProperty(name);
+                    return""
+/*                        const propertyModel = model.getProperty(name);
                         const {options} = propertyModel;
                         return {
                             name: name,
                             component: <AutoCompleteFilter key={name} name={name}
                                                            inputFieldOnChange={inputFieldOnChange} options={options}
                                                            value={filterValue[name]}/>
-                        }
+                        }*/
                 }
                 default: {
                     return  <React.Fragment key={name}>
@@ -75,9 +77,9 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                 }
             }
         }
+        return [];
 
-
-    return (Object.keys(modelFilters).length!==0) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
+    //return (Object.keys(modelFilters).length!==0) ? Object.keys(modelFilters).map(filterKey => getFilter(filterKey, modelFilters[filterKey])) : [];
 
 };
 

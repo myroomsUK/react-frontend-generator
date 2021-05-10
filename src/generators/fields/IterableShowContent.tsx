@@ -3,16 +3,17 @@ import Grid from "@material-ui/core/Grid";
 import {Divider, List, ListItem} from "@material-ui/core";
 import {GenericShowField} from "./genericShowField";
 import {PropertyModel} from "../../resource-models/PropertyModel";
+import {EmbeddedMultipleModel} from "../../resource-models/propertyModels/EmbeddedMultipleModel";
 
 interface Props{
     record: any[];
-    model: PropertyModel,
+    model: EmbeddedMultipleModel,
     resourceName: string;
     showElement?: any;
 
 }
 
-export const IterableShowContent: React.FC<Props> = ({record, model, resourceName, showElement}) => {
+export const IterableShowContent: React.FC<Props> = ({model, record, resourceName, showElement}) => {
 
     const embeddedModel = model.getResource().getModel();
 

@@ -6,7 +6,7 @@ import {GenericField} from "./genericField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {PropertyModel} from "../../resource-models/PropertyModel";
 import {Model} from "../../resource-models/Model";
-import {EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM} from "../forms/inputs/InputTypes";
+import {EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM_SINGLE} from "../forms/inputs/InputTypes";
 import TransparentPaper from "../../rendering/components/papers/TransparentPaper";
 
 interface Props{
@@ -56,23 +56,29 @@ export const GenericShowField: React.FC<Props> = ({requestedName, noLabel=false,
         case EMBEDDED_SINGLE:{
 
             return <Paper elevation={0}>
-                <GenericField {...genericFieldProps} originalId={record?.id}  />
+                {propertyModel.getOutputField(genericFieldProps)}
+                {/*<GenericField {...genericFieldProps} originalId={record?.id}  />*/}
             </Paper>
         }
         case EMBEDDED_MULTIPLE:{
             return <Paper style={{width:"100%"}} elevation={0}>
-                <GenericField {...genericFieldProps} />
+                {/*<GenericField {...genericFieldProps} />*/}
+                {propertyModel.getOutputField(genericFieldProps)}
             </Paper>
         }
-        case ENUM:{
-            return <TransparentPaper className={classes.smallPaper} elevation={0}><GenericField {...genericFieldProps} /></TransparentPaper>
+        case ENUM_SINGLE:{
+            return <TransparentPaper className={classes.smallPaper} elevation={0}>
+                {propertyModel.getOutputField(genericFieldProps)}
+                {/*<GenericField {...genericFieldProps} />*/}
+            </TransparentPaper>
         }
         default:{
             return (noLabel) ?
                 <TransparentPaper className={classes.smallPaper} elevation={0}><GenericField {...genericFieldProps} /></TransparentPaper> :
             <TransparentPaper className={classes.paper} elevation={0}>
                 <Typography className={classes.label}>{_.startCase(propertyModel.label)}</Typography>
-                <GenericField {...genericFieldProps} />
+                {propertyModel.getOutputField(genericFieldProps)}
+               {/* <GenericField {...genericFieldProps} />*/}
             </TransparentPaper>
         }
     }

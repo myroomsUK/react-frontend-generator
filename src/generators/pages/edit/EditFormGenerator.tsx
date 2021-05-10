@@ -5,6 +5,7 @@ import {useEdit} from "../../../redux/actions/verbs/edit";
 import {getFormValueFromRecord} from "../../forms/formHelpers";
 import GenericForm from "../../forms/genericForm";
 import {FormGenerator} from "../../forms/FormGenerator";
+import {Error, Errors} from "../../errors/Errors";
 
 interface EditFormGeneratorProps {
     propResourceName: string,
@@ -32,15 +33,25 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
+    const [errors, setErrors] = useState(new Errors([]));
 
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
-    const {edit, errors} = useEdit();
+    const {edit, errors:responseErrors} = useEdit();
+
+    useEffect(()=>{
+        // @ts-ignore
+        const {_error, ...errorFields} = responseErrors;
+        // @ts-ignore
+        const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new Error(field,errorFields[field])))
+        setErrors(newErrors)},[responseErrors])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
 
     useEffect(()=>setFormValue(getFormValueFromRecord(record, model)), [record])
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
+
+
 
     const submitHandler = async (formValue:any)=> edit(resourceName,propId, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
@@ -58,7 +69,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
-            resourceId: propId.toString()
+            resourceId:propId.toString()
         }
     },[model,referencesMap, formValue, resourceName, propId])
 

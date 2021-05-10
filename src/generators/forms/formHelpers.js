@@ -1,7 +1,8 @@
 import {
     BOOLEAN,
     EMBEDDED_MULTIPLE,
-    EMBEDDED_SINGLE, ENUM,
+    EMBEDDED_SINGLE,
+    ENUM_SINGLE,
     FILE_MULTIPLE,
     FILE_SINGLE,
     PHONE,
@@ -23,6 +24,7 @@ export function getReferenceKeys(model){
 
 
 export function getFormValueFromRecord(record, model){
+    console.log(record, model);
     const formattedFormValue = record;
     const propertyModels = getReferenceKeys(model);
     propertyModels.forEach(propertyModel =>{
@@ -84,7 +86,7 @@ export function filterOnChangeHandler(type, onChange, formValue, vars){
         case EMBEDDED_SINGLE:{
             return embeddedOnChange(vars);
         }
-        case ENUM:{
+        case ENUM_SINGLE:{
             console.log("vars", vars);
             return autoCompleteOnchange(vars);
         }

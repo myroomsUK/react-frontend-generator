@@ -2,11 +2,12 @@ import {Resource} from "./Resource";
 import _ from "lodash";
 import React, {ReactElement} from "react";
 import {PropertyModelCore} from "./PropertyModelCore";
-import {InputType} from "../generators/forms/genericInputField";
-import {EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, REFERENCE} from "../generators/forms/inputs/InputTypes";
+import {Errors} from "../generators/errors/Errors";
 
+export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
 export interface PropertyModel{
+    id:string;
     type:InputType;
     label:string;
     validators?: string[];
@@ -39,23 +40,23 @@ export type Option = {
 /**
  * @Property {id} - Name of the property
  */
-export abstract class PropertyModel{
-    id:string;
-    type:InputType;
-    label:string;
+export abstract class PropertyModel {
+    id: string;
+    type: InputType;
+    label: string;
     validators?: string[];
     errorMessages?: string[];
-    resourceName:string;
-    optionText:string;
+    resourceName: string;
+    optionText: string;
     resource?: Resource;
     form: React.DetailedReactHTMLElement<any, any>;
-    xs?:GridRange;
-    md?:GridRange;
-    write?:boolean;
-    read?:boolean;
+    xs?: GridRange;
+    md?: GridRange;
+    write?: boolean;
+    read?: boolean;
 
-    constructor(id:string, rest:PropertyModelCore ) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, resource, form,  xs = 12, md = 6, write=false, read=false} = rest;
+    constructor(id: string, rest: any) {
+        const {type, label, validators = [], errorMessages = [], resourceName, optionText, resource, form, xs = 12, md = 6, write = false, read = false} = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -71,47 +72,23 @@ export abstract class PropertyModel{
         this.read = read;
     }
 
-    /*constructor(id:string, rest:PropertyModelCore ) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, single, resource, form, options, xs = 12, md = 6, adornment, showElement, modifyOnlyLastElement=false, editabilityRule = (() => {return true}), write=false, read=false, listValue, listDataTransformer, areImages} = rest;
-        this.id = id;
-        this.type = type;
-        this.label = label;
-        this.validators = validators;
-        this.errorMessages = errorMessages;
-        this.resourceName = resourceName;
-        this.optionText = optionText;
-        this.single = single;
-        this.resource = resource ? new Resource(resource) : undefined;
-        this.form = form;
-        this.options = options;
-        this.xs = xs;
-        this.md = md;
-        this.adornment = adornment;
-        this.showElement = showElement;
-        this.modifyOnlyLastElement = modifyOnlyLastElement;
-        this.editabilityRule = editabilityRule;
-        this.write = write;
-        this.read = read;
-        this.listValue = listValue;
-        this.listDataTransformer = listDataTransformer;
-        this.areImages = areImages;
-    }*/
-
-
-    addPropertiesToRequestedElement(propertiesObject:any, resourceName:string):any{
+    addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): any {
         return _.merge(propertiesObject, this);
     }
 
-    getResource():Resource{
-        if(this.isNested() && this.resource!==undefined) return this.resource;
-        throw new Error("Accessing inexistent resource");
-    }
+    abstract manipulateErrors(errors:Errors):any;
 
-    isNested():boolean{
-        return [EMBEDDED_SINGLE, EMBEDDED_MULTIPLE].includes(this.type);
-    }
+    abstract getInputField(props: InputField): ReactElement<any, any> | null;
 
-    abstract getInputField(props:any):ReactElement<any,any>|null;
+    abstract getOutputField(props:any): ReactElement<any, any> |null;
+
+    abstract getInputOnChangeHandler({formValue, setFormValue}: any): (vars:any) => void;
 }
 
-export interface MyInputProps{}
+export interface InputField{
+    model: PropertyModel,
+    formValue: any,
+    setFormValue:  React.Dispatch<React.SetStateAction<{}>>,
+    lockedFormValue: any,
+    errors: Errors
+}

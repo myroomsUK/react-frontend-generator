@@ -2,22 +2,21 @@ import React, {useEffect, useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import {CustomTextValidator} from "../formHelpers";
 import {StringModel} from "../../../resource-models/propertyModels/StringModel";
-import {MyInputProps, PropertyModel} from "../../../resource-models/PropertyModel";
 
-export interface StringInput extends MyInputProps{
-    hasError:boolean;
-    model:PropertyModel;
-    errorMessage?:string;
-    label:string;
+export interface StringInput{
+    model: StringModel;
     onClick:(e:any)=>void;
     value: any;
+    hasError:boolean;
+    id?:string,
+    label?: string;
+    errorMessage?:string;
     adornment?: any;
-
 }
 
-export const StringInput: React.FC<StringInput> = ({model, label, onClick, value, hasError, errorMessage, adornment}) => {
+export const StringInput: React.FC<StringInput> = ({ model,id = model.id, label = model.label, onClick, value, hasError, errorMessage, adornment}) => {
 
-    const [localValue, setLocalValue] = useState(value);
+    const [localValue, setLocalValue] = useState("");
     useEffect(()=>setLocalValue(value),[value])
 
     const debounced = useDebouncedCallback(
@@ -34,15 +33,15 @@ export const StringInput: React.FC<StringInput> = ({model, label, onClick, value
     }
 
     return <CustomTextValidator
-        autoComplete="nope"
-        error={hasError}
-        name={model.id}
-        id={model.id}
-        errorMessage={errorMessage}
-        variant="outlined"
+        id={id}
+        name={id}
         label={label}
         onChange={localOnChange}
         value={localValue}
+        autoComplete="nope"
+        error={hasError}
+        errorMessage={errorMessage}
+        variant="outlined"
         style={{width: "100%"}}
         InputProps={{
             startAdornment: adornment

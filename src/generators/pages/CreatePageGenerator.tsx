@@ -6,6 +6,7 @@ import {FormGeneratorPropsObject} from "../forms/FormGeneratorProps";
 import {FormGenerator} from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import {UpdateListings} from "../../utils/referenceFieldUtils";
+import {Error, Errors} from "../errors/Errors";
 
 interface Props{
     propResourceName?:string,
@@ -26,8 +27,17 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage, locke
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState(lockedFormValue);
-    const {create, errors} = useCreate();
+    const {create, errors:responseErrors} = useCreate();
     const location = useLocation<object>();
+    const [errors, setErrors] = useState(new Errors([]));
+
+    useEffect(()=>{
+        // @ts-ignore
+        const {_error, ...errorFields} = responseErrors;
+        // @ts-ignore
+        const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new Error(field,errorFields[field])))
+        setErrors(newErrors)},[responseErrors])
+
 
     const changeFromLocation = useCallback(()=>{
 
@@ -61,7 +71,7 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage, locke
         if(createPageToUse){
             setGenericCreateRender(<GenericForm {...createFormProps} page={createPageToUse} errors={errors}/>)
         }else{
-            setGenericCreateRender(<FormGenerator {...createFormProps} />)
+            setGenericCreateRender(<FormGenerator {...createFormProps} errors={errors} />)
         }
     }, [model, referencesMap, formValue, resourceName, errors, resourceName])
 

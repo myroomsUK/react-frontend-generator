@@ -39,7 +39,6 @@ export function useSetRegistry(registry:any){
     const arrayRegistry = Object.keys(registry).map(resourceName => {return{name: resourceName, resource: new Resource(registry[resourceName]) } });
     const dispatch = useDispatch();
     useEffect(()=> {
-        console.log("dispatching");
         dispatch(updateRegistry(arrayRegistry))
         setModelLoaded(true)
     },[])

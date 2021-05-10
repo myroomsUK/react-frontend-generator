@@ -13,8 +13,8 @@ import {Errors} from "../errors/Errors";
 
 
 
-export default function IterableFormContent({resource, parentFormValue,  partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single=false, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement=false, modifyRule= ()=>{return true;}}){
-    const {model:embeddableModel, resourceName} = useMemo(()=> {return resource},[resource])
+export default function IterableFormContent({model:embeddableModel, resourceName,resource, parentFormValue,  partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single=false, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement=false, modifyRule= ()=>{return true;}}){
+
     const {remove} = useDelete(resourceName);
     const creationTime = useRef(Date.now());
     const localPartialSubmitHandler = () => partialSubmitHandler(parentFormValue);
@@ -33,11 +33,11 @@ export default function IterableFormContent({resource, parentFormValue,  partial
         const date = Date.now();
         const newMap = new Map(localFormValueMap).set(date, {} )
         const newArray = createArrayFromMap(newMap);
+        console.log(newArray)
         setParentFormValue(newArray);
     }
 
     const deleteForm = (key)=>{
-        console.log("key", key);
         const deleted = localFormValueMap.delete(key);
         if(key < creationTime.current){
             remove(key);
@@ -65,9 +65,8 @@ export default function IterableFormContent({resource, parentFormValue,  partial
         const isEditable = modifyRule(formValue);
 
 
-        const nestedErrors = index in errors.errorFields ? new Errors([...errors.errorFields[index]] ): {};
         //const fields = embeddableModel.properties.map((property)=> <GenericShowField model={property} resourceName={resourceName} record={formValue}/>)
-        const formElement = <FormContent form={form} referencesMap={referencesMap} resource={resource} setFormValue={localSetFormValue(key)} model={embeddableModel} resourceName={resourceName} refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={nestedErrors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent form={form} referencesMap={referencesMap} resource={resource} setFormValue={localSetFormValue(key)} model={embeddableModel} resourceName={resourceName} refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>
@@ -76,7 +75,7 @@ export default function IterableFormContent({resource, parentFormValue,  partial
             </Grid>
             <Grid item xs={10}>{formFinal}</Grid>
             <Grid item xs={1}>
-                {isEditable && <CustomDeleteButton icon={true} message={"Delete Item?"} onClick={() => deleteForm(formValue.id)}/>}
+                {isEditable && <CustomDeleteButton icon={true} message={"Delete Item?"} onClick={() => deleteForm(formValue.fid)}/>}
             </Grid>
             <Grid item xs={12} style={{marginTop: 15, marginBottom: 15}}>
                 <Divider/>

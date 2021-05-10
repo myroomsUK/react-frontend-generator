@@ -5,7 +5,7 @@ import {
     DATE,
     EMBEDDED_MULTIPLE,
     EMBEDDED_SINGLE,
-    ENUM,
+    ENUM_SINGLE,
     FILE_MULTIPLE,
     FILE_SINGLE,
     MONEY,
@@ -39,7 +39,7 @@ export const GenericField: React.FC<GenericField> = ({propertyRecord, propertyMo
 
     const dispatch = useDispatch();
 
-    const {type, optionText, resourceName, label, options} = propertyModel;
+    const {type, optionText, resourceName, label} = propertyModel;
     const embeddedResource = useGetResourceModel(resourceName);
     switch(type){
         case REFERENCE: {
@@ -50,12 +50,12 @@ export const GenericField: React.FC<GenericField> = ({propertyRecord, propertyMo
             const value = propertyRecord[optionText];
             return <Link color="secondary" href={`/${embResourceName}/${propertyRecord.id}/show`}>{value}</Link>
         }
-        case BOOLEAN: {
-            return (propertyRecord) ? <CheckIcon/> : <CloseIcon/>
-        }
-        case DATE: {
+        /*case BOOLEAN: {
+            /!*return (propertyRecord) ? <CheckIcon/> : <CloseIcon/>*!/
+        }*/
+       /* case DATE: {
             return <Typography>{showDate(propertyRecord)}</Typography>;
-        }
+        }*/
         case FILE_SINGLE:{
             if(propertyRecord){
                 return <a href={propertyRecord.url} target="_blank"> {propertyRecord.filename} </a>
@@ -66,27 +66,28 @@ export const GenericField: React.FC<GenericField> = ({propertyRecord, propertyMo
             return <ShowFileList filesList={propertyRecord} />
         }
         case EMBEDDED_SINGLE:{
-            if(table){
+            /*if(table){
                 return <div></div>
             }
             const embeddedModel = propertyModel.getResource().getModel();
             if(propertyRecord){
                 return <ShowContent record={propertyRecord} model={embeddedModel} resourceName={propertyModel.resourceName} showElement={showElement} />
-            }
+            }*/
             return <div></div>
         }
         case EMBEDDED_MULTIPLE:{
-            if(table){
+           /* if(table){
                 const embeddedPropertyModel = embeddedResource.model.getPropertyByResourceName(originalResourceName);
                 const name = embeddedPropertyModel.id;
                 return <Button variant="contained" color="primary" onClick={()=>dispatch(push(`/${resourceName}?${name}=${originalId}`))}>{`VIEW ${label}`}</Button>
             }
             if(propertyRecord){
-                return <IterableShowContent record={propertyRecord} model={propertyModel} resourceName={propertyModel.resourceName} showElement={showElement} />
-            }
+
+                /!*return <IterableShowContent record={propertyRecord} model={propertyModel} resourceName={propertyModel.resourceName} showElement={showElement} />*!/
+            }*/
             return <div></div>
         }
-        case ENUM:{
+        case ENUM_SINGLE:{
             const props = {propertyRecord, propertyModel, resourceName:originalResourceName, originalId, table, showElement};
             return chipGenerator(originalResourceName,props );
         }
