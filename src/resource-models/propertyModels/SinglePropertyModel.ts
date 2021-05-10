@@ -14,6 +14,7 @@ export interface SinglePropertyInputFields extends SingleInputFields{
 export abstract class SinglePropertyModel extends PropertyModel{
 
     manipulateErrors(errors:Errors): SingleErrors {
+        console.log("manipulating errors for single prop model");
         const errorMessage = errors.returnMessageByName(this.id);
         const hasError = errors.containsError(this.id);
         return {errorMessage, hasError};
