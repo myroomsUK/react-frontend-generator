@@ -1,16 +1,13 @@
 import {StringInput} from "../../generators/forms/inputs/StringInput";
-import {SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
-import {InputField} from "../PropertyModel";
 
 
 export class StringModel extends SinglePropertyModel{
 
-
-    getInputField(props: InputField): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, errors} = props;
-        const {errorMessage, hasError} = this.manipulateErrors(errors);
-        const propsWithModel: StringInput = {...props, model:this, onClick:this.getInputOnChangeHandler({formValue, setFormValue}), errorMessage, hasError, value:formValue[this.id]}
+    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+        const {inputHandler} = props;
+        const propsWithModel: StringInput = {...props, onClick:inputHandler}
         return StringInput(propsWithModel);
     }
 

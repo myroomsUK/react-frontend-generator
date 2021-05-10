@@ -31,7 +31,7 @@ import {IdModel} from "./propertyModels/IdModel";
 export class PropertyModelRegistry{
 
 
-    static get(id:string,others:PropertyModelCore):PropertyModel{
+    static get(id:string,others:any):PropertyModel{
         switch (others.type){
             case BOOLEAN:{
                 return new BooleanModel(id,others);

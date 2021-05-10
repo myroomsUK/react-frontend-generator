@@ -1,7 +1,6 @@
 import {Resource} from "./Resource";
 import _ from "lodash";
 import React, {ReactElement} from "react";
-import {PropertyModelCore} from "./PropertyModelCore";
 import {Errors} from "../generators/errors/Errors";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
@@ -15,7 +14,6 @@ export interface PropertyModel{
     resourceName:string;
     optionText:string;
     single?:boolean;
-    resource?: Resource;
     form: React.DetailedReactHTMLElement<any, any>;
     options?: Option[];
     xs?:GridRange;
@@ -48,7 +46,6 @@ export abstract class PropertyModel {
     errorMessages?: string[];
     resourceName: string;
     optionText: string;
-    resource?: Resource;
     form: React.DetailedReactHTMLElement<any, any>;
     xs?: GridRange;
     md?: GridRange;
@@ -56,7 +53,7 @@ export abstract class PropertyModel {
     read?: boolean;
 
     constructor(id: string, rest: any) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, resource, form, xs = 12, md = 6, write = false, read = false} = rest;
+        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false} = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -64,7 +61,6 @@ export abstract class PropertyModel {
         this.errorMessages = errorMessages;
         this.resourceName = resourceName;
         this.optionText = optionText;
-        this.resource = resource ? new Resource(resource) : undefined;
         this.form = form;
         this.xs = xs;
         this.md = md;
@@ -72,23 +68,25 @@ export abstract class PropertyModel {
         this.read = read;
     }
 
-    addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): any {
-        return _.merge(propertiesObject, this);
-    }
-
     abstract manipulateErrors(errors:Errors):any;
 
-    abstract getInputField(props: InputField): ReactElement<any, any> | null;
+    abstract setInputField(props: any): ReactElement<any, any> | null;
 
     abstract getOutputField(props:any): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler({formValue, setFormValue}: any): (vars:any) => void;
+
+    abstract getInputField(props:InputFields): ReactElement<any,any>|null;
 }
 
-export interface InputField{
+export interface InputFields{
     model: PropertyModel,
     formValue: any,
     setFormValue:  React.Dispatch<React.SetStateAction<{}>>,
     lockedFormValue: any,
-    errors: Errors
+    errors: Errors,
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap:()=>void;
 }

@@ -1,13 +1,17 @@
-import {SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 
-export class MultipleFileModel extends SinglePropertyModel{
-    getInputField(props: any): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, errors} = props;
-        const {errorMessage, hasError} = this.manipulateErrors(errors);
-        const propsWithModel = {...props, model:this, onClick:this.getInputOnChangeHandler({formValue, setFormValue}), errorMessage, hasError, file:formValue[this.id]}
+interface MultipleFileInputFields extends SinglePropertyInputFields{
 
+}
+
+export class MultipleFileModel extends SinglePropertyModel{
+    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+        const {formValue, setFormValue, errors} = props;
+        const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue[this.id]}
+
+        // @ts-ignore
         return FileListInput(propsWithModel);
     }
 

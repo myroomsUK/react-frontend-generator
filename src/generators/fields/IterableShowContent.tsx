@@ -1,8 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {Divider, List, ListItem} from "@material-ui/core";
-import {GenericShowField} from "./genericShowField";
-import {PropertyModel} from "../../resource-models/PropertyModel";
 import {EmbeddedMultipleModel} from "../../resource-models/propertyModels/EmbeddedMultipleModel";
 
 interface Props{
@@ -44,7 +42,7 @@ export const IterableShowContent: React.FC<Props> = ({model, record, resourceNam
                             embeddedModel.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
                                 const {xs, md, id} = propertyModel;
                                 return <Grid item xs={xs} md={md}>
-                                    <GenericShowField requestedName={id} record={singleRecord} resourceName={resourceName} model={embeddedModel} />
+                                    {propertyModel.getOutputField(undefined)}
                                 </Grid>
                             })
                         }

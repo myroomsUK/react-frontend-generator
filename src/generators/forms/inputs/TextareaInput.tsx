@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import {CustomTextValidator} from "../formHelpers";
-import {PropertyModel} from "../../../resource-models/PropertyModel";
+import {TextareaModel} from "../../../resource-models/propertyModels/TextareaModel";
 
 interface Props{
-    hasError:boolean;
-    model:PropertyModel;
-    errorMessage?:string;
-    label:string;
+    model: TextareaModel;
     onClick:(e:any)=>void;
     value: any;
+    hasError:boolean;
+    id?:string,
+    label?: string;
+    errorMessage?:string;
     adornment?: any;
 
 }
 
-export const TextareaInput: React.FC<Props> = ({model, label, onClick, value, hasError, errorMessage, adornment, ...rest}) => {
+export const TextareaInput: React.FC<Props> = ({model, label = model.label, onClick, value, hasError, errorMessage, adornment}) => {
 
     const [localValue, setLocalValue] = useState(value);
     useEffect(()=>setLocalValue(value),[value])

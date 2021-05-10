@@ -6,7 +6,7 @@ import {useDeleteFile} from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
 
-export default function FileListInput({files, resourceName, resourceId, multiple = false, onChange,id, partialSubmitHandler, areImages=true, label}) {
+export default function FileListInput({model, files, resourceName, resourceId, onChange, partialSubmitHandler, areImages=true, id= model.id, label = model.label, ...rest}) {
 
     const {remove} = useDeleteFile(resourceName);
     const creationTime = useRef(Date.now());

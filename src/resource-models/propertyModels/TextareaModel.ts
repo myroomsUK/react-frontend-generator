@@ -1,12 +1,11 @@
-import {SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import {TextareaInput} from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
 
 export class TextareaModel extends SinglePropertyModel{
-    getInputField(props: any): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, errors} = props;
-        const {errorMessage, hasError} = this.manipulateErrors(errors);
-        const propsWithModel = {...props, model:this, onClick:this.getInputOnChangeHandler({formValue, setFormValue}), errorMessage, hasError, value:formValue[this.id]}
+    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+        const {formValue, inputHandler} = props;
+        const propsWithModel = {...props, model:this, onClick:inputHandler}
         return TextareaInput(propsWithModel);
     }
 

@@ -17,7 +17,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import {useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
 import {useDebouncedCallback} from "use-debounce";
 import _ from 'lodash';
@@ -29,7 +28,6 @@ import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
-import {GenericField} from "../fields/genericField";
 import {useTableFilters} from "../filters/TableFilters";
 
 
@@ -257,8 +255,8 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
         const propertyModel = model.getProperty(id);
         propertyModel.label = label;
         return {propertyModel: propertyModel , record: record}
-    }).map(({propertyModel, record}, localIndex) => {
-        return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
+    }).map(({propertyModel, record}) => {
+        propertyModel.getOutputField()
     })
 
     return <GenericList

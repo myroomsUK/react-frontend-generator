@@ -10,9 +10,9 @@ export class ReferenceModel extends SinglePropertyModel{
         super(id, other);
     }
 
-    getInputField(props: any): React.ReactElement<any, any> | null {
-        const {value, formValue, setFormValue} = props;
-        const propsWithModel = {...props, model:this, onChange:this.getInputOnChangeHandler({formValue, setFormValue}) };
+    setInputField(props: any): React.ReactElement<any, any> | null {
+        const {inputHandler} = props;
+        const propsWithModel = {...props, model:this, onChange:inputHandler};
         return AutocompleteInput(propsWithModel)
     }
 

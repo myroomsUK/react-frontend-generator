@@ -1,8 +1,8 @@
-import {InputField, PropertyModel} from "../PropertyModel";
+import {InputFields, PropertyModel} from "../PropertyModel";
 import {Errors} from "../../generators/errors/Errors";
 
 export class IdModel extends PropertyModel{
-    getInputField(props: InputField): React.ReactElement<any, any> | null {
+    setInputField(props: InputFields): React.ReactElement<any, any> | null {
         return <></>
     }
 
@@ -16,6 +16,10 @@ export class IdModel extends PropertyModel{
     }
 
     manipulateErrors(errors: Errors): any {
+    }
+
+    getInputField(props: InputFields): React.ReactElement<any, any> | null {
+        return null;
     }
 
 }

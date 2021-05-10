@@ -1,5 +1,5 @@
 import React from "react";
-import {NestedPropertyModel} from "./NestedPropertyModel";
+import {EmbeddedInputFields, NestedPropertyModel} from "./NestedPropertyModel";
 import IterableFormContent from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 
@@ -7,7 +7,7 @@ import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 export class EmbeddedMultipleModel extends NestedPropertyModel{
 
 
-    getInputField(props: any): React.ReactElement<any, any> | null {
+    setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule} =  props;
         const setParentFormValue = (values:any) => setFormValue({...formValue, [this.resourceName] : values });
         const newErrors = this.manipulateErrors(errors);

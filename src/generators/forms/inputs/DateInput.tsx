@@ -1,13 +1,25 @@
 import {TextValidator} from "react-material-ui-form-validator";
 import React, {useEffect, useState} from "react";
 import {getDateInputFormat} from "../../../utils/timeUtils";
+import {DateModel} from "../../../resource-models/propertyModels/DateModel";
 
-export default function ({name, onClick, value, label,...rest}){
+export interface DateInput{
+    model: DateModel;
+    onClick: (e: any, value: any)=>void;
+    value: any;
+    hasError:boolean;
+    id?:string,
+    name?:string,
+    label?: string;
+    errorMessage?:string;
+    adornment?: any;
+}
 
+
+export default function ({model,name = model.id, onClick, value, label = model.label}:DateInput){
     const [localValue, setLocalvalue] = useState(getDateInputFormat());
-    
 
-    const localChange = (event) => {
+    const localChange = (event:any) => {
         const target = event.target;
         let value = target.value;
         const name = target.id;
@@ -28,7 +40,7 @@ export default function ({name, onClick, value, label,...rest}){
 
 
     return <TextValidator
-        {...rest}
+        name={name}
         label={label}
         onChange={localChange}
         value={localValue}

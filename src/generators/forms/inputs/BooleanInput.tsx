@@ -3,11 +3,28 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import React, {useEffect, useState} from "react";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import {FormControl} from "@material-ui/core";
+import {BooleanModel} from "../../../resource-models/propertyModels/BooleanModel";
 
-export default function ({name, onClick, checked, label, hasError, errorMessage}){
+export interface BooleanInput{
+    model: BooleanModel;
+    onClick:(e:any)=>void;
+    value: any;
+    hasError:boolean;
+    checked:boolean,
+    id?:string,
+    name?:string,
+    label?: string;
+    errorMessage?:string;
+    adornment?: any;
+}
+
+
+
+
+export default function BooleanInput({model, name = model.id, onClick, checked, label = model.label, hasError, errorMessage}:BooleanInput){
 
     const [localError,setLocalError] = useState(false);
-    const [localErrorMessage,setLocalErrorMessage] = useState();
+    const [localErrorMessage,setLocalErrorMessage] = useState("");
 
     useEffect(()=>{
         if(hasError!==undefined){
@@ -18,14 +35,14 @@ export default function ({name, onClick, checked, label, hasError, errorMessage}
         }
     },[hasError, errorMessage])
 
-    const onClickHandler = (e) => {
+    const onClickHandler = (e:any) => {
         setLocalError(false);
-        setLocalErrorMessage(undefined);
+        setLocalErrorMessage("");
         onClick(e);
     }
 
     return <FormControl>
         <FormControlLabel control={<Checkbox id={name} name={name} onClick={onClickHandler} checked={checked}/>} label={label} />
         <FormHelperText>{localErrorMessage}</FormHelperText>
-        </FormControl>
+    </FormControl>
 }

@@ -1,14 +1,16 @@
-import {SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
 import chipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 
+interface EnumSingleInputFields extends SinglePropertyInputFields{
+    options:any
+}
+
 export class EnumSingleModel extends SinglePropertyModel{
-    getInputField(props: any): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, errors, options} = props;
-        const {errorMessage, hasError} = this.manipulateErrors(errors);
-        const value = formValue[this.id];
+    setInputField(props: EnumSingleInputFields): React.ReactElement<any, any> | null {
+        const {formValue, setFormValue, errors, options, value} = props;
         const valuePositionInOptions = getAutocompleteValuePosition(value, options);
-        const propsWithModel = {...props, model:this, inheritedValue:valuePositionInOptions, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), errorMessage, hasError, value:formValue[this.id]}
+        const propsWithModel = {...props, model:this, inheritedValue:valuePositionInOptions, onChange:this.getInputOnChangeHandler({formValue, setFormValue})}
         return EnumInput(propsWithModel);
     }
 

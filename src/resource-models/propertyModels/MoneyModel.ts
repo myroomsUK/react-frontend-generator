@@ -1,12 +1,11 @@
-import {SinglePropertyModel} from "./SinglePropertyModel";
-import MoneyInput from "../../generators/forms/inputs/MoneyInput";
+import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import MoneyShow from "../../generators/fields/outputs/MoneyShow";
+import MoneyInput from "../../generators/forms/inputs/MoneyInput";
 
 export class MoneyModel extends SinglePropertyModel{
-    getInputField(props: any): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, errors} = props;
-        const {errorMessage, hasError} = this.manipulateErrors(errors);
-        const propsWithModel = {...props, model:this, onClick:this.getInputOnChangeHandler({formValue, setFormValue}), errorMessage, hasError, value:formValue[this.id]}
+    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+        const {inputHandler} = props;
+        const propsWithModel = {...props, model:this, onClick:inputHandler}
         return MoneyInput(propsWithModel)
     }
 
