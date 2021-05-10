@@ -1,8 +1,7 @@
-export function AutocompleteInput({ model, options, refreshReferencesMap, valuePositionInOptions, createNew, onChange }: {
+export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue, createNew, onChange }: {
     model: any;
-    options: any;
     refreshReferencesMap: any;
-    valuePositionInOptions: any;
+    inheritedValue: any;
     createNew?: boolean | undefined;
     onChange: any;
 }): JSX.Element;

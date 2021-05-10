@@ -1,20 +1,8 @@
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 import { jsx as _jsx } from "react/jsx-runtime";
 import { TextValidator } from "react-material-ui-form-validator";
 import { useEffect, useState } from "react";
 import { getDateInputFormat } from "../../../utils/timeUtils";
-export default function (_a) {
-    var { name, onClick, value, label } = _a, rest = __rest(_a, ["name", "onClick", "value", "label"]);
+export default function ({ model, name = model.id, onClick, value, label = model.label }) {
     const [localValue, setLocalvalue] = useState(getDateInputFormat());
     const localChange = (event) => {
         const target = event.target;
@@ -31,5 +19,5 @@ export default function (_a) {
             setLocalvalue(value);
         }
     }, [value]);
-    return _jsx(TextValidator, Object.assign({}, rest, { label: label, onChange: localChange, value: localValue, style: { width: "100%" }, type: "date" }), void 0);
+    return _jsx(TextValidator, { name: name, label: label, onChange: localChange, value: localValue, style: { width: "100%" }, type: "date" }, void 0);
 }

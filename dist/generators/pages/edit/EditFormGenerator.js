@@ -7,6 +7,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGetResourceModel } from "../../../resource-models/modelsRegistry";
@@ -15,6 +26,7 @@ import { useEdit } from "../../../redux/actions/verbs/edit";
 import { getFormValueFromRecord } from "../../forms/formHelpers";
 import GenericForm from "../../forms/genericForm";
 import { FormGenerator } from "../../forms/FormGenerator";
+import { Error, Errors } from "../../errors/Errors";
 /**
  *
  * @param record
@@ -32,8 +44,16 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
+    const [errors, setErrors] = useState(new Errors([]));
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
-    const { edit, errors } = useEdit();
+    const { edit, errors: responseErrors } = useEdit();
+    useEffect(() => {
+        // @ts-ignore
+        const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
+        // @ts-ignore
+        const newErrors = new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
+        setErrors(newErrors);
+    }, [responseErrors]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => setFormValue(getFormValueFromRecord(record, model)), [record]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
@@ -54,7 +74,7 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,
             resourceName: resourceName,
-            resourceId: propId.toString(),
+            resourceId: propId.toString()
         };
     }, [model, referencesMap, formValue, resourceName, propId]);
     useEffect(() => {

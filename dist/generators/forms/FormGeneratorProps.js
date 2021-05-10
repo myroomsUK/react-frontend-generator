@@ -1,5 +1,5 @@
 export class FormGeneratorPropsObject {
-    constructor({ resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue }) {
+    constructor({ resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }) {
         this.resourceName = resourceName;
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
@@ -12,5 +12,6 @@ export class FormGeneratorPropsObject {
         this.text = text;
         this.errors = errors;
         this.showButton = showButton;
+        this.resourceId = resourceId;
     }
 }

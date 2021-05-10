@@ -1,8 +1,8 @@
-import { Resource } from "./Resource";
-import React from "react";
-import { PropertyModelCore } from "./PropertyModelCore";
-import { InputType } from "../generators/forms/genericInputField";
+import React, { ReactElement } from "react";
+import { Errors } from "../generators/errors/Errors";
+export declare type InputType = "id" | "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea" | "enum_single" | "enum_multiple";
 export interface PropertyModel {
+    id: string;
     type: InputType;
     label: string;
     validators?: string[];
@@ -10,7 +10,6 @@ export interface PropertyModel {
     resourceName: string;
     optionText: string;
     single?: boolean;
-    resource?: Resource;
     form: React.DetailedReactHTMLElement<any, any>;
     options?: Option[];
     xs?: GridRange;
@@ -33,7 +32,7 @@ export declare type Option = {
 /**
  * @Property {id} - Name of the property
  */
-export declare class PropertyModel {
+export declare abstract class PropertyModel {
     id: string;
     type: InputType;
     label: string;
@@ -41,25 +40,26 @@ export declare class PropertyModel {
     errorMessages?: string[];
     resourceName: string;
     optionText: string;
-    single?: boolean;
-    resource?: Resource;
     form: React.DetailedReactHTMLElement<any, any>;
-    options?: Option[];
     xs?: GridRange;
     md?: GridRange;
-    adornment?: string;
-    showElement?: React.DetailedReactHTMLElement<any, any>;
-    modifyOnlyLastElement?: boolean;
-    editabilityRule?: () => any;
     write?: boolean;
     read?: boolean;
-    listValue?: any;
-    listDataTransformer?: any;
-    areImages?: boolean;
-    constructor(id: string, rest: PropertyModelCore);
-    static get(id: string, others: PropertyModelCore): PropertyModel;
-    static createReferenceElement(name: string, resourceName: string): PropertyModel;
-    addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): any;
-    getResource(): Resource;
-    isNested(): boolean;
+    constructor(id: string, rest: any);
+    abstract manipulateErrors(errors: Errors): any;
+    abstract setInputField(props: any): ReactElement<any, any> | null;
+    abstract getOutputField(props: any): ReactElement<any, any> | null;
+    abstract getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
+    abstract getInputField(props: InputFields): ReactElement<any, any> | null;
+}
+export interface InputFields {
+    model: PropertyModel;
+    formValue: any;
+    setFormValue: React.Dispatch<React.SetStateAction<{}>>;
+    lockedFormValue: any;
+    errors: Errors;
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap: () => void;
 }

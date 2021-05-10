@@ -1,4 +1,6 @@
-export default function IterableFormContent({ resource, parentFormValue, partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement, modifyRule }: {
+export default function IterableFormContent({ model: embeddableModel, resourceName, resource, parentFormValue, partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement, modifyRule }: {
+    model: any;
+    resourceName: any;
     resource: any;
     parentFormValue: any;
     partialSubmitHandler: any;

@@ -1,8 +1,8 @@
 import React from "react";
-import { PropertyModel } from "../../resource-models/PropertyModel";
+import { EmbeddedMultipleModel } from "../../resource-models/propertyModels/EmbeddedMultipleModel";
 interface Props {
     record: any[];
-    model: PropertyModel;
+    model: EmbeddedMultipleModel;
     resourceName: string;
     showElement?: any;
 }

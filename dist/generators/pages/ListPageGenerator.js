@@ -28,7 +28,6 @@ import { useGetResourceModel } from "../../resource-models/modelsRegistry";
 import { useList } from "../../redux/actions/verbs/list";
 import { getComparator, stableSort } from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
-import { GenericField } from "../fields/genericField";
 import { useTableFilters } from "../filters/TableFilters";
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters } = props;
@@ -151,8 +150,8 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
         const propertyModel = model.getProperty(id);
         propertyModel.label = label;
         return { propertyModel: propertyModel, record: record };
-    }).map(({ propertyModel, record }, localIndex) => {
-        return _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0);
+    }).map(({ propertyModel, record }) => {
+        propertyModel.getOutputField();
     });
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }

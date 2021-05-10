@@ -19,18 +19,20 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import { makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeResourceBuffer } from "../../../redux/actions/app/actions";
 import { Create } from "../../pages/CreatePageGenerator";
-export function AutocompleteInput({ model, options, refreshReferencesMap, valuePositionInOptions, createNew = true, onChange }) {
+export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue, createNew = true, onChange }) {
     const { id, label, resourceName: modalResourceName, optionText: optionTextModelItem } = useMemo(() => { return model; }, [model]);
     const [open, setOpen] = React.useState(false);
     const [localOptions, setLocalOptions] = useState([]);
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
+    const { listings } = useSelector(({ appReducer }) => appReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         if (modalResourceName) {
+            console.log("dispatch change resource buffer");
             dispatch(changeResourceBuffer(modalResourceName));
         }
     }, []);
@@ -42,19 +44,21 @@ export function AutocompleteInput({ model, options, refreshReferencesMap, valueP
         setOpen(false);
         refreshReferencesMap();
     };
-    useEffect(() => { setLocalOptions((value) => (createNew) ? [{ button: _jsx(Button, Object.assign({ style: { width: "100%" }, onClick: handleOpen }, { children: "Add a new one" }), void 0), label: "" }, ...options] : [...options]); }, [options]);
     useEffect(() => {
+        var _a;
+        const options = (_a = listings.get(model.resourceName)) !== null && _a !== void 0 ? _a : [];
+        setLocalOptions((value) => (createNew) ? [{ button: _jsx(Button, Object.assign({ style: { width: "100%" }, onClick: handleOpen }, { children: "Add a new one" }), void 0), label: "" }, ...options] : [...options]);
+    }, [listings]);
+    useEffect(() => {
+        const valuePositionInOptions = getAutocompleteValuePosition(inheritedValue, localOptions);
         const localOptionsLengthCondition = (createNew) ? localOptions.length !== 1 : localOptions.length !== 0;
         const truePosition = (createNew) ? valuePositionInOptions + 1 : valuePositionInOptions;
         if (valuePositionInOptions !== -1 && localOptionsLengthCondition) {
             setValue(localOptions[truePosition]);
         }
-    }, [valuePositionInOptions, localOptions, createNew]);
-    //const autocompleteOnChange = (item)=> onChange(id, (cardinality ===1 ) ?  parseInt(item.id) : item.map(singleItem => singleItem.id))
+    }, [localOptions, createNew]);
     const autocompleteOnChange = (item) => onChange(id, parseInt(item.id));
-    return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, 
-                //multiple={!(cardinality===1)}
-                inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
+    return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
                     var params = __rest(_a, []);
                     return _jsx(TextValidator, Object.assign({}, params, { variant: "outlined", value: value, label: label, style: { width: "100%" }, autoComplete: "nope" }), void 0);
                 } }, void 0),

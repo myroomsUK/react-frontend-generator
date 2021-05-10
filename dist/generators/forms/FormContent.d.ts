@@ -1,5 +1,6 @@
 import React from "react";
 import { Model } from "../../resource-models/Model";
+import { Errors } from "../errors/Errors";
 interface FormContentProps {
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
@@ -8,7 +9,7 @@ interface FormContentProps {
     refreshReferencesMap: () => void;
     formValue: object;
     lockedFormValue: object;
-    errors: object;
+    errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
     form?: React.DetailedReactHTMLElement<any, any>;
     resourceName: string;

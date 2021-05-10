@@ -10,7 +10,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { BOOLEAN, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM, FILE_MULTIPLE, FILE_SINGLE, PHONE, REFERENCE } from "./inputs/InputTypes";
+import { BOOLEAN, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM_SINGLE, FILE_MULTIPLE, FILE_SINGLE, PHONE, REFERENCE } from "./inputs/InputTypes";
 import { TextValidator } from "react-material-ui-form-validator";
 import { useEffect, useState } from "react";
 export function initializeReferenceFields(model) {
@@ -23,6 +23,7 @@ export function getReferenceKeys(model) {
     return model.properties.filter((item) => item.type === REFERENCE);
 }
 export function getFormValueFromRecord(record, model) {
+    console.log(record, model);
     const formattedFormValue = record;
     const propertyModels = getReferenceKeys(model);
     propertyModels.forEach(propertyModel => {
@@ -72,7 +73,7 @@ export function filterOnChangeHandler(type, onChange, formValue, vars) {
         case EMBEDDED_SINGLE: {
             return embeddedOnChange(vars);
         }
-        case ENUM: {
+        case ENUM_SINGLE: {
             console.log("vars", vars);
             return autoCompleteOnchange(vars);
         }

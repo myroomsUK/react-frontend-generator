@@ -47,6 +47,7 @@ export function UpdateListings() {
     const { resourceBuffer, listings } = useSelector(state => state.appReducer);
     const dispatch = useDispatch();
     const { getListingGroup } = useGetListingGroup();
+    useEffect(() => { console.log(resourceBuffer); }, [resourceBuffer]);
     const updateListings = useCallback(() => {
         const resourceArray = Array.from(resourceBuffer);
         if (resourceArray.length !== 0) {

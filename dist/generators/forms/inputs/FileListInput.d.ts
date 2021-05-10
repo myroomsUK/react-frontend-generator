@@ -1,11 +1,12 @@
-export default function FileListInput({ files, resourceName, resourceId, multiple, onChange, id, partialSubmitHandler, areImages, label }: {
+export default function FileListInput({ model, files, resourceName, resourceId, onChange, partialSubmitHandler, areImages, id, label, ...rest }: {
+    [x: string]: any;
+    model: any;
     files: any;
     resourceName: any;
     resourceId: any;
-    multiple?: boolean | undefined;
     onChange: any;
-    id: any;
     partialSubmitHandler: any;
     areImages?: boolean | undefined;
-    label: any;
+    id?: any;
+    label?: any;
 }): JSX.Element;

@@ -7,6 +7,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -16,6 +27,7 @@ import { FormGeneratorPropsObject } from "../forms/FormGeneratorProps";
 import { FormGenerator } from "../forms/FormGenerator";
 import GenericForm from "../forms/genericForm";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
+import { Error, Errors } from "../errors/Errors";
 export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {}, thenFunction = () => { }, catchFunction = () => { } }) => {
     const { urlResourceName } = useParams();
     const resourceNameToUse = useMemo(() => propResourceName ? propResourceName : urlResourceName, [urlResourceName, propResourceName]);
@@ -23,8 +35,16 @@ export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {},
     const createPageToUse = useMemo(() => propCreatePage ? propCreatePage : createPage, [createPage, propCreatePage]);
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const [formValue, setFormValue] = useState(lockedFormValue);
-    const { create, errors } = useCreate();
+    const { create, errors: responseErrors } = useCreate();
     const location = useLocation();
+    const [errors, setErrors] = useState(new Errors([]));
+    useEffect(() => {
+        // @ts-ignore
+        const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
+        // @ts-ignore
+        const newErrors = new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
+        setErrors(newErrors);
+    }, [responseErrors]);
     const changeFromLocation = useCallback(() => {
         if (resourceName === urlResourceName) { // Serve per evitare di propagare le modifiche su create innestati
             setFormValue(Object.assign(Object.assign({}, formValue), location.state));
@@ -48,7 +68,7 @@ export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {},
             setGenericCreateRender(_jsx(GenericForm, Object.assign({}, createFormProps, { page: createPageToUse, errors: errors }), void 0));
         }
         else {
-            setGenericCreateRender(_jsx(FormGenerator, Object.assign({}, createFormProps), void 0));
+            setGenericCreateRender(_jsx(FormGenerator, Object.assign({}, createFormProps, { errors: errors }), void 0));
         }
     }, [model, referencesMap, formValue, resourceName, errors, resourceName]);
     return genericCreateRender;

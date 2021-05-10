@@ -1,12 +1,13 @@
 import React from "react";
-import { PropertyModel } from "../../../resource-models/PropertyModel";
+import { TextareaModel } from "../../../resource-models/propertyModels/TextareaModel";
 interface Props {
-    hasError: boolean;
-    model: PropertyModel;
-    errorMessage?: string;
-    label: string;
+    model: TextareaModel;
     onClick: (e: any) => void;
     value: any;
+    hasError: boolean;
+    id?: string;
+    label?: string;
+    errorMessage?: string;
     adornment?: any;
 }
 export declare const TextareaInput: React.FC<Props>;
