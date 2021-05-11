@@ -11,14 +11,16 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     setInputField(props: any): React.ReactElement<any, any> | null {
-        const {inputHandler} = props;
-        const propsWithModel = {...props, model:this, onChange:inputHandler};
+        const {inputHandler, value} = props;
+        const propsWithModel = Object.assign(Object.assign({}, props), {onChange: inputHandler, inheritedValue:value });
         return AutocompleteInput(propsWithModel)
     }
 
     getInputOnChangeHandler({formValue, setFormValue}:any){
-        return (vars:any)=>{
-            const [name, value] = vars;
+        return (event:any)=>{
+            const target = event.target;
+            let value = parseInt(target.value);
+            const name = target.id;
             setFormValue({...formValue,[name]: value});
         }
     }

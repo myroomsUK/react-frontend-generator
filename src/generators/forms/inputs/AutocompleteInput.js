@@ -56,7 +56,7 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
         setValue(localOptions[truePosition]);
     }}, [ localOptions, createNew])
 
-    const autocompleteOnChange = (item)=> onChange(id,parseInt(item.id))
+    const autocompleteOnChange = onChange
 
     return <>
         <Autocomplete
@@ -65,7 +65,7 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
             disableClearable
             options={localOptions}
             onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
-            onChange={(event,value)=>autocompleteOnChange(value)}
+            onChange={autocompleteOnChange}
             getOptionLabel={(option) => option["label"]}
             renderOption={(option) => (option.button) ? option.button :  <div>{option.label}</div>}
             style={{ width: "100%" }}
