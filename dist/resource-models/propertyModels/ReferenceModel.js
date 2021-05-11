@@ -14,7 +14,8 @@ export class ReferenceModel extends SinglePropertyModel {
         return (event) => {
             const target = event.target;
             let value = parseInt(target.value);
-            const name = target.id;
+            const name = target.name;
+            const id = target.id;
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }

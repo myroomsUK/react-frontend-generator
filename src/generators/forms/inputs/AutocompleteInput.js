@@ -72,6 +72,8 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
             label={label}
             renderInput={({...params}) =>
                 <TextValidator {...params}
+                    id={model.id}
+                    name={model.id}
                     variant="outlined" value={value}
                     label={label}
                     style={{width: "100%"}}
