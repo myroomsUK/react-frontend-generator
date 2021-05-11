@@ -4,7 +4,6 @@ import { useList } from "../../../redux/actions/verbs/list";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import _ from "lodash";
-import { GenericField } from "../../fields/genericField";
 import { GenericList } from "../ListPageGenerator";
 export function useListHelpers(resourceName, filters) {
     const { data, get, loading } = useList();
@@ -29,7 +28,8 @@ export function GenericFilterList({ resourceName, data, loading, page, setPage, 
         propertyModel.label = label;
         return { propertyModel: propertyModel, record: record };
     }).map(({ propertyModel, record }, localIndex) => {
-        return _jsx(GenericField, { table: true, propertyRecord: record, propertyModel: propertyModel, resourceName: resourceName, originalId: row.id }, void 0);
+        return propertyModel.getOutputField({ propertyRecord: record });
+        //return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
     });
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
