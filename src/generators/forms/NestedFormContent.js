@@ -3,9 +3,6 @@ import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {FormContent} from "./FormContent";
 
 export default function NestedFormContent({model, form, setParentFormValue, formValue, errors, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler}){
-    const resourceFromRegistry = useGetResourceModel(model.resourceName)
-    const resource = useMemo(()=> model.resource ?? resourceFromRegistry ,[model]);
-    const embModel = useMemo(()=> resource.model,[resource])
     const [localFormValue, setLocalFormValue] = useState({});
 
     useEffect(()=>{
@@ -15,6 +12,6 @@ export default function NestedFormContent({model, form, setParentFormValue, form
     },[formValue])
 
 
-    return <FormContent referencesMap={referencesMap} form={form} setFormValue={setParentFormValue} model={embModel} refreshReferencesMap={refreshReferencesMap}
+    return <FormContent referencesMap={referencesMap} form={form} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler} />
 }

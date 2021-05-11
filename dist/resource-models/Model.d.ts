@@ -1,4 +1,5 @@
-import { PropertyModel } from "./PropertyModel";
+import { InputFields, PropertyModel } from "./PropertyModel";
+import { ReactElement } from "react";
 export interface Model {
     properties: PropertyModel[];
 }
@@ -12,4 +13,5 @@ export declare class Model {
     getPropertyByResourceName(resourceName: string): PropertyModel;
     addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): this;
     static createFromJson(jsonModel: any): Model;
+    inputProperty(requestedName: string, props: InputFields): ReactElement<any, any> | null;
 }

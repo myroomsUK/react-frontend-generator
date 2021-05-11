@@ -52,4 +52,7 @@ export class Model {
         const properties = Object.keys(jsonModel).map(key => PropertyModelRegistry.get(key, jsonModel[key]));
         return new Model(properties);
     }
+    inputProperty(requestedName, props) {
+        return this.getProperty(requestedName).getInputField(props);
+    }
 }

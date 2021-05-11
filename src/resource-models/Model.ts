@@ -1,7 +1,9 @@
-import {PropertyModel} from "./PropertyModel";
+import {InputFields, PropertyModel} from "./PropertyModel";
 import _ from 'lodash';
 import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {NestedPropertyModel} from "./propertyModels/NestedPropertyModel";
+import {InputProps} from "@material-ui/core";
+import {ReactElement} from "react";
 
 export interface Model{
     properties: PropertyModel[]
@@ -64,6 +66,9 @@ export class Model{
         return new Model(properties);
     }
 
+    inputProperty(requestedName:string, props:InputFields): ReactElement<any, any>|null{
+        return this.getProperty(requestedName).getInputField(props);
+    }
 }
 
 
