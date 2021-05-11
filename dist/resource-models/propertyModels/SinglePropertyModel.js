@@ -1,7 +1,6 @@
 import { PropertyModel } from "../PropertyModel";
 export class SinglePropertyModel extends PropertyModel {
     manipulateErrors(errors) {
-        console.log("manipulating errors for single prop model");
         const errorMessage = errors.returnMessageByName(this.id);
         const hasError = errors.containsError(this.id);
         return { errorMessage, hasError };

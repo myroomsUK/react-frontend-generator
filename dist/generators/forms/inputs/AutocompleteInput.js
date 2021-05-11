@@ -57,8 +57,8 @@ export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue,
             setValue(localOptions[truePosition]);
         }
     }, [localOptions, createNew]);
-    const autocompleteOnChange = onChange;
-    return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: autocompleteOnChange, getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
+    const autocompleteOnChange = (item) => onChange(item);
+    return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, newInputvalue) => autocompleteOnChange(newInputvalue), getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
                     var params = __rest(_a, []);
                     return _jsx(TextValidator, Object.assign({}, params, { id: model.id, name: model.id, variant: "outlined", value: value, label: label, style: { width: "100%" }, autoComplete: "nope" }), void 0);
                 } }, void 0),
