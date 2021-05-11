@@ -7,19 +7,14 @@ import {FilterList} from "./FilterList";
 import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 
 
-interface RouteParams{
-    urlResourceName:string
-}
-
-export const RouteTableFilters: (resourceNameToUse:string, presetFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceNameToUse, presetFilters) => {
-    const {urlResourceName} = useParams<RouteParams>();
+export const useRouteFilters: (resourceNameToUse:string, presetFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceNameToUse, presetFilters) => {
     const location = useLocation<any>();
     const [routeFilters, setRouteFilters] = useState<any>({});
     const [inheritedFilters, setInheritedFilters] = useState<any>({});
     const [filterObject, setFilterObject] = useState<any>({});
     const dispatch = useDispatch();
 
-    const isEmbeddedTable = resourceNameToUse!==urlResourceName;
+    const isEmbeddedTable = true;
 
     const getFiltersFromLocation = (location:any) => {
         const searchParams = new URLSearchParams(location.search);

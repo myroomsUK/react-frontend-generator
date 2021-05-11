@@ -28,7 +28,7 @@ import { useGetResourceModel } from "../../resource-models/modelsRegistry";
 import { useList } from "../../redux/actions/verbs/list";
 import { getComparator, stableSort } from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
-import { useTableFilters } from "../filters/TableFilters";
+import { useRouteFilters, useTableFilters } from "../filters/TableFilters";
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters } = props;
     const createSortHandler = (property) => (event) => {
@@ -134,6 +134,33 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
     const { filters, components, clearFilters } = useTableFilters(resourceName, lockedFilters);
+    const { data, get, loading } = useList();
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
+    const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
+    useEffect(() => {
+        debounced();
+    }, [resourceName, filters, page]);
+    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
+    const showClearFilters = !!components.length;
+    const columns = (row) => table.map(({ id, label }) => {
+        const split = _.split(id, ".");
+        const reducer = (start, value) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, row);
+        const propertyModel = model.getProperty(id);
+        propertyModel.label = label;
+        return { propertyModel: propertyModel, record: record };
+    }).map(({ propertyModel, record }) => {
+        propertyModel.getOutputField();
+    });
+    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
+}
+export function RouteFilterList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
+    const { model, title, table } = useGetResourceModel(resourceName);
+    const headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
+        return { id: id, numeric: false, disablePadding: false, label: label };
+    });
+    const { filters, components, clearFilters } = useRouteFilters(resourceName, lockedFilters);
     const { data, get, loading } = useList();
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);

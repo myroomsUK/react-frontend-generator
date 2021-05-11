@@ -50,11 +50,13 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
     useEffect(()=>{
         const valuePositionInOptions = getAutocompleteValuePosition(inheritedValue, localOptions);
         const localOptionsLengthCondition = (createNew) ? localOptions.length!==1 : localOptions.length!==0;
-        const truePosition = (createNew) ? valuePositionInOptions+1 : valuePositionInOptions;
+        const truePosition = (createNew) ? valuePositionInOptions : valuePositionInOptions-1;
 
     if(valuePositionInOptions!==-1 && localOptionsLengthCondition){
         setValue(localOptions[truePosition]);
-    }}, [ localOptions, createNew])
+    }}, [ localOptions, inheritedValue, createNew])
+
+
 
     const autocompleteOnChange = (item) => onChange([id, item])
     return <>

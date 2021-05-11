@@ -1,4 +1,4 @@
-export declare const RouteTableFilters: (resourceNameToUse: string, presetFilters: any) => {
+export declare const useRouteFilters: (resourceNameToUse: string, presetFilters: any) => {
     components: any;
     filters: any;
     clearFilters: () => void;

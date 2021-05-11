@@ -1,18 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
 import { replace } from "connected-react-router";
 import { FilterList } from "./FilterList";
 import { useGetResourceModel } from "../../resource-models/modelsRegistry";
-export const RouteTableFilters = (resourceNameToUse, presetFilters) => {
-    const { urlResourceName } = useParams();
+export const useRouteFilters = (resourceNameToUse, presetFilters) => {
     const location = useLocation();
     const [routeFilters, setRouteFilters] = useState({});
     const [inheritedFilters, setInheritedFilters] = useState({});
     const [filterObject, setFilterObject] = useState({});
     const dispatch = useDispatch();
-    const isEmbeddedTable = resourceNameToUse !== urlResourceName;
+    const isEmbeddedTable = true;
     const getFiltersFromLocation = (location) => {
         const searchParams = new URLSearchParams(location.search);
         const routeFilters = {};

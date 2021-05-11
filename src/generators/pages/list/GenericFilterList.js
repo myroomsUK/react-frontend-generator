@@ -4,7 +4,6 @@ import {useList} from "../../../redux/actions/verbs/list";
 import React, {useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import _ from "lodash";
-import {GenericField} from "../../fields/genericField";
 import {GenericList} from "../ListPageGenerator";
 
 
@@ -42,7 +41,8 @@ export function GenericFilterList({resourceName, data, loading, page, setPage, s
         propertyModel.label = label;
         return {propertyModel: propertyModel , record: record}
     }).map(({propertyModel, record}, localIndex) => {
-        return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
+        return propertyModel.getOutputField({propertyRecord:record});
+        //return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
     })
 
     return <GenericList
@@ -65,3 +65,4 @@ export function GenericFilterList({resourceName, data, loading, page, setPage, s
     />
 
 }
+

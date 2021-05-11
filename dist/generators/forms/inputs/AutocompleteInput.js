@@ -52,11 +52,11 @@ export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue,
     useEffect(() => {
         const valuePositionInOptions = getAutocompleteValuePosition(inheritedValue, localOptions);
         const localOptionsLengthCondition = (createNew) ? localOptions.length !== 1 : localOptions.length !== 0;
-        const truePosition = (createNew) ? valuePositionInOptions + 1 : valuePositionInOptions;
+        const truePosition = (createNew) ? valuePositionInOptions : valuePositionInOptions - 1;
         if (valuePositionInOptions !== -1 && localOptionsLengthCondition) {
             setValue(localOptions[truePosition]);
         }
-    }, [localOptions, createNew]);
+    }, [localOptions, inheritedValue, createNew]);
     const autocompleteOnChange = (item) => onChange([id, item]);
     return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, newInputvalue) => autocompleteOnChange(newInputvalue), getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
                     var params = __rest(_a, []);
