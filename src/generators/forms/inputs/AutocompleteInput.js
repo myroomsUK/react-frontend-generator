@@ -56,8 +56,7 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
         setValue(localOptions[truePosition]);
     }}, [ localOptions, createNew])
 
-    const autocompleteOnChange = (item) => onChange(item)
-
+    const autocompleteOnChange = (item) => onChange([id, item])
     return <>
         <Autocomplete
             value={value}

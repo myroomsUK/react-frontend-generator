@@ -4,6 +4,6 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 export declare class ReferenceModel extends SinglePropertyModel {
     constructor(id: string, other: PropertyModelCore);
     setInputField(props: any): React.ReactElement<any, any> | null;
-    getInputOnChangeHandler({ formValue, setFormValue }: any): (event: any) => void;
+    getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
     getOutputField(props: any): React.ReactElement<any, any> | null;
 }

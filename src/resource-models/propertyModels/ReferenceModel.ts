@@ -17,12 +17,9 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getInputOnChangeHandler({formValue, setFormValue}:any){
-        return (event:any)=>{
-            const target = event.target;
-            let value = parseInt(target.value);
-            const name = target.name;
-            const id = target.id;
-            setFormValue({...formValue,[name]: value});
+        return (vars:any)=>{
+            const [name, value] = vars;
+            setFormValue({...formValue,[name]: parseInt(value)});
         }
     }
 

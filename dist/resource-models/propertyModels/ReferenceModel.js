@@ -11,12 +11,9 @@ export class ReferenceModel extends SinglePropertyModel {
         return AutocompleteInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
-        return (event) => {
-            const target = event.target;
-            let value = parseInt(target.value);
-            const name = target.name;
-            const id = target.id;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
+        return (vars) => {
+            const [name, value] = vars;
+            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: parseInt(value) }));
         };
     }
     getOutputField(props) {
