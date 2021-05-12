@@ -29,6 +29,8 @@ import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import {useRouteFilters, useTableFilters} from "../filters/TableFilters";
+import StringShow from "../fields/outputs/StringShow";
+import ShowField from "../fields/ShowField";
 
 
 function EnhancedTableHead(props) {
@@ -287,6 +289,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
     const {filters, components, clearFilters} = useRouteFilters(resourceName,lockedFilters);
+    console.log("components", components)
     const {data, get, loading} = useList();
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
@@ -314,7 +317,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
         propertyModel.label = label;
         return {propertyModel: propertyModel , record: record}
     }).map(({propertyModel, record}) => {
-        propertyModel.getOutputField()
+        return <ShowField propertyModel={propertyModel} propertyRecord={record}/>
     })
 
     return <GenericList

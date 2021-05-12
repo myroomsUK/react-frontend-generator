@@ -33,7 +33,6 @@ export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, r
                 const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form};
                 return <Grid item xs={xs} md={md} key={index}>
                     {propertyModel.getInputField(props)}
-                    {/*<GenericInput {...props} resourceName={resourceName} resourceId={resourceId} requestedName={propertyModel.id} />*/}
                 </Grid>
             }
         )}

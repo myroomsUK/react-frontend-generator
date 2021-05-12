@@ -12,7 +12,7 @@ export class IdModel extends PropertyModel{
     }
 
     getOutputField(props: any): React.ReactElement<any, any> | null {
-        return <></>;
+        return <>{props.propertyRecord}</>;
     }
 
     manipulateErrors(errors: Errors): any {

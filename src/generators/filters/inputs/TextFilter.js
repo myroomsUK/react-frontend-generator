@@ -21,7 +21,7 @@ export default function TextFilter({name, label, type, inputFieldOnChange, value
         const target = event.target;
         let value = target.value;
         setLocalValue(value);
-        debounced.callback(event);
+        debounced(event);
     }
 
     return <React.Fragment key={name}>

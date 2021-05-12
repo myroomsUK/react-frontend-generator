@@ -31,6 +31,10 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage, locke
     const location = useLocation<object>();
     const [errors, setErrors] = useState(new Errors([]));
 
+    console.log("create page to use", createPageToUse)
+    console.log("prop create page", propCreatePage)
+    console.log("create page", useGetResourceModel(resourceNameToUse))
+
     useEffect(()=>{
         // @ts-ignore
         const {_error, ...errorFields} = responseErrors;
@@ -67,6 +71,7 @@ export const Create: React.FC<Props> = ({propResourceName, propCreatePage, locke
     ,[model, referencesMap, formValue, resourceName, errors, lockedFormValue])
 
     useEffect(()=>{
+
 
         if(createPageToUse){
             setGenericCreateRender(<GenericForm {...createFormProps} page={createPageToUse} errors={errors}/>)

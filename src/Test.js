@@ -1,38 +1,29 @@
 import React from "react";
-import {useSetRegistry} from "./resource-models/modelsRegistry";
-import {EditPage} from "./generators/pages/EditPageGenerator";
+import {useSetResourceModel} from "./resource-models/modelsRegistry";
 import {createServer} from "miragejs"
+import {properties} from "./mock/properties";
+import {listings} from "./mock/listings";
+import {model} from "./mock/model";
+import {overrideRegistry} from "./mock/overrideRegistry";
+import {Create} from "./generators/pages/CreatePageGenerator";
+import {RouteFilterList} from "./generators/pages/ListPageGenerator";
 
 export default function Test(){
-    console.log(process.env);
-
-    const record = {
-        "id": 1,
-        "title": "Corso prova",
-        "description": "Descrizione",
-        "published": false,
-        "courseImages": [],
-        "lessons":
-            [{"id":1, "title": "bel titolo"}]
-        ,
-        "days": 0,
-        "months": 1
-    };
 
     createServer({
         routes() {
-            this.get("http://localhost:1000/api/courses/1", () => record)
+            this.get("http://localhost:1000/api/properties", () => properties);
+            this.post("http://localhost:1000/api/resources/listings", ()=> listings)
+            this.get("http://localhost:1000/resources", ()=> model)
         },
     })
 
-    const modelLoaded = useSetRegistry(
-        {"courses":{"filters":{"text":["title"]},"model":{"id":{"id":"id","label":"id"},"title":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"},"description":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"description","label":"description"},"published":{"id":"published","label":"published"},"courseImages":{"type":"file_multiple","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"courseImages","label":"courseImages"},"lessons":{"id":"lessons","label":"lessons"},"days":{"type":"integer","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"days","label":"days"},"months":{"type":"integer","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"months","label":"months"},"banner":{"type":"file_single","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"banner","label":"banner"},"cover":{"type":"file_single","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"cover","label":"cover"}},"title":"Courses","resourceName":"courses"},"course_subscriptions":{"filters":{"text":["user","course"],"boolean":["isCourseSubscription"]},"model":{"id":{"type":"id","nullable":false,"write":false,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"id","label":"id"},"course":{"targetClass":"App\\Entity\\Course","type":"reference","nullable":false,"write":true,"read":true,"resourceName":"courses","optionText":"title","validators":["required"],"errorMessages":["This field is required"],"id":"course","label":"course"},"user":{"targetClass":"App\\Entity\\User","type":"reference","nullable":false,"write":false,"read":true,"resourceName":"users","optionText":"id","validators":["required"],"errorMessages":["This field is required"],"id":"user","label":"user"},"startSubscriptionTime":{"type":"date","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"startSubscriptionTime","label":"startSubscriptionTime"},"endSubscriptionTime":{"type":"date","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"endSubscriptionTime","label":"endSubscriptionTime"},"subscriptionState":{"id":"subscriptionState","label":"subscriptionState"},"masterSubscription":{"targetClass":"App\\Entity\\MasterSubscription","type":"reference","nullable":false,"write":false,"read":true,"resourceName":"master_subscriptions","optionText":"id","validators":["required"],"errorMessages":["This field is required"],"id":"masterSubscription","label":"masterSubscription"}},"title":"Course Subscriptions","resourceName":"course_subscriptions"},"lessons":{"model":{"id":{"type":"id","nullable":false,"write":false,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"id","label":"id"},"title":{"type":"string","nullable":false,"write":true,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"},"description":{"type":"string","nullable":false,"write":true,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"description","label":"description"},"comments":{"type":"string","nullable":false,"write":true,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"comments","label":"comments"},"position":{"id":"position","label":"position"},"course":{"targetClass":"App\\Entity\\Course","type":"reference","nullable":false,"write":true,"read":true,"resourceName":"courses","optionText":"title","validators":["required"],"errorMessages":["This field is required"],"id":"course","label":"course"},"documents":{"type":"file_multiple","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"documents","label":"documents"}},"title":"Lezioni","resourceName":"lessons"},"lesson_items":{"model":[],"title":"Elementi lezione","resourceName":"lesson_items"},"masters":{"model":{"id":{"type":"id","nullable":false,"write":false,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"id","label":"id"},"title":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"},"description":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"description","label":"description"},"identifier":{"id":"identifier","label":"identifier"},"masterCourses":{"id":"masterCourses","label":"masterCourses"},"type":{"id":"type","label":"type"},"masterImages":{"id":"masterImages","label":"masterImages"},"days":{"type":"integer","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"days","label":"days"},"months":{"type":"integer","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"months","label":"months"}},"title":"Master","resourceName":"masters"},"master_subscriptions":{"filters":{"text":["user"]},"model":{"id":{"id":"id","label":"id"},"master":{"targetClass":"App\\Entity\\Master","type":"reference","nullable":false,"write":false,"read":true,"resourceName":"masters","optionText":"title","validators":["required"],"errorMessages":["This field is required"],"id":"master","label":"master"},"user":{"targetClass":"App\\Entity\\User","type":"reference","nullable":false,"write":false,"read":true,"resourceName":"users","optionText":"id","validators":["required"],"errorMessages":["This field is required"],"id":"user","label":"user"},"startSubscriptionTime":{"id":"startSubscriptionTime","label":"startSubscriptionTime"},"endSubscriptionTime":{"id":"endSubscriptionTime","label":"endSubscriptionTime"},"subscriptionState":{"id":"subscriptionState","label":"subscriptionState"}},"title":"Iscrizioni","resourceName":"master_subscriptions"},"personal_data":{"model":[],"title":"Dati personali","resourceName":"personal_data"},"users":{"model":{"id":{"type":"id","nullable":false,"write":false,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"id","label":"id"},"email":{"type":"string","nullable":false,"write":false,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"email","label":"email"},"roles":{"id":"roles","label":"roles"},"personalData":{"targetClass":"App\\Entity\\PersonalData","type":"embedded_single","nullable":false,"write":true,"read":true,"resource":{"model":{"id":{"type":"id","nullable":false,"write":false,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"id","label":"id"},"name":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"name","label":"name"},"surname":{"type":"string","nullable":false,"write":true,"read":true,"validators":["required"],"errorMessages":["This field is required"],"id":"surname","label":"surname"}},"title":"Dati personali","resourceName":"personal_data"},"resourceName":"personal_data","validators":["required"],"errorMessages":["This field is required"],"id":"personalData","label":"personalData"}},"title":"Users","resourceName":"users"},"videos":{"model":{"link":{"type":"string","nullable":false,"write":true,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"link","label":"link"},"title":{"type":"string","nullable":false,"write":true,"read":false,"validators":["required"],"errorMessages":["This field is required"],"id":"title","label":"title"}},"title":"Video","resourceName":"videos"}}
-    );
+    const modelLoaded = useSetResourceModel(overrideRegistry,"http://localhost:1000/resources" );
 
 
     const render = <div>
-        <EditPage propResourceName={"courses"} propId={1}/>
+        <RouteFilterList resourceName={"properties"} filters={{}}/>
+        {/*<Create propResourceName={"properties"}/>*/}
     </div>
-
     return modelLoaded ? render : <div></div>;
 }

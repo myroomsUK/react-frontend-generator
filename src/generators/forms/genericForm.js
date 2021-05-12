@@ -64,5 +64,6 @@ export default function GenericForm(props){
             </ButtonsHorizontalList>
         </div>}
     </ValidatorForm>
+    return <div>generic form ma ho tanta altra rova</div>
 }
 

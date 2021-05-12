@@ -8,7 +8,6 @@ import {
     STRING, TEXTAREA
 } from "../generators/forms/inputs/InputTypes";
 import {PropertyModel} from "./PropertyModel";
-import {StringModel} from "./propertyModels/StringModel";
 import {NumberModel} from "./propertyModels/NumberModel";
 import {ReferenceModel} from "./propertyModels/ReferenceModel";
 import {EmbeddedSingleModel} from "./propertyModels/EmbeddedSingleModel";
@@ -24,6 +23,7 @@ import {MoneyModel} from "./propertyModels/MoneyModel";
 import {EnumSingleModel} from "./propertyModels/EnumSingleModel";
 import {EnumMultipleModel} from "./propertyModels/EnumMultipleModel";
 import {IdModel} from "./propertyModels/IdModel";
+import {StringModel} from "./propertyModels/StringModel";
 
 /**
  * @Property {id} - Name of the property

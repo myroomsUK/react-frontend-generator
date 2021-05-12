@@ -24,6 +24,7 @@ function App() {
                         search: "",
                         state: { referrer: location }
                     } }, void 0) }), void 0)] }, void 0);
+    return _jsx(Test, {}, void 0);
     return authenticatedRoutes;
 }
 export default App;

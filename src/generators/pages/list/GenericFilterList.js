@@ -42,7 +42,6 @@ export function GenericFilterList({resourceName, data, loading, page, setPage, s
         return {propertyModel: propertyModel , record: record}
     }).map(({propertyModel, record}, localIndex) => {
         return propertyModel.getOutputField({propertyRecord:record});
-        //return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
     })
 
     return <GenericList

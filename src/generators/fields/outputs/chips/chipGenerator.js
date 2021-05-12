@@ -1,9 +1,44 @@
-import React from "react";
+import React, {useState} from "react";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Chip from "@material-ui/core/Chip";
+import red from "@material-ui/core/colors/red";
+import green from "@material-ui/core/colors/green";
+import yellow from "@material-ui/core/colors/yellow";
 
-export default function chipGenerator(resourceName, props){
-    switch(resourceName){
-        default:{
-            return <div>{props.propertyModel.options?.find(option => option.id === props.propertyRecord)?.label}</div>
-        }
-    }
+const useStyles = makeStyles({
+    not_managed: {
+        backgroundColor: red.A700,
+        color:"white"
+    },
+    managed: {
+        backgroundColor: green.A700,
+    },
+    discarded: {
+        backgroundColor: yellow.A700,
+    },
+    enquired: {
+        backgroundColor: yellow.A100,
+    },
+});
+
+export default function ChipGenerator({propertyRecord, propertyModel, colorMap}){
+    const trueColorMap = (colorMap) ?? {};
+    console.log("classes", propertyModel.id, trueColorMap)
+    const [local, setLocal] = useState(true)
+
+
+    const {options} = propertyModel;
+
+    const label = options?.find(option => option.id === propertyRecord)?.label;
+    const id = options?.find(option => option.id === propertyRecord)?.id;
+
+    return <Chip
+        label={label}
+    />
+}
+
+
+export function createColorMap(chipStyles){
+    const reducer = (accumulator, value) =>{return {...accumulator, ...value}};
+    chipStyles.reduce(reducer,{});
 }
