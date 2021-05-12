@@ -9,6 +9,7 @@ import {GenericList} from "./generators/pages/ListPageGenerator";
 import {EditPage} from "./generators/pages/EditPageGenerator";
 import {Show} from "./generators/pages/ShowPageGenerator";
 import Test from "./Test";
+import {CookiesProvider} from "react-cookie";
 
 function App() {
 
@@ -38,7 +39,12 @@ function App() {
                 />
             </Route>
         </Switch>
-    return <Test/>
+
+
+    return <CookiesProvider>
+        <Test/>
+    </CookiesProvider>
+
 
     return  authenticatedRoutes;
 

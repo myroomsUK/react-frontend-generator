@@ -31,6 +31,9 @@ import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHor
 import {useRouteFilters, useTableFilters} from "../filters/TableFilters";
 import StringShow from "../fields/outputs/StringShow";
 import ShowField from "../fields/ShowField";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import {useCookies} from "react-cookie";
 
 
 function EnhancedTableHead(props) {
@@ -134,7 +137,12 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected,clearFilters, components, showClearFilters, collectionOperations, selected } = props;
+    const { numSelected,clearFilters, components, showClearFilters, collectionOperations, selected, setTable, allColumns = [] } = props;
+    const selectedColumns = allColumns.filter(column => column.inColumn === true)
+    const handleChangeCols = (event)=>{
+        const newValues = event.target.value
+        setTable(newValues);
+    }
 
     const [expanded, setExpanded] = useState(false);
 
@@ -169,6 +177,22 @@ const EnhancedTableToolbar = (props) => {
                                 {props.title}
                             </Typography>
                         )}
+                        {setTable && <TextField
+                            id="standard-select-currency"
+                            select
+                            label=""
+                            value={selectedColumns}
+                            onChange={handleChangeCols}
+                            SelectProps={{
+                                multiple:true
+                            }}
+                        >
+                            {allColumns.map((option) => (
+                                <MenuItem key={option.id} value={option}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField> }
                         {(showClearFilters) && (<Button onClick={clearFilters}>Clear filters</Button>)}
                         {(!!components.length) && <Tooltip title="Filter list">
                             <IconButton aria-label="filter list" onClick={handleChange}>
@@ -285,7 +309,27 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
 
 export function RouteFilterList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
     const {model, title, table} = useGetResourceModel(resourceName)
-    const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
+    const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
+
+
+    const [localTable, setLocalTable] = useState(cookies[`list-${resourceName}`] ?? table);
+
+    const propSetLocalTable = (value) => {
+        setCookie(`list-${resourceName}`, value, { path: '/' });
+        setLocalTable(value);
+    }
+
+    const allProperties = model.getAllPropertiesReadableNames();
+    const tableWithStats = allProperties.map(tableElement => {
+        return {
+            ...tableElement,
+            inColumn: localTable.some(localTableElement => localTableElement.id === tableElement.id)
+        }
+    } )
+
+
+
+    const headCells = localTable.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
         return { id: id, numeric:false, disablePadding:false, label: label};
     })
     const {filters, components, clearFilters} = useRouteFilters(resourceName,lockedFilters);
@@ -308,7 +352,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const showClearFilters = !!components.length;
 
 
-    const columns = (row) => table.map(({id, label}) =>
+    const columns = (row) => localTable.map(({id, label}) =>
     {
         const split = _.split(id, ".");
         const reducer = (start, value) => (start) ? start[value] : undefined;
@@ -338,14 +382,15 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
         headCells={headCells}
         itemOperations={itemOperations}
         collectionOperations={collectionOperations}
+        allColumns={tableWithStats}
+        setTable={propSetLocalTable}
     />
 
 }
 
-export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns}) {
+export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
     const [rows, setRows] = useState([]);
-    headCells = headCells.concat({ numeric:true, disablePadding:false, label:"Actions"})
-
+    headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells
     //get Data as a first step.
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(()=>{setLocalLoading(loading)},[loading])
@@ -355,6 +400,7 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(30);
+
 
 
     useEffect(()=>{
@@ -405,7 +451,7 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
         <>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations}/>
+                    <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} />
                     <TableContainer>
                         <Table
                             className={classes.table}

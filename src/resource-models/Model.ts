@@ -4,6 +4,7 @@ import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {NestedPropertyModel} from "./propertyModels/NestedPropertyModel";
 import {InputProps} from "@material-ui/core";
 import {ReactElement} from "react";
+import {properties} from "../mock/properties";
 
 export interface Model{
     properties: PropertyModel[]
@@ -68,6 +69,15 @@ export class Model{
 
     inputProperty(requestedName:string, props:InputFields): ReactElement<any, any>|null{
         return this.getProperty(requestedName).getInputField(props);
+    }
+
+    getAllPropertiesReadableNames(){
+        return this.properties.filter((propertyModel)=> propertyModel.read===true).map((propertyModel) => {
+            return {
+                id: propertyModel.id,
+                label:propertyModel.label
+            }
+        } );
     }
 }
 

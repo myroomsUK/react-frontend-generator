@@ -37,4 +37,5 @@ export class Resource{
     getModel():Model{
         return this.model;
     }
+
 }

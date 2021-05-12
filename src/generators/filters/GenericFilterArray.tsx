@@ -54,7 +54,6 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                 }
                 case "enum": {
                          const propertyModel = model.getProperty(name);
-                         console.log("property Model", propertyModel);
                         const {options} = propertyModel;
                         return {
                             name: name,
