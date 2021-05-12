@@ -48,4 +48,5 @@ export default function GenericForm(props) {
     const clonedForm = React.cloneElement(page, props);
     return _jsxs(ValidatorForm, Object.assign({ className: classes.form, onSubmit: submitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [clonedForm, showButton && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsxs(ButtonsHorizontalList, { children: [_jsx(Button, Object.assign({ style: { float: "right" }, variant: "contained", color: "secondary", onClick: submitHandler }, { children: text }), void 0),
                         _jsxs(Button, Object.assign({ style: { float: "right" }, variant: "contained", color: "secondary", onClick: submitAndBack }, { children: [text, " and back"] }), void 0)] }, void 0) }), void 0)] }), void 0);
+    return _jsx("div", { children: "generic form ma ho tanta altra rova" }, void 0);
 }

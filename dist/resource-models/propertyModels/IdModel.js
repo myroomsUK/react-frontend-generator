@@ -9,7 +9,7 @@ export class IdModel extends PropertyModel {
         };
     }
     getOutputField(props) {
-        return _jsx(_Fragment, {}, void 0);
+        return _jsx(_Fragment, { children: props.propertyRecord }, void 0);
     }
     manipulateErrors(errors) {
     }

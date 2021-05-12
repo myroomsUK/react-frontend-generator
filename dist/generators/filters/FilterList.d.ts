@@ -5,5 +5,5 @@ interface Props {
     filters: any;
     setFilters: any;
 }
-export declare const FilterList: ({ model, modelFilters, filters, setFilters }: Props) => never[];
+export declare const FilterList: ({ model, modelFilters, filters, setFilters }: Props) => any[];
 export {};

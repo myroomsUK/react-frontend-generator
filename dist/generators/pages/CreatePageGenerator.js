@@ -38,6 +38,9 @@ export const Create = ({ propResourceName, propCreatePage, lockedFormValue = {},
     const { create, errors: responseErrors } = useCreate();
     const location = useLocation();
     const [errors, setErrors] = useState(new Errors([]));
+    console.log("create page to use", createPageToUse);
+    console.log("prop create page", propCreatePage);
+    console.log("create page", useGetResourceModel(resourceNameToUse));
     useEffect(() => {
         // @ts-ignore
         const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);

@@ -11,7 +11,7 @@ export const useRouteFilters = (resourceNameToUse, presetFilters) => {
     const [inheritedFilters, setInheritedFilters] = useState({});
     const [filterObject, setFilterObject] = useState({});
     const dispatch = useDispatch();
-    const isEmbeddedTable = true;
+    const isEmbeddedTable = false;
     const getFiltersFromLocation = (location) => {
         const searchParams = new URLSearchParams(location.search);
         const routeFilters = {};
@@ -64,15 +64,19 @@ export const useRouteFilters = (resourceNameToUse, presetFilters) => {
     }, [filterObject]);
     const clearFilters = () => setFilterObject({});
     const { model, filters: modelFilters } = useGetResourceModel(resourceNameToUse);
-    const propsFiltersList = useMemo(() => { return { model: model, modelFilters: modelFilters, filters: filterObject, setFilters: setFilterObject }; }, [model, modelFilters, filterObject]);
-    return { filters: filterObject, components: FilterList(propsFiltersList), clearFilters: clearFilters };
+    const modelFi = getFinalFilters(modelFilters, {});
+    const propsFiltersList = useMemo(() => { return { model: model, modelFilters: modelFi, filters: filterObject, setFilters: setFilterObject }; }, [model, modelFilters, filterObject]);
+    const filterComponents = FilterList(propsFiltersList);
+    return { filters: filterObject, components: filterComponents, clearFilters: clearFilters };
 };
 export const useTableFilters = (resourceName, propLockedFilters) => {
     const [filters, setFilters] = useState(propLockedFilters);
     const { model, filters: modelFilters } = useGetResourceModel(resourceName);
     const clearFilters = () => setFilters(propLockedFilters);
-    const propsFiltersList = useMemo(() => { return { model: model, modelFilters: getFinalFilters(modelFilters, propLockedFilters), filters: filters, setFilters: setFilters }; }, [model, modelFilters, filters, propLockedFilters]);
-    return { filters: filters, components: FilterList(propsFiltersList), clearFilters: clearFilters };
+    const modelFi = getFinalFilters(modelFilters, propLockedFilters);
+    const propsFiltersList = useMemo(() => { return { model: model, modelFilters: modelFi, filters: filters, setFilters: setFilters }; }, [model, modelFilters, filters, propLockedFilters]);
+    const filterComponents = FilterList(propsFiltersList);
+    return { filters: filters, components: filterComponents, clearFilters: clearFilters };
 };
 function removeLockedFiltersFromModelFilters(filters, lockedFilters) {
     Object.keys(lockedFilters).forEach(key => delete filters[key]);

@@ -13,7 +13,7 @@ export default function TextFilter({ name, label, type, inputFieldOnChange, valu
         const target = event.target;
         let value = target.value;
         setLocalValue(value);
-        debounced.callback(event);
+        debounced(event);
     };
     return _jsx(React.Fragment, { children: _jsx(TextField, { label: label, id: name, name: name, value: localValue, onChange: localOnChange }, void 0) }, name);
 }

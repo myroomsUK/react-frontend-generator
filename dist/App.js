@@ -8,6 +8,7 @@ import { GenericList } from "./generators/pages/ListPageGenerator";
 import { EditPage } from "./generators/pages/EditPageGenerator";
 import { Show } from "./generators/pages/ShowPageGenerator";
 import Test from "./Test";
+import { CookiesProvider } from "react-cookie";
 function App() {
     const token = localStorage.getItem('token');
     const tokenValid = authProvider.checkTokenValidity();
@@ -24,7 +25,7 @@ function App() {
                         search: "",
                         state: { referrer: location }
                     } }, void 0) }), void 0)] }, void 0);
-    return _jsx(Test, {}, void 0);
+    return _jsx(CookiesProvider, { children: _jsx(Test, {}, void 0) }, void 0);
     return authenticatedRoutes;
 }
 export default App;

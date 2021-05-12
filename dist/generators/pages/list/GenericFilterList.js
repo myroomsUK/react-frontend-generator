@@ -29,7 +29,6 @@ export function GenericFilterList({ resourceName, data, loading, page, setPage, 
         return { propertyModel: propertyModel, record: record };
     }).map(({ propertyModel, record }, localIndex) => {
         return propertyModel.getOutputField({ propertyRecord: record });
-        //return <GenericField table propertyRecord={record} propertyModel={propertyModel} resourceName={resourceName} originalId={row.id} />
     });
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }

@@ -29,6 +29,10 @@ import { useList } from "../../redux/actions/verbs/list";
 import { getComparator, stableSort } from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { useRouteFilters, useTableFilters } from "../filters/TableFilters";
+import ShowField from "../fields/ShowField";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import { useCookies } from "react-cookie";
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters } = props;
     const createSortHandler = (property) => (event) => {
@@ -81,7 +85,12 @@ const useToolbarStyles = makeStyles((theme) => ({
 }));
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, clearFilters, components, showClearFilters, collectionOperations, selected } = props;
+    const { numSelected, clearFilters, components, showClearFilters, collectionOperations, selected, setTable, allColumns = [] } = props;
+    const selectedColumns = allColumns.filter(column => column.inColumn === true);
+    const handleChangeCols = (event) => {
+        const newValues = event.target.value;
+        setTable(newValues);
+    };
     const [expanded, setExpanded] = useState(false);
     const handleChange = () => {
         setExpanded(!expanded);
@@ -90,6 +99,9 @@ const EnhancedTableToolbar = (props) => {
                                     [classes.highlight]: numSelected > 0,
                                 }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0),
                                     collectionOperations.map(({ color, text, icon, onClick }) => _jsx(Tooltip, Object.assign({ title: text }, { children: getOperationButton({ color: color, text: text, icon: icon, onClick: () => onClick(selected) }) }), void 0))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: props.title }), void 0)),
+                            setTable && _jsx(TextField, Object.assign({ id: "standard-select-currency", select: true, label: "", value: selectedColumns, onChange: handleChangeCols, SelectProps: {
+                                    multiple: true
+                                } }, { children: allColumns.map((option) => (_jsx(MenuItem, Object.assign({ value: option }, { children: option.label }), option.id))) }), void 0),
                             (showClearFilters) && (_jsx(Button, Object.assign({ onClick: clearFilters }, { children: "Clear filters" }), void 0)),
                             (!!components.length) && _jsx(Tooltip, Object.assign({ title: "Filter list" }, { children: _jsx(IconButton, Object.assign({ "aria-label": "filter list", onClick: handleChange }, { children: _jsx(FilterListIcon, {}, void 0) }), void 0) }), void 0)] }), void 0) }), void 0),
                 _jsx(AccordionDetails, { children: _jsx(ListPageFilterBar, { components: components }, void 0) }, void 0)] }), void 0) }, void 0));
@@ -156,11 +168,23 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
 export function RouteFilterList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
+    var _a;
     const { model, title, table } = useGetResourceModel(resourceName);
-    const headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
+    const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
+    const [localTable, setLocalTable] = useState((_a = cookies[`list-${resourceName}`]) !== null && _a !== void 0 ? _a : table);
+    const propSetLocalTable = (value) => {
+        setCookie(`list-${resourceName}`, value, { path: '/' });
+        setLocalTable(value);
+    };
+    const allProperties = model.getAllPropertiesReadableNames();
+    const tableWithStats = allProperties.map(tableElement => {
+        return Object.assign(Object.assign({}, tableElement), { inColumn: localTable.some(localTableElement => localTableElement.id === tableElement.id) });
+    });
+    const headCells = localTable.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
         return { id: id, numeric: false, disablePadding: false, label: label };
     });
     const { filters, components, clearFilters } = useRouteFilters(resourceName, lockedFilters);
+    console.log("components", components);
     const { data, get, loading } = useList();
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
@@ -170,7 +194,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     }, [resourceName, filters, page]);
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
     const showClearFilters = !!components.length;
-    const columns = (row) => table.map(({ id, label }) => {
+    const columns = (row) => localTable.map(({ id, label }) => {
         const split = _.split(id, ".");
         const reducer = (start, value) => (start) ? start[value] : undefined;
         const record = split.reduce(reducer, row);
@@ -178,13 +202,13 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
         propertyModel.label = label;
         return { propertyModel: propertyModel, record: record };
     }).map(({ propertyModel, record }) => {
-        propertyModel.getOutputField();
+        return _jsx(ShowField, { propertyModel: propertyModel, propertyRecord: record }, void 0);
     });
-    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
+    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }
-export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns }) {
+export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable }) {
     const [rows, setRows] = useState([]);
-    headCells = headCells.concat({ numeric: true, disablePadding: false, label: "Actions" });
+    headCells = (itemOperations.length !== 0) ? headCells.concat({ numeric: true, disablePadding: false, label: "Actions" }) : headCells;
     //get Data as a first step.
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(() => { setLocalLoading(loading); }, [loading]);
@@ -228,7 +252,7 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
     };
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(EnhancedTableToolbar, { selected: selected, numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters, collectionOperations: collectionOperations }, void 0),
+    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(EnhancedTableToolbar, { selected: selected, numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
                     _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { classes: classes, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells, filters: components }, void 0),
                                 _jsx(TableBody, { children: localLoading ?
                                         (randomArray()).map((value, index) => _jsxs(TableRow, Object.assign({ hover: true, 

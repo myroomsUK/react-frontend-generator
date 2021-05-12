@@ -14,4 +14,8 @@ export declare class Model {
     addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): this;
     static createFromJson(jsonModel: any): Model;
     inputProperty(requestedName: string, props: InputFields): ReactElement<any, any> | null;
+    getAllPropertiesReadableNames(): {
+        id: string;
+        label: string;
+    }[];
 }

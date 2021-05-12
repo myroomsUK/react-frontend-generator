@@ -7,5 +7,5 @@ interface Props {
     referencesMap: any;
     filterValue: any;
 }
-export declare const GenericFilterArray: ({ model, modelFilters, inputFieldOnChange, referencesMap, filterValue }: Props) => never[];
+export declare const GenericFilterArray: ({ model, modelFilters, inputFieldOnChange, referencesMap, filterValue }: Props) => any[];
 export {};

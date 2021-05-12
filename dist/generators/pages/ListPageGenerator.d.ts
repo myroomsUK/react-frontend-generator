@@ -10,7 +10,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     itemOperations?: any[] | undefined;
     collectionOperations?: any[] | undefined;
 }): JSX.Element;
-export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns }: {
+export function GenericList({ data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns, allColumns, setTable }: {
     data: any;
     totalItems: any;
     loading: any;
@@ -27,4 +27,6 @@ export function GenericList({ data, totalItems, loading, page, setPage, selected
     collectionOperations?: any[] | undefined;
     headCells: any;
     columns: any;
+    allColumns: any;
+    setTable: any;
 }): JSX.Element;

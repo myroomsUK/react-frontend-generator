@@ -1,1 +1,6 @@
-export default function chipGenerator(resourceName: any, props: any): JSX.Element;
+export default function ChipGenerator({ propertyRecord, propertyModel, colorMap }: {
+    propertyRecord: any;
+    propertyModel: any;
+    colorMap: any;
+}): JSX.Element;
+export function createColorMap(chipStyles: any): void;
