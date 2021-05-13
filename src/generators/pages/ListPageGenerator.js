@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles} from '@material-ui/core/styles';
@@ -249,6 +249,7 @@ function randomArray(){
     return new Array(getRandomInt(3,7)).fill(1);
 }
 
+
 export function ResourceList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
     const {model, title, table} = useGetResourceModel(resourceName)
     const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
@@ -307,65 +308,81 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
 
 }
 
-export function RouteFilterList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
-    const {model, title, table} = useGetResourceModel(resourceName)
+export function RouteFilterList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}) {
+    const {model, table, title} = useGetResourceModel(resourceName)
     const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
-
-
     const [localTable, setLocalTable] = useState(cookies[`list-${resourceName}`] ?? table);
+    const [localModel, setLocalModel] = useState(model);
+    const [rows, setRows] = useState([])
+
+    useEffect(()=>{setRows([])}, [resourceName])
+    useEffect(()=>{setLocalModel(model)},[model]) //Change model
+    useEffect(()=>{setLocalTable(cookies[`list-${resourceName}`] ?? table)},[table, resourceName, cookies]) //Change tables
 
     const propSetLocalTable = (value) => {
-        setCookie(`list-${resourceName}`, value, { path: '/' });
+        setCookie(`list-${resourceName}`, value, {path: '/'});
         setLocalTable(value);
     }
 
-    const allProperties = model.getAllPropertiesReadableNames();
+    const allProperties = localModel.getAllPropertiesReadableNames();
     const tableWithStats = allProperties.map(tableElement => {
         return {
             ...tableElement,
             inColumn: localTable.some(localTableElement => localTableElement.id === tableElement.id)
         }
-    } )
-
-
-
-    const headCells = localTable.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
-        return { id: id, numeric:false, disablePadding:false, label: label};
     })
-    const {filters, components, clearFilters} = useRouteFilters(resourceName,lockedFilters);
-    console.log("components", components)
+
+
+    const headCells = useMemo(()=>{
+        const localHeadcells = localTable.map(({id, label}) => {
+            return {propertyModel: localModel.getProperty(id), tableItemName: {id: id, label: label}}
+        }).map(({propertyModel, tableItemName: {id, label}}) => {
+            return {id: id, numeric: false, disablePadding: false, label: label};
+        })
+        return localHeadcells;
+    }, [localTable, localModel])
+
+
+    const {filters, components, clearFilters} = useRouteFilters(resourceName, lockedFilters);
     const {data, get, loading} = useList();
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
 
     const debounced = useDebouncedCallback(
-        ()=>get(resourceName,page+1, filters),
+        () => get(resourceName, page + 1, filters),
         1000
     );
 
-    useEffect(()=>{
+    useEffect(() => {
         debounced();
-    },[resourceName, filters, page])
+    }, [resourceName, filters, page])
+
+    useEffect(()=>{
+        setRows(data.list);
+    },[data])
 
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
 
     const showClearFilters = !!components.length;
 
-
-    const columns = (row) => localTable.map(({id, label}) =>
-    {
+    const getRowElement = (row, id, label, localModel)=> {
         const split = _.split(id, ".");
         const reducer = (start, value) => (start) ? start[value] : undefined;
         const record = split.reduce(reducer, row);
-        const propertyModel = model.getProperty(id);
+        const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        return {propertyModel: propertyModel , record: record}
-    }).map(({propertyModel, record}) => {
+        return {propertyModel: propertyModel, record: record}
+    }
+
+    const columns = useCallback((row) => localTable.map( ({id, label}) => {
+        return getRowElement(row, id, label, localModel)
+        }).map(({propertyModel, record}) => {
         return <ShowField propertyModel={propertyModel} propertyRecord={record}/>
-    })
+    }),[localModel, localTable])
+
 
     return <GenericList
-        data={data.list}
+        data={rows}
         totalItems={data.totalItems}
         getDataHandler={debounced}
         loading={loading}
@@ -388,8 +405,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
 
 }
 
-export function GenericList({data, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
-    const [rows, setRows] = useState([]);
+export function GenericList({data:rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
     headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells
     //get Data as a first step.
     const [localLoading, setLocalLoading] = useState(false);
@@ -403,9 +419,7 @@ export function GenericList({data, totalItems, loading, page, setPage, selected,
 
 
 
-    useEffect(()=>{
-        setRows(data);
-    }, [data]);
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
