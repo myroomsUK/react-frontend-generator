@@ -8,8 +8,7 @@ export class BooleanModel extends SinglePropertyModel {
         return BooleanInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
-        return (vars) => {
-            const [event] = vars;
+        return (event) => {
             const target = event.target;
             let value = target.checked;
             const name = target.id;
