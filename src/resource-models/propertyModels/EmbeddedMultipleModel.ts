@@ -39,12 +39,12 @@ export class EmbeddedMultipleModel extends NestedPropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-        const {record} = props;
+        const {record, showElement} = props;
         return IterableShowContent({
             model:this.getResource().getModel(),
             record:record[this.id],
             resourceName: this.resourceName,
-            showElement:this.showElement
+            showElement:showElement
         });
     }
 }

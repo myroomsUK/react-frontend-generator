@@ -71,8 +71,8 @@ export class Model{
         return this.getProperty(requestedName).getInputField(props);
     }
 
-    outputProperty(requestedName:string, props:any): ReactElement<any, any>|null{
-        return this.getProperty(requestedName).getOutputField(props);
+    outputProperty(requestedName:string, props:any, showLabel:boolean = true): ReactElement<any, any>|null{
+        return this.getProperty(requestedName).getOutputField({...props, showLabel:showLabel});
     }
 
     getAllPropertiesReadableNames(){

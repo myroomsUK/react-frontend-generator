@@ -1,5 +1,8 @@
 import {InputFields, OutputFields, PropertyModel} from "../PropertyModel";
 import {Error, Errors} from "../../generators/errors/Errors";
+import { Typography } from "@material-ui/core";
+import React from "react";
+import _ from 'lodash'
 
 interface SingleErrors{
     hasError:boolean,
@@ -28,10 +31,12 @@ export abstract class SinglePropertyModel extends PropertyModel{
     }
 
     getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
-        console.log("props for ",this.id, props)
-        const {record} = props;
+        const {record, showLabel} = props;
         const newProps:SingleOutputFields = {...props,  propertyRecord:record[this.id]}
-        return this.setOutputField(newProps);
+        return <>
+            {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
+            {this.setOutputField(newProps)}
+        </>
     }
 }
 
@@ -42,5 +47,5 @@ interface SingleInputFields extends InputFields{
 }
 
 interface SingleOutputFields{
-    propertyRecord: any,
+    propertyRecord: any
 }

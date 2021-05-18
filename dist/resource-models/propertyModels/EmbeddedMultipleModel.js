@@ -30,12 +30,12 @@ export class EmbeddedMultipleModel extends NestedPropertyModel {
         };
     }
     setOutputField(props) {
-        const { record } = props;
+        const { record, showElement } = props;
         return IterableShowContent({
             model: this.getResource().getModel(),
             record: record[this.id],
             resourceName: this.resourceName,
-            showElement: this.showElement
+            showElement: showElement
         });
     }
 }

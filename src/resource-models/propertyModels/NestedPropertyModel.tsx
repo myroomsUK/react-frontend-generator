@@ -1,8 +1,10 @@
-import {GridRange, InputFields, Option, PropertyModel} from "../PropertyModel";
+import {GridRange, InputFields, Option, OutputFields, PropertyModel} from "../PropertyModel";
 import {Resource} from "../Resource";
 import {Errors} from "../../generators/errors/Errors";
 import {PropertyModelCore} from "../PropertyModelCore";
 import React from "react";
+import {Typography} from "@material-ui/core";
+import _ from "lodash";
 
 
 export abstract class NestedPropertyModel extends PropertyModel{
@@ -31,8 +33,12 @@ export abstract class NestedPropertyModel extends PropertyModel{
         return this.setInputField(newProps);
     }
 
-    getOutputField(props:any): React.ReactElement<any, any> | null {
-        return this.setOutputField(props);
+    getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
+        const {showLabel} = props;
+        return <>
+            {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
+            {this.setOutputField(props)}
+        </>
     }
 }
 

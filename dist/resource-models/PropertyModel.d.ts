@@ -66,4 +66,5 @@ export interface InputFields {
 }
 export interface OutputFields {
     record: any;
+    showLabel: boolean;
 }

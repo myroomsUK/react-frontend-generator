@@ -162,7 +162,7 @@ export function ResourceList({ resourceName, filters: lockedFilters, itemOperati
         propertyModel.label = label;
         return { propertyModel: propertyModel, record: record };
     }).map(({ propertyModel, record }) => {
-        propertyModel.getOutputField();
+        propertyModel.getOutputField({ record: row, showLabel: false });
     });
     return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
 }
@@ -216,7 +216,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const columns = useCallback((row) => localTable.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);
     }).map(({ propertyModel, record }) => {
-        return propertyModel.getOutputField({ record: row });
+        return propertyModel.getOutputField({ record: row, showLabel: false });
     }), [localModel, localTable]);
     return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }

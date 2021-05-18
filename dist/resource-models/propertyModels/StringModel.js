@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { StringInput } from "../../generators/forms/inputs/StringInput";
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
@@ -17,7 +17,6 @@ export class StringModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        console.log("props", props);
-        return _jsx(StringShow, Object.assign({}, props), void 0);
+        return _jsx(_Fragment, { children: _jsx(StringShow, Object.assign({}, props), void 0) }, void 0);
     }
 }

@@ -27,5 +27,5 @@ export default function Test() {
 }
 function ShowPageCustom(props) {
     const { model } = props;
-    return _jsx("div", { children: model.outputProperty("images", props) }, void 0);
+    return _jsx("div", { children: model.outputProperty("kitchen", props) }, void 0);
 }

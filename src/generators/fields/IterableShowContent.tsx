@@ -44,7 +44,7 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
                             model.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
                                 const {xs, md, id} = propertyModel;
                                 return <Grid item xs={xs} md={md}>
-                                    {propertyModel.getOutputField({record:singleRecord})}
+                                    {propertyModel.getOutputField({record:singleRecord, showLabel:true})}
                                 </Grid>
                             })
                         }

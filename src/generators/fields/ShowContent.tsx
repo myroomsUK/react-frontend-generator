@@ -21,7 +21,7 @@ export const ShowContent: React.FC<ShowContent> = ({record, model, showElement, 
         {model?.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
             const {xs, md, id} = propertyModel;
             return <Grid key={index} item xs={xs} md={md}>
-                {propertyModel.getOutputField({record:record})}
+                {propertyModel.getOutputField({record:record, showLabel:true})}
             </Grid>
         })
         }

@@ -1,6 +1,6 @@
-/// <reference types="react" />
 import { InputFields, OutputFields, PropertyModel } from "../PropertyModel";
 import { Errors } from "../../generators/errors/Errors";
+import React from "react";
 interface SingleErrors {
     hasError: boolean;
     errorMessage?: string;

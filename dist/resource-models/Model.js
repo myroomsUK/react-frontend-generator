@@ -55,8 +55,8 @@ export class Model {
     inputProperty(requestedName, props) {
         return this.getProperty(requestedName).getInputField(props);
     }
-    outputProperty(requestedName, props) {
-        return this.getProperty(requestedName).getOutputField(props);
+    outputProperty(requestedName, props, showLabel = true) {
+        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { showLabel: showLabel }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

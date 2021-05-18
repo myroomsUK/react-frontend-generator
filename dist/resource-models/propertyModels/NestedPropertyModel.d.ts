@@ -1,4 +1,4 @@
-import { GridRange, InputFields, Option, PropertyModel } from "../PropertyModel";
+import { GridRange, InputFields, Option, OutputFields, PropertyModel } from "../PropertyModel";
 import { Resource } from "../Resource";
 import { Errors } from "../../generators/errors/Errors";
 import { PropertyModelCore } from "../PropertyModelCore";
@@ -10,7 +10,7 @@ export declare abstract class NestedPropertyModel extends PropertyModel {
     getResource(): Resource;
     manipulateErrors(fetchErrors: Errors): Errors;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
-    getOutputField(props: any): React.ReactElement<any, any> | null;
+    getOutputField(props: OutputFields): React.ReactElement<any, any> | null;
 }
 export interface EmbeddedInputFields extends InputFields {
     inputHandler: (vars: any) => void;

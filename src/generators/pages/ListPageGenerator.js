@@ -282,7 +282,7 @@ export function ResourceList({resourceName, filters:lockedFilters,  itemOperatio
         propertyModel.label = label;
         return {propertyModel: propertyModel , record: record}
     }).map(({propertyModel, record}) => {
-        propertyModel.getOutputField()
+        propertyModel.getOutputField({record:row, showLabel:false})
     })
 
     return <GenericList
@@ -376,7 +376,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const columns = useCallback((row) => localTable.map( ({id, label}) => {
         return getRowElement(row, id, label, localModel)
         }).map(({propertyModel, record}) => {
-        return propertyModel.getOutputField({record:row})
+        return propertyModel.getOutputField({record:row, showLabel:false})
     }),[localModel, localTable])
 
 
