@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import ImageDialog from "./ImageDialog";
 
 export default function ({filesList=[]}){
+    console.log("filelist", filesList)
     return <ShowImageGrid images={filesList}/>
 }
 

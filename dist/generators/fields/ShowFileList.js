@@ -7,6 +7,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageDialog from "./ImageDialog";
 export default function ({ filesList = [] }) {
+    console.log("filelist", filesList);
     return _jsx(ShowImageGrid, { images: filesList }, void 0);
 }
 const useStyles = makeStyles((theme) => ({
