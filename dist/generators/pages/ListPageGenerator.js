@@ -29,7 +29,6 @@ import { useList } from "../../redux/actions/verbs/list";
 import { getComparator, stableSort } from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { useRouteFilters, useTableFilters } from "../filters/TableFilters";
-import ShowField from "../fields/ShowField";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useCookies } from "react-cookie";
@@ -217,7 +216,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const columns = useCallback((row) => localTable.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);
     }).map(({ propertyModel, record }) => {
-        return _jsx(ShowField, { propertyModel: propertyModel, propertyRecord: record }, void 0);
+        return propertyModel.getOutputField({ record: row });
     }), [localModel, localTable]);
     return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }

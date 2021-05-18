@@ -11,5 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 export default function ShowField(_a) {
     var { propertyModel } = _a, rest = __rest(_a, ["propertyModel"]);
+    console.log("rest", rest);
+    console.log("property model", propertyModel);
     return propertyModel.getOutputField(rest);
 }
