@@ -12,6 +12,7 @@ export interface SinglePropertyInputFields extends SingleInputFields {
 export declare abstract class SinglePropertyModel extends PropertyModel {
     manipulateErrors(errors: Errors): SingleErrors;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
+    getOutputField(props: any): React.ReactElement<any, any> | null;
 }
 interface SingleInputFields extends InputFields {
     inputHandler: (vars: any) => void;

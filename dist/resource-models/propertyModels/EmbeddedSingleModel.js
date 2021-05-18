@@ -2,7 +2,7 @@ import NestedFormContent from "../../generators/forms/NestedFormContent";
 import { NestedPropertyModel } from "./NestedPropertyModel";
 import { ShowContent } from "../../generators/fields/ShowContent";
 export class EmbeddedSingleModel extends NestedPropertyModel {
-    getOutputField(props) {
+    setOutputField(props) {
         const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel(), resourceName: this.getResource().resourceName });
         return ShowContent(newProps);
     }

@@ -29,7 +29,6 @@ import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import {useRouteFilters, useTableFilters} from "../filters/TableFilters";
-import StringShow from "../fields/outputs/StringShow";
 import ShowField from "../fields/ShowField";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";

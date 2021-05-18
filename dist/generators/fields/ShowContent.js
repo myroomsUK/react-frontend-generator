@@ -8,6 +8,6 @@ export const ShowContent = ({ record, model, showElement, resourceName }) => {
     }
     return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model === null || model === void 0 ? void 0 : model.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
             const { xs, md, id } = propertyModel;
-            return _jsx(Grid, { item: true, xs: xs, md: md }, index);
+            return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ record: record }) }), index);
         }) }), void 0);
 };

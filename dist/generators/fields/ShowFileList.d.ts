@@ -1,3 +1,3 @@
 export default function _default({ filesList }: {
-    filesList: any;
+    filesList?: any[] | undefined;
 }): JSX.Element;

@@ -31,23 +31,9 @@ export class EnumSingleModel extends SinglePropertyModel{
         }
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         const {propertyRecord} = props
-        return SingleEnumShow({propertyModel:this, propertyRecord, colorMap:{
-                not_managed: {
-                    backgroundColor: red.A700,
-                    color:"white"
-                },
-                managed: {
-                    backgroundColor: green.A700,
-                },
-                discarded: {
-                    backgroundColor: yellow.A700,
-                },
-                enquired: {
-                    backgroundColor: yellow.A100,
-                },
-            }});
+        return SingleEnumShow({propertyModel:this, propertyRecord, colorMap:this.colorMap});
     }
 
 }

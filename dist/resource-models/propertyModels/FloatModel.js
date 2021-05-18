@@ -16,7 +16,7 @@ export class FloatModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: parseFloat(value) }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return FloatShow(props);
     }
 }

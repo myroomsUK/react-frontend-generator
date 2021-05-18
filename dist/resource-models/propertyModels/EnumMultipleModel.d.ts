@@ -9,6 +9,6 @@ export declare class EnumMultipleModel extends SinglePropertyModel {
     constructor(id: string, others: any);
     setInputField(props: EnumMultipleInputFields): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
-    getOutputField(props: any): React.ReactElement<any, any> | null;
+    setOutputField(props: any): React.ReactElement<any, any> | null;
 }
 export {};

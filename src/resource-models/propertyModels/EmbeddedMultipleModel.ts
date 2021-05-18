@@ -9,7 +9,7 @@ export class EmbeddedMultipleModel extends NestedPropertyModel{
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule} =  props;
-        const setParentFormValue = (values:any) => setFormValue({...formValue, [this.resourceName] : values });
+        const setParentFormValue = (values:any) => setFormValue({...formValue, [props.model.id] : values });
         const newErrors = this.manipulateErrors(errors);
 
         return IterableFormContent({
@@ -38,9 +38,12 @@ export class EmbeddedMultipleModel extends NestedPropertyModel{
         };
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
-        return IterableShowContent(props);
+    setOutputField(props: any): React.ReactElement<any, any> | null {
+        return IterableShowContent({
+            model:this.getResource().getModel(),
+            record:props.propertyRecord,
+            resourceName: this.resourceName,
+            showElement:this.showElement
+        });
     }
-
-
 }

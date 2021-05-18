@@ -13,7 +13,7 @@ export class NumberModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: parseInt(value) }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return NumberShow(props);
     }
 }

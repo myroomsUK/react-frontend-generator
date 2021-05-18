@@ -14,7 +14,8 @@ export class MultipleFileModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
-        return MultipleFileShow(props);
+    setOutputField(props) {
+        var _a;
+        return MultipleFileShow(Object.assign(Object.assign({}, props), { propertyRecord: (_a = props.record) !== null && _a !== void 0 ? _a : [] }));
     }
 }

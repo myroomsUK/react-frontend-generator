@@ -55,6 +55,9 @@ export class Model {
     inputProperty(requestedName, props) {
         return this.getProperty(requestedName).getInputField(props);
     }
+    outputProperty(requestedName, props) {
+        return this.getProperty(requestedName).getOutputField(props);
+    }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {
             return {

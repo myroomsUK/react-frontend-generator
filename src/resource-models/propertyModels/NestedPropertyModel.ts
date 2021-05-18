@@ -3,7 +3,6 @@ import {Resource} from "../Resource";
 import {Errors} from "../../generators/errors/Errors";
 import {PropertyModelCore} from "../PropertyModelCore";
 import React from "react";
-import {Model} from "../Model";
 
 
 export abstract class NestedPropertyModel extends PropertyModel{
@@ -30,6 +29,12 @@ export abstract class NestedPropertyModel extends PropertyModel{
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
         const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue[this.id], model:this}
         return this.setInputField(newProps);
+    }
+
+    getOutputField(props:any): React.ReactElement<any, any> | null {
+        const {record} = props;
+        const newProps:any = {...props,  propertyRecord:record[this.id] ?? []}
+        return this.setOutputField(newProps);
     }
 }
 

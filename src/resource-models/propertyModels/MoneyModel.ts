@@ -16,7 +16,7 @@ export class MoneyModel extends SinglePropertyModel{
         }
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         return MoneyShow(props);
     }
 

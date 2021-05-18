@@ -10,6 +10,7 @@ export declare abstract class NestedPropertyModel extends PropertyModel {
     getResource(): Resource;
     manipulateErrors(fetchErrors: Errors): Errors;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
+    getOutputField(props: any): React.ReactElement<any, any> | null;
 }
 export interface EmbeddedInputFields extends InputFields {
     inputHandler: (vars: any) => void;

@@ -29,7 +29,7 @@ export class EnumMultipleModel extends SinglePropertyModel{
         }
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         const {propertyRecord,} = props;
         const newProps = {propertyRecord, propertyModel:this};
         const record: any = Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord);

@@ -1,6 +1,7 @@
 import {StringInput} from "../../generators/forms/inputs/StringInput";
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
+import React from "react";
 
 
 export class StringModel extends SinglePropertyModel{
@@ -20,8 +21,8 @@ export class StringModel extends SinglePropertyModel{
         }
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
-        return StringShow(props);
-    }
+    setOutputField(props: any): React.ReactElement<any, any> | null {
 
+        return <StringShow {...props} />
+    }
 }

@@ -26,10 +26,20 @@ export abstract class SinglePropertyModel extends PropertyModel{
         const newProps:SinglePropertyInputFields = {...props, hasError, errorMessage, inputHandler:inputHandler, value:formValue[this.id], model:this}
         return this.setInputField(newProps);
     }
+
+    getOutputField(props:any): React.ReactElement<any, any> | null {
+        const {record} = props;
+        const newProps:SingleOutputFields = {...props,  propertyRecord:record[this.id]}
+        return this.setOutputField(newProps);
+    }
 }
 
 interface SingleInputFields extends InputFields{
     inputHandler: (vars:any) => void,
     value: any,
     model: SinglePropertyModel
+}
+
+interface SingleOutputFields{
+
 }

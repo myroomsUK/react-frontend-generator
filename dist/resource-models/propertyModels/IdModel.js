@@ -8,12 +8,15 @@ export class IdModel extends PropertyModel {
         return function (p1) {
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return _jsx(_Fragment, { children: props.propertyRecord }, void 0);
     }
     manipulateErrors(errors) {
     }
     getInputField(props) {
+        return null;
+    }
+    getOutputField(props) {
         return null;
     }
 }

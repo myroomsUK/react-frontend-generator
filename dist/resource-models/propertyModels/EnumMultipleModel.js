@@ -19,7 +19,7 @@ export class EnumMultipleModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         const { propertyRecord, } = props;
         const newProps = { propertyRecord, propertyModel: this };
         const record = Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord);

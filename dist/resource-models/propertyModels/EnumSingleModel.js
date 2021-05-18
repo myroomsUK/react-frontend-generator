@@ -1,6 +1,5 @@
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import { EnumInput, getAutocompleteValuePosition } from "../../generators/forms/inputs/EnumInput";
-import { green, red, yellow } from "@material-ui/core/colors";
 import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
 export class EnumSingleModel extends SinglePropertyModel {
     constructor(id, other) {
@@ -20,22 +19,8 @@ export class EnumSingleModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         const { propertyRecord } = props;
-        return SingleEnumShow({ propertyModel: this, propertyRecord, colorMap: {
-                not_managed: {
-                    backgroundColor: red.A700,
-                    color: "white"
-                },
-                managed: {
-                    backgroundColor: green.A700,
-                },
-                discarded: {
-                    backgroundColor: yellow.A700,
-                },
-                enquired: {
-                    backgroundColor: yellow.A100,
-                },
-            } });
+        return SingleEnumShow({ propertyModel: this, propertyRecord, colorMap: this.colorMap });
     }
 }

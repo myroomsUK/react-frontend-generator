@@ -16,7 +16,7 @@ export class NumberModel extends SinglePropertyModel{
             setFormValue({...formValue, [name]: parseInt(value)});}
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         return NumberShow(props);
     }
 

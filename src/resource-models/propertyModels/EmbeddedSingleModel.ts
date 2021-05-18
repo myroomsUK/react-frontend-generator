@@ -4,7 +4,7 @@ import {EmbeddedInputFields, NestedPropertyModel} from "./NestedPropertyModel";
 import {ShowContent} from "../../generators/fields/ShowContent";
 
 export class EmbeddedSingleModel extends NestedPropertyModel{
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         const newProps = {...props, model:this.getResource().getModel(), resourceName:this.getResource().resourceName}
         return ShowContent(newProps)
     }

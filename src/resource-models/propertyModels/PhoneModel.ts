@@ -16,7 +16,7 @@ export class PhoneModel extends SinglePropertyModel{
         }
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         return PhoneShow(props);
     }
 }

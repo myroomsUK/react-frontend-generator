@@ -4,7 +4,7 @@ import { IterableShowContent } from "../../generators/fields/IterableShowContent
 export class EmbeddedMultipleModel extends NestedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule } = props;
-        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [this.resourceName]: values }));
+        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
         const newErrors = this.manipulateErrors(errors);
         return IterableFormContent({
             model: this.getResource().getModel(),
@@ -29,7 +29,12 @@ export class EmbeddedMultipleModel extends NestedPropertyModel {
         return function (p1) {
         };
     }
-    getOutputField(props) {
-        return IterableShowContent(props);
+    setOutputField(props) {
+        return IterableShowContent({
+            model: this.getResource().getModel(),
+            record: props.propertyRecord,
+            resourceName: this.resourceName,
+            showElement: this.showElement
+        });
     }
 }

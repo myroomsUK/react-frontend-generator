@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
 import {authProvider} from "./authentication/authorizationProvider";
-import {useLocation, Switch, Route, Redirect} from 'react-router-dom';
+import {Redirect, Route, Switch, useLocation} from 'react-router-dom';
 import SignIn from "./authentication/login";
 import {MainPage} from "./rendering/templates/MainPage";
-import {Create} from "./generators/pages/CreatePageGenerator";
 import {GenericList} from "./generators/pages/ListPageGenerator";
 import {EditPage} from "./generators/pages/EditPageGenerator";
-import {Show} from "./generators/pages/ShowPageGenerator";
 import Test from "./Test";
 import {CookiesProvider} from "react-cookie";
 
@@ -22,7 +20,6 @@ function App() {
         <Route path="/test" render={() => <Test/>}/>
         <Route path="/:urlResourceName" exact render={() => <MainPage main={<GenericList />}/>} />
         <Route path="/:urlResourceName/:id/edit" exact render={() => <MainPage main={<EditPage  />} />}/>
-        <Route path="/:urlResourceName/:id/show" exact render={() => <MainPage main={<Show />} />}/>
         <Route path="/" render={() => <MainPage main={<div>dashboard</div>} />}/>
     </Switch>
 

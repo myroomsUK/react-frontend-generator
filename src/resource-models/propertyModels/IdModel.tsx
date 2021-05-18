@@ -11,7 +11,7 @@ export class IdModel extends PropertyModel{
         };
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: any): React.ReactElement<any, any> | null {
         return <>{props.propertyRecord}</>;
     }
 
@@ -19,6 +19,10 @@ export class IdModel extends PropertyModel{
     }
 
     getInputField(props: InputFields): React.ReactElement<any, any> | null {
+        return null;
+    }
+
+    getOutputField(props: any): React.ReactElement<any, any> | null {
         return null;
     }
 

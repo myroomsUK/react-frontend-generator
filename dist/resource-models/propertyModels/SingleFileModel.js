@@ -14,7 +14,7 @@ export class SingleFileModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return SingleFileShow(props);
     }
 }

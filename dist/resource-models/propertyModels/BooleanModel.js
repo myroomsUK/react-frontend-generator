@@ -15,7 +15,7 @@ export class BooleanModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return BooleanShow(props);
     }
 }

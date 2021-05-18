@@ -2,20 +2,22 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {Divider, List, ListItem} from "@material-ui/core";
 import {EmbeddedMultipleModel} from "../../resource-models/propertyModels/EmbeddedMultipleModel";
+import {Model} from "../../resource-models/Model";
 
-interface Props{
+export interface IterableShowContentProps{
     record: any[];
-    model: EmbeddedMultipleModel,
+    model: Model,
     resourceName: string;
     showElement?: any;
 
 }
 
-export const IterableShowContent: React.FC<Props> = ({model, record, resourceName, showElement}) => {
+export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, showElement}) => {
 
-    const embeddedModel = model.getResource().getModel();
+    console.log("model iterable", model);
+    console.log("record", record)
 
-    if(record.length===0){
+    if(record===undefined || record.length===0){
         return <div>No elements found</div>
     }
     if(showElement){
@@ -25,7 +27,7 @@ export const IterableShowContent: React.FC<Props> = ({model, record, resourceNam
 
                     return <>
                         <ListItem alignItems="center">
-                            {React.cloneElement(showElement, {record:singleRecord, model:embeddedModel})}
+                            {React.cloneElement(showElement, {record:singleRecord, model:model})}
                         </ListItem>
                         <Divider component="li" />
                     </>
@@ -39,10 +41,10 @@ export const IterableShowContent: React.FC<Props> = ({model, record, resourceNam
                 <Grid item xs={12} md={12}>
                     <Grid container spacing={2}>
                         {
-                            embeddedModel.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
+                            model.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
                                 const {xs, md, id} = propertyModel;
                                 return <Grid item xs={xs} md={md}>
-                                    {propertyModel.getOutputField(undefined)}
+                                    {propertyModel.getOutputField({propertyRecord:record})}
                                 </Grid>
                             })
                         }

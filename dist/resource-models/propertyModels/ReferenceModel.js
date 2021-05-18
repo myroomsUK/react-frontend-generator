@@ -16,8 +16,7 @@ export class ReferenceModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: parseInt(value) }));
         };
     }
-    getOutputField(props) {
-        console.log(props);
+    setOutputField(props) {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
 }

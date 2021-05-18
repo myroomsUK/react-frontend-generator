@@ -13,7 +13,7 @@ export class DateModel extends SinglePropertyModel {
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }
-    getOutputField(props) {
+    setOutputField(props) {
         return DateShow(props);
     }
 }

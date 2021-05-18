@@ -1,10 +1,9 @@
 import React from "react";
-import { EmbeddedMultipleModel } from "../../resource-models/propertyModels/EmbeddedMultipleModel";
-interface Props {
+import { Model } from "../../resource-models/Model";
+export interface IterableShowContentProps {
     record: any[];
-    model: EmbeddedMultipleModel;
+    model: Model;
     resourceName: string;
     showElement?: any;
 }
-export declare const IterableShowContent: React.FC<Props>;
-export {};
+export declare const IterableShowContent: React.FC<IterableShowContentProps>;

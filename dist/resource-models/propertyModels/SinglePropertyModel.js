@@ -12,4 +12,9 @@ export class SinglePropertyModel extends PropertyModel {
         const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: formValue[this.id], model: this });
         return this.setInputField(newProps);
     }
+    getOutputField(props) {
+        const { record } = props;
+        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record[this.id] });
+        return this.setOutputField(newProps);
+    }
 }

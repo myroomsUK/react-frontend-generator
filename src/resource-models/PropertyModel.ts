@@ -74,6 +74,8 @@ export abstract class PropertyModel {
 
     abstract getOutputField(props:any): ReactElement<any, any> |null;
 
+    abstract setOutputField(props:any): ReactElement<any, any> |null;
+
     abstract getInputOnChangeHandler({formValue, setFormValue}: any): (vars:any) => void;
 
     abstract getInputField(props:InputFields): ReactElement<any,any>|null;
