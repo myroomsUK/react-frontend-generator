@@ -21,9 +21,6 @@ export class NestedPropertyModel extends PropertyModel {
         return this.setInputField(newProps);
     }
     getOutputField(props) {
-        var _a;
-        const { record } = props;
-        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: (_a = record[this.id]) !== null && _a !== void 0 ? _a : [] });
-        return this.setOutputField(newProps);
+        return this.setOutputField(props);
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Model } from "../../resource-models/Model";
 export interface IterableShowContentProps {
-    record: any[];
+    record: any;
     model: Model;
     resourceName: string;
     showElement?: any;

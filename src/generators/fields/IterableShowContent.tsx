@@ -5,7 +5,7 @@ import {EmbeddedMultipleModel} from "../../resource-models/propertyModels/Embedd
 import {Model} from "../../resource-models/Model";
 
 export interface IterableShowContentProps{
-    record: any[];
+    record: any;
     model: Model,
     resourceName: string;
     showElement?: any;
@@ -23,7 +23,7 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
     if(showElement){
         return  <List style={{width:"100%"}} >
             {
-                record.map((singleRecord) => {
+                record.map((singleRecord:any) => {
 
                     return <>
                         <ListItem alignItems="center">
@@ -37,14 +37,14 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
 
     }else{
         return <Grid container>
-            {record.map(singleRecord =>
+            {record.map((singleRecord:any) =>
                 <Grid item xs={12} md={12}>
                     <Grid container spacing={2}>
                         {
                             model.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
                                 const {xs, md, id} = propertyModel;
                                 return <Grid item xs={xs} md={md}>
-                                    {propertyModel.getOutputField({propertyRecord:record})}
+                                    {propertyModel.getOutputField({record:singleRecord})}
                                 </Grid>
                             })
                         }

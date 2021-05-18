@@ -17,6 +17,7 @@ export class StringModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
+        console.log("props", props);
         return _jsx(StringShow, Object.assign({}, props), void 0);
     }
 }

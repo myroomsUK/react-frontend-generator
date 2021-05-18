@@ -32,9 +32,7 @@ export abstract class NestedPropertyModel extends PropertyModel{
     }
 
     getOutputField(props:any): React.ReactElement<any, any> | null {
-        const {record} = props;
-        const newProps:any = {...props,  propertyRecord:record[this.id] ?? []}
-        return this.setOutputField(newProps);
+        return this.setOutputField(props);
     }
 }
 

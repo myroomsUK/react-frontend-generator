@@ -1,4 +1,4 @@
-import {InputFields, PropertyModel} from "../PropertyModel";
+import {InputFields, OutputFields, PropertyModel} from "../PropertyModel";
 import {Error, Errors} from "../../generators/errors/Errors";
 
 interface SingleErrors{
@@ -27,7 +27,8 @@ export abstract class SinglePropertyModel extends PropertyModel{
         return this.setInputField(newProps);
     }
 
-    getOutputField(props:any): React.ReactElement<any, any> | null {
+    getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
+        console.log("props for ",this.id, props)
         const {record} = props;
         const newProps:SingleOutputFields = {...props,  propertyRecord:record[this.id]}
         return this.setOutputField(newProps);
@@ -41,5 +42,5 @@ interface SingleInputFields extends InputFields{
 }
 
 interface SingleOutputFields{
-
+    propertyRecord: any,
 }

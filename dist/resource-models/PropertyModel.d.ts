@@ -48,7 +48,7 @@ export declare abstract class PropertyModel {
     constructor(id: string, rest: any);
     abstract manipulateErrors(errors: Errors): any;
     abstract setInputField(props: any): ReactElement<any, any> | null;
-    abstract getOutputField(props: any): ReactElement<any, any> | null;
+    abstract getOutputField(props: OutputFields): ReactElement<any, any> | null;
     abstract setOutputField(props: any): ReactElement<any, any> | null;
     abstract getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
     abstract getInputField(props: InputFields): ReactElement<any, any> | null;
@@ -63,4 +63,7 @@ export interface InputFields {
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
+}
+export interface OutputFields {
+    record: any;
 }

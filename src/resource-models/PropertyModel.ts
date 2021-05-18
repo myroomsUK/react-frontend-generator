@@ -72,7 +72,7 @@ export abstract class PropertyModel {
 
     abstract setInputField(props: any): ReactElement<any, any> | null;
 
-    abstract getOutputField(props:any): ReactElement<any, any> |null;
+    abstract getOutputField(props:OutputFields): ReactElement<any, any> |null;
 
     abstract setOutputField(props:any): ReactElement<any, any> |null;
 
@@ -91,4 +91,8 @@ export interface InputFields{
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
+}
+
+export interface OutputFields{
+    record:any,
 }

@@ -15,9 +15,9 @@ export const IterableShowContent = ({ model, record, showElement }) => {
             }) }), void 0);
     }
     else {
-        return _jsx(Grid, Object.assign({ container: true }, { children: record.map(singleRecord => _jsx(Grid, Object.assign({ item: true, xs: 12, md: 12 }, { children: _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties.filter(propertyModel => propertyModel.read === true).map(propertyModel => {
+        return _jsx(Grid, Object.assign({ container: true }, { children: record.map((singleRecord) => _jsx(Grid, Object.assign({ item: true, xs: 12, md: 12 }, { children: _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties.filter(propertyModel => propertyModel.read === true).map(propertyModel => {
                         const { xs, md, id } = propertyModel;
-                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ propertyRecord: record }) }), void 0);
+                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ record: singleRecord }) }), void 0);
                     }) }), void 0) }), void 0)) }), void 0);
     }
     ;

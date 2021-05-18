@@ -22,7 +22,7 @@ export class StringModel extends SinglePropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-
+        console.log("props", props)
         return <StringShow {...props} />
     }
 }

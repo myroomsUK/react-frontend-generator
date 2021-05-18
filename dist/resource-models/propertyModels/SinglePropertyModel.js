@@ -13,6 +13,7 @@ export class SinglePropertyModel extends PropertyModel {
         return this.setInputField(newProps);
     }
     getOutputField(props) {
+        console.log("props for ", this.id, props);
         const { record } = props;
         const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record[this.id] });
         return this.setOutputField(newProps);

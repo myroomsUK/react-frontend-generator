@@ -376,7 +376,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const columns = useCallback((row) => localTable.map( ({id, label}) => {
         return getRowElement(row, id, label, localModel)
         }).map(({propertyModel, record}) => {
-        return <ShowField propertyModel={propertyModel} propertyRecord={record}/>
+        return propertyModel.getOutputField({record:row})
     }),[localModel, localTable])
 
 

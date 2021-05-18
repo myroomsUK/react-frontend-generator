@@ -39,6 +39,6 @@ export default function Test(){
 function ShowPageCustom(props){
     const {model} = props
     return <div>
-        {model.outputProperty("kitchen", props)}
+        {model.outputProperty("propertyName", props)}
     </div>
 }
