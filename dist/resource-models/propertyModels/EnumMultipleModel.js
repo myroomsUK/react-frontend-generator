@@ -20,12 +20,12 @@ export class EnumMultipleModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        const { propertyRecord, } = props;
+        const { propertyRecord } = props;
         const newProps = { propertyRecord, propertyModel: this };
         const record = Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord);
         return record.map((singleRecord) => {
             const eachProp = Object.assign(Object.assign({}, props), { propertyRecord: singleRecord });
-            return ChipGenerator({ propertyModel: this, propertyRecord, colorMap: this.colorMap });
+            return ChipGenerator({ propertyModel: this, propertyRecord: singleRecord, colorMap: "suca" });
         });
     }
 }

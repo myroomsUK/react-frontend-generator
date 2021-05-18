@@ -3,4 +3,3 @@ export default function ChipGenerator({ propertyRecord, propertyModel, colorMap 
     propertyModel: any;
     colorMap: any;
 }): JSX.Element;
-export function createColorMap(chipStyles: any): void;

@@ -22,23 +22,13 @@ const useStyles = makeStyles({
 });
 
 export default function ChipGenerator({propertyRecord, propertyModel, colorMap}){
-    const trueColorMap = (colorMap) ?? {};
-    console.log("classes", propertyModel.id, trueColorMap)
-    const [local, setLocal] = useState(true)
-
-
     const {options} = propertyModel;
-
     const label = options?.find(option => option.id === propertyRecord)?.label;
     const id = options?.find(option => option.id === propertyRecord)?.id;
+
+    console.log("options", options);
 
     return <Chip
         label={label}
     />
-}
-
-
-export function createColorMap(chipStyles){
-    const reducer = (accumulator, value) =>{return {...accumulator, ...value}};
-    chipStyles.reduce(reducer,{});
 }

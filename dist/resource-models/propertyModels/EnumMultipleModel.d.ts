@@ -1,5 +1,5 @@
-/// <reference types="react" />
 import { SinglePropertyInputFields, SinglePropertyModel } from "./SinglePropertyModel";
+import React from "react";
 interface EnumMultipleInputFields extends SinglePropertyInputFields {
     options: any;
 }
