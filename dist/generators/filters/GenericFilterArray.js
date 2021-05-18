@@ -45,14 +45,12 @@ export const GenericFilterArray = ({ model, modelFilters, inputFieldOnChange, re
                 };
             }
             case "enum_multiple": {
-                return modelFilters[type].map((name, index) => {
-                    const propertyModel = model.getProperty(name);
-                    const { options } = propertyModel;
-                    return {
-                        name: name,
-                        component: _jsx(ReferenceMultipleFilter, { text: name, modelItem: propertyModel, inputFieldOnChange: inputFieldOnChange, options: options, inheritedValue: filterValue[name] }, name)
-                    };
-                });
+                const propertyModel = model.getProperty(name);
+                const { options } = propertyModel;
+                return {
+                    name: name,
+                    component: _jsx(ReferenceMultipleFilter, { text: name, modelItem: propertyModel, inputFieldOnChange: inputFieldOnChange, options: options, inheritedValue: filterValue[name] }, name)
+                };
             }
             default: {
                 return _jsxs(React.Fragment, { children: [_jsxs(ListItem, Object.assign({ button: true }, { children: [_jsx(ListItemIcon, { children: _jsx(InboxIcon, {}, void 0) }, void 0),

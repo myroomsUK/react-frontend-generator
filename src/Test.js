@@ -9,8 +9,10 @@ import {RouteFilterList} from "./generators/pages/ListPageGenerator";
 import {landlords} from "./mock/landlords";
 import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import {propertyShow} from "./mock/propertyShow";
+import {units} from "./mock/units";
 
 export default function Test(){
+
 
     createServer({
         routes() {
@@ -19,6 +21,7 @@ export default function Test(){
             this.get("http://localhost:1000/api/landlords", () => landlords);
             this.post("http://localhost:1000/api/resources/listings", ()=> listings)
             this.get("http://localhost:1000/resources", ()=> model)
+            this.get("http://localhost:1000/api/units", ()=> units)
         },
     })
 
@@ -30,8 +33,8 @@ export default function Test(){
     const render = <div>
 
         <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
-        {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
-        <ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>
+        <RouteFilterList resourceName={"units"} filters={{}}/>
+        {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
     </div>
     return modelLoaded ? render : <div></div>;
 }

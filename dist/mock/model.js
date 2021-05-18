@@ -1277,6 +1277,469 @@ export const model = {
         "title": "Tenant Contracts",
         "resourceName": "tenant_contracts"
     },
+    "enquiries": {
+        "model": {
+            "id": {
+                "type": "id",
+                "nullable": false,
+                "write": false,
+                "read": false,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "id",
+                "label": "id"
+            },
+            "name": {
+                "type": "string",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "name",
+                "label": "name"
+            },
+            "surname": {
+                "type": "string",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "surname",
+                "label": "surname"
+            },
+            "email": {
+                "type": "string",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "email",
+                "label": "email"
+            },
+            "phoneNumber": {
+                "type": "string",
+                "nullable": true,
+                "write": true,
+                "read": true,
+                "id": "phoneNumber",
+                "label": "phoneNumber"
+            },
+            "unitType": {
+                "targetClass": "App\\Entity\\Units\\UnitType",
+                "type": "reference",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": {
+                        "id": {
+                            "type": "id",
+                            "nullable": false,
+                            "write": false,
+                            "read": false,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "id",
+                            "label": "id"
+                        },
+                        "description": {
+                            "type": "string",
+                            "nullable": false,
+                            "write": false,
+                            "read": true,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "description",
+                            "label": "description"
+                        }
+                    },
+                    "title": "Unit Types",
+                    "resourceName": "unit_types"
+                },
+                "resourceName": "unit_types",
+                "optionText": "description",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "unitType",
+                "label": "unitType"
+            },
+            "numberOfTenants": {
+                "type": "integer",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "numberOfTenants",
+                "label": "numberOfTenants"
+            },
+            "startDate": {
+                "type": "date",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "startDate",
+                "label": "startDate"
+            },
+            "endDate": {
+                "type": "date",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "endDate",
+                "label": "endDate"
+            },
+            "tenantType": {
+                "targetClass": "App\\Model\\Enum\\Enquiries\\TenantType",
+                "optionsName": "VALUES",
+                "type": "enum",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "options": [
+                    {
+                        "id": 0,
+                        "label": "Student"
+                    },
+                    {
+                        "id": 1,
+                        "label": "Professional"
+                    }
+                ],
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "tenantType",
+                "label": "tenantType"
+            },
+            "portal": {
+                "targetClass": "App\\Entity\\Marketing\\Portal",
+                "type": "reference",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": [],
+                    "title": "Portal",
+                    "resourceName": "portals"
+                },
+                "resourceName": "portals",
+                "optionText": "name",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "portal",
+                "label": "portal"
+            },
+            "enquiredRoom": {
+                "targetClass": "App\\Entity\\Units\\Unit",
+                "type": "reference",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": {
+                        "images": {
+                            "type": "file_multiple",
+                            "nullable": false,
+                            "write": false,
+                            "read": true,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "images",
+                            "label": "images"
+                        },
+                        "currentPlace": {
+                            "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
+                            "optionsName": "VALUES",
+                            "type": "enum_multiple",
+                            "nullable": false,
+                            "write": false,
+                            "read": true,
+                            "options": [
+                                {
+                                    "id": "enquired",
+                                    "label": "Enquired"
+                                },
+                                {
+                                    "id": "available_to_let",
+                                    "label": "Available to let"
+                                },
+                                {
+                                    "id": "discarded",
+                                    "label": "Discarded"
+                                },
+                                {
+                                    "id": "let",
+                                    "label": "Let"
+                                },
+                                {
+                                    "id": "unavailable_to_let",
+                                    "label": "Unavailable"
+                                },
+                                {
+                                    "id": "under_offer",
+                                    "label": "Under Offer"
+                                },
+                                {
+                                    "id": "managed",
+                                    "label": "Managed"
+                                },
+                                {
+                                    "id": "not_managed",
+                                    "label": "Unmanaged"
+                                },
+                                {
+                                    "id": "vacant",
+                                    "label": "Vacant"
+                                },
+                                {
+                                    "id": "occupied",
+                                    "label": "Occupied"
+                                }
+                            ],
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "currentPlace",
+                            "label": "currentPlace"
+                        },
+                        "requestedTransition": {
+                            "id": "requestedTransition",
+                            "label": "requestedTransition"
+                        },
+                        "eligibleTransitions": {
+                            "id": "eligibleTransitions",
+                            "label": "eligibleTransitions"
+                        }
+                    },
+                    "title": "Units",
+                    "resourceName": "units"
+                },
+                "resourceName": "units",
+                "optionText": "reference",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "enquiredRoom",
+                "label": "enquiredRoom"
+            },
+            "neighborhood": {
+                "targetClass": "App\\Entity\\Localization\\Neighborhood",
+                "type": "reference",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": [],
+                    "title": "Neighborhoods",
+                    "resourceName": "neighborhoods"
+                },
+                "resourceName": "neighborhoods",
+                "optionText": "name",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "neighborhood",
+                "label": "neighborhood"
+            },
+            "specialRequirements": {
+                "type": "string",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "specialRequirements",
+                "label": "specialRequirements"
+            },
+            "status": {
+                "type": "boolean",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "status",
+                "label": "status"
+            },
+            "price": {
+                "type": "integer",
+                "nullable": false,
+                "write": false,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "price",
+                "label": "price"
+            },
+            "reasons": {
+                "targetClass": "App\\Entity\\Enquiry\\RejectReason",
+                "type": "reference",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": {
+                        "id": {
+                            "type": "id",
+                            "nullable": false,
+                            "write": false,
+                            "read": false,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "id",
+                            "label": "id"
+                        },
+                        "reason": {
+                            "type": "string",
+                            "nullable": false,
+                            "write": false,
+                            "read": true,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "reason",
+                            "label": "reason"
+                        }
+                    },
+                    "title": "Reject Reasons",
+                    "resourceName": "reject_reasons"
+                },
+                "resourceName": "reject_reasons",
+                "optionText": "id",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "reasons",
+                "label": "reasons"
+            }
+        },
+        "title": "Enquiries",
+        "resourceName": "enquiries"
+    },
+    "reject_reasons": {
+        "model": {
+            "id": {
+                "type": "id",
+                "nullable": false,
+                "write": false,
+                "read": false,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "id",
+                "label": "id"
+            },
+            "reason": {
+                "type": "string",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "reason",
+                "label": "reason"
+            }
+        },
+        "title": "Reject Reasons",
+        "resourceName": "reject_reasons"
+    },
     "events": {
         "model": {
             "id": {
@@ -1980,7 +2443,7 @@ export const model = {
                                     "currentPlace": {
                                         "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                                         "optionsName": "VALUES",
-                                        "type": "enum",
+                                        "type": "enum_multiple",
                                         "nullable": false,
                                         "write": false,
                                         "read": true,
@@ -1990,8 +2453,8 @@ export const model = {
                                                 "label": "Enquired"
                                             },
                                             {
-                                                "id": "available",
-                                                "label": "Available"
+                                                "id": "available_to_let",
+                                                "label": "Available to let"
                                             },
                                             {
                                                 "id": "discarded",
@@ -2002,7 +2465,7 @@ export const model = {
                                                 "label": "Let"
                                             },
                                             {
-                                                "id": "unavailable",
+                                                "id": "unavailable_to_let",
                                                 "label": "Unavailable"
                                             },
                                             {
@@ -2010,8 +2473,20 @@ export const model = {
                                                 "label": "Under Offer"
                                             },
                                             {
-                                                "id": "unmanaged",
+                                                "id": "managed",
+                                                "label": "Managed"
+                                            },
+                                            {
+                                                "id": "not_managed",
                                                 "label": "Unmanaged"
+                                            },
+                                            {
+                                                "id": "vacant",
+                                                "label": "Vacant"
+                                            },
+                                            {
+                                                "id": "occupied",
+                                                "label": "Occupied"
                                             }
                                         ],
                                         "validators": [
@@ -2024,10 +2499,6 @@ export const model = {
                                         "label": "currentPlace"
                                     },
                                     "requestedTransition": {
-                                        "type": "string",
-                                        "nullable": true,
-                                        "write": true,
-                                        "read": false,
                                         "id": "requestedTransition",
                                         "label": "requestedTransition"
                                     },
@@ -4416,6 +4887,20 @@ export const model = {
                 ],
                 "id": "units",
                 "label": "units"
+            },
+            "isPushIntegration": {
+                "type": "boolean",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "isPushIntegration",
+                "label": "isPushIntegration"
             }
         },
         "title": "Portal",
@@ -4484,7 +4969,7 @@ export const model = {
                         "currentPlace": {
                             "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                             "optionsName": "VALUES",
-                            "type": "enum",
+                            "type": "enum_multiple",
                             "nullable": false,
                             "write": false,
                             "read": true,
@@ -4494,8 +4979,8 @@ export const model = {
                                     "label": "Enquired"
                                 },
                                 {
-                                    "id": "available",
-                                    "label": "Available"
+                                    "id": "available_to_let",
+                                    "label": "Available to let"
                                 },
                                 {
                                     "id": "discarded",
@@ -4506,7 +4991,7 @@ export const model = {
                                     "label": "Let"
                                 },
                                 {
-                                    "id": "unavailable",
+                                    "id": "unavailable_to_let",
                                     "label": "Unavailable"
                                 },
                                 {
@@ -4514,8 +4999,20 @@ export const model = {
                                     "label": "Under Offer"
                                 },
                                 {
-                                    "id": "unmanaged",
+                                    "id": "managed",
+                                    "label": "Managed"
+                                },
+                                {
+                                    "id": "not_managed",
                                     "label": "Unmanaged"
+                                },
+                                {
+                                    "id": "vacant",
+                                    "label": "Vacant"
+                                },
+                                {
+                                    "id": "occupied",
+                                    "label": "Occupied"
                                 }
                             ],
                             "validators": [
@@ -4528,10 +5025,6 @@ export const model = {
                             "label": "currentPlace"
                         },
                         "requestedTransition": {
-                            "type": "string",
-                            "nullable": true,
-                            "write": true,
-                            "read": false,
                             "id": "requestedTransition",
                             "label": "requestedTransition"
                         },
@@ -4567,6 +5060,20 @@ export const model = {
                 ],
                 "id": "unitDiscount",
                 "label": "unitDiscount"
+            },
+            "isActive": {
+                "type": "boolean",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "isActive",
+                "label": "isActive"
             }
         },
         "title": "Portal Unit",
@@ -4802,6 +5309,10 @@ export const model = {
                 ],
                 "id": "notification",
                 "label": "notification"
+            },
+            "isNew": {
+                "id": "isNew",
+                "label": "isNew"
             }
         },
         "title": "User Notifications",
@@ -7604,7 +8115,7 @@ export const model = {
                         "currentPlace": {
                             "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                             "optionsName": "VALUES",
-                            "type": "enum",
+                            "type": "enum_multiple",
                             "nullable": false,
                             "write": false,
                             "read": true,
@@ -7614,8 +8125,8 @@ export const model = {
                                     "label": "Enquired"
                                 },
                                 {
-                                    "id": "available",
-                                    "label": "Available"
+                                    "id": "available_to_let",
+                                    "label": "Available to let"
                                 },
                                 {
                                     "id": "discarded",
@@ -7626,7 +8137,7 @@ export const model = {
                                     "label": "Let"
                                 },
                                 {
-                                    "id": "unavailable",
+                                    "id": "unavailable_to_let",
                                     "label": "Unavailable"
                                 },
                                 {
@@ -7634,8 +8145,20 @@ export const model = {
                                     "label": "Under Offer"
                                 },
                                 {
-                                    "id": "unmanaged",
+                                    "id": "managed",
+                                    "label": "Managed"
+                                },
+                                {
+                                    "id": "not_managed",
                                     "label": "Unmanaged"
+                                },
+                                {
+                                    "id": "vacant",
+                                    "label": "Vacant"
+                                },
+                                {
+                                    "id": "occupied",
+                                    "label": "Occupied"
                                 }
                             ],
                             "validators": [
@@ -7648,10 +8171,6 @@ export const model = {
                             "label": "currentPlace"
                         },
                         "requestedTransition": {
-                            "type": "string",
-                            "nullable": true,
-                            "write": true,
-                            "read": false,
                             "id": "requestedTransition",
                             "label": "requestedTransition"
                         },
@@ -7897,7 +8416,7 @@ export const model = {
                         "currentPlace": {
                             "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                             "optionsName": "VALUES",
-                            "type": "enum",
+                            "type": "enum_multiple",
                             "nullable": false,
                             "write": false,
                             "read": true,
@@ -7907,8 +8426,8 @@ export const model = {
                                     "label": "Enquired"
                                 },
                                 {
-                                    "id": "available",
-                                    "label": "Available"
+                                    "id": "available_to_let",
+                                    "label": "Available to let"
                                 },
                                 {
                                     "id": "discarded",
@@ -7919,7 +8438,7 @@ export const model = {
                                     "label": "Let"
                                 },
                                 {
-                                    "id": "unavailable",
+                                    "id": "unavailable_to_let",
                                     "label": "Unavailable"
                                 },
                                 {
@@ -7927,8 +8446,20 @@ export const model = {
                                     "label": "Under Offer"
                                 },
                                 {
-                                    "id": "unmanaged",
+                                    "id": "managed",
+                                    "label": "Managed"
+                                },
+                                {
+                                    "id": "not_managed",
                                     "label": "Unmanaged"
+                                },
+                                {
+                                    "id": "vacant",
+                                    "label": "Vacant"
+                                },
+                                {
+                                    "id": "occupied",
+                                    "label": "Occupied"
                                 }
                             ],
                             "validators": [
@@ -7941,10 +8472,6 @@ export const model = {
                             "label": "currentPlace"
                         },
                         "requestedTransition": {
-                            "type": "string",
-                            "nullable": true,
-                            "write": true,
-                            "read": false,
                             "id": "requestedTransition",
                             "label": "requestedTransition"
                         },
@@ -8332,7 +8859,7 @@ export const model = {
                         "currentPlace": {
                             "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                             "optionsName": "VALUES",
-                            "type": "enum",
+                            "type": "enum_multiple",
                             "nullable": false,
                             "write": false,
                             "read": true,
@@ -8342,8 +8869,8 @@ export const model = {
                                     "label": "Enquired"
                                 },
                                 {
-                                    "id": "available",
-                                    "label": "Available"
+                                    "id": "available_to_let",
+                                    "label": "Available to let"
                                 },
                                 {
                                     "id": "discarded",
@@ -8354,7 +8881,7 @@ export const model = {
                                     "label": "Let"
                                 },
                                 {
-                                    "id": "unavailable",
+                                    "id": "unavailable_to_let",
                                     "label": "Unavailable"
                                 },
                                 {
@@ -8362,8 +8889,20 @@ export const model = {
                                     "label": "Under Offer"
                                 },
                                 {
-                                    "id": "unmanaged",
+                                    "id": "managed",
+                                    "label": "Managed"
+                                },
+                                {
+                                    "id": "not_managed",
                                     "label": "Unmanaged"
+                                },
+                                {
+                                    "id": "vacant",
+                                    "label": "Vacant"
+                                },
+                                {
+                                    "id": "occupied",
+                                    "label": "Occupied"
                                 }
                             ],
                             "validators": [
@@ -8376,10 +8915,6 @@ export const model = {
                             "label": "currentPlace"
                         },
                         "requestedTransition": {
-                            "type": "string",
-                            "nullable": true,
-                            "write": true,
-                            "read": false,
                             "id": "requestedTransition",
                             "label": "requestedTransition"
                         },
@@ -8420,11 +8955,11 @@ export const model = {
                 "type",
                 "arthurUnit.idWp"
             ],
-            "enum": [
-                "currentPlace"
-            ],
             "boolean": [
                 "councilShow"
+            ],
+            "enum_multiple": [
+                "currentPlace"
             ]
         },
         "model": {
@@ -8867,7 +9402,7 @@ export const model = {
             "currentPlace": {
                 "targetClass": "App\\Model\\Enum\\Places\\UnitPlaces",
                 "optionsName": "VALUES",
-                "type": "enum",
+                "type": "enum_multiple",
                 "nullable": false,
                 "write": false,
                 "read": true,
@@ -8877,8 +9412,8 @@ export const model = {
                         "label": "Enquired"
                     },
                     {
-                        "id": "available",
-                        "label": "Available"
+                        "id": "available_to_let",
+                        "label": "Available to let"
                     },
                     {
                         "id": "discarded",
@@ -8889,7 +9424,7 @@ export const model = {
                         "label": "Let"
                     },
                     {
-                        "id": "unavailable",
+                        "id": "unavailable_to_let",
                         "label": "Unavailable"
                     },
                     {
@@ -8897,8 +9432,20 @@ export const model = {
                         "label": "Under Offer"
                     },
                     {
-                        "id": "unmanaged",
+                        "id": "managed",
+                        "label": "Managed"
+                    },
+                    {
+                        "id": "not_managed",
                         "label": "Unmanaged"
+                    },
+                    {
+                        "id": "vacant",
+                        "label": "Vacant"
+                    },
+                    {
+                        "id": "occupied",
+                        "label": "Occupied"
                     }
                 ],
                 "validators": [
@@ -9046,6 +9593,20 @@ export const model = {
                             ],
                             "id": "unitDiscount",
                             "label": "unitDiscount"
+                        },
+                        "isActive": {
+                            "type": "boolean",
+                            "nullable": false,
+                            "write": true,
+                            "read": true,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "isActive",
+                            "label": "isActive"
                         }
                     },
                     "title": "Portal Unit",
@@ -9062,10 +9623,6 @@ export const model = {
                 "label": "portals"
             },
             "requestedTransition": {
-                "type": "string",
-                "nullable": true,
-                "write": true,
-                "read": false,
                 "id": "requestedTransition",
                 "label": "requestedTransition"
             },
@@ -9227,6 +9784,18 @@ export const model = {
                     {
                         "id": "ROLE_USER",
                         "label": "Standard User"
+                    },
+                    {
+                        "id": "ROLE_GENERAL_MANAGER",
+                        "label": "General Manager"
+                    },
+                    {
+                        "id": "ROLE_FINANCE",
+                        "label": "Finance"
+                    },
+                    {
+                        "id": "ROLE_FINANCE_DIRECTOR",
+                        "label": "Finance Director"
                     }
                 ],
                 "validators": [
@@ -9237,6 +9806,10 @@ export const model = {
                 ],
                 "id": "roles",
                 "label": "roles"
+            },
+            "lastNotificationCheckTime": {
+                "id": "lastNotificationCheckTime",
+                "label": "lastNotificationCheckTime"
             }
         },
         "title": "Users",

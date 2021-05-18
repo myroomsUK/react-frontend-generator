@@ -14,33 +14,36 @@ import { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 export function MyAutocomplete(_a) {
-    var { modelItem, inheritedOptions, inheritedValue, variant = "standard", noLabel = true } = _a, rest = __rest(_a, ["modelItem", "inheritedOptions", "inheritedValue", "variant", "noLabel"]);
-    const { id, label, cardinality } = modelItem;
-    const [options, setOptions] = useState([]);
-    const [value, setValue] = useState(null);
+    var { modelItem, inheritedOptions, inheritedValue, variant = "standard", noLabel = true, multiple = false } = _a, rest = __rest(_a, ["modelItem", "inheritedOptions", "inheritedValue", "variant", "noLabel", "multiple"]);
+    const { id, label } = modelItem;
+    const [value, setValue] = useState((multiple) ? [] : null);
+    const [localOptions, setLocalOptions] = useState([]);
     const [inputValue, setInputValue] = useState("");
     useEffect(() => {
         if (inheritedOptions) {
-            setOptions(inheritedOptions);
+            setLocalOptions(inheritedOptions);
         }
     }, [inheritedOptions]);
     useEffect(() => {
-        if (inheritedValue !== null) {
-            setValue(options[inheritedValue]);
+        const localOptionsLengthCondition = localOptions.length !== 0;
+        if (multiple) {
+            const existingPositions = inheritedValue.filter((position) => position !== -1);
+            setValue(existingPositions.map((truePosition) => localOptions[truePosition]));
         }
         else {
-            setValue(null);
+            if (inheritedValue !== -1 && localOptionsLengthCondition) {
+                setValue(localOptions[inheritedValue]);
+            }
         }
-    }, [inheritedValue, options]);
+    }, [inheritedValue, localOptions]);
     const autocompleteOnChange = (item) => {
-        if (cardinality === 1) {
-            //console.log("value in autocomplete", item);options[0]
-            setValue(item);
-            rest.onChange(id, item.id);
-        }
-        else {
+        if (multiple) {
             setValue(item);
             rest.onChange(id, item.map(singleItem => singleItem.id));
+        }
+        else {
+            setValue(item);
+            rest.onChange(id, item.id);
         }
     };
     const getOptionLabel = (option) => {
@@ -51,7 +54,7 @@ export function MyAutocomplete(_a) {
             return option["label"];
         }
     };
-    return _jsx(Autocomplete, Object.assign({ id: id }, rest, { value: value, inputValue: inputValue, disableClearable: true, options: options, onInputChange: (event, newInputValue) => {
+    return _jsx(Autocomplete, { id: id, value: value, inputValue: inputValue, multiple: multiple, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => {
             setInputValue(newInputValue);
-        }, onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: getOptionLabel, style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { label: noLabel ? null : label, variant: variant }), void 0) }), void 0);
+        }, onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: getOptionLabel, style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { label: noLabel ? null : label, variant: variant }), void 0) }, void 0);
 }

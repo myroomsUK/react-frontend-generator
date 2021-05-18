@@ -16,6 +16,8 @@ export const useRouteFilters: (resourceNameToUse:string, presetFilters:any) => {
 
     const isEmbeddedTable = false;
 
+    useEffect(()=>{setFilterObject({})},[resourceNameToUse])
+
     const getFiltersFromLocation = (location:any) => {
         const searchParams = new URLSearchParams(location.search);
         const routeFilters = {};

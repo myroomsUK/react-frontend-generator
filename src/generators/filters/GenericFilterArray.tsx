@@ -64,7 +64,6 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                 }
                 case "enum_multiple": {
 
-                    return modelFilters[type].map((name: string, index: number) => {
                         const propertyModel = model.getProperty(name);
                         const {options} = propertyModel;
                         return {
@@ -73,7 +72,7 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                                                                  inputFieldOnChange={inputFieldOnChange} options={options}
                                                                  inheritedValue={filterValue[name]}/>
                         }
-                    })
+
                 }
                 default: {
                     return  <React.Fragment key={name}>

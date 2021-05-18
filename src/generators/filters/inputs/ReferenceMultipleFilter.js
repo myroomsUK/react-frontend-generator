@@ -4,9 +4,8 @@ import {MyAutocomplete} from "./MyAutocomplete";
 
 
 export default function ReferenceMultipleFilter({text, options, modelItem, inputFieldOnChange, inheritedValue}){
-    console.log(inheritedValue);
     const valuePositionInOptions = getAutocompleteMultipleValuePosition(inheritedValue ?? [], options);
-
+    console.log(valuePositionInOptions);
     return <React.Fragment key={text}>
         <ListItem>
             <MyAutocomplete multiple size="small" onChange={inputFieldOnChange("reference")} modelItem={modelItem} inheritedOptions={options} inheritedValue={valuePositionInOptions}/>
