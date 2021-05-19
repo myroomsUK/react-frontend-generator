@@ -29,7 +29,6 @@ export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowPr
 
 
     useEffect(()=>{
-        console.log("record", record)
         if(propShowPage){
             // @ts-ignore
             setGenericShowRender(React.cloneElement(propShowPage, showFormProps ));
