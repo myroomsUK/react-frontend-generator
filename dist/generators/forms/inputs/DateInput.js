@@ -19,5 +19,5 @@ export default function ({ model, name = model.id, onClick, value, label = model
             setLocalvalue(value);
         }
     }, [value]);
-    return _jsx(TextValidator, { name: name, label: label, onChange: localChange, value: localValue, style: { width: "100%" }, type: "date" }, void 0);
+    return _jsx(TextValidator, { name: name, label: label, onChange: onClick, value: localValue, style: { width: "100%" }, type: "date" }, void 0);
 }

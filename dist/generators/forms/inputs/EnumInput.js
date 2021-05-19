@@ -13,8 +13,8 @@ import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { TextValidator } from "react-material-ui-form-validator";
-export function EnumInput({ model, options, inheritedValue, onChange }) {
-    const { id, label } = useMemo(() => { return model; }, [model]);
+export function EnumInput({ model, inheritedValue, onChange }) {
+    const { id, label, options } = useMemo(() => { return model; }, [model]);
     const [localOptions, setLocalOptions] = useState([]);
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
@@ -22,10 +22,9 @@ export function EnumInput({ model, options, inheritedValue, onChange }) {
         setLocalOptions(options);
     }, [options]);
     useEffect(() => {
-        const valuePositionInOptions = getAutocompleteValuePosition(inheritedValue, localOptions);
         const localOptionsLengthCondition = localOptions.length !== 0;
-        if (valuePositionInOptions !== -1 && localOptionsLengthCondition) {
-            setValue(localOptions[valuePositionInOptions]);
+        if (inheritedValue !== -1 && localOptionsLengthCondition) {
+            setValue(localOptions[inheritedValue]);
         }
     }, [localOptions]);
     const autocompleteOnChange = (item) => onChange(id, parseInt(item.id));

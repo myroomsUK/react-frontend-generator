@@ -1,6 +1,5 @@
-export function EnumInput({ model, options, inheritedValue, onChange }: {
+export function EnumInput({ model, inheritedValue, onChange }: {
     model: any;
-    options: any;
     inheritedValue: any;
     onChange: any;
 }): JSX.Element;
