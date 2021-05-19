@@ -25,8 +25,10 @@ export abstract class SinglePropertyModel extends PropertyModel{
     getInputField(props: InputFields): React.ReactElement<any, any> | null {
         const {errors, formValue, setFormValue} = props;
         const {hasError, errorMessage} = this.manipulateErrors(errors);
+        const model = this;
+        model.label = _.startCase(this.label)
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:SinglePropertyInputFields = {...props, hasError, errorMessage, inputHandler:inputHandler, value:formValue[this.id], model:this}
+        const newProps:SinglePropertyInputFields = {...props,  hasError, errorMessage, inputHandler:inputHandler, value:formValue[this.id], model:model}
         return this.setInputField(newProps);
     }
 

@@ -11,8 +11,10 @@ export class SinglePropertyModel extends PropertyModel {
     getInputField(props) {
         const { errors, formValue, setFormValue } = props;
         const { hasError, errorMessage } = this.manipulateErrors(errors);
+        const model = this;
+        model.label = _.startCase(this.label);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: formValue[this.id], model: this });
+        const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: formValue[this.id], model: model });
         return this.setInputField(newProps);
     }
     getOutputField(props) {

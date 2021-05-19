@@ -207,6 +207,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const showClearFilters = !!components.length;
     const getRowElement = (row, id, label, localModel) => {
         const split = _.split(id, ".");
+        split.pop();
         const reducer = (start, value) => (start) ? start[value] : undefined;
         const record = split.reduce(reducer, row);
         const propertyModel = localModel.getProperty(id);
@@ -216,7 +217,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const columns = useCallback((row) => localTable.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);
     }).map(({ propertyModel, record }) => {
-        return propertyModel.getOutputField({ record: row, showLabel: false });
+        return propertyModel.getOutputField({ record: record, showLabel: false });
     }), [localModel, localTable]);
     return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }

@@ -366,6 +366,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
 
     const getRowElement = (row, id, label, localModel)=> {
         const split = _.split(id, ".");
+        split.pop();
         const reducer = (start, value) => (start) ? start[value] : undefined;
         const record = split.reduce(reducer, row);
         const propertyModel = localModel.getProperty(id);
@@ -376,7 +377,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const columns = useCallback((row) => localTable.map( ({id, label}) => {
         return getRowElement(row, id, label, localModel)
         }).map(({propertyModel, record}) => {
-        return propertyModel.getOutputField({record:row, showLabel:false})
+        return propertyModel.getOutputField({record:record, showLabel:false})
     }),[localModel, localTable])
 
 

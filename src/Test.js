@@ -35,8 +35,7 @@ export default function Test(){
     const render = <div>
 
         <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
-        <RouteFilterList resourceName={"units"} filters={{}}/>
-        <Create propResourceName={"enquiries"}></Create>
+        <RouteFilterList resourceName={"landlords"} filters={{}}/>
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
     </div>
     return modelLoaded ? render : <div></div>;
