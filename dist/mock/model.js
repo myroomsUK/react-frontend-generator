@@ -8664,7 +8664,118 @@ export const model = {
                 "write": true,
                 "read": true,
                 "resource": {
-                    "model": [],
+                    "model": {
+                        "id": {
+                            "type": "id",
+                            "nullable": false,
+                            "write": false,
+                            "read": false,
+                            "validators": [
+                                "required"
+                            ],
+                            "errorMessages": [
+                                "This field is required"
+                            ],
+                            "id": "id",
+                            "label": "id"
+                        },
+                        "name": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "name",
+                            "label": "name"
+                        },
+                        "surname": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "surname",
+                            "label": "surname"
+                        },
+                        "address1": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "address1",
+                            "label": "address1"
+                        },
+                        "address2": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "address2",
+                            "label": "address2"
+                        },
+                        "postcode": {
+                            "targetClass": "App\\Entity\\Localization\\Postcode",
+                            "type": "reference",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "resource": {
+                                "model": [],
+                                "title": "Postcodes",
+                                "resourceName": "postcodes"
+                            },
+                            "resourceName": "postcodes",
+                            "optionText": "postcode",
+                            "id": "postcode",
+                            "label": "postcode"
+                        },
+                        "postcode2": {
+                            "targetClass": "App\\Entity\\Localization\\Postcode",
+                            "type": "reference",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "resource": {
+                                "model": [],
+                                "title": "Postcodes",
+                                "resourceName": "postcodes"
+                            },
+                            "resourceName": "postcodes",
+                            "optionText": "postcode",
+                            "id": "postcode2",
+                            "label": "postcode2"
+                        },
+                        "email": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "email",
+                            "label": "email"
+                        },
+                        "telephone": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "telephone",
+                            "label": "telephone"
+                        },
+                        "mobile": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "mobile",
+                            "label": "mobile"
+                        },
+                        "nino": {
+                            "type": "string",
+                            "nullable": true,
+                            "write": true,
+                            "read": true,
+                            "id": "nino",
+                            "label": "nino"
+                        }
+                    },
                     "title": "Personal Data",
                     "resourceName": "personal_datas"
                 },
@@ -8677,6 +8788,30 @@ export const model = {
                 ],
                 "id": "personalData",
                 "label": "personalData"
+            },
+            "passport": {
+                "type": "file_single",
+                "nullable": true,
+                "write": false,
+                "read": true,
+                "id": "passport",
+                "label": "passport"
+            },
+            "visa": {
+                "type": "file_single",
+                "nullable": true,
+                "write": false,
+                "read": true,
+                "id": "visa",
+                "label": "visa"
+            },
+            "rightToRent": {
+                "type": "file_single",
+                "nullable": true,
+                "write": false,
+                "read": true,
+                "id": "rightToRent",
+                "label": "rightToRent"
             }
         },
         "title": "Tenants",
@@ -8705,7 +8840,32 @@ export const model = {
                 "write": true,
                 "read": true,
                 "resource": {
-                    "model": [],
+                    "model": {
+                        "passport": {
+                            "type": "file_single",
+                            "nullable": true,
+                            "write": false,
+                            "read": true,
+                            "id": "passport",
+                            "label": "passport"
+                        },
+                        "visa": {
+                            "type": "file_single",
+                            "nullable": true,
+                            "write": false,
+                            "read": true,
+                            "id": "visa",
+                            "label": "visa"
+                        },
+                        "rightToRent": {
+                            "type": "file_single",
+                            "nullable": true,
+                            "write": false,
+                            "read": true,
+                            "id": "rightToRent",
+                            "label": "rightToRent"
+                        }
+                    },
                     "title": "Tenants",
                     "resourceName": "tenants"
                 },
@@ -8714,55 +8874,77 @@ export const model = {
                 "id": "tenant",
                 "label": "tenant"
             },
-            "firstLandlordTenancy": {
-                "targetClass": "App\\Entity\\TenantTenancies\\FirstTenantTenancy",
-                "type": "embedded_single",
-                "nullable": true,
-                "write": true,
-                "read": true,
-                "resource": {
-                    "model": [],
-                    "title": "First Tenant Tenancies",
-                    "resourceName": "first_tenant_tenancies"
-                },
-                "resourceName": "first_tenant_tenancies",
-                "id": "firstLandlordTenancy",
-                "label": "firstLandlordTenancy"
-            },
-            "renewals": {
-                "targetClass": "App\\Entity\\TenantTenancies\\RenewalTenantTenancy",
+            "fullAgreementTenancies": {
+                "targetClass": "App\\Entity\\TenantTenancies\\FullAgreementTenancy",
                 "type": "embedded_multiple",
                 "nullable": false,
                 "write": true,
                 "read": true,
                 "resource": {
                     "model": [],
-                    "title": "Renewal Tenant Tenancies",
-                    "resourceName": "renewal_tenant_tenancies"
+                    "title": "First Tenant Tenancies",
+                    "resourceName": "full_agreement_tenancies"
                 },
-                "resourceName": "renewal_tenant_tenancies",
+                "resourceName": "full_agreement_tenancies",
                 "validators": [
                     "required"
                 ],
                 "errorMessages": [
                     "This field is required"
                 ],
-                "id": "renewals",
-                "label": "renewals"
+                "id": "fullAgreementTenancies",
+                "label": "fullAgreementTenancies"
+            },
+            "memorandumTenancies": {
+                "targetClass": "App\\Entity\\TenantTenancies\\MemorandumTenancy",
+                "type": "embedded_multiple",
+                "nullable": false,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": [],
+                    "title": "Memorandum Tenant Tenancies",
+                    "resourceName": "memorandum_tenancies"
+                },
+                "resourceName": "memorandum_tenancies",
+                "validators": [
+                    "required"
+                ],
+                "errorMessages": [
+                    "This field is required"
+                ],
+                "id": "memorandumTenancies",
+                "label": "memorandumTenancies"
+            },
+            "enquiry": {
+                "targetClass": "App\\Entity\\Enquiry\\Enquiry",
+                "type": "reference",
+                "nullable": true,
+                "write": true,
+                "read": true,
+                "resource": {
+                    "model": [],
+                    "title": "Enquiries",
+                    "resourceName": "enquiries"
+                },
+                "resourceName": "enquiries",
+                "optionText": "id",
+                "id": "enquiry",
+                "label": "enquiry"
             }
         },
         "title": "Tenant Relationships",
         "resourceName": "tenant_relationships"
     },
-    "first_tenant_tenancies": {
+    "full_agreement_tenancies": {
         "model": [],
         "title": "First Tenant Tenancies",
-        "resourceName": "first_tenant_tenancies"
+        "resourceName": "full_agreement_tenancies"
     },
-    "renewal_tenant_tenancies": {
+    "memorandum_tenancies": {
         "model": [],
-        "title": "Renewal Tenant Tenancies",
-        "resourceName": "renewal_tenant_tenancies"
+        "title": "Memorandum Tenant Tenancies",
+        "resourceName": "memorandum_tenancies"
     },
     "tenant_tenancies": {
         "model": {

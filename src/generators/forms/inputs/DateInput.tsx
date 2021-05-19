@@ -20,6 +20,7 @@ export default function ({model,name = model.id, onClick, value, label = model.l
     const [localValue, setLocalvalue] = useState(getDateInputFormat());
 
     const localChange = (event:any) => {
+
         const target = event.target;
         let value = target.value;
         const name = target.id;
@@ -42,7 +43,7 @@ export default function ({model,name = model.id, onClick, value, label = model.l
     return <TextValidator
         name={name}
         label={label}
-        onChange={localChange}
+        onChange={onClick}
         value={localValue}
         style={{width: "100%"}}
         type="date"

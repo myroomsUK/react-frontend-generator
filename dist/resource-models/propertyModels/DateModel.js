@@ -8,8 +8,10 @@ export class DateModel extends SinglePropertyModel {
         return DateInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
-        return (vars) => {
-            const [name, value] = vars;
+        return (event) => {
+            const target = event.target;
+            let value = target.value;
+            const name = target.name;
             setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
         };
     }

@@ -11613,124 +11613,355 @@ export namespace model {
                 const read_542: boolean;
                 export { read_542 as read };
                 export namespace resource_81 {
-                    const model_125: never[];
+                    export namespace model_125 {
+                        export namespace id_665 {
+                            const type_552: string;
+                            export { type_552 as type };
+                            const nullable_543: boolean;
+                            export { nullable_543 as nullable };
+                            const write_543: boolean;
+                            export { write_543 as write };
+                            const read_543: boolean;
+                            export { read_543 as read };
+                            const validators_334: string[];
+                            export { validators_334 as validators };
+                            const errorMessages_334: string[];
+                            export { errorMessages_334 as errorMessages };
+                            const id_666: string;
+                            export { id_666 as id };
+                            const label_586: string;
+                            export { label_586 as label };
+                        }
+                        export { id_665 as id };
+                        export namespace name_24 {
+                            const type_553: string;
+                            export { type_553 as type };
+                            const nullable_544: boolean;
+                            export { nullable_544 as nullable };
+                            const write_544: boolean;
+                            export { write_544 as write };
+                            const read_544: boolean;
+                            export { read_544 as read };
+                            const id_667: string;
+                            export { id_667 as id };
+                            const label_587: string;
+                            export { label_587 as label };
+                        }
+                        export { name_24 as name };
+                        export namespace surname_6 {
+                            const type_554: string;
+                            export { type_554 as type };
+                            const nullable_545: boolean;
+                            export { nullable_545 as nullable };
+                            const write_545: boolean;
+                            export { write_545 as write };
+                            const read_545: boolean;
+                            export { read_545 as read };
+                            const id_668: string;
+                            export { id_668 as id };
+                            const label_588: string;
+                            export { label_588 as label };
+                        }
+                        export { surname_6 as surname };
+                        export namespace address1_5 {
+                            const type_555: string;
+                            export { type_555 as type };
+                            const nullable_546: boolean;
+                            export { nullable_546 as nullable };
+                            const write_546: boolean;
+                            export { write_546 as write };
+                            const read_546: boolean;
+                            export { read_546 as read };
+                            const id_669: string;
+                            export { id_669 as id };
+                            const label_589: string;
+                            export { label_589 as label };
+                        }
+                        export { address1_5 as address1 };
+                        export namespace address2_4 {
+                            const type_556: string;
+                            export { type_556 as type };
+                            const nullable_547: boolean;
+                            export { nullable_547 as nullable };
+                            const write_547: boolean;
+                            export { write_547 as write };
+                            const read_547: boolean;
+                            export { read_547 as read };
+                            const id_670: string;
+                            export { id_670 as id };
+                            const label_590: string;
+                            export { label_590 as label };
+                        }
+                        export { address2_4 as address2 };
+                        export namespace postcode_17 {
+                            const targetClass_127: string;
+                            export { targetClass_127 as targetClass };
+                            const type_557: string;
+                            export { type_557 as type };
+                            const nullable_548: boolean;
+                            export { nullable_548 as nullable };
+                            const write_548: boolean;
+                            export { write_548 as write };
+                            const read_548: boolean;
+                            export { read_548 as read };
+                            export namespace resource_82 {
+                                const model_126: never[];
+                                export { model_126 as model };
+                                const title_124: string;
+                                export { title_124 as title };
+                                const resourceName_205: string;
+                                export { resourceName_205 as resourceName };
+                            }
+                            export { resource_82 as resource };
+                            const resourceName_206: string;
+                            export { resourceName_206 as resourceName };
+                            const optionText_55: string;
+                            export { optionText_55 as optionText };
+                            const id_671: string;
+                            export { id_671 as id };
+                            const label_591: string;
+                            export { label_591 as label };
+                        }
+                        export { postcode_17 as postcode };
+                        export namespace postcode2_5 {
+                            const targetClass_128: string;
+                            export { targetClass_128 as targetClass };
+                            const type_558: string;
+                            export { type_558 as type };
+                            const nullable_549: boolean;
+                            export { nullable_549 as nullable };
+                            const write_549: boolean;
+                            export { write_549 as write };
+                            const read_549: boolean;
+                            export { read_549 as read };
+                            export namespace resource_83 {
+                                const model_127: never[];
+                                export { model_127 as model };
+                                const title_125: string;
+                                export { title_125 as title };
+                                const resourceName_207: string;
+                                export { resourceName_207 as resourceName };
+                            }
+                            export { resource_83 as resource };
+                            const resourceName_208: string;
+                            export { resourceName_208 as resourceName };
+                            const optionText_56: string;
+                            export { optionText_56 as optionText };
+                            const id_672: string;
+                            export { id_672 as id };
+                            const label_592: string;
+                            export { label_592 as label };
+                        }
+                        export { postcode2_5 as postcode2 };
+                        export namespace email_6 {
+                            const type_559: string;
+                            export { type_559 as type };
+                            const nullable_550: boolean;
+                            export { nullable_550 as nullable };
+                            const write_550: boolean;
+                            export { write_550 as write };
+                            const read_550: boolean;
+                            export { read_550 as read };
+                            const id_673: string;
+                            export { id_673 as id };
+                            const label_593: string;
+                            export { label_593 as label };
+                        }
+                        export { email_6 as email };
+                        export namespace telephone_5 {
+                            const type_560: string;
+                            export { type_560 as type };
+                            const nullable_551: boolean;
+                            export { nullable_551 as nullable };
+                            const write_551: boolean;
+                            export { write_551 as write };
+                            const read_551: boolean;
+                            export { read_551 as read };
+                            const id_674: string;
+                            export { id_674 as id };
+                            const label_594: string;
+                            export { label_594 as label };
+                        }
+                        export { telephone_5 as telephone };
+                        export namespace mobile_5 {
+                            const type_561: string;
+                            export { type_561 as type };
+                            const nullable_552: boolean;
+                            export { nullable_552 as nullable };
+                            const write_552: boolean;
+                            export { write_552 as write };
+                            const read_552: boolean;
+                            export { read_552 as read };
+                            const id_675: string;
+                            export { id_675 as id };
+                            const label_595: string;
+                            export { label_595 as label };
+                        }
+                        export { mobile_5 as mobile };
+                        export namespace nino_5 {
+                            const type_562: string;
+                            export { type_562 as type };
+                            const nullable_553: boolean;
+                            export { nullable_553 as nullable };
+                            const write_553: boolean;
+                            export { write_553 as write };
+                            const read_553: boolean;
+                            export { read_553 as read };
+                            const id_676: string;
+                            export { id_676 as id };
+                            const label_596: string;
+                            export { label_596 as label };
+                        }
+                        export { nino_5 as nino };
+                    }
                     export { model_125 as model };
-                    const title_124: string;
-                    export { title_124 as title };
-                    const resourceName_205: string;
-                    export { resourceName_205 as resourceName };
+                    const title_126: string;
+                    export { title_126 as title };
+                    const resourceName_209: string;
+                    export { resourceName_209 as resourceName };
                 }
                 export { resource_81 as resource };
-                const resourceName_206: string;
-                export { resourceName_206 as resourceName };
-                const validators_334: string[];
-                export { validators_334 as validators };
-                const errorMessages_334: string[];
-                export { errorMessages_334 as errorMessages };
-                const id_665: string;
-                export { id_665 as id };
-                const label_586: string;
-                export { label_586 as label };
-            }
-            export { personalData_2 as personalData };
-        }
-        export { model_124 as model };
-        const title_125: string;
-        export { title_125 as title };
-        const resourceName_207: string;
-        export { resourceName_207 as resourceName };
-    }
-    export namespace tenant_relationships {
-        export namespace model_126 {
-            export namespace id_666 {
-                const type_552: string;
-                export { type_552 as type };
-                const nullable_543: boolean;
-                export { nullable_543 as nullable };
-                const write_543: boolean;
-                export { write_543 as write };
-                const read_543: boolean;
-                export { read_543 as read };
+                const resourceName_210: string;
+                export { resourceName_210 as resourceName };
                 const validators_335: string[];
                 export { validators_335 as validators };
                 const errorMessages_335: string[];
                 export { errorMessages_335 as errorMessages };
-                const id_667: string;
-                export { id_667 as id };
-                const label_587: string;
-                export { label_587 as label };
+                const id_677: string;
+                export { id_677 as id };
+                const label_597: string;
+                export { label_597 as label };
             }
-            export { id_666 as id };
+            export { personalData_2 as personalData };
+            export namespace passport {
+                const type_563: string;
+                export { type_563 as type };
+                const nullable_554: boolean;
+                export { nullable_554 as nullable };
+                const write_554: boolean;
+                export { write_554 as write };
+                const read_554: boolean;
+                export { read_554 as read };
+                const id_678: string;
+                export { id_678 as id };
+                const label_598: string;
+                export { label_598 as label };
+            }
+            export namespace visa {
+                const type_564: string;
+                export { type_564 as type };
+                const nullable_555: boolean;
+                export { nullable_555 as nullable };
+                const write_555: boolean;
+                export { write_555 as write };
+                const read_555: boolean;
+                export { read_555 as read };
+                const id_679: string;
+                export { id_679 as id };
+                const label_599: string;
+                export { label_599 as label };
+            }
+            export namespace rightToRent {
+                const type_565: string;
+                export { type_565 as type };
+                const nullable_556: boolean;
+                export { nullable_556 as nullable };
+                const write_556: boolean;
+                export { write_556 as write };
+                const read_556: boolean;
+                export { read_556 as read };
+                const id_680: string;
+                export { id_680 as id };
+                const label_600: string;
+                export { label_600 as label };
+            }
+        }
+        export { model_124 as model };
+        const title_127: string;
+        export { title_127 as title };
+        const resourceName_211: string;
+        export { resourceName_211 as resourceName };
+    }
+    export namespace tenant_relationships {
+        export namespace model_128 {
+            export namespace id_681 {
+                const type_566: string;
+                export { type_566 as type };
+                const nullable_557: boolean;
+                export { nullable_557 as nullable };
+                const write_557: boolean;
+                export { write_557 as write };
+                const read_557: boolean;
+                export { read_557 as read };
+                const validators_336: string[];
+                export { validators_336 as validators };
+                const errorMessages_336: string[];
+                export { errorMessages_336 as errorMessages };
+                const id_682: string;
+                export { id_682 as id };
+                const label_601: string;
+                export { label_601 as label };
+            }
+            export { id_681 as id };
             export namespace tenant {
-                const targetClass_127: string;
-                export { targetClass_127 as targetClass };
-                const type_553: string;
-                export { type_553 as type };
-                const nullable_544: boolean;
-                export { nullable_544 as nullable };
-                const write_544: boolean;
-                export { write_544 as write };
-                const read_544: boolean;
-                export { read_544 as read };
-                export namespace resource_82 {
-                    const model_127: never[];
-                    export { model_127 as model };
-                    const title_126: string;
-                    export { title_126 as title };
-                    const resourceName_208: string;
-                    export { resourceName_208 as resourceName };
-                }
-                export { resource_82 as resource };
-                const resourceName_209: string;
-                export { resourceName_209 as resourceName };
-                const optionText_55: string;
-                export { optionText_55 as optionText };
-                const id_668: string;
-                export { id_668 as id };
-                const label_588: string;
-                export { label_588 as label };
-            }
-            export namespace firstLandlordTenancy_1 {
-                const targetClass_128: string;
-                export { targetClass_128 as targetClass };
-                const type_554: string;
-                export { type_554 as type };
-                const nullable_545: boolean;
-                export { nullable_545 as nullable };
-                const write_545: boolean;
-                export { write_545 as write };
-                const read_545: boolean;
-                export { read_545 as read };
-                export namespace resource_83 {
-                    const model_128: never[];
-                    export { model_128 as model };
-                    const title_127: string;
-                    export { title_127 as title };
-                    const resourceName_210: string;
-                    export { resourceName_210 as resourceName };
-                }
-                export { resource_83 as resource };
-                const resourceName_211: string;
-                export { resourceName_211 as resourceName };
-                const id_669: string;
-                export { id_669 as id };
-                const label_589: string;
-                export { label_589 as label };
-            }
-            export { firstLandlordTenancy_1 as firstLandlordTenancy };
-            export namespace renewals_1 {
                 const targetClass_129: string;
                 export { targetClass_129 as targetClass };
-                const type_555: string;
-                export { type_555 as type };
-                const nullable_546: boolean;
-                export { nullable_546 as nullable };
-                const write_546: boolean;
-                export { write_546 as write };
-                const read_546: boolean;
-                export { read_546 as read };
+                const type_567: string;
+                export { type_567 as type };
+                const nullable_558: boolean;
+                export { nullable_558 as nullable };
+                const write_558: boolean;
+                export { write_558 as write };
+                const read_558: boolean;
+                export { read_558 as read };
                 export namespace resource_84 {
-                    const model_129: never[];
+                    export namespace model_129 {
+                        export namespace passport_1 {
+                            const type_568: string;
+                            export { type_568 as type };
+                            const nullable_559: boolean;
+                            export { nullable_559 as nullable };
+                            const write_559: boolean;
+                            export { write_559 as write };
+                            const read_559: boolean;
+                            export { read_559 as read };
+                            const id_683: string;
+                            export { id_683 as id };
+                            const label_602: string;
+                            export { label_602 as label };
+                        }
+                        export { passport_1 as passport };
+                        export namespace visa_1 {
+                            const type_569: string;
+                            export { type_569 as type };
+                            const nullable_560: boolean;
+                            export { nullable_560 as nullable };
+                            const write_560: boolean;
+                            export { write_560 as write };
+                            const read_560: boolean;
+                            export { read_560 as read };
+                            const id_684: string;
+                            export { id_684 as id };
+                            const label_603: string;
+                            export { label_603 as label };
+                        }
+                        export { visa_1 as visa };
+                        export namespace rightToRent_1 {
+                            const type_570: string;
+                            export { type_570 as type };
+                            const nullable_561: boolean;
+                            export { nullable_561 as nullable };
+                            const write_561: boolean;
+                            export { write_561 as write };
+                            const read_561: boolean;
+                            export { read_561 as read };
+                            const id_685: string;
+                            export { id_685 as id };
+                            const label_604: string;
+                            export { label_604 as label };
+                        }
+                        export { rightToRent_1 as rightToRent };
+                    }
                     export { model_129 as model };
                     const title_128: string;
                     export { title_128 as title };
@@ -11740,274 +11971,362 @@ export namespace model {
                 export { resource_84 as resource };
                 const resourceName_213: string;
                 export { resourceName_213 as resourceName };
-                const validators_336: string[];
-                export { validators_336 as validators };
-                const errorMessages_336: string[];
-                export { errorMessages_336 as errorMessages };
-                const id_670: string;
-                export { id_670 as id };
-                const label_590: string;
-                export { label_590 as label };
+                const optionText_57: string;
+                export { optionText_57 as optionText };
+                const id_686: string;
+                export { id_686 as id };
+                const label_605: string;
+                export { label_605 as label };
             }
-            export { renewals_1 as renewals };
-        }
-        export { model_126 as model };
-        const title_129: string;
-        export { title_129 as title };
-        const resourceName_214: string;
-        export { resourceName_214 as resourceName };
-    }
-    export namespace first_tenant_tenancies {
-        const model_130: never[];
-        export { model_130 as model };
-        const title_130: string;
-        export { title_130 as title };
-        const resourceName_215: string;
-        export { resourceName_215 as resourceName };
-    }
-    export namespace renewal_tenant_tenancies {
-        const model_131: never[];
-        export { model_131 as model };
-        const title_131: string;
-        export { title_131 as title };
-        const resourceName_216: string;
-        export { resourceName_216 as resourceName };
-    }
-    export namespace tenant_tenancies {
-        export namespace model_132 {
-            export namespace id_671 {
-                const type_556: string;
-                export { type_556 as type };
-                const nullable_547: boolean;
-                export { nullable_547 as nullable };
-                const write_547: boolean;
-                export { write_547 as write };
-                const read_547: boolean;
-                export { read_547 as read };
+            export namespace fullAgreementTenancies {
+                const targetClass_130: string;
+                export { targetClass_130 as targetClass };
+                const type_571: string;
+                export { type_571 as type };
+                const nullable_562: boolean;
+                export { nullable_562 as nullable };
+                const write_562: boolean;
+                export { write_562 as write };
+                const read_562: boolean;
+                export { read_562 as read };
+                export namespace resource_85 {
+                    const model_130: never[];
+                    export { model_130 as model };
+                    const title_129: string;
+                    export { title_129 as title };
+                    const resourceName_214: string;
+                    export { resourceName_214 as resourceName };
+                }
+                export { resource_85 as resource };
+                const resourceName_215: string;
+                export { resourceName_215 as resourceName };
                 const validators_337: string[];
                 export { validators_337 as validators };
                 const errorMessages_337: string[];
                 export { errorMessages_337 as errorMessages };
-                const id_672: string;
-                export { id_672 as id };
-                const label_591: string;
-                export { label_591 as label };
+                const id_687: string;
+                export { id_687 as id };
+                const label_606: string;
+                export { label_606 as label };
             }
-            export { id_671 as id };
+            export namespace memorandumTenancies {
+                const targetClass_131: string;
+                export { targetClass_131 as targetClass };
+                const type_572: string;
+                export { type_572 as type };
+                const nullable_563: boolean;
+                export { nullable_563 as nullable };
+                const write_563: boolean;
+                export { write_563 as write };
+                const read_563: boolean;
+                export { read_563 as read };
+                export namespace resource_86 {
+                    const model_131: never[];
+                    export { model_131 as model };
+                    const title_130: string;
+                    export { title_130 as title };
+                    const resourceName_216: string;
+                    export { resourceName_216 as resourceName };
+                }
+                export { resource_86 as resource };
+                const resourceName_217: string;
+                export { resourceName_217 as resourceName };
+                const validators_338: string[];
+                export { validators_338 as validators };
+                const errorMessages_338: string[];
+                export { errorMessages_338 as errorMessages };
+                const id_688: string;
+                export { id_688 as id };
+                const label_607: string;
+                export { label_607 as label };
+            }
+            export namespace enquiry {
+                const targetClass_132: string;
+                export { targetClass_132 as targetClass };
+                const type_573: string;
+                export { type_573 as type };
+                const nullable_564: boolean;
+                export { nullable_564 as nullable };
+                const write_564: boolean;
+                export { write_564 as write };
+                const read_564: boolean;
+                export { read_564 as read };
+                export namespace resource_87 {
+                    const model_132: never[];
+                    export { model_132 as model };
+                    const title_131: string;
+                    export { title_131 as title };
+                    const resourceName_218: string;
+                    export { resourceName_218 as resourceName };
+                }
+                export { resource_87 as resource };
+                const resourceName_219: string;
+                export { resourceName_219 as resourceName };
+                const optionText_58: string;
+                export { optionText_58 as optionText };
+                const id_689: string;
+                export { id_689 as id };
+                const label_608: string;
+                export { label_608 as label };
+            }
+        }
+        export { model_128 as model };
+        const title_132: string;
+        export { title_132 as title };
+        const resourceName_220: string;
+        export { resourceName_220 as resourceName };
+    }
+    export namespace full_agreement_tenancies {
+        const model_133: never[];
+        export { model_133 as model };
+        const title_133: string;
+        export { title_133 as title };
+        const resourceName_221: string;
+        export { resourceName_221 as resourceName };
+    }
+    export namespace memorandum_tenancies {
+        const model_134: never[];
+        export { model_134 as model };
+        const title_134: string;
+        export { title_134 as title };
+        const resourceName_222: string;
+        export { resourceName_222 as resourceName };
+    }
+    export namespace tenant_tenancies {
+        export namespace model_135 {
+            export namespace id_690 {
+                const type_574: string;
+                export { type_574 as type };
+                const nullable_565: boolean;
+                export { nullable_565 as nullable };
+                const write_565: boolean;
+                export { write_565 as write };
+                const read_565: boolean;
+                export { read_565 as read };
+                const validators_339: string[];
+                export { validators_339 as validators };
+                const errorMessages_339: string[];
+                export { errorMessages_339 as errorMessages };
+                const id_691: string;
+                export { id_691 as id };
+                const label_609: string;
+                export { label_609 as label };
+            }
+            export { id_690 as id };
             export namespace tenantContract_1 {
-                const targetClass_130: string;
-                export { targetClass_130 as targetClass };
-                const type_557: string;
-                export { type_557 as type };
-                const nullable_548: boolean;
-                export { nullable_548 as nullable };
-                const write_548: boolean;
-                export { write_548 as write };
-                const read_548: boolean;
-                export { read_548 as read };
-                export namespace resource_85 {
-                    export namespace model_133 {
+                const targetClass_133: string;
+                export { targetClass_133 as targetClass };
+                const type_575: string;
+                export { type_575 as type };
+                const nullable_566: boolean;
+                export { nullable_566 as nullable };
+                const write_566: boolean;
+                export { write_566 as write };
+                const read_566: boolean;
+                export { read_566 as read };
+                export namespace resource_88 {
+                    export namespace model_136 {
                         export namespace witnessSignedFile_5 {
-                            const type_558: string;
-                            export { type_558 as type };
-                            const nullable_549: boolean;
-                            export { nullable_549 as nullable };
-                            const write_549: boolean;
-                            export { write_549 as write };
-                            const read_549: boolean;
-                            export { read_549 as read };
-                            const validators_338: string[];
-                            export { validators_338 as validators };
-                            const errorMessages_338: string[];
-                            export { errorMessages_338 as errorMessages };
-                            const id_673: string;
-                            export { id_673 as id };
-                            const label_592: string;
-                            export { label_592 as label };
+                            const type_576: string;
+                            export { type_576 as type };
+                            const nullable_567: boolean;
+                            export { nullable_567 as nullable };
+                            const write_567: boolean;
+                            export { write_567 as write };
+                            const read_567: boolean;
+                            export { read_567 as read };
+                            const validators_340: string[];
+                            export { validators_340 as validators };
+                            const errorMessages_340: string[];
+                            export { errorMessages_340 as errorMessages };
+                            const id_692: string;
+                            export { id_692 as id };
+                            const label_610: string;
+                            export { label_610 as label };
                         }
                         export { witnessSignedFile_5 as witnessSignedFile };
                         export namespace unsignedFile_11 {
-                            const type_559: string;
-                            export { type_559 as type };
-                            const nullable_550: boolean;
-                            export { nullable_550 as nullable };
-                            const write_550: boolean;
-                            export { write_550 as write };
-                            const read_550: boolean;
-                            export { read_550 as read };
-                            const id_674: string;
-                            export { id_674 as id };
-                            const label_593: string;
-                            export { label_593 as label };
+                            const type_577: string;
+                            export { type_577 as type };
+                            const nullable_568: boolean;
+                            export { nullable_568 as nullable };
+                            const write_568: boolean;
+                            export { write_568 as write };
+                            const read_568: boolean;
+                            export { read_568 as read };
+                            const id_693: string;
+                            export { id_693 as id };
+                            const label_611: string;
+                            export { label_611 as label };
                         }
                         export { unsignedFile_11 as unsignedFile };
                         export namespace issuerSignedFile_11 {
-                            const type_560: string;
-                            export { type_560 as type };
-                            const nullable_551: boolean;
-                            export { nullable_551 as nullable };
-                            const write_551: boolean;
-                            export { write_551 as write };
-                            const read_551: boolean;
-                            export { read_551 as read };
-                            const id_675: string;
-                            export { id_675 as id };
-                            const label_594: string;
-                            export { label_594 as label };
+                            const type_578: string;
+                            export { type_578 as type };
+                            const nullable_569: boolean;
+                            export { nullable_569 as nullable };
+                            const write_569: boolean;
+                            export { write_569 as write };
+                            const read_569: boolean;
+                            export { read_569 as read };
+                            const id_694: string;
+                            export { id_694 as id };
+                            const label_612: string;
+                            export { label_612 as label };
                         }
                         export { issuerSignedFile_11 as issuerSignedFile };
                         export namespace beneficiarySignedFile_11 {
-                            const type_561: string;
-                            export { type_561 as type };
-                            const nullable_552: boolean;
-                            export { nullable_552 as nullable };
-                            const write_552: boolean;
-                            export { write_552 as write };
-                            const read_552: boolean;
-                            export { read_552 as read };
-                            const id_676: string;
-                            export { id_676 as id };
-                            const label_595: string;
-                            export { label_595 as label };
+                            const type_579: string;
+                            export { type_579 as type };
+                            const nullable_570: boolean;
+                            export { nullable_570 as nullable };
+                            const write_570: boolean;
+                            export { write_570 as write };
+                            const read_570: boolean;
+                            export { read_570 as read };
+                            const id_695: string;
+                            export { id_695 as id };
+                            const label_613: string;
+                            export { label_613 as label };
                         }
                         export { beneficiarySignedFile_11 as beneficiarySignedFile };
                     }
-                    export { model_133 as model };
-                    const title_132: string;
-                    export { title_132 as title };
-                    const resourceName_217: string;
-                    export { resourceName_217 as resourceName };
+                    export { model_136 as model };
+                    const title_135: string;
+                    export { title_135 as title };
+                    const resourceName_223: string;
+                    export { resourceName_223 as resourceName };
                 }
-                export { resource_85 as resource };
-                const resourceName_218: string;
-                export { resourceName_218 as resourceName };
-                const id_677: string;
-                export { id_677 as id };
-                const label_596: string;
-                export { label_596 as label };
+                export { resource_88 as resource };
+                const resourceName_224: string;
+                export { resourceName_224 as resourceName };
+                const id_696: string;
+                export { id_696 as id };
+                const label_614: string;
+                export { label_614 as label };
             }
             export { tenantContract_1 as tenantContract };
             export namespace unit_1 {
-                const targetClass_131: string;
-                export { targetClass_131 as targetClass };
-                const type_562: string;
-                export { type_562 as type };
-                const nullable_553: boolean;
-                export { nullable_553 as nullable };
-                const write_553: boolean;
-                export { write_553 as write };
-                const read_553: boolean;
-                export { read_553 as read };
-                export namespace resource_86 {
-                    export namespace model_134 {
+                const targetClass_134: string;
+                export { targetClass_134 as targetClass };
+                const type_580: string;
+                export { type_580 as type };
+                const nullable_571: boolean;
+                export { nullable_571 as nullable };
+                const write_571: boolean;
+                export { write_571 as write };
+                const read_571: boolean;
+                export { read_571 as read };
+                export namespace resource_89 {
+                    export namespace model_137 {
                         export namespace images_8 {
-                            const type_563: string;
-                            export { type_563 as type };
-                            const nullable_554: boolean;
-                            export { nullable_554 as nullable };
-                            const write_554: boolean;
-                            export { write_554 as write };
-                            const read_554: boolean;
-                            export { read_554 as read };
-                            const validators_339: string[];
-                            export { validators_339 as validators };
-                            const errorMessages_339: string[];
-                            export { errorMessages_339 as errorMessages };
-                            const id_678: string;
-                            export { id_678 as id };
-                            const label_597: string;
-                            export { label_597 as label };
+                            const type_581: string;
+                            export { type_581 as type };
+                            const nullable_572: boolean;
+                            export { nullable_572 as nullable };
+                            const write_572: boolean;
+                            export { write_572 as write };
+                            const read_572: boolean;
+                            export { read_572 as read };
+                            const validators_341: string[];
+                            export { validators_341 as validators };
+                            const errorMessages_341: string[];
+                            export { errorMessages_341 as errorMessages };
+                            const id_697: string;
+                            export { id_697 as id };
+                            const label_615: string;
+                            export { label_615 as label };
                         }
                         export { images_8 as images };
                         export namespace currentPlace_28 {
-                            const targetClass_132: string;
-                            export { targetClass_132 as targetClass };
+                            const targetClass_135: string;
+                            export { targetClass_135 as targetClass };
                             const optionsName_45: string;
                             export { optionsName_45 as optionsName };
-                            const type_564: string;
-                            export { type_564 as type };
-                            const nullable_555: boolean;
-                            export { nullable_555 as nullable };
-                            const write_555: boolean;
-                            export { write_555 as write };
-                            const read_555: boolean;
-                            export { read_555 as read };
+                            const type_582: string;
+                            export { type_582 as type };
+                            const nullable_573: boolean;
+                            export { nullable_573 as nullable };
+                            const write_573: boolean;
+                            export { write_573 as write };
+                            const read_573: boolean;
+                            export { read_573 as read };
                             const options_45: {
                                 id: string;
                                 label: string;
                             }[];
                             export { options_45 as options };
-                            const validators_340: string[];
-                            export { validators_340 as validators };
-                            const errorMessages_340: string[];
-                            export { errorMessages_340 as errorMessages };
-                            const id_679: string;
-                            export { id_679 as id };
-                            const label_598: string;
-                            export { label_598 as label };
+                            const validators_342: string[];
+                            export { validators_342 as validators };
+                            const errorMessages_342: string[];
+                            export { errorMessages_342 as errorMessages };
+                            const id_698: string;
+                            export { id_698 as id };
+                            const label_616: string;
+                            export { label_616 as label };
                         }
                         export { currentPlace_28 as currentPlace };
                         export namespace requestedTransition_28 {
-                            const id_680: string;
-                            export { id_680 as id };
-                            const label_599: string;
-                            export { label_599 as label };
+                            const id_699: string;
+                            export { id_699 as id };
+                            const label_617: string;
+                            export { label_617 as label };
                         }
                         export { requestedTransition_28 as requestedTransition };
                         export namespace eligibleTransitions_28 {
-                            const id_681: string;
-                            export { id_681 as id };
-                            const label_600: string;
-                            export { label_600 as label };
+                            const id_700: string;
+                            export { id_700 as id };
+                            const label_618: string;
+                            export { label_618 as label };
                         }
                         export { eligibleTransitions_28 as eligibleTransitions };
                     }
-                    export { model_134 as model };
-                    const title_133: string;
-                    export { title_133 as title };
-                    const resourceName_219: string;
-                    export { resourceName_219 as resourceName };
+                    export { model_137 as model };
+                    const title_136: string;
+                    export { title_136 as title };
+                    const resourceName_225: string;
+                    export { resourceName_225 as resourceName };
                 }
-                export { resource_86 as resource };
-                const resourceName_220: string;
-                export { resourceName_220 as resourceName };
-                const optionText_56: string;
-                export { optionText_56 as optionText };
-                const id_682: string;
-                export { id_682 as id };
-                const label_601: string;
-                export { label_601 as label };
+                export { resource_89 as resource };
+                const resourceName_226: string;
+                export { resourceName_226 as resourceName };
+                const optionText_59: string;
+                export { optionText_59 as optionText };
+                const id_701: string;
+                export { id_701 as id };
+                const label_619: string;
+                export { label_619 as label };
             }
             export { unit_1 as unit };
             export namespace xeroContactId_4 {
-                const type_565: string;
-                export { type_565 as type };
-                const nullable_556: boolean;
-                export { nullable_556 as nullable };
-                const write_556: boolean;
-                export { write_556 as write };
-                const read_556: boolean;
-                export { read_556 as read };
-                const id_683: string;
-                export { id_683 as id };
-                const label_602: string;
-                export { label_602 as label };
+                const type_583: string;
+                export { type_583 as type };
+                const nullable_574: boolean;
+                export { nullable_574 as nullable };
+                const write_574: boolean;
+                export { write_574 as write };
+                const read_574: boolean;
+                export { read_574 as read };
+                const id_702: string;
+                export { id_702 as id };
+                const label_620: string;
+                export { label_620 as label };
             }
             export { xeroContactId_4 as xeroContactId };
         }
-        export { model_132 as model };
-        const title_134: string;
-        export { title_134 as title };
-        const resourceName_221: string;
-        export { resourceName_221 as resourceName };
+        export { model_135 as model };
+        const title_137: string;
+        export { title_137 as title };
+        const resourceName_227: string;
+        export { resourceName_227 as resourceName };
     }
     export namespace transitions {
-        const model_135: never[];
-        export { model_135 as model };
-        const title_135: string;
-        export { title_135 as title };
-        const resourceName_222: string;
-        export { resourceName_222 as resourceName };
+        const model_138: never[];
+        export { model_138 as model };
+        const title_138: string;
+        export { title_138 as title };
+        const resourceName_228: string;
+        export { resourceName_228 as resourceName };
     }
     export namespace units_3 {
         export namespace filters_2 {
@@ -12019,486 +12338,292 @@ export namespace model {
             export { enum_multiple_1 as enum_multiple };
         }
         export { filters_2 as filters };
-        export namespace model_136 {
-            export namespace id_684 {
-                const type_566: string;
-                export { type_566 as type };
-                const nullable_557: boolean;
-                export { nullable_557 as nullable };
-                const write_557: boolean;
-                export { write_557 as write };
-                const read_557: boolean;
-                export { read_557 as read };
-                const validators_341: string[];
-                export { validators_341 as validators };
-                const errorMessages_341: string[];
-                export { errorMessages_341 as errorMessages };
-                const id_685: string;
-                export { id_685 as id };
-                const label_603: string;
-                export { label_603 as label };
+        export namespace model_139 {
+            export namespace id_703 {
+                const type_584: string;
+                export { type_584 as type };
+                const nullable_575: boolean;
+                export { nullable_575 as nullable };
+                const write_575: boolean;
+                export { write_575 as write };
+                const read_575: boolean;
+                export { read_575 as read };
+                const validators_343: string[];
+                export { validators_343 as validators };
+                const errorMessages_343: string[];
+                export { errorMessages_343 as errorMessages };
+                const id_704: string;
+                export { id_704 as id };
+                const label_621: string;
+                export { label_621 as label };
             }
-            export { id_684 as id };
+            export { id_703 as id };
             export namespace unitLetter_3 {
-                const type_567: string;
-                export { type_567 as type };
-                const nullable_558: boolean;
-                export { nullable_558 as nullable };
-                const write_558: boolean;
-                export { write_558 as write };
-                const read_558: boolean;
-                export { read_558 as read };
-                const validators_342: string[];
-                export { validators_342 as validators };
-                const errorMessages_342: string[];
-                export { errorMessages_342 as errorMessages };
-                const id_686: string;
-                export { id_686 as id };
-                const label_604: string;
-                export { label_604 as label };
+                const type_585: string;
+                export { type_585 as type };
+                const nullable_576: boolean;
+                export { nullable_576 as nullable };
+                const write_576: boolean;
+                export { write_576 as write };
+                const read_576: boolean;
+                export { read_576 as read };
+                const validators_344: string[];
+                export { validators_344 as validators };
+                const errorMessages_344: string[];
+                export { errorMessages_344 as errorMessages };
+                const id_705: string;
+                export { id_705 as id };
+                const label_622: string;
+                export { label_622 as label };
             }
             export { unitLetter_3 as unitLetter };
-            export namespace type_568 {
-                const targetClass_133: string;
-                export { targetClass_133 as targetClass };
-                const type_569: string;
-                export { type_569 as type };
-                const nullable_559: boolean;
-                export { nullable_559 as nullable };
-                const write_559: boolean;
-                export { write_559 as write };
-                const read_559: boolean;
-                export { read_559 as read };
-                export namespace resource_87 {
-                    export namespace model_137 {
-                        export namespace id_687 {
-                            const type_570: string;
-                            export { type_570 as type };
-                            const nullable_560: boolean;
-                            export { nullable_560 as nullable };
-                            const write_560: boolean;
-                            export { write_560 as write };
-                            const read_560: boolean;
-                            export { read_560 as read };
-                            const validators_343: string[];
-                            export { validators_343 as validators };
-                            const errorMessages_343: string[];
-                            export { errorMessages_343 as errorMessages };
-                            const id_688: string;
-                            export { id_688 as id };
-                            const label_605: string;
-                            export { label_605 as label };
-                        }
-                        export { id_687 as id };
-                        export namespace description_10 {
-                            const type_571: string;
-                            export { type_571 as type };
-                            const nullable_561: boolean;
-                            export { nullable_561 as nullable };
-                            const write_561: boolean;
-                            export { write_561 as write };
-                            const read_561: boolean;
-                            export { read_561 as read };
-                            const validators_344: string[];
-                            export { validators_344 as validators };
-                            const errorMessages_344: string[];
-                            export { errorMessages_344 as errorMessages };
-                            const id_689: string;
-                            export { id_689 as id };
-                            const label_606: string;
-                            export { label_606 as label };
-                        }
-                        export { description_10 as description };
-                    }
-                    export { model_137 as model };
-                    const title_136: string;
-                    export { title_136 as title };
-                    const resourceName_223: string;
-                    export { resourceName_223 as resourceName };
-                }
-                export { resource_87 as resource };
-                const resourceName_224: string;
-                export { resourceName_224 as resourceName };
-                const optionText_57: string;
-                export { optionText_57 as optionText };
-                const validators_345: string[];
-                export { validators_345 as validators };
-                const errorMessages_345: string[];
-                export { errorMessages_345 as errorMessages };
-                const id_690: string;
-                export { id_690 as id };
-                const label_607: string;
-                export { label_607 as label };
-            }
-            export { type_568 as type };
-            export namespace weeklyPrice_3 {
-                const type_572: string;
-                export { type_572 as type };
-                const nullable_562: boolean;
-                export { nullable_562 as nullable };
-                const write_562: boolean;
-                export { write_562 as write };
-                const read_562: boolean;
-                export { read_562 as read };
-                const validators_346: string[];
-                export { validators_346 as validators };
-                const errorMessages_346: string[];
-                export { errorMessages_346 as errorMessages };
-                const id_691: string;
-                export { id_691 as id };
-                const label_608: string;
-                export { label_608 as label };
-            }
-            export { weeklyPrice_3 as weeklyPrice };
-            export namespace availableFrom_2 {
-                const type_573: string;
-                export { type_573 as type };
-                const nullable_563: boolean;
-                export { nullable_563 as nullable };
-                const write_563: boolean;
-                export { write_563 as write };
-                const read_563: boolean;
-                export { read_563 as read };
-                const id_692: string;
-                export { id_692 as id };
-                const label_609: string;
-                export { label_609 as label };
-            }
-            export { availableFrom_2 as availableFrom };
-            export namespace property_1 {
-                const targetClass_134: string;
-                export { targetClass_134 as targetClass };
-                const type_574: string;
-                export { type_574 as type };
-                const nullable_564: boolean;
-                export { nullable_564 as nullable };
-                const write_564: boolean;
-                export { write_564 as write };
-                const read_564: boolean;
-                export { read_564 as read };
-                export namespace resource_88 {
-                    export namespace model_138 {
-                        export namespace id_693 {
-                            const type_575: string;
-                            export { type_575 as type };
-                            const nullable_565: boolean;
-                            export { nullable_565 as nullable };
-                            const write_565: boolean;
-                            export { write_565 as write };
-                            const read_565: boolean;
-                            export { read_565 as read };
-                            const validators_347: string[];
-                            export { validators_347 as validators };
-                            const errorMessages_347: string[];
-                            export { errorMessages_347 as errorMessages };
-                            const id_694: string;
-                            export { id_694 as id };
-                            const label_610: string;
-                            export { label_610 as label };
-                        }
-                        export { id_693 as id };
-                        export namespace propertyName_2 {
-                            const type_576: string;
-                            export { type_576 as type };
-                            const nullable_566: boolean;
-                            export { nullable_566 as nullable };
-                            const write_566: boolean;
-                            export { write_566 as write };
-                            const read_566: boolean;
-                            export { read_566 as read };
-                            const validators_348: string[];
-                            export { validators_348 as validators };
-                            const errorMessages_348: string[];
-                            export { errorMessages_348 as errorMessages };
-                            const id_695: string;
-                            export { id_695 as id };
-                            const label_611: string;
-                            export { label_611 as label };
-                        }
-                        export { propertyName_2 as propertyName };
-                        export namespace floorplans_3 {
-                            const type_577: string;
-                            export { type_577 as type };
-                            const nullable_567: boolean;
-                            export { nullable_567 as nullable };
-                            const write_567: boolean;
-                            export { write_567 as write };
-                            const read_567: boolean;
-                            export { read_567 as read };
-                            const validators_349: string[];
-                            export { validators_349 as validators };
-                            const errorMessages_349: string[];
-                            export { errorMessages_349 as errorMessages };
-                            const id_696: string;
-                            export { id_696 as id };
-                            const label_612: string;
-                            export { label_612 as label };
-                        }
-                        export { floorplans_3 as floorplans };
-                        export namespace images_9 {
-                            const type_578: string;
-                            export { type_578 as type };
-                            const nullable_568: boolean;
-                            export { nullable_568 as nullable };
-                            const write_568: boolean;
-                            export { write_568 as write };
-                            const read_568: boolean;
-                            export { read_568 as read };
-                            const validators_350: string[];
-                            export { validators_350 as validators };
-                            const errorMessages_350: string[];
-                            export { errorMessages_350 as errorMessages };
-                            const id_697: string;
-                            export { id_697 as id };
-                            const label_613: string;
-                            export { label_613 as label };
-                        }
-                        export { images_9 as images };
-                        export namespace currentPlace_29 {
-                            const targetClass_135: string;
-                            export { targetClass_135 as targetClass };
-                            const optionsName_46: string;
-                            export { optionsName_46 as optionsName };
-                            const type_579: string;
-                            export { type_579 as type };
-                            const nullable_569: boolean;
-                            export { nullable_569 as nullable };
-                            const write_569: boolean;
-                            export { write_569 as write };
-                            const read_569: boolean;
-                            export { read_569 as read };
-                            const options_46: {
-                                id: string;
-                                label: string;
-                            }[];
-                            export { options_46 as options };
-                            const validators_351: string[];
-                            export { validators_351 as validators };
-                            const errorMessages_351: string[];
-                            export { errorMessages_351 as errorMessages };
-                            const id_698: string;
-                            export { id_698 as id };
-                            const label_614: string;
-                            export { label_614 as label };
-                        }
-                        export { currentPlace_29 as currentPlace };
-                        export namespace requestedTransition_29 {
-                            const type_580: string;
-                            export { type_580 as type };
-                            const nullable_570: boolean;
-                            export { nullable_570 as nullable };
-                            const write_570: boolean;
-                            export { write_570 as write };
-                            const read_570: boolean;
-                            export { read_570 as read };
-                            const id_699: string;
-                            export { id_699 as id };
-                            const label_615: string;
-                            export { label_615 as label };
-                        }
-                        export { requestedTransition_29 as requestedTransition };
-                        export namespace eligibleTransitions_29 {
-                            const id_700: string;
-                            export { id_700 as id };
-                            const label_616: string;
-                            export { label_616 as label };
-                        }
-                        export { eligibleTransitions_29 as eligibleTransitions };
-                    }
-                    export { model_138 as model };
-                    const title_137: string;
-                    export { title_137 as title };
-                    const resourceName_225: string;
-                    export { resourceName_225 as resourceName };
-                }
-                export { resource_88 as resource };
-                const resourceName_226: string;
-                export { resourceName_226 as resourceName };
-                const optionText_58: string;
-                export { optionText_58 as optionText };
-                const validators_352: string[];
-                export { validators_352 as validators };
-                const errorMessages_352: string[];
-                export { errorMessages_352 as errorMessages };
-                const id_701: string;
-                export { id_701 as id };
-                const label_617: string;
-                export { label_617 as label };
-            }
-            export { property_1 as property };
-            export namespace floorNumber_3 {
-                const type_581: string;
-                export { type_581 as type };
-                const nullable_571: boolean;
-                export { nullable_571 as nullable };
-                const write_571: boolean;
-                export { write_571 as write };
-                const read_571: boolean;
-                export { read_571 as read };
-                const validators_353: string[];
-                export { validators_353 as validators };
-                const errorMessages_353: string[];
-                export { errorMessages_353 as errorMessages };
-                const id_702: string;
-                export { id_702 as id };
-                const label_618: string;
-                export { label_618 as label };
-            }
-            export { floorNumber_3 as floorNumber };
-            export namespace features {
+            export namespace type_586 {
                 const targetClass_136: string;
                 export { targetClass_136 as targetClass };
-                const type_582: string;
-                export { type_582 as type };
-                const nullable_572: boolean;
-                export { nullable_572 as nullable };
-                const write_572: boolean;
-                export { write_572 as write };
-                const read_572: boolean;
-                export { read_572 as read };
-                export namespace resource_89 {
-                    export namespace model_139 {
-                        export namespace id_703 {
-                            const type_583: string;
-                            export { type_583 as type };
-                            const nullable_573: boolean;
-                            export { nullable_573 as nullable };
-                            const write_573: boolean;
-                            export { write_573 as write };
-                            const read_573: boolean;
-                            export { read_573 as read };
-                            const validators_354: string[];
-                            export { validators_354 as validators };
-                            const errorMessages_354: string[];
-                            export { errorMessages_354 as errorMessages };
-                            const id_704: string;
-                            export { id_704 as id };
-                            const label_619: string;
-                            export { label_619 as label };
-                        }
-                        export { id_703 as id };
-                        export namespace feature {
-                            const targetClass_137: string;
-                            export { targetClass_137 as targetClass };
-                            const type_584: string;
-                            export { type_584 as type };
-                            const nullable_574: boolean;
-                            export { nullable_574 as nullable };
-                            const write_574: boolean;
-                            export { write_574 as write };
-                            const read_574: boolean;
-                            export { read_574 as read };
-                            export namespace resource_90 {
-                                export namespace model_140 {
-                                    export namespace id_705 {
-                                        const type_585: string;
-                                        export { type_585 as type };
-                                        const nullable_575: boolean;
-                                        export { nullable_575 as nullable };
-                                        const write_575: boolean;
-                                        export { write_575 as write };
-                                        const read_575: boolean;
-                                        export { read_575 as read };
-                                        const validators_355: string[];
-                                        export { validators_355 as validators };
-                                        const errorMessages_355: string[];
-                                        export { errorMessages_355 as errorMessages };
-                                        const id_706: string;
-                                        export { id_706 as id };
-                                        const label_620: string;
-                                        export { label_620 as label };
-                                    }
-                                    export { id_705 as id };
-                                    export namespace name_24 {
-                                        const type_586: string;
-                                        export { type_586 as type };
-                                        const nullable_576: boolean;
-                                        export { nullable_576 as nullable };
-                                        const write_576: boolean;
-                                        export { write_576 as write };
-                                        const read_576: boolean;
-                                        export { read_576 as read };
-                                        const validators_356: string[];
-                                        export { validators_356 as validators };
-                                        const errorMessages_356: string[];
-                                        export { errorMessages_356 as errorMessages };
-                                        const id_707: string;
-                                        export { id_707 as id };
-                                        const label_621: string;
-                                        export { label_621 as label };
-                                    }
-                                    export { name_24 as name };
-                                }
-                                export { model_140 as model };
-                                const title_138: string;
-                                export { title_138 as title };
-                                const resourceName_227: string;
-                                export { resourceName_227 as resourceName };
-                            }
-                            export { resource_90 as resource };
-                            const resourceName_228: string;
-                            export { resourceName_228 as resourceName };
-                            const optionText_59: string;
-                            export { optionText_59 as optionText };
-                            const validators_357: string[];
-                            export { validators_357 as validators };
-                            const errorMessages_357: string[];
-                            export { errorMessages_357 as errorMessages };
-                            const id_708: string;
-                            export { id_708 as id };
-                            const label_622: string;
-                            export { label_622 as label };
-                        }
-                        export namespace amount {
-                            const type_587: string;
-                            export { type_587 as type };
-                            const nullable_577: boolean;
-                            export { nullable_577 as nullable };
-                            const write_577: boolean;
-                            export { write_577 as write };
-                            const read_577: boolean;
-                            export { read_577 as read };
-                            const validators_358: string[];
-                            export { validators_358 as validators };
-                            const errorMessages_358: string[];
-                            export { errorMessages_358 as errorMessages };
-                            const id_709: string;
-                            export { id_709 as id };
+                const type_587: string;
+                export { type_587 as type };
+                const nullable_577: boolean;
+                export { nullable_577 as nullable };
+                const write_577: boolean;
+                export { write_577 as write };
+                const read_577: boolean;
+                export { read_577 as read };
+                export namespace resource_90 {
+                    export namespace model_140 {
+                        export namespace id_706 {
+                            const type_588: string;
+                            export { type_588 as type };
+                            const nullable_578: boolean;
+                            export { nullable_578 as nullable };
+                            const write_578: boolean;
+                            export { write_578 as write };
+                            const read_578: boolean;
+                            export { read_578 as read };
+                            const validators_345: string[];
+                            export { validators_345 as validators };
+                            const errorMessages_345: string[];
+                            export { errorMessages_345 as errorMessages };
+                            const id_707: string;
+                            export { id_707 as id };
                             const label_623: string;
                             export { label_623 as label };
                         }
+                        export { id_706 as id };
+                        export namespace description_10 {
+                            const type_589: string;
+                            export { type_589 as type };
+                            const nullable_579: boolean;
+                            export { nullable_579 as nullable };
+                            const write_579: boolean;
+                            export { write_579 as write };
+                            const read_579: boolean;
+                            export { read_579 as read };
+                            const validators_346: string[];
+                            export { validators_346 as validators };
+                            const errorMessages_346: string[];
+                            export { errorMessages_346 as errorMessages };
+                            const id_708: string;
+                            export { id_708 as id };
+                            const label_624: string;
+                            export { label_624 as label };
+                        }
+                        export { description_10 as description };
                     }
-                    export { model_139 as model };
+                    export { model_140 as model };
                     const title_139: string;
                     export { title_139 as title };
                     const resourceName_229: string;
                     export { resourceName_229 as resourceName };
                 }
-                export { resource_89 as resource };
+                export { resource_90 as resource };
                 const resourceName_230: string;
                 export { resourceName_230 as resourceName };
-                const validators_359: string[];
-                export { validators_359 as validators };
-                const errorMessages_359: string[];
-                export { errorMessages_359 as errorMessages };
+                const optionText_60: string;
+                export { optionText_60 as optionText };
+                const validators_347: string[];
+                export { validators_347 as validators };
+                const errorMessages_347: string[];
+                export { errorMessages_347 as errorMessages };
+                const id_709: string;
+                export { id_709 as id };
+                const label_625: string;
+                export { label_625 as label };
+            }
+            export { type_586 as type };
+            export namespace weeklyPrice_3 {
+                const type_590: string;
+                export { type_590 as type };
+                const nullable_580: boolean;
+                export { nullable_580 as nullable };
+                const write_580: boolean;
+                export { write_580 as write };
+                const read_580: boolean;
+                export { read_580 as read };
+                const validators_348: string[];
+                export { validators_348 as validators };
+                const errorMessages_348: string[];
+                export { errorMessages_348 as errorMessages };
                 const id_710: string;
                 export { id_710 as id };
-                const label_624: string;
-                export { label_624 as label };
+                const label_626: string;
+                export { label_626 as label };
             }
-            export namespace tenantTenancies {
-                const targetClass_138: string;
-                export { targetClass_138 as targetClass };
-                const type_588: string;
-                export { type_588 as type };
-                const nullable_578: boolean;
-                export { nullable_578 as nullable };
-                const write_578: boolean;
-                export { write_578 as write };
-                const read_578: boolean;
-                export { read_578 as read };
+            export { weeklyPrice_3 as weeklyPrice };
+            export namespace availableFrom_2 {
+                const type_591: string;
+                export { type_591 as type };
+                const nullable_581: boolean;
+                export { nullable_581 as nullable };
+                const write_581: boolean;
+                export { write_581 as write };
+                const read_581: boolean;
+                export { read_581 as read };
+                const id_711: string;
+                export { id_711 as id };
+                const label_627: string;
+                export { label_627 as label };
+            }
+            export { availableFrom_2 as availableFrom };
+            export namespace property_1 {
+                const targetClass_137: string;
+                export { targetClass_137 as targetClass };
+                const type_592: string;
+                export { type_592 as type };
+                const nullable_582: boolean;
+                export { nullable_582 as nullable };
+                const write_582: boolean;
+                export { write_582 as write };
+                const read_582: boolean;
+                export { read_582 as read };
                 export namespace resource_91 {
-                    const model_141: never[];
+                    export namespace model_141 {
+                        export namespace id_712 {
+                            const type_593: string;
+                            export { type_593 as type };
+                            const nullable_583: boolean;
+                            export { nullable_583 as nullable };
+                            const write_583: boolean;
+                            export { write_583 as write };
+                            const read_583: boolean;
+                            export { read_583 as read };
+                            const validators_349: string[];
+                            export { validators_349 as validators };
+                            const errorMessages_349: string[];
+                            export { errorMessages_349 as errorMessages };
+                            const id_713: string;
+                            export { id_713 as id };
+                            const label_628: string;
+                            export { label_628 as label };
+                        }
+                        export { id_712 as id };
+                        export namespace propertyName_2 {
+                            const type_594: string;
+                            export { type_594 as type };
+                            const nullable_584: boolean;
+                            export { nullable_584 as nullable };
+                            const write_584: boolean;
+                            export { write_584 as write };
+                            const read_584: boolean;
+                            export { read_584 as read };
+                            const validators_350: string[];
+                            export { validators_350 as validators };
+                            const errorMessages_350: string[];
+                            export { errorMessages_350 as errorMessages };
+                            const id_714: string;
+                            export { id_714 as id };
+                            const label_629: string;
+                            export { label_629 as label };
+                        }
+                        export { propertyName_2 as propertyName };
+                        export namespace floorplans_3 {
+                            const type_595: string;
+                            export { type_595 as type };
+                            const nullable_585: boolean;
+                            export { nullable_585 as nullable };
+                            const write_585: boolean;
+                            export { write_585 as write };
+                            const read_585: boolean;
+                            export { read_585 as read };
+                            const validators_351: string[];
+                            export { validators_351 as validators };
+                            const errorMessages_351: string[];
+                            export { errorMessages_351 as errorMessages };
+                            const id_715: string;
+                            export { id_715 as id };
+                            const label_630: string;
+                            export { label_630 as label };
+                        }
+                        export { floorplans_3 as floorplans };
+                        export namespace images_9 {
+                            const type_596: string;
+                            export { type_596 as type };
+                            const nullable_586: boolean;
+                            export { nullable_586 as nullable };
+                            const write_586: boolean;
+                            export { write_586 as write };
+                            const read_586: boolean;
+                            export { read_586 as read };
+                            const validators_352: string[];
+                            export { validators_352 as validators };
+                            const errorMessages_352: string[];
+                            export { errorMessages_352 as errorMessages };
+                            const id_716: string;
+                            export { id_716 as id };
+                            const label_631: string;
+                            export { label_631 as label };
+                        }
+                        export { images_9 as images };
+                        export namespace currentPlace_29 {
+                            const targetClass_138: string;
+                            export { targetClass_138 as targetClass };
+                            const optionsName_46: string;
+                            export { optionsName_46 as optionsName };
+                            const type_597: string;
+                            export { type_597 as type };
+                            const nullable_587: boolean;
+                            export { nullable_587 as nullable };
+                            const write_587: boolean;
+                            export { write_587 as write };
+                            const read_587: boolean;
+                            export { read_587 as read };
+                            const options_46: {
+                                id: string;
+                                label: string;
+                            }[];
+                            export { options_46 as options };
+                            const validators_353: string[];
+                            export { validators_353 as validators };
+                            const errorMessages_353: string[];
+                            export { errorMessages_353 as errorMessages };
+                            const id_717: string;
+                            export { id_717 as id };
+                            const label_632: string;
+                            export { label_632 as label };
+                        }
+                        export { currentPlace_29 as currentPlace };
+                        export namespace requestedTransition_29 {
+                            const type_598: string;
+                            export { type_598 as type };
+                            const nullable_588: boolean;
+                            export { nullable_588 as nullable };
+                            const write_588: boolean;
+                            export { write_588 as write };
+                            const read_588: boolean;
+                            export { read_588 as read };
+                            const id_718: string;
+                            export { id_718 as id };
+                            const label_633: string;
+                            export { label_633 as label };
+                        }
+                        export { requestedTransition_29 as requestedTransition };
+                        export namespace eligibleTransitions_29 {
+                            const id_719: string;
+                            export { id_719 as id };
+                            const label_634: string;
+                            export { label_634 as label };
+                        }
+                        export { eligibleTransitions_29 as eligibleTransitions };
+                    }
                     export { model_141 as model };
                     const title_140: string;
                     export { title_140 as title };
@@ -12508,271 +12633,83 @@ export namespace model {
                 export { resource_91 as resource };
                 const resourceName_232: string;
                 export { resourceName_232 as resourceName };
-                const validators_360: string[];
-                export { validators_360 as validators };
-                const errorMessages_360: string[];
-                export { errorMessages_360 as errorMessages };
-                const id_711: string;
-                export { id_711 as id };
-                const label_625: string;
-                export { label_625 as label };
-            }
-            export namespace images_10 {
-                const type_589: string;
-                export { type_589 as type };
-                const nullable_579: boolean;
-                export { nullable_579 as nullable };
-                const write_579: boolean;
-                export { write_579 as write };
-                const read_579: boolean;
-                export { read_579 as read };
-                const validators_361: string[];
-                export { validators_361 as validators };
-                const errorMessages_361: string[];
-                export { errorMessages_361 as errorMessages };
-                const id_712: string;
-                export { id_712 as id };
-                const label_626: string;
-                export { label_626 as label };
-            }
-            export { images_10 as images };
-            export namespace arthurUnit {
-                const targetClass_139: string;
-                export { targetClass_139 as targetClass };
-                const type_590: string;
-                export { type_590 as type };
-                const nullable_580: boolean;
-                export { nullable_580 as nullable };
-                const write_580: boolean;
-                export { write_580 as write };
-                const read_580: boolean;
-                export { read_580 as read };
-                export namespace resource_92 {
-                    export namespace model_142 {
-                        export namespace id_713 {
-                            const type_591: string;
-                            export { type_591 as type };
-                            const nullable_581: boolean;
-                            export { nullable_581 as nullable };
-                            const write_581: boolean;
-                            export { write_581 as write };
-                            const read_581: boolean;
-                            export { read_581 as read };
-                            const validators_362: string[];
-                            export { validators_362 as validators };
-                            const errorMessages_362: string[];
-                            export { errorMessages_362 as errorMessages };
-                            const id_714: string;
-                            export { id_714 as id };
-                            const label_627: string;
-                            export { label_627 as label };
-                        }
-                        export { id_713 as id };
-                        export namespace idWp {
-                            const type_592: string;
-                            export { type_592 as type };
-                            const nullable_582: boolean;
-                            export { nullable_582 as nullable };
-                            const write_582: boolean;
-                            export { write_582 as write };
-                            const read_582: boolean;
-                            export { read_582 as read };
-                            const id_715: string;
-                            export { id_715 as id };
-                            const label_628: string;
-                            export { label_628 as label };
-                        }
-                    }
-                    export { model_142 as model };
-                    const title_141: string;
-                    export { title_141 as title };
-                    const resourceName_233: string;
-                    export { resourceName_233 as resourceName };
-                }
-                export { resource_92 as resource };
-                const resourceName_234: string;
-                export { resourceName_234 as resourceName };
-                const id_716: string;
-                export { id_716 as id };
-                const label_629: string;
-                export { label_629 as label };
-            }
-            export namespace view360 {
-                const type_593: string;
-                export { type_593 as type };
-                const nullable_583: boolean;
-                export { nullable_583 as nullable };
-                const write_583: boolean;
-                export { write_583 as write };
-                const read_583: boolean;
-                export { read_583 as read };
-                const id_717: string;
-                export { id_717 as id };
-                const label_630: string;
-                export { label_630 as label };
-            }
-            export namespace councilShow {
-                const type_594: string;
-                export { type_594 as type };
-                const nullable_584: boolean;
-                export { nullable_584 as nullable };
-                const write_584: boolean;
-                export { write_584 as write };
-                const read_584: boolean;
-                export { read_584 as read };
-                const validators_363: string[];
-                export { validators_363 as validators };
-                const errorMessages_363: string[];
-                export { errorMessages_363 as errorMessages };
-                const id_718: string;
-                export { id_718 as id };
-                const label_631: string;
-                export { label_631 as label };
-            }
-            export namespace currentPlace_30 {
-                const targetClass_140: string;
-                export { targetClass_140 as targetClass };
-                const optionsName_47: string;
-                export { optionsName_47 as optionsName };
-                const type_595: string;
-                export { type_595 as type };
-                const nullable_585: boolean;
-                export { nullable_585 as nullable };
-                const write_585: boolean;
-                export { write_585 as write };
-                const read_585: boolean;
-                export { read_585 as read };
-                const options_47: {
-                    id: string;
-                    label: string;
-                }[];
-                export { options_47 as options };
-                const validators_364: string[];
-                export { validators_364 as validators };
-                const errorMessages_364: string[];
-                export { errorMessages_364 as errorMessages };
-                const id_719: string;
-                export { id_719 as id };
-                const label_632: string;
-                export { label_632 as label };
-            }
-            export { currentPlace_30 as currentPlace };
-            export namespace hasDiscount {
-                const type_596: string;
-                export { type_596 as type };
-                const nullable_586: boolean;
-                export { nullable_586 as nullable };
-                const write_586: boolean;
-                export { write_586 as write };
-                const read_586: boolean;
-                export { read_586 as read };
-                const validators_365: string[];
-                export { validators_365 as validators };
-                const errorMessages_365: string[];
-                export { errorMessages_365 as errorMessages };
+                const optionText_61: string;
+                export { optionText_61 as optionText };
+                const validators_354: string[];
+                export { validators_354 as validators };
+                const errorMessages_354: string[];
+                export { errorMessages_354 as errorMessages };
                 const id_720: string;
                 export { id_720 as id };
-                const label_633: string;
-                export { label_633 as label };
+                const label_635: string;
+                export { label_635 as label };
             }
-            export namespace notes {
-                const type_597: string;
-                export { type_597 as type };
-                const nullable_587: boolean;
-                export { nullable_587 as nullable };
-                const write_587: boolean;
-                export { write_587 as write };
-                const read_587: boolean;
-                export { read_587 as read };
+            export { property_1 as property };
+            export namespace floorNumber_3 {
+                const type_599: string;
+                export { type_599 as type };
+                const nullable_589: boolean;
+                export { nullable_589 as nullable };
+                const write_589: boolean;
+                export { write_589 as write };
+                const read_589: boolean;
+                export { read_589 as read };
+                const validators_355: string[];
+                export { validators_355 as validators };
+                const errorMessages_355: string[];
+                export { errorMessages_355 as errorMessages };
                 const id_721: string;
                 export { id_721 as id };
-                const label_634: string;
-                export { label_634 as label };
+                const label_636: string;
+                export { label_636 as label };
             }
-            export namespace portals_1 {
-                const targetClass_141: string;
-                export { targetClass_141 as targetClass };
-                const type_598: string;
-                export { type_598 as type };
-                const nullable_588: boolean;
-                export { nullable_588 as nullable };
-                const write_588: boolean;
-                export { write_588 as write };
-                const read_588: boolean;
-                export { read_588 as read };
-                export namespace resource_93 {
-                    export namespace model_143 {
+            export { floorNumber_3 as floorNumber };
+            export namespace features {
+                const targetClass_139: string;
+                export { targetClass_139 as targetClass };
+                const type_600: string;
+                export { type_600 as type };
+                const nullable_590: boolean;
+                export { nullable_590 as nullable };
+                const write_590: boolean;
+                export { write_590 as write };
+                const read_590: boolean;
+                export { read_590 as read };
+                export namespace resource_92 {
+                    export namespace model_142 {
                         export namespace id_722 {
-                            const type_599: string;
-                            export { type_599 as type };
-                            const nullable_589: boolean;
-                            export { nullable_589 as nullable };
-                            const write_589: boolean;
-                            export { write_589 as write };
-                            const read_589: boolean;
-                            export { read_589 as read };
-                            const validators_366: string[];
-                            export { validators_366 as validators };
-                            const errorMessages_366: string[];
-                            export { errorMessages_366 as errorMessages };
+                            const type_601: string;
+                            export { type_601 as type };
+                            const nullable_591: boolean;
+                            export { nullable_591 as nullable };
+                            const write_591: boolean;
+                            export { write_591 as write };
+                            const read_591: boolean;
+                            export { read_591 as read };
+                            const validators_356: string[];
+                            export { validators_356 as validators };
+                            const errorMessages_356: string[];
+                            export { errorMessages_356 as errorMessages };
                             const id_723: string;
                             export { id_723 as id };
-                            const label_635: string;
-                            export { label_635 as label };
+                            const label_637: string;
+                            export { label_637 as label };
                         }
                         export { id_722 as id };
-                        export namespace portal_2 {
-                            const targetClass_142: string;
-                            export { targetClass_142 as targetClass };
-                            const type_600: string;
-                            export { type_600 as type };
-                            const nullable_590: boolean;
-                            export { nullable_590 as nullable };
-                            const write_590: boolean;
-                            export { write_590 as write };
-                            const read_590: boolean;
-                            export { read_590 as read };
-                            export namespace resource_94 {
-                                export namespace model_144 {
+                        export namespace feature {
+                            const targetClass_140: string;
+                            export { targetClass_140 as targetClass };
+                            const type_602: string;
+                            export { type_602 as type };
+                            const nullable_592: boolean;
+                            export { nullable_592 as nullable };
+                            const write_592: boolean;
+                            export { write_592 as write };
+                            const read_592: boolean;
+                            export { read_592 as read };
+                            export namespace resource_93 {
+                                export namespace model_143 {
                                     export namespace id_724 {
-                                        const type_601: string;
-                                        export { type_601 as type };
-                                        const nullable_591: boolean;
-                                        export { nullable_591 as nullable };
-                                        const write_591: boolean;
-                                        export { write_591 as write };
-                                        const read_591: boolean;
-                                        export { read_591 as read };
-                                        const validators_367: string[];
-                                        export { validators_367 as validators };
-                                        const errorMessages_367: string[];
-                                        export { errorMessages_367 as errorMessages };
-                                        const id_725: string;
-                                        export { id_725 as id };
-                                        const label_636: string;
-                                        export { label_636 as label };
-                                    }
-                                    export { id_724 as id };
-                                    export namespace name_25 {
-                                        const type_602: string;
-                                        export { type_602 as type };
-                                        const nullable_592: boolean;
-                                        export { nullable_592 as nullable };
-                                        const write_592: boolean;
-                                        export { write_592 as write };
-                                        const read_592: boolean;
-                                        export { read_592 as read };
-                                        const validators_368: string[];
-                                        export { validators_368 as validators };
-                                        const errorMessages_368: string[];
-                                        export { errorMessages_368 as errorMessages };
-                                        const id_726: string;
-                                        export { id_726 as id };
-                                        const label_637: string;
-                                        export { label_637 as label };
-                                    }
-                                    export { name_25 as name };
-                                    export namespace discount_2 {
                                         const type_603: string;
                                         export { type_603 as type };
                                         const nullable_593: boolean;
@@ -12781,17 +12718,17 @@ export namespace model {
                                         export { write_593 as write };
                                         const read_593: boolean;
                                         export { read_593 as read };
-                                        const validators_369: string[];
-                                        export { validators_369 as validators };
-                                        const errorMessages_369: string[];
-                                        export { errorMessages_369 as errorMessages };
-                                        const id_727: string;
-                                        export { id_727 as id };
+                                        const validators_357: string[];
+                                        export { validators_357 as validators };
+                                        const errorMessages_357: string[];
+                                        export { errorMessages_357 as errorMessages };
+                                        const id_725: string;
+                                        export { id_725 as id };
                                         const label_638: string;
                                         export { label_638 as label };
                                     }
-                                    export { discount_2 as discount };
-                                    export namespace url_3 {
+                                    export { id_724 as id };
+                                    export namespace name_25 {
                                         const type_604: string;
                                         export { type_604 as type };
                                         const nullable_594: boolean;
@@ -12800,39 +12737,38 @@ export namespace model {
                                         export { write_594 as write };
                                         const read_594: boolean;
                                         export { read_594 as read };
-                                        const validators_370: string[];
-                                        export { validators_370 as validators };
-                                        const errorMessages_370: string[];
-                                        export { errorMessages_370 as errorMessages };
-                                        const id_728: string;
-                                        export { id_728 as id };
+                                        const validators_358: string[];
+                                        export { validators_358 as validators };
+                                        const errorMessages_358: string[];
+                                        export { errorMessages_358 as errorMessages };
+                                        const id_726: string;
+                                        export { id_726 as id };
                                         const label_639: string;
                                         export { label_639 as label };
                                     }
-                                    export { url_3 as url };
+                                    export { name_25 as name };
                                 }
-                                export { model_144 as model };
-                                const title_142: string;
-                                export { title_142 as title };
-                                const resourceName_235: string;
-                                export { resourceName_235 as resourceName };
+                                export { model_143 as model };
+                                const title_141: string;
+                                export { title_141 as title };
+                                const resourceName_233: string;
+                                export { resourceName_233 as resourceName };
                             }
-                            export { resource_94 as resource };
-                            const resourceName_236: string;
-                            export { resourceName_236 as resourceName };
-                            const optionText_60: string;
-                            export { optionText_60 as optionText };
-                            const validators_371: string[];
-                            export { validators_371 as validators };
-                            const errorMessages_371: string[];
-                            export { errorMessages_371 as errorMessages };
-                            const id_729: string;
-                            export { id_729 as id };
+                            export { resource_93 as resource };
+                            const resourceName_234: string;
+                            export { resourceName_234 as resourceName };
+                            const optionText_62: string;
+                            export { optionText_62 as optionText };
+                            const validators_359: string[];
+                            export { validators_359 as validators };
+                            const errorMessages_359: string[];
+                            export { errorMessages_359 as errorMessages };
+                            const id_727: string;
+                            export { id_727 as id };
                             const label_640: string;
                             export { label_640 as label };
                         }
-                        export { portal_2 as portal };
-                        export namespace unitDiscount_1 {
+                        export namespace amount {
                             const type_605: string;
                             export { type_605 as type };
                             const nullable_595: boolean;
@@ -12841,80 +12777,66 @@ export namespace model {
                             export { write_595 as write };
                             const read_595: boolean;
                             export { read_595 as read };
-                            const validators_372: string[];
-                            export { validators_372 as validators };
-                            const errorMessages_372: string[];
-                            export { errorMessages_372 as errorMessages };
-                            const id_730: string;
-                            export { id_730 as id };
+                            const validators_360: string[];
+                            export { validators_360 as validators };
+                            const errorMessages_360: string[];
+                            export { errorMessages_360 as errorMessages };
+                            const id_728: string;
+                            export { id_728 as id };
                             const label_641: string;
                             export { label_641 as label };
                         }
-                        export { unitDiscount_1 as unitDiscount };
-                        export namespace isActive_1 {
-                            const type_606: string;
-                            export { type_606 as type };
-                            const nullable_596: boolean;
-                            export { nullable_596 as nullable };
-                            const write_596: boolean;
-                            export { write_596 as write };
-                            const read_596: boolean;
-                            export { read_596 as read };
-                            const validators_373: string[];
-                            export { validators_373 as validators };
-                            const errorMessages_373: string[];
-                            export { errorMessages_373 as errorMessages };
-                            const id_731: string;
-                            export { id_731 as id };
-                            const label_642: string;
-                            export { label_642 as label };
-                        }
-                        export { isActive_1 as isActive };
                     }
-                    export { model_143 as model };
+                    export { model_142 as model };
+                    const title_142: string;
+                    export { title_142 as title };
+                    const resourceName_235: string;
+                    export { resourceName_235 as resourceName };
+                }
+                export { resource_92 as resource };
+                const resourceName_236: string;
+                export { resourceName_236 as resourceName };
+                const validators_361: string[];
+                export { validators_361 as validators };
+                const errorMessages_361: string[];
+                export { errorMessages_361 as errorMessages };
+                const id_729: string;
+                export { id_729 as id };
+                const label_642: string;
+                export { label_642 as label };
+            }
+            export namespace tenantTenancies {
+                const targetClass_141: string;
+                export { targetClass_141 as targetClass };
+                const type_606: string;
+                export { type_606 as type };
+                const nullable_596: boolean;
+                export { nullable_596 as nullable };
+                const write_596: boolean;
+                export { write_596 as write };
+                const read_596: boolean;
+                export { read_596 as read };
+                export namespace resource_94 {
+                    const model_144: never[];
+                    export { model_144 as model };
                     const title_143: string;
                     export { title_143 as title };
                     const resourceName_237: string;
                     export { resourceName_237 as resourceName };
                 }
-                export { resource_93 as resource };
+                export { resource_94 as resource };
                 const resourceName_238: string;
                 export { resourceName_238 as resourceName };
-                const validators_374: string[];
-                export { validators_374 as validators };
-                const errorMessages_374: string[];
-                export { errorMessages_374 as errorMessages };
-                const id_732: string;
-                export { id_732 as id };
+                const validators_362: string[];
+                export { validators_362 as validators };
+                const errorMessages_362: string[];
+                export { errorMessages_362 as errorMessages };
+                const id_730: string;
+                export { id_730 as id };
                 const label_643: string;
                 export { label_643 as label };
             }
-            export { portals_1 as portals };
-            export namespace requestedTransition_30 {
-                const id_733: string;
-                export { id_733 as id };
-                const label_644: string;
-                export { label_644 as label };
-            }
-            export { requestedTransition_30 as requestedTransition };
-            export namespace eligibleTransitions_30 {
-                const id_734: string;
-                export { id_734 as id };
-                const label_645: string;
-                export { label_645 as label };
-            }
-            export { eligibleTransitions_30 as eligibleTransitions };
-        }
-        export { model_136 as model };
-        const title_144: string;
-        export { title_144 as title };
-        const resourceName_239: string;
-        export { resourceName_239 as resourceName };
-    }
-    export { units_3 as units };
-    export namespace unit_features {
-        export namespace model_145 {
-            export namespace id_735 {
+            export namespace images_10 {
                 const type_607: string;
                 export { type_607 as type };
                 const nullable_597: boolean;
@@ -12923,17 +12845,19 @@ export namespace model {
                 export { write_597 as write };
                 const read_597: boolean;
                 export { read_597 as read };
-                const validators_375: string[];
-                export { validators_375 as validators };
-                const errorMessages_375: string[];
-                export { errorMessages_375 as errorMessages };
-                const id_736: string;
-                export { id_736 as id };
-                const label_646: string;
-                export { label_646 as label };
+                const validators_363: string[];
+                export { validators_363 as validators };
+                const errorMessages_363: string[];
+                export { errorMessages_363 as errorMessages };
+                const id_731: string;
+                export { id_731 as id };
+                const label_644: string;
+                export { label_644 as label };
             }
-            export { id_735 as id };
-            export namespace name_26 {
+            export { images_10 as images };
+            export namespace arthurUnit {
+                const targetClass_142: string;
+                export { targetClass_142 as targetClass };
                 const type_608: string;
                 export { type_608 as type };
                 const nullable_598: boolean;
@@ -12942,81 +12866,57 @@ export namespace model {
                 export { write_598 as write };
                 const read_598: boolean;
                 export { read_598 as read };
-                const validators_376: string[];
-                export { validators_376 as validators };
-                const errorMessages_376: string[];
-                export { errorMessages_376 as errorMessages };
-                const id_737: string;
-                export { id_737 as id };
+                export namespace resource_95 {
+                    export namespace model_145 {
+                        export namespace id_732 {
+                            const type_609: string;
+                            export { type_609 as type };
+                            const nullable_599: boolean;
+                            export { nullable_599 as nullable };
+                            const write_599: boolean;
+                            export { write_599 as write };
+                            const read_599: boolean;
+                            export { read_599 as read };
+                            const validators_364: string[];
+                            export { validators_364 as validators };
+                            const errorMessages_364: string[];
+                            export { errorMessages_364 as errorMessages };
+                            const id_733: string;
+                            export { id_733 as id };
+                            const label_645: string;
+                            export { label_645 as label };
+                        }
+                        export { id_732 as id };
+                        export namespace idWp {
+                            const type_610: string;
+                            export { type_610 as type };
+                            const nullable_600: boolean;
+                            export { nullable_600 as nullable };
+                            const write_600: boolean;
+                            export { write_600 as write };
+                            const read_600: boolean;
+                            export { read_600 as read };
+                            const id_734: string;
+                            export { id_734 as id };
+                            const label_646: string;
+                            export { label_646 as label };
+                        }
+                    }
+                    export { model_145 as model };
+                    const title_144: string;
+                    export { title_144 as title };
+                    const resourceName_239: string;
+                    export { resourceName_239 as resourceName };
+                }
+                export { resource_95 as resource };
+                const resourceName_240: string;
+                export { resourceName_240 as resourceName };
+                const id_735: string;
+                export { id_735 as id };
                 const label_647: string;
                 export { label_647 as label };
             }
-            export { name_26 as name };
-        }
-        export { model_145 as model };
-        const title_145: string;
-        export { title_145 as title };
-        const resourceName_240: string;
-        export { resourceName_240 as resourceName };
-    }
-    export namespace unit_feature_lists {
-        const model_146: never[];
-        export { model_146 as model };
-        const title_146: string;
-        export { title_146 as title };
-        const resourceName_241: string;
-        export { resourceName_241 as resourceName };
-    }
-    export namespace unit_types {
-        export namespace model_147 {
-            export namespace id_738 {
-                const type_609: string;
-                export { type_609 as type };
-                const nullable_599: boolean;
-                export { nullable_599 as nullable };
-                const write_599: boolean;
-                export { write_599 as write };
-                const read_599: boolean;
-                export { read_599 as read };
-                const validators_377: string[];
-                export { validators_377 as validators };
-                const errorMessages_377: string[];
-                export { errorMessages_377 as errorMessages };
-                const id_739: string;
-                export { id_739 as id };
-                const label_648: string;
-                export { label_648 as label };
-            }
-            export { id_738 as id };
-            export namespace description_11 {
-                const type_610: string;
-                export { type_610 as type };
-                const nullable_600: boolean;
-                export { nullable_600 as nullable };
-                const write_600: boolean;
-                export { write_600 as write };
-                const read_600: boolean;
-                export { read_600 as read };
-                const validators_378: string[];
-                export { validators_378 as validators };
-                const errorMessages_378: string[];
-                export { errorMessages_378 as errorMessages };
-                const id_740: string;
-                export { id_740 as id };
-                const label_649: string;
-                export { label_649 as label };
-            }
-            export { description_11 as description };
-        }
-        export { model_147 as model };
-        const title_147: string;
-        export { title_147 as title };
-        const resourceName_242: string;
-        export { resourceName_242 as resourceName };
-    }
-    export namespace users_1 {
-        export namespace model_148 {
-            export namespace id_741 {
+            export namespace view360 {
                 const type_611: string;
                 export { type_611 as type };
                 const nullable_601: boolean;
@@ -13025,17 +12925,12 @@ export namespace model {
                 export { write_601 as write };
                 const read_601: boolean;
                 export { read_601 as read };
-                const validators_379: string[];
-                export { validators_379 as validators };
-                const errorMessages_379: string[];
-                export { errorMessages_379 as errorMessages };
-                const id_742: string;
-                export { id_742 as id };
-                const label_650: string;
-                export { label_650 as label };
+                const id_736: string;
+                export { id_736 as id };
+                const label_648: string;
+                export { label_648 as label };
             }
-            export { id_741 as id };
-            export namespace email_6 {
+            export namespace councilShow {
                 const type_612: string;
                 export { type_612 as type };
                 const nullable_602: boolean;
@@ -13044,17 +12939,20 @@ export namespace model {
                 export { write_602 as write };
                 const read_602: boolean;
                 export { read_602 as read };
-                const validators_380: string[];
-                export { validators_380 as validators };
-                const errorMessages_380: string[];
-                export { errorMessages_380 as errorMessages };
-                const id_743: string;
-                export { id_743 as id };
-                const label_651: string;
-                export { label_651 as label };
+                const validators_365: string[];
+                export { validators_365 as validators };
+                const errorMessages_365: string[];
+                export { errorMessages_365 as errorMessages };
+                const id_737: string;
+                export { id_737 as id };
+                const label_649: string;
+                export { label_649 as label };
             }
-            export { email_6 as email };
-            export namespace password {
+            export namespace currentPlace_30 {
+                const targetClass_143: string;
+                export { targetClass_143 as targetClass };
+                const optionsName_47: string;
+                export { optionsName_47 as optionsName };
                 const type_613: string;
                 export { type_613 as type };
                 const nullable_603: boolean;
@@ -13063,16 +12961,22 @@ export namespace model {
                 export { write_603 as write };
                 const read_603: boolean;
                 export { read_603 as read };
-                const validators_381: string[];
-                export { validators_381 as validators };
-                const errorMessages_381: string[];
-                export { errorMessages_381 as errorMessages };
-                const id_744: string;
-                export { id_744 as id };
-                const label_652: string;
-                export { label_652 as label };
+                const options_47: {
+                    id: string;
+                    label: string;
+                }[];
+                export { options_47 as options };
+                const validators_366: string[];
+                export { validators_366 as validators };
+                const errorMessages_366: string[];
+                export { errorMessages_366 as errorMessages };
+                const id_738: string;
+                export { id_738 as id };
+                const label_650: string;
+                export { label_650 as label };
             }
-            export namespace name_27 {
+            export { currentPlace_30 as currentPlace };
+            export namespace hasDiscount {
                 const type_614: string;
                 export { type_614 as type };
                 const nullable_604: boolean;
@@ -13081,21 +12985,16 @@ export namespace model {
                 export { write_604 as write };
                 const read_604: boolean;
                 export { read_604 as read };
-                const validators_382: string[];
-                export { validators_382 as validators };
-                const errorMessages_382: string[];
-                export { errorMessages_382 as errorMessages };
-                const id_745: string;
-                export { id_745 as id };
-                const label_653: string;
-                export { label_653 as label };
+                const validators_367: string[];
+                export { validators_367 as validators };
+                const errorMessages_367: string[];
+                export { errorMessages_367 as errorMessages };
+                const id_739: string;
+                export { id_739 as id };
+                const label_651: string;
+                export { label_651 as label };
             }
-            export { name_27 as name };
-            export namespace roles {
-                const targetClass_143: string;
-                export { targetClass_143 as targetClass };
-                const optionsName_48: string;
-                export { optionsName_48 as optionsName };
+            export namespace notes {
                 const type_615: string;
                 export { type_615 as type };
                 const nullable_605: boolean;
@@ -13104,53 +13003,14 @@ export namespace model {
                 export { write_605 as write };
                 const read_605: boolean;
                 export { read_605 as read };
-                const options_48: {
-                    id: string;
-                    label: string;
-                }[];
-                export { options_48 as options };
-                const validators_383: string[];
-                export { validators_383 as validators };
-                const errorMessages_383: string[];
-                export { errorMessages_383 as errorMessages };
-                const id_746: string;
-                export { id_746 as id };
-                const label_654: string;
-                export { label_654 as label };
+                const id_740: string;
+                export { id_740 as id };
+                const label_652: string;
+                export { label_652 as label };
             }
-            export namespace lastNotificationCheckTime {
-                const id_747: string;
-                export { id_747 as id };
-                const label_655: string;
-                export { label_655 as label };
-            }
-        }
-        export { model_148 as model };
-        const title_148: string;
-        export { title_148 as title };
-        const resourceName_243: string;
-        export { resourceName_243 as resourceName };
-    }
-    export { users_1 as users };
-    export namespace arthur_properties {
-        const model_149: never[];
-        export { model_149 as model };
-        const title_149: string;
-        export { title_149 as title };
-        const resourceName_244: string;
-        export { resourceName_244 as resourceName };
-    }
-    export namespace arthur_units {
-        const model_150: never[];
-        export { model_150 as model };
-        const title_150: string;
-        export { title_150 as title };
-        const resourceName_245: string;
-        export { resourceName_245 as resourceName };
-    }
-    export namespace invoices {
-        export namespace model_151 {
-            export namespace id_748 {
+            export namespace portals_1 {
+                const targetClass_144: string;
+                export { targetClass_144 as targetClass };
                 const type_616: string;
                 export { type_616 as type };
                 const nullable_606: boolean;
@@ -13159,241 +13019,700 @@ export namespace model {
                 export { write_606 as write };
                 const read_606: boolean;
                 export { read_606 as read };
-                const validators_384: string[];
-                export { validators_384 as validators };
-                const errorMessages_384: string[];
-                export { errorMessages_384 as errorMessages };
-                const id_749: string;
-                export { id_749 as id };
-                const label_656: string;
-                export { label_656 as label };
-            }
-            export { id_748 as id };
-            export namespace payment_1 {
-                const targetClass_144: string;
-                export { targetClass_144 as targetClass };
-                const type_617: string;
-                export { type_617 as type };
-                const nullable_607: boolean;
-                export { nullable_607 as nullable };
-                const write_607: boolean;
-                export { write_607 as write };
-                const read_607: boolean;
-                export { read_607 as read };
-                export namespace resource_95 {
-                    const model_152: never[];
-                    export { model_152 as model };
-                    const title_151: string;
-                    export { title_151 as title };
-                    const resourceName_246: string;
-                    export { resourceName_246 as resourceName };
+                export namespace resource_96 {
+                    export namespace model_146 {
+                        export namespace id_741 {
+                            const type_617: string;
+                            export { type_617 as type };
+                            const nullable_607: boolean;
+                            export { nullable_607 as nullable };
+                            const write_607: boolean;
+                            export { write_607 as write };
+                            const read_607: boolean;
+                            export { read_607 as read };
+                            const validators_368: string[];
+                            export { validators_368 as validators };
+                            const errorMessages_368: string[];
+                            export { errorMessages_368 as errorMessages };
+                            const id_742: string;
+                            export { id_742 as id };
+                            const label_653: string;
+                            export { label_653 as label };
+                        }
+                        export { id_741 as id };
+                        export namespace portal_2 {
+                            const targetClass_145: string;
+                            export { targetClass_145 as targetClass };
+                            const type_618: string;
+                            export { type_618 as type };
+                            const nullable_608: boolean;
+                            export { nullable_608 as nullable };
+                            const write_608: boolean;
+                            export { write_608 as write };
+                            const read_608: boolean;
+                            export { read_608 as read };
+                            export namespace resource_97 {
+                                export namespace model_147 {
+                                    export namespace id_743 {
+                                        const type_619: string;
+                                        export { type_619 as type };
+                                        const nullable_609: boolean;
+                                        export { nullable_609 as nullable };
+                                        const write_609: boolean;
+                                        export { write_609 as write };
+                                        const read_609: boolean;
+                                        export { read_609 as read };
+                                        const validators_369: string[];
+                                        export { validators_369 as validators };
+                                        const errorMessages_369: string[];
+                                        export { errorMessages_369 as errorMessages };
+                                        const id_744: string;
+                                        export { id_744 as id };
+                                        const label_654: string;
+                                        export { label_654 as label };
+                                    }
+                                    export { id_743 as id };
+                                    export namespace name_26 {
+                                        const type_620: string;
+                                        export { type_620 as type };
+                                        const nullable_610: boolean;
+                                        export { nullable_610 as nullable };
+                                        const write_610: boolean;
+                                        export { write_610 as write };
+                                        const read_610: boolean;
+                                        export { read_610 as read };
+                                        const validators_370: string[];
+                                        export { validators_370 as validators };
+                                        const errorMessages_370: string[];
+                                        export { errorMessages_370 as errorMessages };
+                                        const id_745: string;
+                                        export { id_745 as id };
+                                        const label_655: string;
+                                        export { label_655 as label };
+                                    }
+                                    export { name_26 as name };
+                                    export namespace discount_2 {
+                                        const type_621: string;
+                                        export { type_621 as type };
+                                        const nullable_611: boolean;
+                                        export { nullable_611 as nullable };
+                                        const write_611: boolean;
+                                        export { write_611 as write };
+                                        const read_611: boolean;
+                                        export { read_611 as read };
+                                        const validators_371: string[];
+                                        export { validators_371 as validators };
+                                        const errorMessages_371: string[];
+                                        export { errorMessages_371 as errorMessages };
+                                        const id_746: string;
+                                        export { id_746 as id };
+                                        const label_656: string;
+                                        export { label_656 as label };
+                                    }
+                                    export { discount_2 as discount };
+                                    export namespace url_3 {
+                                        const type_622: string;
+                                        export { type_622 as type };
+                                        const nullable_612: boolean;
+                                        export { nullable_612 as nullable };
+                                        const write_612: boolean;
+                                        export { write_612 as write };
+                                        const read_612: boolean;
+                                        export { read_612 as read };
+                                        const validators_372: string[];
+                                        export { validators_372 as validators };
+                                        const errorMessages_372: string[];
+                                        export { errorMessages_372 as errorMessages };
+                                        const id_747: string;
+                                        export { id_747 as id };
+                                        const label_657: string;
+                                        export { label_657 as label };
+                                    }
+                                    export { url_3 as url };
+                                }
+                                export { model_147 as model };
+                                const title_145: string;
+                                export { title_145 as title };
+                                const resourceName_241: string;
+                                export { resourceName_241 as resourceName };
+                            }
+                            export { resource_97 as resource };
+                            const resourceName_242: string;
+                            export { resourceName_242 as resourceName };
+                            const optionText_63: string;
+                            export { optionText_63 as optionText };
+                            const validators_373: string[];
+                            export { validators_373 as validators };
+                            const errorMessages_373: string[];
+                            export { errorMessages_373 as errorMessages };
+                            const id_748: string;
+                            export { id_748 as id };
+                            const label_658: string;
+                            export { label_658 as label };
+                        }
+                        export { portal_2 as portal };
+                        export namespace unitDiscount_1 {
+                            const type_623: string;
+                            export { type_623 as type };
+                            const nullable_613: boolean;
+                            export { nullable_613 as nullable };
+                            const write_613: boolean;
+                            export { write_613 as write };
+                            const read_613: boolean;
+                            export { read_613 as read };
+                            const validators_374: string[];
+                            export { validators_374 as validators };
+                            const errorMessages_374: string[];
+                            export { errorMessages_374 as errorMessages };
+                            const id_749: string;
+                            export { id_749 as id };
+                            const label_659: string;
+                            export { label_659 as label };
+                        }
+                        export { unitDiscount_1 as unitDiscount };
+                        export namespace isActive_1 {
+                            const type_624: string;
+                            export { type_624 as type };
+                            const nullable_614: boolean;
+                            export { nullable_614 as nullable };
+                            const write_614: boolean;
+                            export { write_614 as write };
+                            const read_614: boolean;
+                            export { read_614 as read };
+                            const validators_375: string[];
+                            export { validators_375 as validators };
+                            const errorMessages_375: string[];
+                            export { errorMessages_375 as errorMessages };
+                            const id_750: string;
+                            export { id_750 as id };
+                            const label_660: string;
+                            export { label_660 as label };
+                        }
+                        export { isActive_1 as isActive };
+                    }
+                    export { model_146 as model };
+                    const title_146: string;
+                    export { title_146 as title };
+                    const resourceName_243: string;
+                    export { resourceName_243 as resourceName };
                 }
-                export { resource_95 as resource };
-                const resourceName_247: string;
-                export { resourceName_247 as resourceName };
-                const optionText_61: string;
-                export { optionText_61 as optionText };
-                const validators_385: string[];
-                export { validators_385 as validators };
-                const errorMessages_385: string[];
-                export { errorMessages_385 as errorMessages };
-                const id_750: string;
-                export { id_750 as id };
-                const label_657: string;
-                export { label_657 as label };
-            }
-            export { payment_1 as payment };
-            export namespace reference {
-                const type_618: string;
-                export { type_618 as type };
-                const nullable_608: boolean;
-                export { nullable_608 as nullable };
-                const write_608: boolean;
-                export { write_608 as write };
-                const read_608: boolean;
-                export { read_608 as read };
-                const validators_386: string[];
-                export { validators_386 as validators };
-                const errorMessages_386: string[];
-                export { errorMessages_386 as errorMessages };
+                export { resource_96 as resource };
+                const resourceName_244: string;
+                export { resourceName_244 as resourceName };
+                const validators_376: string[];
+                export { validators_376 as validators };
+                const errorMessages_376: string[];
+                export { errorMessages_376 as errorMessages };
                 const id_751: string;
                 export { id_751 as id };
-                const label_658: string;
-                export { label_658 as label };
-            }
-            export namespace dueTime {
-                const type_619: string;
-                export { type_619 as type };
-                const nullable_609: boolean;
-                export { nullable_609 as nullable };
-                const write_609: boolean;
-                export { write_609 as write };
-                const read_609: boolean;
-                export { read_609 as read };
-                const validators_387: string[];
-                export { validators_387 as validators };
-                const errorMessages_387: string[];
-                export { errorMessages_387 as errorMessages };
-                const id_752: string;
-                export { id_752 as id };
-                const label_659: string;
-                export { label_659 as label };
-            }
-            export namespace status_4 {
-                const targetClass_145: string;
-                export { targetClass_145 as targetClass };
-                const optionsName_49: string;
-                export { optionsName_49 as optionsName };
-                const type_620: string;
-                export { type_620 as type };
-                const nullable_610: boolean;
-                export { nullable_610 as nullable };
-                const write_610: boolean;
-                export { write_610 as write };
-                const read_610: boolean;
-                export { read_610 as read };
-                const options_49: {
-                    id: number;
-                    label: string;
-                }[];
-                export { options_49 as options };
-                const validators_388: string[];
-                export { validators_388 as validators };
-                const errorMessages_388: string[];
-                export { errorMessages_388 as errorMessages };
-                const id_753: string;
-                export { id_753 as id };
-                const label_660: string;
-                export { label_660 as label };
-            }
-            export { status_4 as status };
-            export namespace type_621 {
-                const targetClass_146: string;
-                export { targetClass_146 as targetClass };
-                const optionsName_50: string;
-                export { optionsName_50 as optionsName };
-                const type_622: string;
-                export { type_622 as type };
-                const nullable_611: boolean;
-                export { nullable_611 as nullable };
-                const write_611: boolean;
-                export { write_611 as write };
-                const read_611: boolean;
-                export { read_611 as read };
-                const options_50: {
-                    id: number;
-                    label: string;
-                }[];
-                export { options_50 as options };
-                const validators_389: string[];
-                export { validators_389 as validators };
-                const errorMessages_389: string[];
-                export { errorMessages_389 as errorMessages };
-                const id_754: string;
-                export { id_754 as id };
                 const label_661: string;
                 export { label_661 as label };
             }
-            export { type_621 as type };
-            export namespace lineAmountType {
-                const type_623: string;
-                export { type_623 as type };
-                const nullable_612: boolean;
-                export { nullable_612 as nullable };
-                const write_612: boolean;
-                export { write_612 as write };
-                const read_612: boolean;
-                export { read_612 as read };
-                const validators_390: string[];
-                export { validators_390 as validators };
-                const errorMessages_390: string[];
-                export { errorMessages_390 as errorMessages };
-                const id_755: string;
-                export { id_755 as id };
+            export { portals_1 as portals };
+            export namespace requestedTransition_30 {
+                const id_752: string;
+                export { id_752 as id };
                 const label_662: string;
                 export { label_662 as label };
             }
-            export namespace contactId {
-                const type_624: string;
-                export { type_624 as type };
-                const nullable_613: boolean;
-                export { nullable_613 as nullable };
-                const write_613: boolean;
-                export { write_613 as write };
-                const read_613: boolean;
-                export { read_613 as read };
-                const validators_391: string[];
-                export { validators_391 as validators };
-                const errorMessages_391: string[];
-                export { errorMessages_391 as errorMessages };
-                const id_756: string;
-                export { id_756 as id };
+            export { requestedTransition_30 as requestedTransition };
+            export namespace eligibleTransitions_30 {
+                const id_753: string;
+                export { id_753 as id };
                 const label_663: string;
                 export { label_663 as label };
             }
-            export namespace lineItems {
-                const targetClass_147: string;
-                export { targetClass_147 as targetClass };
+            export { eligibleTransitions_30 as eligibleTransitions };
+        }
+        export { model_139 as model };
+        const title_147: string;
+        export { title_147 as title };
+        const resourceName_245: string;
+        export { resourceName_245 as resourceName };
+    }
+    export { units_3 as units };
+    export namespace unit_features {
+        export namespace model_148 {
+            export namespace id_754 {
                 const type_625: string;
                 export { type_625 as type };
-                const nullable_614: boolean;
-                export { nullable_614 as nullable };
-                const write_614: boolean;
-                export { write_614 as write };
-                const read_614: boolean;
-                export { read_614 as read };
-                export namespace resource_96 {
-                    const model_153: never[];
-                    export { model_153 as model };
-                    const title_152: string;
-                    export { title_152 as title };
-                    const resourceName_248: string;
-                    export { resourceName_248 as resourceName };
-                }
-                export { resource_96 as resource };
-                const resourceName_249: string;
-                export { resourceName_249 as resourceName };
-                const validators_392: string[];
-                export { validators_392 as validators };
-                const errorMessages_392: string[];
-                export { errorMessages_392 as errorMessages };
-                const id_757: string;
-                export { id_757 as id };
-                const label_664: string;
-                export { label_664 as label };
-            }
-            export namespace xeroInvoiceId_2 {
-                const type_626: string;
-                export { type_626 as type };
                 const nullable_615: boolean;
                 export { nullable_615 as nullable };
                 const write_615: boolean;
                 export { write_615 as write };
                 const read_615: boolean;
                 export { read_615 as read };
+                const validators_377: string[];
+                export { validators_377 as validators };
+                const errorMessages_377: string[];
+                export { errorMessages_377 as errorMessages };
+                const id_755: string;
+                export { id_755 as id };
+                const label_664: string;
+                export { label_664 as label };
+            }
+            export { id_754 as id };
+            export namespace name_27 {
+                const type_626: string;
+                export { type_626 as type };
+                const nullable_616: boolean;
+                export { nullable_616 as nullable };
+                const write_616: boolean;
+                export { write_616 as write };
+                const read_616: boolean;
+                export { read_616 as read };
+                const validators_378: string[];
+                export { validators_378 as validators };
+                const errorMessages_378: string[];
+                export { errorMessages_378 as errorMessages };
+                const id_756: string;
+                export { id_756 as id };
+                const label_665: string;
+                export { label_665 as label };
+            }
+            export { name_27 as name };
+        }
+        export { model_148 as model };
+        const title_148: string;
+        export { title_148 as title };
+        const resourceName_246: string;
+        export { resourceName_246 as resourceName };
+    }
+    export namespace unit_feature_lists {
+        const model_149: never[];
+        export { model_149 as model };
+        const title_149: string;
+        export { title_149 as title };
+        const resourceName_247: string;
+        export { resourceName_247 as resourceName };
+    }
+    export namespace unit_types {
+        export namespace model_150 {
+            export namespace id_757 {
+                const type_627: string;
+                export { type_627 as type };
+                const nullable_617: boolean;
+                export { nullable_617 as nullable };
+                const write_617: boolean;
+                export { write_617 as write };
+                const read_617: boolean;
+                export { read_617 as read };
+                const validators_379: string[];
+                export { validators_379 as validators };
+                const errorMessages_379: string[];
+                export { errorMessages_379 as errorMessages };
+                const id_758: string;
+                export { id_758 as id };
+                const label_666: string;
+                export { label_666 as label };
+            }
+            export { id_757 as id };
+            export namespace description_11 {
+                const type_628: string;
+                export { type_628 as type };
+                const nullable_618: boolean;
+                export { nullable_618 as nullable };
+                const write_618: boolean;
+                export { write_618 as write };
+                const read_618: boolean;
+                export { read_618 as read };
+                const validators_380: string[];
+                export { validators_380 as validators };
+                const errorMessages_380: string[];
+                export { errorMessages_380 as errorMessages };
+                const id_759: string;
+                export { id_759 as id };
+                const label_667: string;
+                export { label_667 as label };
+            }
+            export { description_11 as description };
+        }
+        export { model_150 as model };
+        const title_150: string;
+        export { title_150 as title };
+        const resourceName_248: string;
+        export { resourceName_248 as resourceName };
+    }
+    export namespace users_1 {
+        export namespace model_151 {
+            export namespace id_760 {
+                const type_629: string;
+                export { type_629 as type };
+                const nullable_619: boolean;
+                export { nullable_619 as nullable };
+                const write_619: boolean;
+                export { write_619 as write };
+                const read_619: boolean;
+                export { read_619 as read };
+                const validators_381: string[];
+                export { validators_381 as validators };
+                const errorMessages_381: string[];
+                export { errorMessages_381 as errorMessages };
+                const id_761: string;
+                export { id_761 as id };
+                const label_668: string;
+                export { label_668 as label };
+            }
+            export { id_760 as id };
+            export namespace email_7 {
+                const type_630: string;
+                export { type_630 as type };
+                const nullable_620: boolean;
+                export { nullable_620 as nullable };
+                const write_620: boolean;
+                export { write_620 as write };
+                const read_620: boolean;
+                export { read_620 as read };
+                const validators_382: string[];
+                export { validators_382 as validators };
+                const errorMessages_382: string[];
+                export { errorMessages_382 as errorMessages };
+                const id_762: string;
+                export { id_762 as id };
+                const label_669: string;
+                export { label_669 as label };
+            }
+            export { email_7 as email };
+            export namespace password {
+                const type_631: string;
+                export { type_631 as type };
+                const nullable_621: boolean;
+                export { nullable_621 as nullable };
+                const write_621: boolean;
+                export { write_621 as write };
+                const read_621: boolean;
+                export { read_621 as read };
+                const validators_383: string[];
+                export { validators_383 as validators };
+                const errorMessages_383: string[];
+                export { errorMessages_383 as errorMessages };
+                const id_763: string;
+                export { id_763 as id };
+                const label_670: string;
+                export { label_670 as label };
+            }
+            export namespace name_28 {
+                const type_632: string;
+                export { type_632 as type };
+                const nullable_622: boolean;
+                export { nullable_622 as nullable };
+                const write_622: boolean;
+                export { write_622 as write };
+                const read_622: boolean;
+                export { read_622 as read };
+                const validators_384: string[];
+                export { validators_384 as validators };
+                const errorMessages_384: string[];
+                export { errorMessages_384 as errorMessages };
+                const id_764: string;
+                export { id_764 as id };
+                const label_671: string;
+                export { label_671 as label };
+            }
+            export { name_28 as name };
+            export namespace roles {
+                const targetClass_146: string;
+                export { targetClass_146 as targetClass };
+                const optionsName_48: string;
+                export { optionsName_48 as optionsName };
+                const type_633: string;
+                export { type_633 as type };
+                const nullable_623: boolean;
+                export { nullable_623 as nullable };
+                const write_623: boolean;
+                export { write_623 as write };
+                const read_623: boolean;
+                export { read_623 as read };
+                const options_48: {
+                    id: string;
+                    label: string;
+                }[];
+                export { options_48 as options };
+                const validators_385: string[];
+                export { validators_385 as validators };
+                const errorMessages_385: string[];
+                export { errorMessages_385 as errorMessages };
+                const id_765: string;
+                export { id_765 as id };
+                const label_672: string;
+                export { label_672 as label };
+            }
+            export namespace lastNotificationCheckTime {
+                const id_766: string;
+                export { id_766 as id };
+                const label_673: string;
+                export { label_673 as label };
+            }
+        }
+        export { model_151 as model };
+        const title_151: string;
+        export { title_151 as title };
+        const resourceName_249: string;
+        export { resourceName_249 as resourceName };
+    }
+    export { users_1 as users };
+    export namespace arthur_properties {
+        const model_152: never[];
+        export { model_152 as model };
+        const title_152: string;
+        export { title_152 as title };
+        const resourceName_250: string;
+        export { resourceName_250 as resourceName };
+    }
+    export namespace arthur_units {
+        const model_153: never[];
+        export { model_153 as model };
+        const title_153: string;
+        export { title_153 as title };
+        const resourceName_251: string;
+        export { resourceName_251 as resourceName };
+    }
+    export namespace invoices {
+        export namespace model_154 {
+            export namespace id_767 {
+                const type_634: string;
+                export { type_634 as type };
+                const nullable_624: boolean;
+                export { nullable_624 as nullable };
+                const write_624: boolean;
+                export { write_624 as write };
+                const read_624: boolean;
+                export { read_624 as read };
+                const validators_386: string[];
+                export { validators_386 as validators };
+                const errorMessages_386: string[];
+                export { errorMessages_386 as errorMessages };
+                const id_768: string;
+                export { id_768 as id };
+                const label_674: string;
+                export { label_674 as label };
+            }
+            export { id_767 as id };
+            export namespace payment_1 {
+                const targetClass_147: string;
+                export { targetClass_147 as targetClass };
+                const type_635: string;
+                export { type_635 as type };
+                const nullable_625: boolean;
+                export { nullable_625 as nullable };
+                const write_625: boolean;
+                export { write_625 as write };
+                const read_625: boolean;
+                export { read_625 as read };
+                export namespace resource_98 {
+                    const model_155: never[];
+                    export { model_155 as model };
+                    const title_154: string;
+                    export { title_154 as title };
+                    const resourceName_252: string;
+                    export { resourceName_252 as resourceName };
+                }
+                export { resource_98 as resource };
+                const resourceName_253: string;
+                export { resourceName_253 as resourceName };
+                const optionText_64: string;
+                export { optionText_64 as optionText };
+                const validators_387: string[];
+                export { validators_387 as validators };
+                const errorMessages_387: string[];
+                export { errorMessages_387 as errorMessages };
+                const id_769: string;
+                export { id_769 as id };
+                const label_675: string;
+                export { label_675 as label };
+            }
+            export { payment_1 as payment };
+            export namespace reference {
+                const type_636: string;
+                export { type_636 as type };
+                const nullable_626: boolean;
+                export { nullable_626 as nullable };
+                const write_626: boolean;
+                export { write_626 as write };
+                const read_626: boolean;
+                export { read_626 as read };
+                const validators_388: string[];
+                export { validators_388 as validators };
+                const errorMessages_388: string[];
+                export { errorMessages_388 as errorMessages };
+                const id_770: string;
+                export { id_770 as id };
+                const label_676: string;
+                export { label_676 as label };
+            }
+            export namespace dueTime {
+                const type_637: string;
+                export { type_637 as type };
+                const nullable_627: boolean;
+                export { nullable_627 as nullable };
+                const write_627: boolean;
+                export { write_627 as write };
+                const read_627: boolean;
+                export { read_627 as read };
+                const validators_389: string[];
+                export { validators_389 as validators };
+                const errorMessages_389: string[];
+                export { errorMessages_389 as errorMessages };
+                const id_771: string;
+                export { id_771 as id };
+                const label_677: string;
+                export { label_677 as label };
+            }
+            export namespace status_4 {
+                const targetClass_148: string;
+                export { targetClass_148 as targetClass };
+                const optionsName_49: string;
+                export { optionsName_49 as optionsName };
+                const type_638: string;
+                export { type_638 as type };
+                const nullable_628: boolean;
+                export { nullable_628 as nullable };
+                const write_628: boolean;
+                export { write_628 as write };
+                const read_628: boolean;
+                export { read_628 as read };
+                const options_49: {
+                    id: number;
+                    label: string;
+                }[];
+                export { options_49 as options };
+                const validators_390: string[];
+                export { validators_390 as validators };
+                const errorMessages_390: string[];
+                export { errorMessages_390 as errorMessages };
+                const id_772: string;
+                export { id_772 as id };
+                const label_678: string;
+                export { label_678 as label };
+            }
+            export { status_4 as status };
+            export namespace type_639 {
+                const targetClass_149: string;
+                export { targetClass_149 as targetClass };
+                const optionsName_50: string;
+                export { optionsName_50 as optionsName };
+                const type_640: string;
+                export { type_640 as type };
+                const nullable_629: boolean;
+                export { nullable_629 as nullable };
+                const write_629: boolean;
+                export { write_629 as write };
+                const read_629: boolean;
+                export { read_629 as read };
+                const options_50: {
+                    id: number;
+                    label: string;
+                }[];
+                export { options_50 as options };
+                const validators_391: string[];
+                export { validators_391 as validators };
+                const errorMessages_391: string[];
+                export { errorMessages_391 as errorMessages };
+                const id_773: string;
+                export { id_773 as id };
+                const label_679: string;
+                export { label_679 as label };
+            }
+            export { type_639 as type };
+            export namespace lineAmountType {
+                const type_641: string;
+                export { type_641 as type };
+                const nullable_630: boolean;
+                export { nullable_630 as nullable };
+                const write_630: boolean;
+                export { write_630 as write };
+                const read_630: boolean;
+                export { read_630 as read };
+                const validators_392: string[];
+                export { validators_392 as validators };
+                const errorMessages_392: string[];
+                export { errorMessages_392 as errorMessages };
+                const id_774: string;
+                export { id_774 as id };
+                const label_680: string;
+                export { label_680 as label };
+            }
+            export namespace contactId {
+                const type_642: string;
+                export { type_642 as type };
+                const nullable_631: boolean;
+                export { nullable_631 as nullable };
+                const write_631: boolean;
+                export { write_631 as write };
+                const read_631: boolean;
+                export { read_631 as read };
                 const validators_393: string[];
                 export { validators_393 as validators };
                 const errorMessages_393: string[];
                 export { errorMessages_393 as errorMessages };
-                const id_758: string;
-                export { id_758 as id };
-                const label_665: string;
-                export { label_665 as label };
+                const id_775: string;
+                export { id_775 as id };
+                const label_681: string;
+                export { label_681 as label };
+            }
+            export namespace lineItems {
+                const targetClass_150: string;
+                export { targetClass_150 as targetClass };
+                const type_643: string;
+                export { type_643 as type };
+                const nullable_632: boolean;
+                export { nullable_632 as nullable };
+                const write_632: boolean;
+                export { write_632 as write };
+                const read_632: boolean;
+                export { read_632 as read };
+                export namespace resource_99 {
+                    const model_156: never[];
+                    export { model_156 as model };
+                    const title_155: string;
+                    export { title_155 as title };
+                    const resourceName_254: string;
+                    export { resourceName_254 as resourceName };
+                }
+                export { resource_99 as resource };
+                const resourceName_255: string;
+                export { resourceName_255 as resourceName };
+                const validators_394: string[];
+                export { validators_394 as validators };
+                const errorMessages_394: string[];
+                export { errorMessages_394 as errorMessages };
+                const id_776: string;
+                export { id_776 as id };
+                const label_682: string;
+                export { label_682 as label };
+            }
+            export namespace xeroInvoiceId_2 {
+                const type_644: string;
+                export { type_644 as type };
+                const nullable_633: boolean;
+                export { nullable_633 as nullable };
+                const write_633: boolean;
+                export { write_633 as write };
+                const read_633: boolean;
+                export { read_633 as read };
+                const validators_395: string[];
+                export { validators_395 as validators };
+                const errorMessages_395: string[];
+                export { errorMessages_395 as errorMessages };
+                const id_777: string;
+                export { id_777 as id };
+                const label_683: string;
+                export { label_683 as label };
             }
             export { xeroInvoiceId_2 as xeroInvoiceId };
         }
-        export { model_151 as model };
-        const title_153: string;
-        export { title_153 as title };
-        const resourceName_250: string;
-        export { resourceName_250 as resourceName };
+        export { model_154 as model };
+        const title_156: string;
+        export { title_156 as title };
+        const resourceName_256: string;
+        export { resourceName_256 as resourceName };
     }
     export namespace line_items {
-        const model_154: never[];
-        export { model_154 as model };
-        const title_154: string;
-        export { title_154 as title };
-        const resourceName_251: string;
-        export { resourceName_251 as resourceName };
+        const model_157: never[];
+        export { model_157 as model };
+        const title_157: string;
+        export { title_157 as title };
+        const resourceName_257: string;
+        export { resourceName_257 as resourceName };
     }
 }
