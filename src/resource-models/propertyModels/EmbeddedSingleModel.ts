@@ -10,15 +10,15 @@ export class EmbeddedSingleModel extends NestedPropertyModel{
     }
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler} =  props;
+        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler} =  props;
         const setParentFormValue = (values:any) => setFormValue({...formValue, [this.resourceName] : values });
         return NestedFormContent({
             model:this.getResource().getModel(),
-            form:form,
+            form: this.form,
             setParentFormValue:setParentFormValue,
             refreshReferencesMap:refreshReferencesMap,
             referencesMap:referencesMap,
-            formValue:formValue[this.id],
+            formValue:formValue,
             errors:errors,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler
