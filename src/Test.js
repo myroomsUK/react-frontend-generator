@@ -5,13 +5,11 @@ import {properties} from "./mock/properties";
 import {listings} from "./mock/listings";
 import {model} from "./mock/model";
 import {overrideRegistry} from "./mock/overrideRegistry";
-import {RouteFilterList} from "./generators/pages/ListPageGenerator";
 import {landlords} from "./mock/landlords";
-import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
-import {EditPage} from "./generators/pages/EditPageGenerator";
 import {Create} from "./generators/pages/CreatePageGenerator";
+import {EditPage} from "./generators/pages/EditPageGenerator";
 
 export default function Test(){
 
@@ -34,9 +32,10 @@ export default function Test(){
 
     const render = <div>
 
-        <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
-        <RouteFilterList resourceName={"landlords"} filters={{}}/>
+        {/*<button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
+        <RouteFilterList resourceName={"landlords"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
+        <EditPage propResourceName={"properties"} propId={1}></EditPage>
     </div>
     return modelLoaded ? render : <div></div>;
 }

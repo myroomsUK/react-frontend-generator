@@ -11,9 +11,14 @@ interface FormContentProps {
     lockedFormValue: object;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
-    form?: React.DetailedReactHTMLElement<any, any>;
-    resourceName: string;
-    resourceId?: string;
+    formContent?: React.DetailedReactHTMLElement<any, any>;
 }
+/**
+ *
+ * @constructor
+ *
+ * FormContent component is responsible for overriding the form, passing all the required props
+ * @param props
+ */
 export declare const FormContent: React.FC<FormContentProps>;
 export {};

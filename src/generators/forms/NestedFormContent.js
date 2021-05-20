@@ -11,9 +11,7 @@ export default function NestedFormContent(props){
         }
     },[formValue])
 
-    if(form){
-        return React.cloneElement(form, props)
-    }
+
 
     return <FormContent referencesMap={referencesMap} form={form} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler} />

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Grid} from "@material-ui/core";
 import {PropertyModel} from "../../resource-models/PropertyModel";
 import {Model} from "../../resource-models/Model";
@@ -14,31 +14,35 @@ interface FormContentProps {
     lockedFormValue:object;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<any>>;
-    form?:React.DetailedReactHTMLElement<any, any>;
-    resourceName: string;
-    resourceId?: string;
+    formContent?:React.DetailedReactHTMLElement<any, any>;
 }
 
-export const FormContent: React.FC<FormContentProps> = ({partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, form}) => {
-    useEffect(()=>{console.log("references map", referencesMap)},[referencesMap])
+/**
+ *
+ * @constructor
+ *
+ * FormContent component is responsible for overriding the form, passing all the required props
+ * @param props
+ */
+export const FormContent: React.FC<FormContentProps> = (props) => {
 
-    if(form){
-        const props = {model:model, formValue:formValue, lockedFormValue:lockedFormValue, referencesMap:referencesMap, refreshReferencesMap:refreshReferencesMap, setFormValue:setFormValue, errors:errors, partialSubmitHandler:partialSubmitHandler, submitHandler:submitHandler}
-        return React.cloneElement(form, props);
+    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, formContent}=props;
+    if(formContent){
+        return React.cloneElement(formContent, props);
     }
 
     return <Grid container spacing={2}>
-        {model.properties.filter((propertyModel:PropertyModel) => propertyModel.write === true).map((propertyModel:PropertyModel, index:number) => {
+        {model.properties //TODO va reso indipendente da material ui nel rendering
+            .filter((propertyModel:PropertyModel) => propertyModel.write === true)
+            .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form};
+                const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors};
                 return <Grid item xs={xs} md={md} key={index}>
                     {propertyModel.getInputField(props)}
                 </Grid>
             }
         )}
     </Grid>
-
-    return <div></div>
 }
 
 

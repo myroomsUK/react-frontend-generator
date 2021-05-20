@@ -14,7 +14,7 @@ interface ShowProps {
 export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowProps) => JSX.Element = ({propResourceName, propId:id, record, propShowPage}:ShowProps) =>{
 
     const resourceModel = useGetResourceModel(propResourceName);
-    const {model, showPage} = resourceModel;
+    const {model} = resourceModel;
     const [genericShowRender, setGenericShowRender] = useState(<div/>);
 
 
@@ -34,7 +34,7 @@ export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowPr
             setGenericShowRender(React.cloneElement(propShowPage, showFormProps ));
         }else{
             setGenericShowRender(<Grid container spacing={2}>
-            <ShowContent record={record} resourceName={propResourceName} model={model} />
+            <ShowContent record={record} model={model} />
             </Grid>)
         }
     },[record])

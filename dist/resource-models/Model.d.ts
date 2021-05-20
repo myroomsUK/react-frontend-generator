@@ -1,5 +1,6 @@
-import { InputFields, PropertyModel } from "./PropertyModel";
-import { ReactElement } from "react";
+import { PropertyModel } from "./PropertyModel";
+import React, { ReactElement } from "react";
+import { Errors } from "../generators/errors/Errors";
 export interface Model {
     properties: PropertyModel[];
 }
@@ -10,13 +11,31 @@ export declare class Model {
      * @param name
      */
     getProperty(name: string): PropertyModel;
-    getPropertyByResourceName(resourceName: string): PropertyModel;
-    addPropertiesToRequestedElement(propertiesObject: any, resourceName: string): this;
+    /**
+     * Create a Model from a valid json Model.
+     * @param jsonModel
+     */
     static createFromJson(jsonModel: any): Model;
-    inputProperty(requestedName: string, props: InputFields): ReactElement<any, any> | null;
-    outputProperty(requestedName: string, props: any, showLabel?: boolean): ReactElement<any, any> | null;
+    getInputField(requestedName: string, props: ModelGetInputFieldProps): ReactElement<any, any> | null;
+    getOutputField(requestedName: string, props: OutputPropertyProps, showLabel?: boolean): ReactElement<any, any> | null;
     getAllPropertiesReadableNames(): {
         id: string;
         label: string;
     }[];
 }
+interface OutputPropertyProps {
+    model: Model;
+    record: any;
+}
+export interface ModelGetInputFieldProps {
+    model: Model;
+    formValue: any;
+    setFormValue: React.Dispatch<React.SetStateAction<{}>>;
+    lockedFormValue: any;
+    errors: Errors;
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap: () => void;
+}
+export {};

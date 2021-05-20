@@ -9,6 +9,8 @@ export interface PropertyModel {
     errorMessages?: string[];
     resourceName: string;
     optionText: string;
+    write?: boolean;
+    read?: boolean;
     single?: boolean;
     form: React.DetailedReactHTMLElement<any, any>;
     options?: Option[];
@@ -18,8 +20,6 @@ export interface PropertyModel {
     showElement?: React.DetailedReactHTMLElement<any, any>;
     modifyOnlyLastElement?: boolean;
     editabilityRule?: () => any;
-    write?: boolean;
-    read?: boolean;
     listValue?: any;
     listDataTransformer?: any;
     areImages?: boolean;
@@ -66,5 +66,6 @@ export interface InputFields {
 }
 export interface OutputFields {
     record: any;
+    model: PropertyModel;
     showLabel: boolean;
 }

@@ -1,4 +1,3 @@
-import {PropertyModel} from "../PropertyModel";
 import {PropertyModelCore} from "../PropertyModelCore";
 import {AutocompleteInput} from "../../generators/forms/inputs/AutocompleteInput";
 import React from "react";

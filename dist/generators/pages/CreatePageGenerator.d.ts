@@ -1,6 +1,6 @@
 import React from "react";
 interface Props {
-    propResourceName?: string;
+    propResourceName: string;
     propCreatePage?: any;
     lockedFormValue?: any;
     thenFunction?: any;

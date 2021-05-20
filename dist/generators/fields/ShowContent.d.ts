@@ -4,6 +4,5 @@ export interface ShowContent {
     record: any;
     model: Model | undefined;
     showElement?: any;
-    resourceName: string;
 }
 export declare const ShowContent: React.FC<ShowContent>;

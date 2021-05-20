@@ -25,7 +25,6 @@ export function AutocompleteInput({model, refreshReferencesMap, inheritedValue, 
     const dispatch = useDispatch();
     useEffect(()=>{
         if(modalResourceName){
-            console.log("dispatch change resource buffer")
             dispatch(changeResourceBuffer(modalResourceName))
         }
     },[])

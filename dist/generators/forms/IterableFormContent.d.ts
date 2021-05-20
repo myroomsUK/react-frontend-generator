@@ -1,18 +1,20 @@
-export default function IterableFormContent({ model: embeddableModel, resourceName, resource, parentFormValue, partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement, modifyRule }: {
-    model: any;
-    resourceName: any;
-    resource: any;
-    parentFormValue: any;
-    partialSubmitHandler: any;
-    setParentFormValue: any;
-    formValueArray: any;
-    label: any;
-    errors: any;
-    single?: boolean | undefined;
-    submitHandler: any;
-    form: any;
-    referencesMap: any;
-    refreshReferencesMap: any;
-    modifyOnlyLastElement?: boolean | undefined;
-    modifyRule?: (() => boolean) | undefined;
-}): JSX.Element;
+import React from "react";
+import { Errors } from "../errors/Errors";
+import { Model } from "../../resource-models/Model";
+interface IterableFormContentProps {
+    model: Model;
+    resourceName: string;
+    setParentFormValue: (values: any) => void;
+    formContent: React.DetailedReactHTMLElement<any, any>;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap: () => void;
+    formValueArray: any[];
+    errors: Errors;
+    label: string;
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    modifyOnlyLastElement?: boolean;
+    modifyRule?: (formvalue: any) => boolean;
+}
+export declare const IterableFormContent: React.FC<IterableFormContentProps>;
+export {};

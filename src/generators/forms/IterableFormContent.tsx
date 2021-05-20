@@ -10,20 +10,47 @@ import {createArrayFromMap, createMapFromArray} from "../../utils/mapUtils";
 import CustomDeleteButton from "../../rendering/components/buttons/CustomDeleteButton";
 import {FormContent} from "./FormContent";
 import {Errors} from "../errors/Errors";
+import {Model} from "../../resource-models/Model";
+import {FormGeneratorProps} from "./FormGeneratorProps";
 
+interface IterableFormContentProps{
+    model: Model,
+    resourceName: string,
+    setParentFormValue: (values:any) => void,
+    formContent:  React.DetailedReactHTMLElement<any, any>
+    referencesMap: Map<string, any>
+    refreshReferencesMap:()=>void
+    formValueArray: any[],
+    errors: Errors,
+    label:string,
+    submitHandler: (e:any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    modifyOnlyLastElement?:boolean;
+    modifyRule?: (formvalue:any)=> boolean
 
+}
 
-export default function IterableFormContent({model:embeddableModel, resourceName,resource, parentFormValue,  partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single=false, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement=false, modifyRule= ()=>{return true;}}){
+// @ts-ignore
+const useStyles = makeStyles((theme) => ({
+    embeddedTitle:{
+        backgroundColor: theme.palette.secondary
+    },
+    tabs: {
+        borderRight: `1px solid ${theme.palette.divider}`,
+    },
+}));
+
+export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true}) => {
+/*export default function IterableFormContent({model, resourceName,resource, parentFormValue,  partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single=false, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement=false, modifyRule= ()=>{return true;}}){*/
 
     const {remove} = useDelete(resourceName);
     const creationTime = useRef(Date.now());
-    const localPartialSubmitHandler = () => partialSubmitHandler(parentFormValue);
-
     //local map with formvalues: if is edit, I have values from db, otherwise it is a map with no elements.
     const [localFormValueMap, setLocalFormValueMap] = useState(new Map());
+
     useEffect(()=>{
         if(formValueArray!==undefined){
-            const newFormValueArray = formValueArray.map(item => getFormValueFromRecord(item, embeddableModel) );
+            const newFormValueArray = formValueArray.map(item => getFormValueFromRecord(item, model) );
             const formValueMap = createMapFromArray(newFormValueArray);
             setLocalFormValueMap(new Map(formValueMap));
         }
@@ -33,20 +60,19 @@ export default function IterableFormContent({model:embeddableModel, resourceName
         const date = Date.now();
         const newMap = new Map(localFormValueMap).set(date, {} )
         const newArray = createArrayFromMap(newMap);
-        console.log(newArray)
         setParentFormValue(newArray);
     }
 
-    const deleteForm = (key)=>{
-        const deleted = localFormValueMap.delete(key);
+    const deleteForm = (key:any)=>{
+        localFormValueMap.delete(key);
         if(key < creationTime.current){
             remove(key);
         }
-       setParentFormValue(createArrayFromMap(new Map(localFormValueMap)));
+        setParentFormValue(createArrayFromMap(new Map(localFormValueMap)));
     }
 
-    const localSetFormValue = (key) => {
-        return (value) => {
+    const localSetFormValue = (key:any) => {
+        return (value:any) => {
             setParentFormValue(createArrayFromMap(new Map(localFormValueMap.set(key, value))));
         }
     }
@@ -58,6 +84,7 @@ export default function IterableFormContent({model:embeddableModel, resourceName
         return item.fid > creationTime.current
     });
 
+    // @ts-ignore
     const basicButton = <IconButton variant="contained" color="primary" onClick={addForm}><AddOutlinedIcon/></IconButton>
     const button = modifyOnlyLastElement ?  (!hasNewEntry && basicButton) : basicButton
 
@@ -65,8 +92,7 @@ export default function IterableFormContent({model:embeddableModel, resourceName
         const isEditable = modifyRule(formValue);
 
 
-        //const fields = embeddableModel.properties.map((property)=> <GenericShowField model={property} resourceName={resourceName} record={formValue}/>)
-        const formElement = <FormContent form={form} referencesMap={referencesMap} resource={resource} setFormValue={localSetFormValue(key)} model={embeddableModel} resourceName={resourceName} refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent lockedFormValue={{}} formContent={formContent} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>
@@ -83,8 +109,11 @@ export default function IterableFormContent({model:embeddableModel, resourceName
         </React.Fragment>;
     })
 
+    // @ts-ignore
+    const classEmbeddedTitle = classes.embeddedTitle
+
     return <Grid container>
-        <Grid item xs={12} className={classes.embeddedTitle}>
+        <Grid item xs={12} className={classEmbeddedTitle}>
             {label}
             {button}
         </Grid>
@@ -92,11 +121,4 @@ export default function IterableFormContent({model:embeddableModel, resourceName
     </Grid>
 }
 
-const useStyles = makeStyles((theme) => ({
-    embeddedTitle:{
-        backgroundColor: theme.palette.secondary
-    },
-    tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-    },
-}));
+

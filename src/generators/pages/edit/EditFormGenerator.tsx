@@ -3,7 +3,6 @@ import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 import {UpdateListings} from "../../../utils/referenceFieldUtils";
 import {useEdit} from "../../../redux/actions/verbs/edit";
 import {getFormValueFromRecord} from "../../forms/formHelpers";
-import GenericForm from "../../forms/genericForm";
 import {FormGenerator} from "../../forms/FormGenerator";
 import {Error, Errors} from "../../errors/Errors";
 
@@ -34,7 +33,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
     const initialValue = useRef({});
     const [formValue, setFormValue] = useState(initialValue.current);
     const [errors, setErrors] = useState(new Errors([]));
-
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
 
@@ -46,7 +44,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
         setErrors(newErrors)},[responseErrors])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
-
     useEffect(()=>setFormValue(getFormValueFromRecord(record, model)), [record])
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
@@ -76,14 +73,9 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
 
     useEffect(()=>{
         if(formValue!==initialValue.current){
-            if(createEditPageToUse){
-                setGenericEditRender(<GenericForm  {...editFormProps} page={createEditPageToUse} errors={errors}  />)
-            }else{
-                setGenericEditRender(<FormGenerator {...editFormProps} errors={errors} text="Save"/>)
-            }
+            setGenericEditRender(<FormGenerator {...editFormProps} formContent={createEditPageToUse} errors={errors} text="Save"/>)
         }
     },[formValue, errors])
-
 
 
     return genericEditRender;

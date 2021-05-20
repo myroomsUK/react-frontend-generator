@@ -1,11 +1,10 @@
 import React from "react";
-import {EmbeddedInputFields, NestedPropertyModel} from "./NestedPropertyModel";
-import IterableFormContent from "../../generators/forms/IterableFormContent";
+import {EmbeddedInputFields, EmbeddedOutputFields, EmbeddedPropertyModel} from "./NestedPropertyModel";
+import {IterableFormContent} from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 
 
-export class EmbeddedMultipleModel extends NestedPropertyModel{
-
+export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule} =  props;
@@ -15,21 +14,17 @@ export class EmbeddedMultipleModel extends NestedPropertyModel{
         return IterableFormContent({
             model:this.getResource().getModel(),
             resourceName:this.resourceName,
-            form:form,
             setParentFormValue:setParentFormValue,
-            refreshReferencesMap:refreshReferencesMap,
+            formContent: this.form,
             referencesMap:referencesMap,
+            refreshReferencesMap:refreshReferencesMap,
             errors:newErrors,
+            formValueArray:formValue[this.id],
+            label:this.label,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,
-            formValueArray:formValue[this.id],
-            single:single,
-            resource:this.getResource(),
-            label:this.label,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
-            parentFormValue:formValue
-
         })
     }
 
@@ -38,7 +33,8 @@ export class EmbeddedMultipleModel extends NestedPropertyModel{
         };
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null {
+        console.log("props", props, this.id)
         const {record, showElement} = props;
         return IterableShowContent({
             model:this.getResource().getModel(),

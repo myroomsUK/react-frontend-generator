@@ -7,7 +7,7 @@ import {Typography} from "@material-ui/core";
 import _ from "lodash";
 
 
-export abstract class NestedPropertyModel extends PropertyModel{
+export abstract class EmbeddedPropertyModel extends PropertyModel{
     resourceName:string;
     resource:Resource;
 
@@ -27,13 +27,15 @@ export abstract class NestedPropertyModel extends PropertyModel{
 
     getInputField(props: InputFields): React.ReactElement<any, any> | null {
         const {errors, formValue, setFormValue} = props;
+        const model = this;
+        model.label = _.startCase(this.label)
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue[this.id], model:this}
+        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue[this.id], model:model}
         return this.setInputField(newProps);
     }
 
-    getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
+    getOutputField(props:EmbeddedOutputFields): React.ReactElement<any, any> | null {
         const {showLabel} = props;
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
@@ -46,14 +48,13 @@ export abstract class NestedPropertyModel extends PropertyModel{
 export interface EmbeddedInputFields extends InputFields{
     inputHandler: (vars:any) => void,
     value: any,
-    model: NestedPropertyModel,
+    model: EmbeddedPropertyModel,
     errors: Errors,
     form?: React.DetailedReactHTMLElement<any, any>;
     options?: Option[];
     xs?:GridRange;
     md?:GridRange;
     adornment?:string,
-    showElement?:React.DetailedReactHTMLElement<any, any>;
     modifyOnlyLastElement?:boolean;
     editabilityRule?:()=>any,
     write?:boolean,
@@ -68,4 +69,8 @@ export interface EmbeddedInputFields extends InputFields{
     single?: boolean;
     modifyRule?: any;
 
+}
+
+export interface EmbeddedOutputFields extends OutputFields{
+    showElement?:React.DetailedReactHTMLElement<any, any>;
 }

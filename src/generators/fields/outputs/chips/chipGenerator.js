@@ -26,8 +26,6 @@ export default function ChipGenerator({propertyRecord, propertyModel, colorMap})
     const label = options?.find(option => option.id === propertyRecord)?.label;
     const id = options?.find(option => option.id === propertyRecord)?.id;
 
-    console.log("options", options);
-
     return <Chip
         label={label}
     />

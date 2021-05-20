@@ -43,27 +43,6 @@ export const overrideRegistry = {
                 "label": "Status"
             }
         ],
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "showPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
         "formType": "tab-horizontal"
     },
     "areas": {

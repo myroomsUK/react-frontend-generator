@@ -1,16 +1,23 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React, { useEffect } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
-export const FormContent = ({ partialSubmitHandler, resourceName, resourceId, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue = {}, setFormValue, errors, form }) => {
-    useEffect(() => { console.log("references map", referencesMap); }, [referencesMap]);
-    if (form) {
-        const props = { model: model, formValue: formValue, lockedFormValue: lockedFormValue, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler };
-        return React.cloneElement(form, props);
+/**
+ *
+ * @constructor
+ *
+ * FormContent component is responsible for overriding the form, passing all the required props
+ * @param props
+ */
+export const FormContent = (props) => {
+    const { partialSubmitHandler, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue = {}, setFormValue, errors, formContent } = props;
+    if (formContent) {
+        return React.cloneElement(formContent, props);
     }
-    return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties.filter((propertyModel) => propertyModel.write === true).map((propertyModel, index) => {
+    return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties //TODO va reso indipendente da material ui nel rendering
+            .filter((propertyModel) => propertyModel.write === true)
+            .map((propertyModel, index) => {
             const { xs, md } = propertyModel;
-            const props = { model: propertyModel, partialSubmitHandler, submitHandler, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, form };
+            const props = { model: propertyModel, partialSubmitHandler, submitHandler, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors };
             return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getInputField(props) }), index);
         }) }), void 0);
-    return _jsx("div", {}, void 0);
 };

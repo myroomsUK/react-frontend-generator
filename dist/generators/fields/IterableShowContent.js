@@ -3,8 +3,6 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Divider, List, ListItem } from "@material-ui/core";
 export const IterableShowContent = ({ model, record, showElement }) => {
-    console.log("model iterable", model);
-    console.log("record", record);
     if (record === undefined || record.length === 0) {
         return _jsx("div", { children: "No elements found" }, void 0);
     }
@@ -17,7 +15,7 @@ export const IterableShowContent = ({ model, record, showElement }) => {
     else {
         return _jsx(Grid, Object.assign({ container: true }, { children: record.map((singleRecord) => _jsx(Grid, Object.assign({ item: true, xs: 12, md: 12 }, { children: _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties.filter(propertyModel => propertyModel.read === true).map(propertyModel => {
                         const { xs, md, id } = propertyModel;
-                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ record: singleRecord, showLabel: true }) }), void 0);
+                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ model: propertyModel, record: singleRecord, showLabel: true }) }), void 0);
                     }) }), void 0) }), void 0)) }), void 0);
     }
     ;

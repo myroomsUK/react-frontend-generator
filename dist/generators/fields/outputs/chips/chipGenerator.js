@@ -24,6 +24,5 @@ export default function ChipGenerator({ propertyRecord, propertyModel, colorMap 
     const { options } = propertyModel;
     const label = (_a = options === null || options === void 0 ? void 0 : options.find(option => option.id === propertyRecord)) === null || _a === void 0 ? void 0 : _a.label;
     const id = (_b = options === null || options === void 0 ? void 0 : options.find(option => option.id === propertyRecord)) === null || _b === void 0 ? void 0 : _b.id;
-    console.log("options", options);
     return _jsx(Chip, { label: label }, void 0);
 }

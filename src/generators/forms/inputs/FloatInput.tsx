@@ -13,7 +13,7 @@ interface Props{
 
 }
 
-export const FloatInput: React.FC<Props> = ({model, id=model.id, hasError, errorMessage, label, onClick, value}) => {
+export const FloatInput: React.FC<Props> = ({model, id=model.id, hasError, errorMessage, label = model.label, onClick, value}) => {
 
     return <CustomTextValidator
     error={hasError}

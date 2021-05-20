@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormContent } from "./FormContent";
 export default function NestedFormContent(props) {
     const { model, form, setParentFormValue, formValue, errors, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler } = props;
@@ -9,8 +9,5 @@ export default function NestedFormContent(props) {
             setLocalFormValue(formValue);
         }
     }, [formValue]);
-    if (form) {
-        return React.cloneElement(form, props);
-    }
     return _jsx(FormContent, { referencesMap: referencesMap, form: form, setFormValue: setParentFormValue, model: model, refreshReferencesMap: refreshReferencesMap, formValue: localFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0);
 }

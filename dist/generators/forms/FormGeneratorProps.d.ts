@@ -15,20 +15,21 @@ export interface FormGeneratorProps {
     text?: string;
     errors: Errors;
     showButton?: boolean;
+    formContent?: any;
 }
 export declare class FormGeneratorPropsObject {
+    model: Model;
+    formValue: any;
+    setFormValue: React.Dispatch<React.SetStateAction<any>>;
     resourceName: string;
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
-    model: Model;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
-    formValue: any;
     lockedFormValue: any;
-    setFormValue: any;
     text?: string;
-    errors: object;
+    errors: Errors;
     showButton?: boolean;
     constructor({ resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }: FormGeneratorProps);
 }

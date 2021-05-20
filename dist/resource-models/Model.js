@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PropertyModelRegistry } from "./PropertyModelRegistry";
-import { NestedPropertyModel } from "./propertyModels/NestedPropertyModel";
+import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -19,7 +19,7 @@ export class Model {
                 throw new Error(`Undefined model for ${value} and name was ${name}`);
             }
             else {
-                if (accumulator instanceof NestedPropertyModel) {
+                if (accumulator instanceof EmbeddedPropertyModel) {
                     const propertyModel = accumulator.getResource().getModel().getProperty(value);
                     if (propertyModel)
                         return propertyModel;
@@ -33,30 +33,19 @@ export class Model {
         // @ts-ignore
         return split.reduce(reducerModel, this);
     }
-    getPropertyByResourceName(resourceName) {
-        const propertyModel = this.properties.find(property => property.resourceName === resourceName);
-        if (propertyModel)
-            return propertyModel;
-        throw new Error("Property by resource name not found");
-    }
-    addPropertiesToRequestedElement(propertiesObject, resourceName) {
-        this.properties.find(property => {
-            if (property.resourceName === resourceName) {
-                property = _.merge(property, propertiesObject);
-            }
-            return property.resourceName === resourceName;
-        });
-        return this;
-    }
+    /**
+     * Create a Model from a valid json Model.
+     * @param jsonModel
+     */
     static createFromJson(jsonModel) {
         const properties = Object.keys(jsonModel).map(key => PropertyModelRegistry.get(key, jsonModel[key]));
         return new Model(properties);
     }
-    inputProperty(requestedName, props) {
-        return this.getProperty(requestedName).getInputField(props);
+    getInputField(requestedName, props) {
+        return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }));
     }
-    outputProperty(requestedName, props, showLabel = true) {
-        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { showLabel: showLabel }));
+    getOutputField(requestedName, props, showLabel = true) {
+        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName), showLabel: showLabel }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

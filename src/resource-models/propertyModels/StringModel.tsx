@@ -22,9 +22,6 @@ export class StringModel extends SinglePropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-        return <>
-            {/*<Typography>{_.startCase(props.propertyModel.label)}</Typography>*/}
-            <StringShow {...props} />
-            </>
+        return <StringShow {...props} />
     }
 }

@@ -7,21 +7,15 @@ export interface ShowContent{
     record: any,
     model: Model|undefined,
     showElement?:any,
-    resourceName:string
 }
 
-export const ShowContent: React.FC<ShowContent> = ({record, model, showElement, resourceName}) => {
-
-    if(showElement){
-        const props = {model:model, record}
-        return React.cloneElement(showElement, props);
-    }
+export const ShowContent: React.FC<ShowContent> = ({record, model}) => {
 
     return <Grid container spacing={2}>
         {model?.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
             const {xs, md, id} = propertyModel;
             return <Grid key={index} item xs={xs} md={md}>
-                {propertyModel.getOutputField({record:record, showLabel:true})}
+                {propertyModel.getOutputField({model:propertyModel,record:record, showLabel:true})}
             </Grid>
         })
         }

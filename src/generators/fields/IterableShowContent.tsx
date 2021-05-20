@@ -14,9 +14,6 @@ export interface IterableShowContentProps{
 
 export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, showElement}) => {
 
-    console.log("model iterable", model);
-    console.log("record", record)
-
     if(record===undefined || record.length===0){
         return <div>No elements found</div>
     }
@@ -44,7 +41,7 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
                             model.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
                                 const {xs, md, id} = propertyModel;
                                 return <Grid item xs={xs} md={md}>
-                                    {propertyModel.getOutputField({record:singleRecord, showLabel:true})}
+                                    {propertyModel.getOutputField({model:propertyModel,record:singleRecord, showLabel:true})}
                                 </Grid>
                             })
                         }

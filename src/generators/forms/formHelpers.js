@@ -24,7 +24,6 @@ export function getReferenceKeys(model){
 
 
 export function getFormValueFromRecord(record, model){
-    console.log(record, model);
     const formattedFormValue = record;
     const propertyModels = getReferenceKeys(model);
     propertyModels.forEach(propertyModel =>{
