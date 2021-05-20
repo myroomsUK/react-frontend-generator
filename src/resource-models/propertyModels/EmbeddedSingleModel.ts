@@ -5,11 +5,8 @@ import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, form, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler} =  props;
+        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler} =  props;
         const setParentFormValue = (values:any) => setFormValue({...formValue, [props.model.id] : values });
-        if(form){
-            return React.cloneElement(form, props)
-        }
         return EmbeddedFormContent({
             model:this.getResource().getModel(),
             formContent: this.form,
@@ -24,11 +21,6 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     }
 
     setOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null {
-        const {showElement, model, record} = props;
-        if(showElement){
-            const props = {model:model, record}
-            return React.cloneElement(showElement, props);
-        }
         const newProps = {...props, model:this.getResource().getModel()}
         return ShowContent(newProps)
     }

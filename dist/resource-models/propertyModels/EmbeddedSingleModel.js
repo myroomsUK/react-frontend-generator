@@ -1,14 +1,10 @@
-import React from "react";
 import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { ShowContent } from "../../generators/fields/ShowContent";
 import { EmbeddedFormContent } from "../../generators/forms/EmbeddedFormContent";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
-        const { formValue, form, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler } = props;
+        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler } = props;
         const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
-        if (form) {
-            return React.cloneElement(form, props);
-        }
         return EmbeddedFormContent({
             model: this.getResource().getModel(),
             formContent: this.form,
@@ -22,11 +18,6 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         });
     }
     setOutputField(props) {
-        const { showElement, model, record } = props;
-        if (showElement) {
-            const props = { model: model, record };
-            return React.cloneElement(showElement, props);
-        }
         const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel() });
         return ShowContent(newProps);
     }
