@@ -17,7 +17,7 @@ interface IterableFormContentProps{
     model: Model,
     resourceName: string,
     setParentFormValue: (values:any) => void,
-    formContent:  React.DetailedReactHTMLElement<any, any>
+    formContent?:  React.DetailedReactHTMLElement<any, any>
     referencesMap: Map<string, any>
     refreshReferencesMap:()=>void
     formValueArray: any[],

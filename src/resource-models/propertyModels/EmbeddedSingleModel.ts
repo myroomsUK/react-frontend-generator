@@ -1,7 +1,7 @@
-import NestedFormContent from "../../generators/forms/NestedFormContent";
 import React from "react";
 import {EmbeddedInputFields, EmbeddedOutputFields, EmbeddedPropertyModel} from "./NestedPropertyModel";
 import {ShowContent} from "../../generators/fields/ShowContent";
+import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
@@ -10,9 +10,9 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
         if(form){
             return React.cloneElement(form, props)
         }
-        return NestedFormContent({
+        return EmbeddedFormContent({
             model:this.getResource().getModel(),
-            form: this.form,
+            formContent: this.form,
             setParentFormValue:setParentFormValue,
             refreshReferencesMap:refreshReferencesMap,
             referencesMap:referencesMap,

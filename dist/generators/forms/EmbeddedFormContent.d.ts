@@ -1,20 +1,16 @@
 import React from "react";
-import { Errors } from "../errors/Errors";
 import { Model } from "../../resource-models/Model";
-interface IterableFormContentProps {
+import { Errors } from "../errors/Errors";
+interface EmbeddedFormContentProps {
     model: Model;
-    resourceName: string;
-    setParentFormValue: (values: any) => void;
     formContent?: React.DetailedReactHTMLElement<any, any>;
+    setParentFormValue: (values: any) => void;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
-    formValueArray: any[];
+    formValue: any;
     errors: Errors;
-    label: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
-    modifyOnlyLastElement?: boolean;
-    modifyRule?: (formvalue: any) => boolean;
 }
-export declare const IterableFormContent: React.FC<IterableFormContentProps>;
+export declare const EmbeddedFormContent: React.FC<EmbeddedFormContentProps>;
 export {};
