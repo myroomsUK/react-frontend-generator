@@ -1,7 +1,7 @@
-import { NestedPropertyModel } from "./NestedPropertyModel";
-import IterableFormContent from "../../generators/forms/IterableFormContent";
+import { EmbeddedPropertyModel } from "./NestedPropertyModel";
+import { IterableFormContent } from "../../generators/forms/IterableFormContent";
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
-export class EmbeddedMultipleModel extends NestedPropertyModel {
+export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule } = props;
         const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
@@ -9,20 +9,17 @@ export class EmbeddedMultipleModel extends NestedPropertyModel {
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
-            form: form,
             setParentFormValue: setParentFormValue,
-            refreshReferencesMap: refreshReferencesMap,
+            formContent: this.form,
             referencesMap: referencesMap,
+            refreshReferencesMap: refreshReferencesMap,
             errors: newErrors,
+            formValueArray: formValue[this.id],
+            label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
-            formValueArray: formValue[this.id],
-            single: single,
-            resource: this.getResource(),
-            label: this.label,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
-            parentFormValue: formValue
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
@@ -30,6 +27,7 @@ export class EmbeddedMultipleModel extends NestedPropertyModel {
         };
     }
     setOutputField(props) {
+        console.log("props", props, this.id);
         const { record, showElement } = props;
         return IterableShowContent({
             model: this.getResource().getModel(),

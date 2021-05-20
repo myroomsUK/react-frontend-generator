@@ -3,7 +3,7 @@ import { PropertyModel } from "../PropertyModel";
 import { Resource } from "../Resource";
 import { Typography } from "@material-ui/core";
 import _ from "lodash";
-export class NestedPropertyModel extends PropertyModel {
+export class EmbeddedPropertyModel extends PropertyModel {
     constructor(id, others) {
         super(id, others);
         this.resourceName = others.resourceName;
@@ -18,9 +18,11 @@ export class NestedPropertyModel extends PropertyModel {
     }
     getInputField(props) {
         const { errors, formValue, setFormValue } = props;
+        const model = this;
+        model.label = _.startCase(this.label);
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue[this.id], model: this });
+        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue[this.id], model: model });
         return this.setInputField(newProps);
     }
     getOutputField(props) {

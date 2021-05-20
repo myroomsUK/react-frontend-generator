@@ -24,7 +24,6 @@ import { useGetResourceModel } from "../../../resource-models/modelsRegistry";
 import { UpdateListings } from "../../../utils/referenceFieldUtils";
 import { useEdit } from "../../../redux/actions/verbs/edit";
 import { getFormValueFromRecord } from "../../forms/formHelpers";
-import GenericForm from "../../forms/genericForm";
 import { FormGenerator } from "../../forms/FormGenerator";
 import { Error, Errors } from "../../errors/Errors";
 /**
@@ -79,12 +78,7 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
     }, [model, referencesMap, formValue, resourceName, propId]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
-            if (createEditPageToUse) {
-                setGenericEditRender(_jsx(GenericForm, Object.assign({}, editFormProps, { page: createEditPageToUse, errors: errors }), void 0));
-            }
-            else {
-                setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { errors: errors, text: "Save" }), void 0));
-            }
+            setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, errors: errors, text: "Save" }), void 0));
         }
     }, [formValue, errors]);
     return genericEditRender;

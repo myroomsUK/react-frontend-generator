@@ -1,7 +1,7 @@
 import React from "react";
-import { EmbeddedInputFields, NestedPropertyModel } from "./NestedPropertyModel";
-export declare class EmbeddedMultipleModel extends NestedPropertyModel {
+import { EmbeddedInputFields, EmbeddedOutputFields, EmbeddedPropertyModel } from "./NestedPropertyModel";
+export declare class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
-    setOutputField(props: any): React.ReactElement<any, any> | null;
+    setOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null;
 }
