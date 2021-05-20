@@ -37,10 +37,9 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
 
     getOutputField(props:EmbeddedOutputFields): React.ReactElement<any, any> | null {
         const {showLabel} = props;
-        const newProps = {...props, record: props.record[this.id]}
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
-            {this.setOutputField(newProps)}
+            {this.setOutputField(props)}
         </>
     }
 }
