@@ -11,7 +11,6 @@ import {genericError} from "../../redux/actions/verbs/edit";
 
 export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
 
-    console.log("passing through form generator");
     const {submitHandler, formContent, resourceName,resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue,  errors, text= "Salva", showButton=true } = props
     const classes = useFormStyles();
     const dispatch = useDispatch();

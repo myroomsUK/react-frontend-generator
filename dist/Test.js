@@ -9,7 +9,7 @@ import { overrideRegistry } from "./mock/overrideRegistry";
 import { landlords } from "./mock/landlords";
 import { propertyShow } from "./mock/propertyShow";
 import { units } from "./mock/units";
-import { EditPage } from "./generators/pages/EditPageGenerator";
+import { Create } from "./generators/pages/CreatePageGenerator";
 export default function Test() {
     createServer({
         routes() {
@@ -23,7 +23,7 @@ export default function Test() {
     });
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
-    const render = _jsx("div", { children: _jsx(EditPage, { propResourceName: "properties", propId: 1 }, void 0) }, void 0);
+    const render = _jsx("div", { children: _jsx(Create, { propResourceName: "landlord_relationships" }, void 0) }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
 function ShowPageCustom(props) {

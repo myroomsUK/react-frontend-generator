@@ -5,7 +5,7 @@ import { EmbeddedFormContent } from "../../generators/forms/EmbeddedFormContent"
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, form, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler } = props;
-        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [this.resourceName]: values }));
+        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
         if (form) {
             return React.cloneElement(form, props);
         }
@@ -15,7 +15,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             setParentFormValue: setParentFormValue,
             refreshReferencesMap: refreshReferencesMap,
             referencesMap: referencesMap,
-            formValue: formValue,
+            formValue: formValue[this.id],
             errors: errors,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler

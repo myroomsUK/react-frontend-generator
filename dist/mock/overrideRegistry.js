@@ -1,3 +1,5 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import PropertyCreate from "./pages/PropertyEnquiryCreate";
 export const overrideRegistry = {
     "properties": {
         "model": {
@@ -98,28 +100,7 @@ export const overrideRegistry = {
                     "_store": {}
                 }
             }
-        ],
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "showPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        }
+        ]
     },
     "landlords": {
         "model": {
@@ -135,13 +116,6 @@ export const overrideRegistry = {
                     }
                 }
             }
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
         },
         "table": [
             {
@@ -179,20 +153,6 @@ export const overrideRegistry = {
             "endDate": {
                 "listShow": true
             }
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
         }
     },
     "bank_accounts": {
@@ -213,20 +173,6 @@ export const overrideRegistry = {
             "endDate": {
                 "listShow": true
             }
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
         }
     },
     "landlord_tenancies": {
@@ -251,20 +197,6 @@ export const overrideRegistry = {
                 "group": "Units",
                 "position": 1
             }
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
         }
     },
     "landlord_tenancy_payments": {
@@ -281,28 +213,7 @@ export const overrideRegistry = {
                 "id": "type",
                 "label": "Type"
             }
-        ],
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "showPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        }
+        ]
     },
     "default_payment_items": {
         "model": {
@@ -622,20 +533,6 @@ export const overrideRegistry = {
                 },
                 "modifyOnlyLastElement": true
             }
-        },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
         }
     },
     "landlord_relationships": {
@@ -646,13 +543,7 @@ export const overrideRegistry = {
                 "type": "embedded_single",
                 "resourceName": "properties",
                 "cardinality": 1,
-                "form": {
-                    "key": null,
-                    "ref": null,
-                    "props": {},
-                    "_owner": null,
-                    "_store": {}
-                },
+                "form": _jsx(PropertyCreate, {}, void 0),
                 "resource": {
                     "model": {
                         "propertyName": {
@@ -697,27 +588,6 @@ export const overrideRegistry = {
                             "label": "Status"
                         }
                     ],
-                    "editPage": {
-                        "key": null,
-                        "ref": null,
-                        "props": {},
-                        "_owner": null,
-                        "_store": {}
-                    },
-                    "createPage": {
-                        "key": null,
-                        "ref": null,
-                        "props": {},
-                        "_owner": null,
-                        "_store": {}
-                    },
-                    "showPage": {
-                        "key": null,
-                        "ref": null,
-                        "props": {},
-                        "_owner": null,
-                        "_store": {}
-                    },
                     "formType": "tab-horizontal"
                 }
             },
@@ -727,13 +597,6 @@ export const overrideRegistry = {
                 "type": "embedded_single",
                 "resourceName": "landlords",
                 "cardinality": 1,
-                "form": {
-                    "key": null,
-                    "ref": null,
-                    "props": {},
-                    "_owner": null,
-                    "_store": {}
-                },
                 "resource": {
                     "model": {
                         "personalData": {
@@ -748,13 +611,6 @@ export const overrideRegistry = {
                                 }
                             }
                         }
-                    },
-                    "createPage": {
-                        "key": null,
-                        "ref": null,
-                        "props": {},
-                        "_owner": null,
-                        "_store": {}
                     },
                     "table": [
                         {
@@ -775,13 +631,6 @@ export const overrideRegistry = {
             "firstLandlordTenancy": {
                 "listShow": true,
                 "optionText": "label",
-                "form": {
-                    "key": null,
-                    "ref": null,
-                    "props": {},
-                    "_owner": null,
-                    "_store": {}
-                }
             }
         },
         "table": [
@@ -798,27 +647,6 @@ export const overrideRegistry = {
                 "label": "Status"
             }
         ],
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "showPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        }
     },
     "first_landlord_tenancies": {
         "model": {
@@ -832,20 +660,6 @@ export const overrideRegistry = {
                 }
             }
         },
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        }
     },
     "portals": {
         "table": [
@@ -887,20 +701,5 @@ export const overrideRegistry = {
             }
         ]
     },
-    "renewal_landlord_tenancies": {
-        "createPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        },
-        "editPage": {
-            "key": null,
-            "ref": null,
-            "props": {},
-            "_owner": null,
-            "_store": {}
-        }
-    }
+    "renewal_landlord_tenancies": {}
 };

@@ -3,7 +3,7 @@ import { IterableFormContent } from "../../generators/forms/IterableFormContent"
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
-        const { formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule } = props;
+        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule } = props;
         const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
         const newErrors = this.manipulateErrors(errors);
         return IterableFormContent({

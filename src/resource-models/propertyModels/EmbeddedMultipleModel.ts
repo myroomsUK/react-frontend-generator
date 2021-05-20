@@ -7,7 +7,7 @@ import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, form, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, single, modifyOnlyLastElement, modifyRule} =  props;
+        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule} =  props;
         const setParentFormValue = (values:any) => setFormValue({...formValue, [props.model.id] : values });
         const newErrors = this.manipulateErrors(errors);
 

@@ -13,6 +13,9 @@
 
 /.idea
 
+# mock
+
+/src/mock
 # misc
 .DS_Store
 .env.local

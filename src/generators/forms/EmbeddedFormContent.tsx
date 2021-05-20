@@ -25,8 +25,6 @@ export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, 
         }
     },[formValue])
 
-
-
     return <FormContent referencesMap={referencesMap} formContent={formContent} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={{}}/>
 }
