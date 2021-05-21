@@ -5,7 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import { ShowContent } from "../../fields/ShowContent";
 export const Show = ({ propResourceName, propId: id, record, propShowPage }) => {
     const resourceModel = useGetResourceModel(propResourceName);
-    const { model } = resourceModel;
+    const { model, showPage } = resourceModel;
+    const showPageToUse = useMemo(() => propShowPage ? propShowPage : showPage, [propShowPage, showPage]);
     const [genericShowRender, setGenericShowRender] = useState(_jsx("div", {}, void 0));
     const showFormProps = useMemo(() => {
         return {
@@ -15,9 +16,9 @@ export const Show = ({ propResourceName, propId: id, record, propShowPage }) => 
         };
     }, [model, record, propResourceName]);
     useEffect(() => {
-        if (propShowPage) {
+        if (showPageToUse) {
             // @ts-ignore
-            setGenericShowRender(React.cloneElement(propShowPage, showFormProps));
+            setGenericShowRender(React.cloneElement(showPageToUse, showFormProps));
         }
         else {
             setGenericShowRender(_jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: _jsx(ShowContent, { record: record, model: model }, void 0) }), void 0));

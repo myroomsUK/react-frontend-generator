@@ -15,7 +15,8 @@ interface ShowProps {
 export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowProps) => JSX.Element = ({propResourceName, propId:id, record, propShowPage}:ShowProps) =>{
 
     const resourceModel = useGetResourceModel(propResourceName);
-    const {model} = resourceModel;
+    const {model, showPage} = resourceModel;
+    const showPageToUse:any = useMemo(()=> propShowPage ? propShowPage: showPage,[propShowPage, showPage])
     const [genericShowRender, setGenericShowRender] = useState(<div/>);
 
 
@@ -30,9 +31,9 @@ export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowPr
 
 
     useEffect(()=>{
-        if(propShowPage){
+        if(showPageToUse){
             // @ts-ignore
-            setGenericShowRender(React.cloneElement(propShowPage, showFormProps ));
+            setGenericShowRender(React.cloneElement(showPageToUse, showFormProps ));
         }else{
             setGenericShowRender(
                 <Grid container spacing={2}>
