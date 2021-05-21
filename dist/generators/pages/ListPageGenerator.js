@@ -208,12 +208,6 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const showClearFilters = !!components.length;
     const getRowElement = (row, id, label, localModel) => {
         const record = Record.createFromJson(row);
-        console.log("row record", record);
-        /*
-         const split = _.split(id, ".");
-         split.pop();
-         const reducer = (start, value) => (start) ? start[value] : undefined;
-         const record = split.reduce(reducer, row);*/
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
         return propertyModel.getOutputField({ record: record.getPropertyRecord(id), showLabel: false });

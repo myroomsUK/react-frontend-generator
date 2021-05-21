@@ -8,11 +8,8 @@ import {overrideRegistry} from "./mock/overrideRegistry";
 import {landlords} from "./mock/landlords";
 import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
-import {Create} from "./generators/pages/CreatePageGenerator";
-import {EditPage} from "./generators/pages/EditPageGenerator";
 import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import {landlordRelationship} from "./mock/landlordRelationship";
-import {RouteFilterList} from "./generators/pages/ListPageGenerator";
 
 export default function Test(){
 
@@ -47,6 +44,6 @@ export default function Test(){
 function ShowPageCustom(props){
     const {model} = props
     return <div>
-        {model.getOutputField("images", props )}
+        {model.getOutputField("postcode", props )}
     </div>
 }

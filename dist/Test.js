@@ -31,5 +31,5 @@ export default function Test() {
 }
 function ShowPageCustom(props) {
     const { model } = props;
-    return _jsx("div", { children: model.getOutputField("images", props) }, void 0);
+    return _jsx("div", { children: model.getOutputField("postcode", props) }, void 0);
 }
