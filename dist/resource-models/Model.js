@@ -61,10 +61,9 @@ export class Model {
         return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }));
     }
     getOutputField(requestedName, props, showLabel = true) {
-        /*const {record:formvalue} = props;
-        const {propertyModel, record} = this.getElement(requestedName, formvalue);
-        return propertyModel.getOutputField({...props, model:propertyModel, record:record, showLabel:showLabel })*/
-        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { showLabel: showLabel }));
+        const { record } = props;
+        const propertyModel = this.getProperty(requestedName);
+        return propertyModel.getOutputField({ record: record.getPropertyRecord(propertyModel.id), showLabel: showLabel });
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

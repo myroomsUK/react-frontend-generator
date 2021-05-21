@@ -6,7 +6,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import _ from "lodash";
 import {Model} from "../Model";
-import {EmbeddedPropertyRecord} from "../PropertyRecord";
+import {EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord, PropertyRecord} from "../PropertyRecord";
 
 
 export abstract class EmbeddedPropertyModel extends PropertyModel{
@@ -38,7 +38,7 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
     }
 
     getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
-        const {showLabel, record} = props;
+        const {showLabel} = props;
         const newProps = {...props, model: this.getResource().getModel()}
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
@@ -76,12 +76,12 @@ export interface EmbeddedInputFields extends InputFields{
 
 export interface EmbeddedSingleOutputFields extends OutputFields{
     showElement?:React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedPropertyRecord,
+    record: EmbeddedSinglePropertyRecord,
     model: Model
 }
 
 export interface EmbeddedMultipleOutputFields extends OutputFields{
     showElement?:React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedPropertyRecord[],
+    record: EmbeddedMultiplePropertyRecord,
     model: Model
 }

@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSetResourceModel } from "./resource-models/modelsRegistry";
 import { createServer } from "miragejs";
@@ -25,10 +25,11 @@ export default function Test() {
     });
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
-    const render = _jsx("div", { children: _jsx(ShowPage, { propResourceName: "landlord_relationships", propId: 1 }, void 0) }, void 0);
+    const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
+            _jsx(ShowPage, { propResourceName: "properties", propId: 1, propShowPage: _jsx(ShowPageCustom, {}, void 0) }, void 0)] }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
 function ShowPageCustom(props) {
     const { model } = props;
-    return _jsx("div", { children: model.outputProperty("kitchen", props) }, void 0);
+    return _jsx("div", { children: model.getOutputField("propertyName", props) }, void 0);
 }

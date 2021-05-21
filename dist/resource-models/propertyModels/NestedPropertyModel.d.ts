@@ -4,7 +4,7 @@ import { Errors } from "../../generators/errors/Errors";
 import { PropertyModelCore } from "../PropertyModelCore";
 import React from "react";
 import { Model } from "../Model";
-import { EmbeddedPropertyRecord } from "../PropertyRecord";
+import { EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord } from "../PropertyRecord";
 export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     resourceName: string;
     resource: Resource;
@@ -40,11 +40,11 @@ export interface EmbeddedInputFields extends InputFields {
 }
 export interface EmbeddedSingleOutputFields extends OutputFields {
     showElement?: React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedPropertyRecord;
+    record: EmbeddedSinglePropertyRecord;
     model: Model;
 }
 export interface EmbeddedMultipleOutputFields extends OutputFields {
     showElement?: React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedPropertyRecord[];
+    record: EmbeddedMultiplePropertyRecord;
     model: Model;
 }

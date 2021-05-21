@@ -33,6 +33,7 @@ import ShowField from "../fields/ShowField";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useCookies} from "react-cookie";
+import {Record} from "../../resource-models/Record";
 
 
 function EnhancedTableHead(props) {
@@ -365,20 +366,21 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const showClearFilters = !!components.length;
 
     const getRowElement = (row, id, label, localModel)=> {
+        const record = Record.createFromJson(row);
+        console.log("row record", record)
+       /*
         const split = _.split(id, ".");
         split.pop();
         const reducer = (start, value) => (start) ? start[value] : undefined;
-        const record = split.reduce(reducer, row);
+        const record = split.reduce(reducer, row);*/
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        return {propertyModel: propertyModel, record: record}
+        return propertyModel.getOutputField({record: record.getPropertyRecord(id), showLabel:false})
     }
 
     const columns = useCallback((row) => localTable.map( ({id, label}) => {
         return getRowElement(row, id, label, localModel)
-        }).map(({propertyModel, record}) => {
-        return propertyModel.getOutputField({record:record, showLabel:false})
-    }),[localModel, localTable])
+        }),[localModel, localTable])
 
 
     return <GenericList

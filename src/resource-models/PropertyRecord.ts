@@ -28,7 +28,7 @@ export class PropertyRecord {
 
 
 
-export class EmbeddedPropertyRecord extends PropertyRecord{
+export class EmbeddedSinglePropertyRecord extends PropertyRecord{
     value: Record;
 
     constructor(name:string, value:Record) {
@@ -37,6 +37,20 @@ export class EmbeddedPropertyRecord extends PropertyRecord{
     }
 
     getPropertyRecord(name:string){
-        return this.value.getPropertyRecord(name);
+        console.log("record", this);
+        console.log("name", name);
+        const record = this.value.getPropertyRecord(name);
+        console.log("record found", record)
+        return record
     }
+}
+
+export class EmbeddedMultiplePropertyRecord extends PropertyRecord{
+    value: Record[];
+
+    constructor(name:string, value:Record[]) {
+        super(name, value);
+        this.value = value;
+    }
+
 }

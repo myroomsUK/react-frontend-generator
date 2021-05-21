@@ -26,7 +26,7 @@ export class EmbeddedPropertyModel extends PropertyModel {
         return this.setInputField(newProps);
     }
     getOutputField(props) {
-        const { showLabel, record } = props;
+        const { showLabel } = props;
         const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel() });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }

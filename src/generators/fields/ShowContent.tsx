@@ -2,11 +2,9 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {Model} from "../../resource-models/Model";
 import {Record} from "../../resource-models/Record";
-import {EmbeddedPropertyRecord} from "../../resource-models/PropertyRecord";
-
 
 export interface ShowContent{
-    record: Record|EmbeddedPropertyRecord,
+    record: Record,
     model: Model|undefined,
     showElement?:any,
 }

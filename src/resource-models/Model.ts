@@ -4,6 +4,7 @@ import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {EmbeddedPropertyModel} from "./propertyModels/NestedPropertyModel";
 import React, {ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
+import {Record} from "./Record";
 
 export interface Model{
     properties: PropertyModel[]
@@ -73,10 +74,9 @@ export class Model{
     }
 
     getOutputField(requestedName:string, props: OutputPropertyProps, showLabel:boolean = true): ReactElement<any, any>|null{
-        /*const {record:formvalue} = props;
-        const {propertyModel, record} = this.getElement(requestedName, formvalue);
-        return propertyModel.getOutputField({...props, model:propertyModel, record:record, showLabel:showLabel })*/
-        return this.getProperty(requestedName).getOutputField({...props, showLabel:showLabel});
+        const {record} = props;
+        const propertyModel = this.getProperty(requestedName);
+        return propertyModel.getOutputField({record: record.getPropertyRecord(propertyModel.id), showLabel:showLabel})
     }
 
     getAllPropertiesReadableNames(){
@@ -91,7 +91,7 @@ export class Model{
 
 interface OutputPropertyProps{
     model: Model,
-    record: any
+    record: Record
 }
 
 export interface ModelGetInputFieldProps{

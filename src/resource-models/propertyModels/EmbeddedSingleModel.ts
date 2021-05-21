@@ -1,9 +1,9 @@
 import React from "react";
 import {EmbeddedInputFields, EmbeddedPropertyModel, EmbeddedSingleOutputFields} from "./NestedPropertyModel";
-import {ShowContent} from "../../generators/fields/ShowContent";
 import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 import {Record} from "../Record";
-import {EmbeddedPropertyRecord} from "../PropertyRecord";
+import {EmbeddedSinglePropertyRecord} from "../PropertyRecord";
+import {EmbeddedShowContent} from "../../generators/fields/EmbeddedShowContent";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
@@ -24,8 +24,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
 
     setOutputField(props: EmbeddedSingleOutputFields): React.ReactElement<any, any> | null {
 
-        const newProps = {...props, record: props.record ?? new EmbeddedPropertyRecord(this.id, new Record([]))}
-        return ShowContent(newProps)
+        const newProps = {...props, record: props.record ?? new EmbeddedSinglePropertyRecord(this.id, new Record([]))}
+        return EmbeddedShowContent(newProps)
     }
 
     getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {
