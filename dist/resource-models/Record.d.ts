@@ -14,4 +14,5 @@ export declare class Record {
      * @param jsonModel
      */
     static createFromJson(jsonModel: any): Record;
+    getPropertyRecordValue(name: string): any;
 }

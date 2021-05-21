@@ -46,4 +46,8 @@ export class Record {
         });
         return new Record(properties);
     }
+    getPropertyRecordValue(name) {
+        var _a;
+        return (_a = this.getPropertyRecord(name)) === null || _a === void 0 ? void 0 : _a.value;
+    }
 }

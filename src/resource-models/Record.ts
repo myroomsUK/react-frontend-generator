@@ -54,4 +54,8 @@ export class Record{
         });
         return new Record(properties);
     }
+
+    getPropertyRecordValue(name:string){
+        return this.getPropertyRecord(name)?.value
+    }
 }

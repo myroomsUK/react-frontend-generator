@@ -1,2 +1,7 @@
 /// <reference types="react" />
-export default function ({ propertyRecord }: any): JSX.Element;
+import { Record } from "../../../resource-models/Record";
+interface MultipleFileShowProps {
+    propertyRecord: Record[];
+}
+export default function ({ propertyRecord }: MultipleFileShowProps): JSX.Element;
+export {};

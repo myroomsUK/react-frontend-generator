@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ShowImageGrid({images}){
+    console.log("images", images)
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);
@@ -46,17 +47,22 @@ function ShowImageGrid({images}){
         <>
             <div className={classes.root}>
                 <GridList cellHeight={180} cols={cols} className={classes.gridList}>
-                    {images.map(({title, url, actionIcon},index) => (
-                        <GridListTile key={index} onClick={()=>selectElement(index)}>
-                            <img src={url} alt={title} />
-                            <GridListTileBar
-                                title={title}
-                                actionIcon={
-                                    actionIcon
-                                }
-                            />
-                        </GridListTile>
-                    ))}
+                    {images.map((elements,index) => {
+                        const actionIcon = elements.getPropertyRecordValue("actionIcon")
+                        const url = elements.getPropertyRecordValue("url")
+                        const title = elements.getPropertyRecordValue("title")
+                        return <GridListTile key={index} onClick={()=>selectElement(index)}>
+                                <img src={url} alt={title} />
+                                <GridListTileBar
+                                    title={title}
+                                    actionIcon={
+                                        actionIcon
+                                    }
+                                />
+                            </GridListTile>
+
+                    })
+                    }
                 </GridList>
             </div>
             <ImageDialog images={images} open={open} selectedImage={selectedImage} setOpen={setOpen}/>

@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 function ShowImageGrid({ images }) {
+    console.log("images", images);
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);
@@ -37,7 +38,12 @@ function ShowImageGrid({ images }) {
         setOpen(true);
     };
     const cols = matches ? 6 : 3;
-    return (_jsxs(_Fragment, { children: [_jsx("div", Object.assign({ className: classes.root }, { children: _jsx(GridList, Object.assign({ cellHeight: 180, cols: cols, className: classes.gridList }, { children: images.map(({ title, url, actionIcon }, index) => (_jsxs(GridListTile, Object.assign({ onClick: () => selectElement(index) }, { children: [_jsx("img", { src: url, alt: title }, void 0),
-                            _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }), index))) }), void 0) }), void 0),
+    return (_jsxs(_Fragment, { children: [_jsx("div", Object.assign({ className: classes.root }, { children: _jsx(GridList, Object.assign({ cellHeight: 180, cols: cols, className: classes.gridList }, { children: images.map((elements, index) => {
+                        const actionIcon = elements.getPropertyRecordValue("actionIcon");
+                        const url = elements.getPropertyRecordValue("url");
+                        const title = elements.getPropertyRecordValue("title");
+                        return _jsxs(GridListTile, Object.assign({ onClick: () => selectElement(index) }, { children: [_jsx("img", { src: url, alt: title }, void 0),
+                                _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }), index);
+                    }) }), void 0) }), void 0),
             _jsx(ImageDialog, { images: images, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }, void 0));
 }
