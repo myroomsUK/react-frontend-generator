@@ -1,6 +1,7 @@
 import { PropertyModel } from "./PropertyModel";
 import React, { ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
+import { Record } from "./Record";
 export interface Model {
     properties: PropertyModel[];
 }
@@ -33,7 +34,7 @@ export declare class Model {
 }
 interface OutputPropertyProps {
     model: Model;
-    record: any;
+    record: Record;
 }
 export interface ModelGetInputFieldProps {
     model: Model;

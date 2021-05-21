@@ -32,6 +32,7 @@ import { useRouteFilters, useTableFilters } from "../filters/TableFilters";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useCookies } from "react-cookie";
+import { Record } from "../../resource-models/Record";
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters } = props;
     const createSortHandler = (property) => (event) => {
@@ -206,18 +207,19 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
     const showClearFilters = !!components.length;
     const getRowElement = (row, id, label, localModel) => {
-        const split = _.split(id, ".");
-        split.pop();
-        const reducer = (start, value) => (start) ? start[value] : undefined;
-        const record = split.reduce(reducer, row);
+        const record = Record.createFromJson(row);
+        console.log("row record", record);
+        /*
+         const split = _.split(id, ".");
+         split.pop();
+         const reducer = (start, value) => (start) ? start[value] : undefined;
+         const record = split.reduce(reducer, row);*/
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        return { propertyModel: propertyModel, record: record };
+        return propertyModel.getOutputField({ record: record.getPropertyRecord(id), showLabel: false });
     };
     const columns = useCallback((row) => localTable.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);
-    }).map(({ propertyModel, record }) => {
-        return propertyModel.getOutputField({ record: record, showLabel: false });
     }), [localModel, localTable]);
     return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }

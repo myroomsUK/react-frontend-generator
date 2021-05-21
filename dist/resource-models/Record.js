@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { EmbeddedPropertyRecord, PropertyRecord } from "./PropertyRecord";
+import { EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord, PropertyRecord } from "./PropertyRecord";
 export class Record {
     constructor(properties) {
         this.properties = properties;
@@ -12,19 +12,16 @@ export class Record {
         const split = _.split(name, ".");
         const reducerModel = (accumulator, value) => {
             if (accumulator instanceof Record) {
-                const propertyRecord = accumulator.properties.find((property) => property.name === value);
-                return propertyRecord;
-                throw new Error(`Undefined property record for ${value} and name was ${name}`);
+                return accumulator.properties.find((property) => property.name === value);
             }
-            else {
-                if (accumulator instanceof EmbeddedPropertyRecord) {
-                    const propertyRecord = accumulator.getPropertyRecord(name);
-                    return propertyRecord;
-                    throw new Error(`Undefined record for ${value}`);
-                }
-                else {
-                    throw new Error(`Undefined resource in ${accumulator}`);
-                }
+            else if (accumulator instanceof EmbeddedMultiplePropertyRecord) {
+                debugger;
+            }
+            else if (accumulator instanceof EmbeddedSinglePropertyRecord) {
+                return accumulator.getPropertyRecord(value);
+            }
+            else if (accumulator === undefined) {
+                return undefined;
             }
         };
         // @ts-ignore
@@ -37,10 +34,11 @@ export class Record {
     static createFromJson(jsonModel) {
         const properties = Object.keys(jsonModel).map(key => {
             if (Array.isArray(jsonModel[key])) {
-                return jsonModel[key].map((element) => new EmbeddedPropertyRecord(key, Record.createFromJson(element)));
+                const result = jsonModel[key].map((element) => Record.createFromJson(element));
+                return new EmbeddedMultiplePropertyRecord(key, result);
             }
             else if (typeof jsonModel[key] === "object") {
-                return new EmbeddedPropertyRecord(key, Record.createFromJson(jsonModel[key]));
+                return new EmbeddedSinglePropertyRecord(key, Record.createFromJson(jsonModel[key]));
             }
             else {
                 return new PropertyRecord(key, jsonModel[key]);

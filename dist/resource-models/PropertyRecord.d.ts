@@ -16,8 +16,12 @@ export declare class PropertyRecord {
     constructor(name: string, value: any);
     getPropertyRecord(name: string): any;
 }
-export declare class EmbeddedPropertyRecord extends PropertyRecord {
+export declare class EmbeddedSinglePropertyRecord extends PropertyRecord {
     value: Record;
     constructor(name: string, value: Record);
     getPropertyRecord(name: string): PropertyRecord | undefined;
+}
+export declare class EmbeddedMultiplePropertyRecord extends PropertyRecord {
+    value: Record[];
+    constructor(name: string, value: Record[]);
 }
