@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import NumberShow from "../../generators/fields/outputs/NumberShow";
 import NumberInput from "../../generators/forms/inputs/NumberInput";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class NumberModel extends SinglePropertyModel{
 
@@ -8,12 +9,13 @@ export class NumberModel extends SinglePropertyModel{
         return NumberInput({...props, onClick:props.inputHandler});
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): (vars: any) => void {
         return (vars:any) => {
             const target = vars.target;
             let value = target.value;
             const name = target.name;
-            setFormValue({...formValue, [name]: parseInt(value)});}
+            setFormValue( formValue.updateFormValue(name, parseInt(value)));
+        }
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {

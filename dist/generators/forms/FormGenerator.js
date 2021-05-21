@@ -8,7 +8,7 @@ import { useFormStyles } from "../../rendering/styles/formStyles";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { genericError } from "../../redux/actions/verbs/edit";
 export const FormGenerator = (props) => {
-    const { submitHandler, formContent, resourceName, resourceId, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, text = "Salva", showButton = true } = props;
+    const { submitHandler, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, text = "Salva", showButton = true } = props;
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref = useRef(null);

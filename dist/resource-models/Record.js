@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord, PropertyRecord } from "./PropertyRecord";
+import { FormValue } from "./formvalue/FormValue";
 export class Record {
     constructor(properties) {
         this.properties = properties;
@@ -50,4 +51,8 @@ export class Record {
         var _a;
         return (_a = this.getPropertyRecord(name)) === null || _a === void 0 ? void 0 : _a.value;
     }
+    generateFormValue() {
+        return FormValue.createFromRecord(this);
+    }
+    ;
 }

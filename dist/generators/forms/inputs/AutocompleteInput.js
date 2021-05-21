@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeResourceBuffer } from "../../../redux/actions/app/actions";
 import { Create } from "../../pages/CreatePageGenerator";
 export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue, createNew = true, onChange }) {
-    const { id, label, resourceName: modalResourceName, optionText: optionTextModelItem } = useMemo(() => { return model; }, [model]);
+    const { id, label, resourceName: modalResourceName } = useMemo(() => { return model; }, [model]);
     const [open, setOpen] = React.useState(false);
     const [localOptions, setLocalOptions] = useState([]);
     const [value, setValue] = useState(null);

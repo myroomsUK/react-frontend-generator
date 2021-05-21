@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import {TextareaInput} from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class TextareaModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -9,12 +10,12 @@ export class TextareaModel extends SinglePropertyModel{
         return TextareaInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (vars:any)=>{
             const target = vars.target;
             let value = target.value;
             const name = target.id;
-            setFormValue({...formValue, [name]:value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

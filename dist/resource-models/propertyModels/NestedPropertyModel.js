@@ -22,7 +22,7 @@ export class EmbeddedPropertyModel extends PropertyModel {
         model.label = _.startCase(this.label);
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue[this.id], model: model });
+        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue.get(this.id), model: model });
         return this.setInputField(newProps);
     }
     getOutputField(props) {

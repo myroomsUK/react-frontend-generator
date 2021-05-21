@@ -1,7 +1,9 @@
 import { Record } from "./Record";
+import { FormValue } from "./formvalue/FormValue";
 export interface PropertyRecord {
     name: string;
     value: any;
+    generatePropertyValue(): any;
 }
 export interface PropertyRecord {
     name: string;
@@ -20,8 +22,10 @@ export declare class EmbeddedSinglePropertyRecord extends PropertyRecord {
     value: Record;
     constructor(name: string, value: Record);
     getPropertyRecord(name: string): PropertyRecord | undefined;
+    generatePropertyValue(): FormValue;
 }
 export declare class EmbeddedMultiplePropertyRecord extends PropertyRecord {
     value: Record[];
     constructor(name: string, value: Record[]);
+    generatePropertyValue(): Map<number, FormValue>;
 }

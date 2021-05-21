@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import DateInput from "../../generators/forms/inputs/DateInput";
 import DateShow from "../../generators/fields/outputs/DateShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class DateModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -9,12 +10,12 @@ export class DateModel extends SinglePropertyModel{
         return DateInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (event :any) => {
             const target = event.target;
             let value = target.value;
             const name = target.name;
-            setFormValue({...formValue,[name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

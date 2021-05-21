@@ -4,7 +4,7 @@ import BooleanShow from "../../generators/fields/outputs/BooleanShow";
 export class BooleanModel extends SinglePropertyModel {
     setInputField(props) {
         const { inputHandler, formValue } = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), { onClick: inputHandler, checked: formValue[this.id] });
+        const propsWithModel = Object.assign(Object.assign({}, props), { onClick: inputHandler, checked: formValue.get(this.id) });
         return BooleanInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
@@ -12,7 +12,7 @@ export class BooleanModel extends SinglePropertyModel {
             const target = event.target;
             let value = target.checked;
             const name = target.id;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
+            setFormValue(formValue.updateFormValue(name, value));
         };
     }
     setOutputField(props) {

@@ -5,7 +5,7 @@ import { EmbeddedMultiplePropertyRecord } from "../PropertyRecord";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule } = props;
-        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
+        const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
         return IterableFormContent({
             model: this.getResource().getModel(),
@@ -15,7 +15,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             errors: newErrors,
-            formValueArray: formValue[this.id],
+            formValueArray: formValue.get(this.id),
             label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,

@@ -4,28 +4,8 @@ import {useGetResourceModel} from "../resource-models/modelsRegistry";
 import {useGetListing, useGetListingGroup} from "../redux/actions/verbs/get_listing";
 import {getReferenceKeys, initializeReferenceFields} from "../generators/forms/formHelpers";
 import {updateResourceListings} from "../redux/actions/app/actions";
-
-export function useGetReferenceFieldsMap(resourceName, resource=null){
-    const resourceFromRegistry = useGetResourceModel(resourceName)
-    const {model} =  (resource) ? resource : resourceFromRegistry ;
-    const {getListing} = useGetListing();
-    const [trueResourceName, setTrueResourceName] = useState(resourceName);
-//Looking for reference resources
-    const initialReferenceMap = initializeReferenceFields(model); //map with all reference fields
-    const [referencesMap, setReferencesMap] = useState(initialReferenceMap)
-    const referenceItemsKeys = getReferenceKeys(model);
-
-
-    useEffect(()=>{
-        //console.log("resourceName has changed", resourceName);
-        referenceItemsKeys.forEach(itemKey=> {
-            getListing(model[itemKey].resourceName).then(result => setReferencesMap(new Map(initialReferenceMap.set(model[itemKey].resourceName, result))) );
-        } );
-    },[trueResourceName])
-
-    return {referencesMap, setResourceName: setTrueResourceName};
-}
-
+import {Listings} from "../resource-models/listings/Listings";
+import {Listing} from "../resource-models/listings/Listing";
 
 export function GetListingsMap(model){
     const {getListingGroup} = useGetListingGroup();
@@ -55,8 +35,6 @@ export function GetListingsMap(model){
 
 
 export function UpdateListings(){
-
-
     const {resourceBuffer, listings} = useSelector(state=>state.appReducer);
     const dispatch = useDispatch();
     const {getListingGroup} = useGetListingGroup();
@@ -67,15 +45,16 @@ export function UpdateListings(){
         const resourceArray = Array.from(resourceBuffer);
         if(resourceArray.length!==0){
             getListingGroup({resources:resourceArray}).then(result => {
-                const newMap = new Map();
-                Object.keys(result).forEach(key => newMap.set(key, result[key]));
-                dispatch(updateResourceListings(newMap));
+                const listings = new Listings();
+                Object.keys(result).forEach(key => listings.set(key, Listing.createFromJson(result[key])));
+                dispatch(updateResourceListings(listings));
             } );
         }
     },[resourceBuffer]);
 
     useEffect(()=>updateListings(),[resourceBuffer]);
 
+    console.log("listings", listings)
     return {listings,updateListings};
 
 }

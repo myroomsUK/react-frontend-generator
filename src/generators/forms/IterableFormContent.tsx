@@ -12,6 +12,7 @@ import {FormContent} from "./FormContent";
 import {Errors} from "../errors/Errors";
 import {Model} from "../../resource-models/Model";
 import {FormGeneratorProps} from "./FormGeneratorProps";
+import {FormValue} from "../../resource-models/formvalue/FormValue";
 
 interface IterableFormContentProps{
     model: Model,
@@ -20,7 +21,7 @@ interface IterableFormContentProps{
     formContent?:  React.DetailedReactHTMLElement<any, any>
     referencesMap: Map<string, any>
     refreshReferencesMap:()=>void
-    formValueArray: any[],
+    formValueArray: Map<string,FormValue>,
     errors: Errors,
     label:string,
     submitHandler: (e:any) => Promise<any>;
@@ -41,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true}) => {
-/*export default function IterableFormContent({model, resourceName,resource, parentFormValue,  partialSubmitHandler, setParentFormValue, formValueArray, label, errors, single=false, submitHandler, form, referencesMap, refreshReferencesMap, modifyOnlyLastElement=false, modifyRule= ()=>{return true;}}){*/
 
     const {remove} = useDelete(resourceName);
     const creationTime = useRef(Date.now());
@@ -50,38 +50,38 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
 
     useEffect(()=>{
         if(formValueArray!==undefined){
-            const newFormValueArray = formValueArray.map(item => getFormValueFromRecord(item, model) );
-            const formValueMap = createMapFromArray(newFormValueArray);
-            setLocalFormValueMap(new Map(formValueMap));
+            console.log("formvalue array", formValueArray)
+            setLocalFormValueMap(formValueArray);
         }
     },[formValueArray])
 
     const addForm = () => {
         const date = Date.now();
-        const newMap = new Map(localFormValueMap).set(date, {} )
-        const newArray = createArrayFromMap(newMap);
-        setParentFormValue(newArray);
+        const newMap = new Map(localFormValueMap).set(date, new FormValue() )
+        setParentFormValue(newMap)
     }
 
     const deleteForm = (key:any)=>{
+        console.log("key", key);
         localFormValueMap.delete(key);
         if(key < creationTime.current){
             remove(key);
         }
-        setParentFormValue(createArrayFromMap(new Map(localFormValueMap)));
+        setParentFormValue(new Map(localFormValueMap));
     }
 
     const localSetFormValue = (key:any) => {
         return (value:any) => {
-            setParentFormValue(createArrayFromMap(new Map(localFormValueMap.set(key, value))));
+            setParentFormValue(new Map(localFormValueMap.set(key, value)));
         }
     }
 
     const classes = useStyles();
 
     const entries = Array.from(localFormValueMap.entries());
-    const hasNewEntry = entries.map(([key, formValue] )=> formValue).some((item)=> {
-        return item.fid > creationTime.current
+    console.log("entries",entries);
+    const hasNewEntry = entries.map(([key, formValue] )=> key).some((key)=> {
+        return key > creationTime.current
     });
 
     // @ts-ignore
@@ -92,7 +92,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
         const isEditable = modifyRule(formValue);
 
 
-        const formElement = <FormContent lockedFormValue={{}} formContent={formContent} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent lockedFormValue={new FormValue()} formContent={formContent} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>
@@ -101,7 +101,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
             </Grid>
             <Grid item xs={10}>{formFinal}</Grid>
             <Grid item xs={1}>
-                {isEditable && <CustomDeleteButton icon={true} message={"Delete Item?"} onClick={() => deleteForm(formValue.fid)}/>}
+                {isEditable && <CustomDeleteButton icon={true} message={"Delete Item?"} onClick={() => deleteForm(key)}/>}
             </Grid>
             <Grid item xs={12} style={{marginTop: 15, marginBottom: 15}}>
                 <Divider/>

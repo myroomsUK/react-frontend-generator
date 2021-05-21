@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import PhoneInput from "../../generators/forms/inputs/PhoneInput";
 import PhoneShow from "../../generators/fields/outputs/PhoneShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class PhoneModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -9,10 +10,10 @@ export class PhoneModel extends SinglePropertyModel{
         return PhoneInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (vars:any) =>{
             const [name, value] = vars;
-            setFormValue({...formValue, [name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

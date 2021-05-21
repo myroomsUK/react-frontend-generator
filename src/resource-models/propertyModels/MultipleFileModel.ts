@@ -2,6 +2,7 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 import React from "react";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 interface MultipleFileInputFields extends SinglePropertyInputFields{
 
@@ -10,16 +11,16 @@ interface MultipleFileInputFields extends SinglePropertyInputFields{
 export class MultipleFileModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors} = props;
-        const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue[this.id]}
+        const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue.get(this.id)}
 
         // @ts-ignore
         return FileListInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (vars:any) => {
             const [name, value] = vars;
-            setFormValue({...formValue, [name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

@@ -1,8 +1,11 @@
 import {Record} from "./Record";
+import {EmbeddedMultiplePropertyValue, EmbeddedSinglePropertyValue, PropertyValue} from "./formvalue/PropertyValue";
+import {FormValue} from "./formvalue/FormValue";
 
 export interface PropertyRecord{
   name:string;
-  value: any
+  value: any;
+  generatePropertyValue(): any;
 }
 
 export interface PropertyRecord{
@@ -24,6 +27,10 @@ export class PropertyRecord {
     getPropertyRecord(name:string){
         return this.value.getPropertyRecord(name);
     }
+
+    generatePropertyValue(): any {
+        return this.value
+    }
 }
 
 
@@ -37,11 +44,11 @@ export class EmbeddedSinglePropertyRecord extends PropertyRecord{
     }
 
     getPropertyRecord(name:string){
-        console.log("record", this);
-        console.log("name", name);
-        const record = this.value.getPropertyRecord(name);
-        console.log("record found", record)
-        return record
+        return this.value.getPropertyRecord(name)
+    }
+
+    generatePropertyValue(): FormValue {
+        return this.value.generateFormValue()
     }
 }
 
@@ -51,6 +58,12 @@ export class EmbeddedMultiplePropertyRecord extends PropertyRecord{
     constructor(name:string, value:Record[]) {
         super(name, value);
         this.value = value;
+    }
+
+    generatePropertyValue(): Map<number, FormValue> {
+        const map = new Map();
+        this.value.forEach((record, index) => map.set(index, FormValue.createFromRecord(record) ))
+        return map;
     }
 
 }

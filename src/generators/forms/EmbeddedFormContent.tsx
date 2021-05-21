@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {FormContent} from "./FormContent";
 import {Model} from "../../resource-models/Model";
 import {Errors} from "../errors/Errors";
+import {FormValue} from "../../resource-models/formvalue/FormValue";
 
 interface EmbeddedFormContentProps{
     model:Model,
@@ -9,7 +10,7 @@ interface EmbeddedFormContentProps{
     setParentFormValue: (values:any) => void,
     referencesMap: Map<string, any>
     refreshReferencesMap:()=>void
-    formValue: any,
+    formValue: FormValue,
     errors: Errors,
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
@@ -17,7 +18,7 @@ interface EmbeddedFormContentProps{
 
 export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValue, partialSubmitHandler, submitHandler, errors}) => {
 
-    const [localFormValue, setLocalFormValue] = useState({});
+    const [localFormValue, setLocalFormValue] = useState(new FormValue());
 
     useEffect(()=>{
         if(formValue!==undefined){
@@ -26,5 +27,5 @@ export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, 
     },[formValue])
 
     return <FormContent referencesMap={referencesMap} formContent={formContent} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
-                        formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={{}}/>
+                        formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={new FormValue()}/>
 }

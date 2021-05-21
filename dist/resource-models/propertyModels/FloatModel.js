@@ -13,7 +13,7 @@ export class FloatModel extends SinglePropertyModel {
             const target = event.target;
             let value = target.value;
             const name = target.id;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: parseFloat(value) }));
+            setFormValue(formValue.updateFormValue(name, parseFloat(value)));
         };
     }
     setOutputField(props) {

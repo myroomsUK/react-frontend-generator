@@ -26,6 +26,7 @@ import { useEdit } from "../../../redux/actions/verbs/edit";
 import { getFormValueFromRecord } from "../../forms/formHelpers";
 import { FormGenerator } from "../../forms/FormGenerator";
 import { Error, Errors } from "../../errors/Errors";
+import { FormValue } from "../../../resource-models/formvalue/FormValue";
 /**
  *
  * @param record
@@ -41,7 +42,7 @@ import { Error, Errors } from "../../errors/Errors";
 export const EditForm = ({ record, propId, propResourceName, propEditPage, catchfunction = () => { }, thenFunction = () => { } }) => {
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
-    const initialValue = useRef({});
+    const initialValue = useRef(new FormValue());
     const [formValue, setFormValue] = useState(initialValue.current);
     const [errors, setErrors] = useState(new Errors([]));
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
@@ -54,8 +55,10 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
         setErrors(newErrors);
     }, [responseErrors]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
-    useEffect(() => setFormValue(getFormValueFromRecord(record, model)), [record]);
+    useEffect(() => setFormValue(FormValue.createFromRecord(record)), [record]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
+    useEffect(() => { console.log("formvalue", formValue); }, [formValue]);
+    useEffect(() => { console.log("ref map", referencesMap); }, [referencesMap]);
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
         return edit(resourceName, propId, formValue).then(response => {
             setFormValue(getFormValueFromRecord(response, model));
@@ -68,7 +71,7 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
-            lockedFormValue: {},
+            lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,

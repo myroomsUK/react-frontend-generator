@@ -2,6 +2,7 @@ import {StringInput} from "../../generators/forms/inputs/StringInput";
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
 import React from "react";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 
 export class StringModel extends SinglePropertyModel{
@@ -12,12 +13,12 @@ export class StringModel extends SinglePropertyModel{
         return StringInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}:any){
+    getInputOnChangeHandler({formValue, setFormValue}:InputOnChangeHandler){
         return (vars:any)=>{
             const target = vars.target;
             let value = target.value;
             const name = target.id;
-            setFormValue({...formValue, [name]:value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

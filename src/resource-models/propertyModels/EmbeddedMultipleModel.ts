@@ -9,7 +9,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule} =  props;
-        const setParentFormValue = (values:any) => setFormValue({...formValue, [props.model.id] : values });
+        const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
 
         return IterableFormContent({
@@ -20,7 +20,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             referencesMap:referencesMap,
             refreshReferencesMap:refreshReferencesMap,
             errors:newErrors,
-            formValueArray:formValue[this.id],
+            formValueArray:formValue.get(this.id),
             label:this.label,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,

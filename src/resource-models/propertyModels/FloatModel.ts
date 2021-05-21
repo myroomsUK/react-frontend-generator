@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import {FloatInput} from "../../generators/forms/inputs/FloatInput";
 import {FloatShow} from "../../generators/fields/outputs/FloatShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class FloatModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -9,14 +10,13 @@ export class FloatModel extends SinglePropertyModel{
         return FloatInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (vars:any) => {
             const [event] = vars;
             const target = event.target;
             let value = target.value;
             const name = target.id;
-
-            setFormValue({...formValue, [name]: parseFloat(value)});
+            setFormValue( formValue.updateFormValue(name, parseFloat(value)));
         }
     }
 

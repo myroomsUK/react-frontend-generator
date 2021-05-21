@@ -1,6 +1,7 @@
 import React from 'react';
 import {Model} from "../../resource-models/Model";
 import {Errors} from "../errors/Errors";
+import {FormValue} from "../../resource-models/formvalue/FormValue";
 
 export interface FormGeneratorProps{
     resourceName:string;
@@ -10,9 +11,9 @@ export interface FormGeneratorProps{
     model:Model;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
-    formValue: any;
-    lockedFormValue:any;
-    setFormValue: React.Dispatch<React.SetStateAction<any>>;
+    formValue: FormValue;
+    lockedFormValue:FormValue;
+    setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     text?:string;
     errors: Errors;
     showButton?:boolean;
@@ -21,8 +22,8 @@ export interface FormGeneratorProps{
 
 export class FormGeneratorPropsObject{
     model:Model;
-    formValue: any;
-    setFormValue:React.Dispatch<React.SetStateAction<any>>;
+    formValue: FormValue;
+    setFormValue:React.Dispatch<React.SetStateAction<FormValue>>;
     resourceName:string;
     resourceId?:string;
     submitHandler: (e: any) => Promise<any>;

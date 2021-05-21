@@ -2,6 +2,7 @@ import React, {ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
 import {Model} from "./Model";
 import {PropertyRecord} from "./PropertyRecord";
+import {FormValue} from "./formvalue/FormValue";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -76,15 +77,20 @@ export abstract class PropertyModel {
 
     abstract setOutputField(props:OutputFields): ReactElement<any, any> |null;
 
-    abstract getInputOnChangeHandler({formValue, setFormValue}: any): (vars:any) => void;
+    abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
 
     abstract getInputField(props:InputFields): ReactElement<any,any>|null;
 }
 
+export interface InputOnChangeHandler{
+    formValue:FormValue,
+    setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
+}
+
 export interface InputFields{
     model: PropertyModel,
-    formValue: any,
-    setFormValue:  React.Dispatch<React.SetStateAction<{}>>,
+    formValue: FormValue,
+    setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
     lockedFormValue: any,
     errors: Errors,
     submitHandler: (e: any) => Promise<any>;

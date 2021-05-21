@@ -6,14 +6,14 @@ import { EmbeddedShowContent } from "../../generators/fields/EmbeddedShowContent
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler } = props;
-        const setParentFormValue = (values) => setFormValue(Object.assign(Object.assign({}, formValue), { [props.model.id]: values }));
+        const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         return EmbeddedFormContent({
             model: this.getResource().getModel(),
             formContent: this.form,
             setParentFormValue: setParentFormValue,
             refreshReferencesMap: refreshReferencesMap,
             referencesMap: referencesMap,
-            formValue: formValue[this.id],
+            formValue: formValue.get(this.id),
             errors: errors,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler

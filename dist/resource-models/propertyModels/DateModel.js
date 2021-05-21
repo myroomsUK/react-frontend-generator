@@ -12,7 +12,7 @@ export class DateModel extends SinglePropertyModel {
             const target = event.target;
             let value = target.value;
             const name = target.name;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
+            setFormValue(formValue.updateFormValue(name, value));
         };
     }
     setOutputField(props) {

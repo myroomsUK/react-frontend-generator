@@ -1,6 +1,7 @@
 import React from "react";
 import { Errors } from "../errors/Errors";
 import { Model } from "../../resource-models/Model";
+import { FormValue } from "../../resource-models/formvalue/FormValue";
 interface IterableFormContentProps {
     model: Model;
     resourceName: string;
@@ -8,7 +9,7 @@ interface IterableFormContentProps {
     formContent?: React.DetailedReactHTMLElement<any, any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
-    formValueArray: any[];
+    formValueArray: Map<string, FormValue>;
     errors: Errors;
     label: string;
     submitHandler: (e: any) => Promise<any>;

@@ -3,27 +3,39 @@ import {AutocompleteInput} from "../../generators/forms/inputs/AutocompleteInput
 import React from "react";
 import {SinglePropertyModel} from "./SinglePropertyModel";
 import ReferenceShow from "../../generators/fields/outputs/ReferenceShow";
+import {InputOnChangeHandler} from "../PropertyModel";
+import {Listing, ListingOption} from "../listings/Listing";
+import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
 
 export class ReferenceModel extends SinglePropertyModel{
     constructor(id:string, other:PropertyModelCore) {
         super(id, other);
     }
 
-    setInputField(props: any): React.ReactElement<any, any> | null {
+    setInputField(props: ReferenceInputFields): React.ReactElement<any, any> | null {
         const {inputHandler, value} = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), {onChange: inputHandler, inheritedValue:value });
-        return AutocompleteInput(propsWithModel)
+        const finalValue = (value) ? new ListingOption(value.get("id"), value.get(this.optionText)) : undefined
+        const propsWithModel = Object.assign(Object.assign({}, props), {model:this,onChange: inputHandler, inheritedValue:finalValue });
+        return ReferenceInput(propsWithModel)
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}:any){
+    getInputOnChangeHandler({formValue, setFormValue}:InputOnChangeHandler){
         return (vars:any)=>{
             console.log("vars", vars)
             const [name, value] = vars;
-            setFormValue({...formValue,[name]: parseInt(value.id)});
+            setFormValue( formValue.updateFormValue(name, value.toMap()));
+         //   setFormValue({...formValue,[name]: parseInt(value.id)});
         }
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return ReferenceShow({...props, propertyModel:this});
     }
+}
+
+interface ReferenceInputFields{
+    inputHandler:any,
+    value: Map<string, any>,
+    model:this,
+    refreshReferencesMap:any
 }

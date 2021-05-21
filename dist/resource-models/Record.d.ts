@@ -1,6 +1,8 @@
 import { PropertyRecord } from "./PropertyRecord";
+import { FormValue } from "./formvalue/FormValue";
 export interface Record {
     properties: PropertyRecord[];
+    generateFormValue(): FormValue;
 }
 export declare class Record {
     constructor(properties: PropertyRecord[]);

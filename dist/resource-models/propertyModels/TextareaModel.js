@@ -12,7 +12,7 @@ export class TextareaModel extends SinglePropertyModel {
             const target = vars.target;
             let value = target.value;
             const name = target.id;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
+            setFormValue(formValue.updateFormValue(name, value));
         };
     }
     setOutputField(props) {

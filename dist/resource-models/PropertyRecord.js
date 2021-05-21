@@ -1,3 +1,4 @@
+import { FormValue } from "./formvalue/FormValue";
 /**
  * @Property {id} - Name of the property
  */
@@ -9,6 +10,9 @@ export class PropertyRecord {
     getPropertyRecord(name) {
         return this.value.getPropertyRecord(name);
     }
+    generatePropertyValue() {
+        return this.value;
+    }
 }
 export class EmbeddedSinglePropertyRecord extends PropertyRecord {
     constructor(name, value) {
@@ -16,16 +20,20 @@ export class EmbeddedSinglePropertyRecord extends PropertyRecord {
         this.value = value;
     }
     getPropertyRecord(name) {
-        console.log("record", this);
-        console.log("name", name);
-        const record = this.value.getPropertyRecord(name);
-        console.log("record found", record);
-        return record;
+        return this.value.getPropertyRecord(name);
+    }
+    generatePropertyValue() {
+        return this.value.generateFormValue();
     }
 }
 export class EmbeddedMultiplePropertyRecord extends PropertyRecord {
     constructor(name, value) {
         super(name, value);
         this.value = value;
+    }
+    generatePropertyValue() {
+        const map = new Map();
+        this.value.forEach((record, index) => map.set(index, FormValue.createFromRecord(record)));
+        return map;
     }
 }

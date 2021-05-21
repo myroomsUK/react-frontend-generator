@@ -1,16 +1,17 @@
 import React from "react";
 import { Model } from "../../resource-models/Model";
 import { Errors } from "../errors/Errors";
+import { FormValue } from "../../resource-models/formvalue/FormValue";
 interface FormContentProps {
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
     model: Model;
     referencesMap: any;
     refreshReferencesMap: () => void;
-    formValue: object;
-    lockedFormValue: object;
+    formValue: FormValue;
+    lockedFormValue: FormValue;
     errors: Errors;
-    setFormValue: React.Dispatch<React.SetStateAction<any>>;
+    setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?: React.DetailedReactHTMLElement<any, any>;
 }
 /**

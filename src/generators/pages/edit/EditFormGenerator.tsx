@@ -6,6 +6,8 @@ import {getFormValueFromRecord} from "../../forms/formHelpers";
 import {FormGenerator} from "../../forms/FormGenerator";
 import {Error, Errors} from "../../errors/Errors";
 import {Record} from '../../../resource-models/Record'
+import {FormValue} from "../../../resource-models/formvalue/FormValue";
+import {listings} from "../../../mock/listings";
 
 interface EditFormGeneratorProps {
     propResourceName: string,
@@ -31,8 +33,8 @@ interface EditFormGeneratorProps {
 export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
-    const initialValue = useRef({});
-    const [formValue, setFormValue] = useState(initialValue.current);
+    const initialValue = useRef(new FormValue());
+    const [formValue, setFormValue] = useState<FormValue>(initialValue.current);
     const [errors, setErrors] = useState(new Errors([]));
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
@@ -45,11 +47,12 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
         setErrors(newErrors)},[responseErrors])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
-    useEffect(()=>setFormValue(getFormValueFromRecord(record, model)), [record])
+    useEffect(()=>setFormValue(FormValue.createFromRecord(record)), [record])
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
-
+    useEffect(()=>{console.log("formvalue", formValue)},[formValue])
+    useEffect(()=>{console.log("ref map", referencesMap)},[referencesMap])
 
     const submitHandler = async (formValue:any)=> edit(resourceName,propId, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
@@ -62,7 +65,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
             referencesMap:referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
-            lockedFormValue: {},
+            lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,

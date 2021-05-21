@@ -10,6 +10,7 @@ import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
 import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import {landlordRelationship} from "./mock/landlordRelationship";
+import {EditPage} from "./generators/pages/EditPageGenerator";
 
 export default function Test(){
 
@@ -35,7 +36,8 @@ export default function Test(){
 
         <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
         {/*<RouteFilterList resourceName={"landlords"} filters={{}}/>*/}
-        <ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>
+        {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
+        <EditPage propResourceName={"properties"} propId={1} />
 
     </div>
     return modelLoaded ? render : <div></div>;

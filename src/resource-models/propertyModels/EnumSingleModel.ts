@@ -3,6 +3,7 @@ import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/in
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import {green, red, yellow} from "@material-ui/core/colors";
 import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 interface EnumSingleInputFields extends SinglePropertyInputFields{
     options:any,
@@ -24,10 +25,10 @@ export class EnumSingleModel extends SinglePropertyModel{
         return EnumInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): (vars: any) => void {
         return (vars:any) =>{
             const [name, value] = vars;
-            setFormValue({...formValue,[name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

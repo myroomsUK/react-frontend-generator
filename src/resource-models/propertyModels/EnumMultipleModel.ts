@@ -2,6 +2,7 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 interface EnumMultipleInputFields extends SinglePropertyInputFields{
     options: any;
@@ -23,10 +24,10 @@ export class EnumMultipleModel extends SinglePropertyModel{
         return EnumInput(propsWithModel);
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): (vars: any) => void {
         return (vars:any) =>{
             const [name, value] = vars;
-            setFormValue({...formValue,[name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

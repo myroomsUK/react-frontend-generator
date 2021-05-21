@@ -17,7 +17,7 @@ export class EnumSingleModel extends SinglePropertyModel {
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return (vars) => {
             const [name, value] = vars;
-            setFormValue(Object.assign(Object.assign({}, formValue), { [name]: value }));
+            setFormValue(formValue.updateFormValue(name, value));
         };
     }
     setOutputField(props) {

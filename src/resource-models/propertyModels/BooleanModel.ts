@@ -2,20 +2,21 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import BooleanInput from "../../generators/forms/inputs/BooleanInput";
 import React from "react";
 import BooleanShow from "../../generators/fields/outputs/BooleanShow";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class BooleanModel extends SinglePropertyModel {
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
       const {inputHandler, formValue} = props;
-      const propsWithModel = {...props, onClick:inputHandler,checked:formValue[this.id]}
+      const propsWithModel = {...props, onClick:inputHandler,checked:formValue.get(this.id)}
       return BooleanInput(propsWithModel)
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): any {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (event:any) => {
             const target = event.target;
             let value =  target.checked;
             const name = target.id;
-            setFormValue({...formValue, [name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 

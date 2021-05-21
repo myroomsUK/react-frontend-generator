@@ -1,8 +1,12 @@
 import _ from 'lodash';
 import {EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord, PropertyRecord} from "./PropertyRecord";
+import {FormValue} from "./formvalue/FormValue";
+import {Form} from "redux-form";
 
 export interface Record{
     properties: PropertyRecord[]
+
+    generateFormValue(): FormValue;
 }
 
 export class Record{
@@ -58,4 +62,8 @@ export class Record{
     getPropertyRecordValue(name:string){
         return this.getPropertyRecord(name)?.value
     }
+
+    generateFormValue(): FormValue{
+        return FormValue.createFromRecord(this)
+    };
 }

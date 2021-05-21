@@ -1,5 +1,6 @@
 import { SinglePropertyInputFields, SinglePropertyModel } from "./SinglePropertyModel";
 import React from "react";
+import { InputOnChangeHandler } from "../PropertyModel";
 interface EnumMultipleInputFields extends SinglePropertyInputFields {
     options: any;
 }
@@ -8,7 +9,7 @@ export declare class EnumMultipleModel extends SinglePropertyModel {
     colorMap: any;
     constructor(id: string, others: any);
     setInputField(props: EnumMultipleInputFields): React.ReactElement<any, any> | null;
-    getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
+    getInputOnChangeHandler({ formValue, setFormValue }: InputOnChangeHandler): (vars: any) => void;
     setOutputField(props: any): React.ReactElement<any, any> | null;
 }
 export {};

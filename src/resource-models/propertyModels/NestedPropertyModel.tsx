@@ -6,7 +6,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import _ from "lodash";
 import {Model} from "../Model";
-import {EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord, PropertyRecord} from "../PropertyRecord";
+import {EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord} from "../PropertyRecord";
 
 
 export abstract class EmbeddedPropertyModel extends PropertyModel{
@@ -33,7 +33,7 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
         model.label = _.startCase(this.label)
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue[this.id], model:model}
+        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue.get(this.id), model:model}
         return this.setInputField(newProps);
     }
 

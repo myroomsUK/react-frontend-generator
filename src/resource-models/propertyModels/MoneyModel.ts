@@ -1,6 +1,7 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import MoneyShow from "../../generators/fields/outputs/MoneyShow";
 import MoneyInput from "../../generators/forms/inputs/MoneyInput";
+import {InputOnChangeHandler} from "../PropertyModel";
 
 export class MoneyModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -9,10 +10,10 @@ export class MoneyModel extends SinglePropertyModel{
         return MoneyInput(propsWithModel)
     }
 
-    getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {
+    getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): (vars: any) => void {
         return (vars:any) =>{
             const [name, value] = vars;
-            setFormValue({...formValue, [name]: value});
+            setFormValue( formValue.updateFormValue(name, value));
         }
     }
 
