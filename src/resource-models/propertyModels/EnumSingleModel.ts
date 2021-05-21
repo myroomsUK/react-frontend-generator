@@ -33,6 +33,7 @@ export class EnumSingleModel extends SinglePropertyModel{
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
         const {propertyRecord} = props
+
         return SingleEnumShow({propertyModel:this, propertyRecord, colorMap:{
                 not_managed: {
                     backgroundColor: red.A700,

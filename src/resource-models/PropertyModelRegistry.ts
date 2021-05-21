@@ -1,11 +1,20 @@
-import {EmbeddedPropertyModelCore, PropertyModelCore} from "./PropertyModelCore";
 import {
-    BOOLEAN, DATE,
+    BOOLEAN,
+    DATE,
     EMBEDDED_MULTIPLE,
-    EMBEDDED_SINGLE, ENUM_MULTIPLE, ENUM_SINGLE, FILE_MULTIPLE, FILE_SINGLE, FLOAT,
-    INTEGER, MONEY, PHONE,
-    REFERENCE,ID,
-    STRING, TEXTAREA
+    EMBEDDED_SINGLE,
+    ENUM_MULTIPLE,
+    ENUM_SINGLE,
+    FILE_MULTIPLE,
+    FILE_SINGLE,
+    FLOAT,
+    ID,
+    INTEGER,
+    MONEY,
+    PHONE,
+    REFERENCE,
+    STRING,
+    TEXTAREA
 } from "../generators/forms/inputs/InputTypes";
 import {PropertyModel} from "./PropertyModel";
 import {NumberModel} from "./propertyModels/NumberModel";
@@ -29,7 +38,6 @@ import {StringModel} from "./propertyModels/StringModel";
  * @Property {id} - Name of the property
  */
 export class PropertyModelRegistry{
-
 
     static get(id:string,others:any):PropertyModel{
         switch (others.type){
@@ -85,6 +93,6 @@ export class PropertyModelRegistry{
                 return new IdModel(id, others);
             }
         }
-
     }
+
 }

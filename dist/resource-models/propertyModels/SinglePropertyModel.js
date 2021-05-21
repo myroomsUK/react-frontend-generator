@@ -11,15 +11,15 @@ export class SinglePropertyModel extends PropertyModel {
     getInputField(props) {
         const { errors, formValue, setFormValue } = props;
         const { hasError, errorMessage } = this.manipulateErrors(errors);
-        const model = this;
-        model.label = _.startCase(this.label);
+        const label = _.startCase(this.label);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: formValue[this.id], model: model });
+        const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: formValue[this.id], label: label });
         return this.setInputField(newProps);
     }
     getOutputField(props) {
         const { record, showLabel } = props;
-        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record[this.id] });
+        // @ts-ignore
+        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record === null || record === void 0 ? void 0 : record.value });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
 }

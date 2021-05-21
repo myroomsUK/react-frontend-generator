@@ -2,12 +2,13 @@ import React, {useEffect, useMemo, useState} from "react";
 import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 import Grid from "@material-ui/core/Grid";
 import {ShowContent} from "../../fields/ShowContent";
+import {Record} from "../../../resource-models/Record";
 
 
 interface ShowProps {
     propResourceName: string,
     propId: number,
-    record: any,
+    record: Record,
     propShowPage?: any
 }
 
@@ -33,9 +34,10 @@ export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowPr
             // @ts-ignore
             setGenericShowRender(React.cloneElement(propShowPage, showFormProps ));
         }else{
-            setGenericShowRender(<Grid container spacing={2}>
-            <ShowContent record={record} model={model} />
-            </Grid>)
+            setGenericShowRender(
+                <Grid container spacing={2}>
+                    <ShowContent record={record} model={model} />
+                </Grid>)
         }
     },[record])
 

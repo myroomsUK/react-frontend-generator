@@ -1,8 +1,9 @@
 import React from "react";
+import { Record } from '../../../resource-models/Record';
 interface EditFormGeneratorProps {
     propResourceName: string;
     propId: number;
-    record: any;
+    record: Record;
     propEditPage?: any;
     thenFunction?: any;
     catchfunction?: any;

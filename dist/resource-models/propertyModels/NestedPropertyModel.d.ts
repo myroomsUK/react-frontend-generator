@@ -3,6 +3,8 @@ import { Resource } from "../Resource";
 import { Errors } from "../../generators/errors/Errors";
 import { PropertyModelCore } from "../PropertyModelCore";
 import React from "react";
+import { Model } from "../Model";
+import { EmbeddedPropertyRecord } from "../PropertyRecord";
 export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     resourceName: string;
     resource: Resource;
@@ -10,7 +12,7 @@ export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     getResource(): Resource;
     manipulateErrors(fetchErrors: Errors): Errors;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
-    getOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null;
+    getOutputField(props: OutputFields): React.ReactElement<any, any> | null;
 }
 export interface EmbeddedInputFields extends InputFields {
     inputHandler: (vars: any) => void;
@@ -36,6 +38,13 @@ export interface EmbeddedInputFields extends InputFields {
     single?: boolean;
     modifyRule?: any;
 }
-export interface EmbeddedOutputFields extends OutputFields {
+export interface EmbeddedSingleOutputFields extends OutputFields {
     showElement?: React.DetailedReactHTMLElement<any, any>;
+    record: EmbeddedPropertyRecord;
+    model: Model;
+}
+export interface EmbeddedMultipleOutputFields extends OutputFields {
+    showElement?: React.DetailedReactHTMLElement<any, any>;
+    record: EmbeddedPropertyRecord[];
+    model: Model;
 }

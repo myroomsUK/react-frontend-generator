@@ -15,7 +15,7 @@ export const IterableShowContent = ({ model, record, showElement }) => {
     else {
         return _jsx(Grid, Object.assign({ container: true }, { children: record.map((singleRecord) => _jsx(Grid, Object.assign({ item: true, xs: 12, md: 12 }, { children: _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties.filter(propertyModel => propertyModel.read === true).map(propertyModel => {
                         const { xs, md, id } = propertyModel;
-                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ model: propertyModel, record: singleRecord, showLabel: true }) }), void 0);
+                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ record: singleRecord.getPropertyRecord(propertyModel.id), showLabel: true }) }), void 0);
                     }) }), void 0) }), void 0)) }), void 0);
     }
     ;

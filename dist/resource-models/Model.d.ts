@@ -11,6 +11,14 @@ export declare class Model {
      * @param name
      */
     getProperty(name: string): PropertyModel;
+    getRecord(name: string, formValue: any): {
+        propertyModel: PropertyModel;
+        record: any;
+    };
+    getElement(name: string, formValue: any): {
+        propertyModel: PropertyModel;
+        record: any;
+    };
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel

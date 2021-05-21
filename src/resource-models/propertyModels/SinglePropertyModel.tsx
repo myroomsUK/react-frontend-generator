@@ -3,6 +3,7 @@ import {Error, Errors} from "../../generators/errors/Errors";
 import { Typography } from "@material-ui/core";
 import React from "react";
 import _ from 'lodash'
+import {PropertyRecord} from "../PropertyRecord";
 
 interface SingleErrors{
     hasError:boolean,
@@ -25,16 +26,17 @@ export abstract class SinglePropertyModel extends PropertyModel{
     getInputField(props: InputFields): React.ReactElement<any, any> | null {
         const {errors, formValue, setFormValue} = props;
         const {hasError, errorMessage} = this.manipulateErrors(errors);
-        const model = this;
-        model.label = _.startCase(this.label)
+        const label = _.startCase(this.label)
+
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:SinglePropertyInputFields = {...props,  hasError, errorMessage, inputHandler:inputHandler, value:formValue[this.id], model:model}
+        const newProps:SinglePropertyInputFields = {...props,  hasError, errorMessage, inputHandler:inputHandler, value:formValue[this.id], label: label}
         return this.setInputField(newProps);
     }
 
-    getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
+    getOutputField(props:SingleOutputFields): React.ReactElement<any, any> | null {
         const {record, showLabel} = props;
-        const newProps:SingleOutputFields = {...props,  propertyRecord:record[this.id]}
+        // @ts-ignore
+        const newProps:SingleOutputFields = {...props, propertyRecord:record?.value  }
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
             {this.setOutputField(newProps)}
@@ -45,9 +47,9 @@ export abstract class SinglePropertyModel extends PropertyModel{
 interface SingleInputFields extends InputFields{
     inputHandler: (vars:any) => void,
     value: any,
-    model: SinglePropertyModel
+    label:string
 }
 
-interface SingleOutputFields{
-    propertyRecord: any
+interface SingleOutputFields extends OutputFields{
+    propertyRecord: PropertyRecord
 }

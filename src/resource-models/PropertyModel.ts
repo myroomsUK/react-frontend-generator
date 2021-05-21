@@ -1,5 +1,7 @@
 import React, {ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
+import {Model} from "./Model";
+import {PropertyRecord} from "./PropertyRecord";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -72,7 +74,7 @@ export abstract class PropertyModel {
 
     abstract getOutputField(props:OutputFields): ReactElement<any, any> |null;
 
-    abstract setOutputField(props:any): ReactElement<any, any> |null;
+    abstract setOutputField(props:OutputFields): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler({formValue, setFormValue}: any): (vars:any) => void;
 
@@ -92,7 +94,6 @@ export interface InputFields{
 }
 
 export interface OutputFields{
-    record:any,
-    model:PropertyModel,
+    record:PropertyRecord|PropertyRecord[] |undefined,
     showLabel:boolean
 }

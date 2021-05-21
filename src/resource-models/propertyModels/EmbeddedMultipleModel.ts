@@ -1,5 +1,5 @@
 import React from "react";
-import {EmbeddedInputFields, EmbeddedOutputFields, EmbeddedPropertyModel} from "./NestedPropertyModel";
+import {EmbeddedInputFields, EmbeddedMultipleOutputFields, EmbeddedPropertyModel} from "./NestedPropertyModel";
 import {IterableFormContent} from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 
@@ -33,12 +33,11 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         };
     }
 
-    setOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null {
-        console.log("props", props, this.id)
-        const {record, showElement} = props;
+    setOutputField(props: EmbeddedMultipleOutputFields): React.ReactElement<any, any> | null {
+        const {record, model, showElement} = props;
         return IterableShowContent({
-            model:this.getResource().getModel(),
-            record:record[this.id],
+            model:model,
+            record:record,
             resourceName: this.resourceName,
             showElement:showElement
         });

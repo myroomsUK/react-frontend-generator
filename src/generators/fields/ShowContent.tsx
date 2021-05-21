@@ -1,10 +1,12 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {Model} from "../../resource-models/Model";
+import {Record} from "../../resource-models/Record";
+import {EmbeddedPropertyRecord} from "../../resource-models/PropertyRecord";
 
 
 export interface ShowContent{
-    record: any,
+    record: Record|EmbeddedPropertyRecord,
     model: Model|undefined,
     showElement?:any,
 }
@@ -19,7 +21,7 @@ export const ShowContent: React.FC<ShowContent> = ({record, model,showElement}) 
         {model?.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
             const {xs, md, id} = propertyModel;
             return <Grid key={index} item xs={xs} md={md}>
-                {propertyModel.getOutputField({model:propertyModel,record:record, showLabel:true})}
+                {propertyModel.getOutputField({record: record.getPropertyRecord(propertyModel.id), showLabel:true})}
             </Grid>
         })
         }

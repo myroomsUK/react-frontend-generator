@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
+import { PropertyRecord } from "./PropertyRecord";
 export declare type InputType = "id" | "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea" | "enum_single" | "enum_multiple";
 export interface PropertyModel {
     id: string;
@@ -49,7 +50,7 @@ export declare abstract class PropertyModel {
     abstract manipulateErrors(errors: Errors): any;
     abstract setInputField(props: any): ReactElement<any, any> | null;
     abstract getOutputField(props: OutputFields): ReactElement<any, any> | null;
-    abstract setOutputField(props: any): ReactElement<any, any> | null;
+    abstract setOutputField(props: OutputFields): ReactElement<any, any> | null;
     abstract getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
     abstract getInputField(props: InputFields): ReactElement<any, any> | null;
 }
@@ -65,7 +66,6 @@ export interface InputFields {
     refreshReferencesMap: () => void;
 }
 export interface OutputFields {
-    record: any;
-    model: PropertyModel;
+    record: PropertyRecord | PropertyRecord[] | undefined;
     showLabel: boolean;
 }

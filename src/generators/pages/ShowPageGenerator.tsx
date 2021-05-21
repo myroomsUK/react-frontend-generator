@@ -1,6 +1,7 @@
 import React from "react";
 import {useResource} from "../hooks/resourceUtils";
 import {Show} from "./show/Show";
+import {Record} from "../../resource-models/Record";
 
 interface Props{
     propResourceName:string,
@@ -18,7 +19,8 @@ interface Props{
  */
 export const ShowPage: React.FC<Props> = ({propResourceName, propId, propShowPage}) => {
 
-    const {record} = useResource(propResourceName, propId);
+    const {record:recordJson} = useResource(propResourceName, propId);
+    const record = Record.createFromJson(recordJson);
     return <Show propResourceName={propResourceName} propId={propId} record={record} propShowPage={propShowPage} />
 }
 

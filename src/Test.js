@@ -10,6 +10,8 @@ import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
 import {Create} from "./generators/pages/CreatePageGenerator";
 import {EditPage} from "./generators/pages/EditPageGenerator";
+import {ShowPage} from "./generators/pages/ShowPageGenerator";
+import {landlordRelationship} from "./mock/landlordRelationship";
 
 export default function Test(){
 
@@ -19,6 +21,7 @@ export default function Test(){
             this.get("http://localhost:1000/api/properties/1", ()=> propertyShow)
             this.get("http://localhost:1000/api/properties", () => properties);
             this.get("http://localhost:1000/api/landlords", () => landlords);
+            this.get("http://localhost:1000/api/landlord_relationships/1", () => landlordRelationship);
             this.post("http://localhost:1000/api/resources/listings", ()=> listings)
             this.get("http://localhost:1000/resources", ()=> model)
             this.get("http://localhost:1000/api/units", ()=> units)
@@ -34,8 +37,8 @@ export default function Test(){
 
         {/*<button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
         <RouteFilterList resourceName={"landlords"} filters={{}}/>*/}
-        {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
-        <Create propResourceName={"landlord_relationships"}/>
+        <ShowPage propResourceName={"landlord_relationships"} propId={1}/>
+
     </div>
     return modelLoaded ? render : <div></div>;
 }

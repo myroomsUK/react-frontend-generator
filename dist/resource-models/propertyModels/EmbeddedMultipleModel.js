@@ -27,11 +27,10 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         };
     }
     setOutputField(props) {
-        console.log("props", props, this.id);
-        const { record, showElement } = props;
+        const { record, model, showElement } = props;
         return IterableShowContent({
-            model: this.getResource().getModel(),
-            record: record[this.id],
+            model: model,
+            record: record,
             resourceName: this.resourceName,
             showElement: showElement
         });

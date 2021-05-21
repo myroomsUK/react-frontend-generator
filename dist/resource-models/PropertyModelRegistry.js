@@ -1,4 +1,4 @@
-import { BOOLEAN, DATE, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM_MULTIPLE, ENUM_SINGLE, FILE_MULTIPLE, FILE_SINGLE, FLOAT, INTEGER, MONEY, PHONE, REFERENCE, ID, STRING, TEXTAREA } from "../generators/forms/inputs/InputTypes";
+import { BOOLEAN, DATE, EMBEDDED_MULTIPLE, EMBEDDED_SINGLE, ENUM_MULTIPLE, ENUM_SINGLE, FILE_MULTIPLE, FILE_SINGLE, FLOAT, ID, INTEGER, MONEY, PHONE, REFERENCE, STRING, TEXTAREA } from "../generators/forms/inputs/InputTypes";
 import { NumberModel } from "./propertyModels/NumberModel";
 import { ReferenceModel } from "./propertyModels/ReferenceModel";
 import { EmbeddedSingleModel } from "./propertyModels/EmbeddedSingleModel";

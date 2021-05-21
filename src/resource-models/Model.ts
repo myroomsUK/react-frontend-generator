@@ -41,6 +41,24 @@ export class Model{
 
     }
 
+    getRecord(name:string, formValue:any){
+        const split = _.split(name, ".");
+        split.pop();
+        const reducer = (start:any, value:any) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, formValue);
+        const propertyModel = this.getProperty(name);
+        return {propertyModel: propertyModel, record: record}
+    }
+
+    getElement(name:string, formValue:any){
+        const split = _.split(name, ".");
+        split.pop();
+        const reducer = (start:any, value:any) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, formValue);
+        const propertyModel = this.getProperty(name);
+        return {propertyModel: propertyModel, record: record}
+    }
+
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
@@ -55,7 +73,10 @@ export class Model{
     }
 
     getOutputField(requestedName:string, props: OutputPropertyProps, showLabel:boolean = true): ReactElement<any, any>|null{
-        return this.getProperty(requestedName).getOutputField({...props, model:this.getProperty(requestedName), showLabel:showLabel});
+        /*const {record:formvalue} = props;
+        const {propertyModel, record} = this.getElement(requestedName, formvalue);
+        return propertyModel.getOutputField({...props, model:propertyModel, record:record, showLabel:showLabel })*/
+        return this.getProperty(requestedName).getOutputField({...props, showLabel:showLabel});
     }
 
     getAllPropertiesReadableNames(){

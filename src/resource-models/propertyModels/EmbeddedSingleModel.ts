@@ -1,7 +1,9 @@
 import React from "react";
-import {EmbeddedInputFields, EmbeddedOutputFields, EmbeddedPropertyModel} from "./NestedPropertyModel";
+import {EmbeddedInputFields, EmbeddedPropertyModel, EmbeddedSingleOutputFields} from "./NestedPropertyModel";
 import {ShowContent} from "../../generators/fields/ShowContent";
 import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
+import {Record} from "../Record";
+import {EmbeddedPropertyRecord} from "../PropertyRecord";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
@@ -20,8 +22,9 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
         })
     }
 
-    setOutputField(props: EmbeddedOutputFields): React.ReactElement<any, any> | null {
-        const newProps = {...props, model:this.getResource().getModel()}
+    setOutputField(props: EmbeddedSingleOutputFields): React.ReactElement<any, any> | null {
+
+        const newProps = {...props, record: props.record ?? new EmbeddedPropertyRecord(this.id, new Record([]))}
         return ShowContent(newProps)
     }
 

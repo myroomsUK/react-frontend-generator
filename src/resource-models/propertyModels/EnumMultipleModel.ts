@@ -33,7 +33,7 @@ export class EnumMultipleModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         const {propertyRecord} = props;
         const newProps = {propertyRecord, propertyModel:this};
-        const record: any = Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord);
+        const record: any = (propertyRecord===undefined) ? []: (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
         return record.map((singleRecord:any) =>{
             const eachProp = {...props, propertyRecord: singleRecord }
             return ChipGenerator({propertyModel:this, propertyRecord:singleRecord, colorMap:"suca"});

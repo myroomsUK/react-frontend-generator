@@ -5,11 +5,12 @@ import {useEdit} from "../../../redux/actions/verbs/edit";
 import {getFormValueFromRecord} from "../../forms/formHelpers";
 import {FormGenerator} from "../../forms/FormGenerator";
 import {Error, Errors} from "../../errors/Errors";
+import {Record} from '../../../resource-models/Record'
 
 interface EditFormGeneratorProps {
     propResourceName: string,
     propId: number,
-    record: any,
+    record: Record,
     propEditPage?: any,
     thenFunction?: any,
     catchfunction?: any

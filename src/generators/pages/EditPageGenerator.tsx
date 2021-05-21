@@ -1,6 +1,7 @@
 import React from "react";
 import {EditForm} from "./edit/EditFormGenerator";
 import {useResource} from "../hooks/resourceUtils";
+import {Record} from "../../resource-models/Record";
 
 interface Props{
     propResourceName:string,
@@ -18,7 +19,9 @@ interface Props{
  */
 export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
 
-    const {record} = useResource(resourceName, propId);
+    const {record:recordJson} = useResource(resourceName, propId);
+    const record = Record.createFromJson(recordJson);
+
     return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
 }
 

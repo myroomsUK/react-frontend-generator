@@ -33,6 +33,22 @@ export class Model {
         // @ts-ignore
         return split.reduce(reducerModel, this);
     }
+    getRecord(name, formValue) {
+        const split = _.split(name, ".");
+        split.pop();
+        const reducer = (start, value) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, formValue);
+        const propertyModel = this.getProperty(name);
+        return { propertyModel: propertyModel, record: record };
+    }
+    getElement(name, formValue) {
+        const split = _.split(name, ".");
+        split.pop();
+        const reducer = (start, value) => (start) ? start[value] : undefined;
+        const record = split.reduce(reducer, formValue);
+        const propertyModel = this.getProperty(name);
+        return { propertyModel: propertyModel, record: record };
+    }
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
@@ -45,7 +61,10 @@ export class Model {
         return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }));
     }
     getOutputField(requestedName, props, showLabel = true) {
-        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName), showLabel: showLabel }));
+        /*const {record:formvalue} = props;
+        const {propertyModel, record} = this.getElement(requestedName, formvalue);
+        return propertyModel.getOutputField({...props, model:propertyModel, record:record, showLabel:showLabel })*/
+        return this.getProperty(requestedName).getOutputField(Object.assign(Object.assign({}, props), { showLabel: showLabel }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {
