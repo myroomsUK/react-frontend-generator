@@ -17,7 +17,7 @@ export class MultipleFileModel extends SinglePropertyModel {
     }
     setOutputField(props) {
         var _a;
-        return MultipleFileShow(Object.assign(Object.assign({}, props), { propertyRecord: (_a = props.propertyRecord) !== null && _a !== void 0 ? _a : [] }));
+        return MultipleFileShow(Object.assign(Object.assign({}, props), { propertyRecord: (_a = props.propertyRecord) !== null && _a !== void 0 ? _a : new Map() }));
     }
     getRecord(jsonValue) {
         return Record.fromJson(jsonValue);

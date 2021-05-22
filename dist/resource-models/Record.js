@@ -25,7 +25,6 @@ export class Record extends Map {
             else
                 return accumulator;
         };
-        console.log("name", name);
         // @ts-ignore
         return split.reduce(reducerModel, this);
     }
