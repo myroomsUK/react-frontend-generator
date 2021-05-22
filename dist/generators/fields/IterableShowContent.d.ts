@@ -1,8 +1,8 @@
 import React from "react";
 import { Model } from "../../resource-models/Model";
-import { EmbeddedMultiplePropertyRecord } from "../../resource-models/PropertyRecord";
+import { Record } from "../../resource-models/Record";
 export interface IterableShowContentProps {
-    record: EmbeddedMultiplePropertyRecord;
+    record: Map<number, Record>;
     model: Model;
     resourceName: string;
     showElement?: any;

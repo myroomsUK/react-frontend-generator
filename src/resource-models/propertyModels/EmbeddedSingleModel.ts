@@ -2,7 +2,6 @@ import React from "react";
 import {EmbeddedInputFields, EmbeddedPropertyModel, EmbeddedSingleOutputFields} from "./NestedPropertyModel";
 import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 import {Record} from "../Record";
-import {EmbeddedSinglePropertyRecord} from "../PropertyRecord";
 import {EmbeddedShowContent} from "../../generators/fields/EmbeddedShowContent";
 import {FormValue} from "../formvalue/FormValue";
 
@@ -25,7 +24,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
 
     setOutputField(props: EmbeddedSingleOutputFields): React.ReactElement<any, any> | null {
 
-        const newProps = {...props, record: props.record ?? new EmbeddedSinglePropertyRecord(this.id, new Record([]))}
+        const newProps = {...props, record: props.record ?? new Record()}
         return EmbeddedShowContent(newProps)
     }
 

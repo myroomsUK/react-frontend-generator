@@ -1,9 +1,9 @@
 import React from "react";
 import { Model } from "../../resource-models/Model";
-import { EmbeddedSinglePropertyRecord } from "../../resource-models/PropertyRecord";
+import { Record } from "../../resource-models/Record";
 interface EmbeddedShowContentProps {
     model: Model;
-    record: EmbeddedSinglePropertyRecord;
+    record: Record;
     showElement?: React.DetailedReactHTMLElement<any, any>;
 }
 export declare const EmbeddedShowContent: React.FC<EmbeddedShowContentProps>;

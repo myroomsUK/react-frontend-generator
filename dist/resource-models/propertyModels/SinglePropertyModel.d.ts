@@ -1,7 +1,6 @@
 import { InputFields, OutputFields, PropertyModel } from "../PropertyModel";
 import { Errors } from "../../generators/errors/Errors";
 import React from "react";
-import { PropertyRecord } from "../PropertyRecord";
 interface SingleErrors {
     hasError: boolean;
     errorMessage?: string;
@@ -24,6 +23,6 @@ interface SingleInputFields extends InputFields {
     label: string;
 }
 interface SingleOutputFields extends OutputFields {
-    propertyRecord: PropertyRecord;
+    propertyRecord: any;
 }
 export {};

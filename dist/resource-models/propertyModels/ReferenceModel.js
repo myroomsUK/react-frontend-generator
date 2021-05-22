@@ -24,7 +24,12 @@ export class ReferenceModel extends SinglePropertyModel {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
     getRecord(jsonValue) {
-        console.log("jsonvalue", jsonValue);
         return jsonValue;
+    }
+    getFormValue(value) {
+        return value;
+    }
+    getJsonFormValue(value) {
+        return value.get("id");
     }
 }

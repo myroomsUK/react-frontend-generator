@@ -1,7 +1,6 @@
 import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { IterableFormContent } from "../../generators/forms/IterableFormContent";
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
-import { EmbeddedMultiplePropertyRecord } from "../PropertyRecord";
 import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
@@ -33,7 +32,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         const { record, model, showElement } = props;
         return IterableShowContent({
             model: model,
-            record: record !== null && record !== void 0 ? record : new EmbeddedMultiplePropertyRecord(this.id, []),
+            record: record,
             resourceName: this.resourceName,
             showElement: showElement
         });

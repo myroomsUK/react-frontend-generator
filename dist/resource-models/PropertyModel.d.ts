@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
-import { PropertyRecord } from "./PropertyRecord";
 import { FormValue } from "./formvalue/FormValue";
+import { Record } from "./Record";
 export declare type InputType = "id" | "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea" | "enum_single" | "enum_multiple";
 export interface PropertyModel {
     id: string;
@@ -74,6 +74,6 @@ export interface InputFields {
     refreshReferencesMap: () => void;
 }
 export interface OutputFields {
-    record: PropertyRecord | PropertyRecord[] | undefined;
+    record: Record | Map<number, Record> | undefined;
     showLabel: boolean;
 }

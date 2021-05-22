@@ -33,9 +33,21 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any{
-        console.log("jsonvalue", jsonValue);
         return jsonValue;
     }
+
+    getFormValue(value:any){
+        return value;
+    }
+
+    getJsonFormValue(value: Map<string, any>){
+        return value.get("id");
+    }
+}
+
+interface ReferenceJson{
+    id: number;
+    label:string;
 }
 
 interface ReferenceInputFields{

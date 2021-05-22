@@ -1,7 +1,6 @@
 import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { EmbeddedFormContent } from "../../generators/forms/EmbeddedFormContent";
 import { Record } from "../Record";
-import { EmbeddedSinglePropertyRecord } from "../PropertyRecord";
 import { EmbeddedShowContent } from "../../generators/fields/EmbeddedShowContent";
 import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
@@ -22,7 +21,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     }
     setOutputField(props) {
         var _a;
-        const newProps = Object.assign(Object.assign({}, props), { record: (_a = props.record) !== null && _a !== void 0 ? _a : new EmbeddedSinglePropertyRecord(this.id, new Record([])) });
+        const newProps = Object.assign(Object.assign({}, props), { record: (_a = props.record) !== null && _a !== void 0 ? _a : new Record() });
         return EmbeddedShowContent(newProps);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {

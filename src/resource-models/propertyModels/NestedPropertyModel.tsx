@@ -6,7 +6,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import _ from "lodash";
 import {Model} from "../Model";
-import {EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord} from "../PropertyRecord";
+import {Record} from "../Record";
 
 
 export abstract class EmbeddedPropertyModel extends PropertyModel{
@@ -76,12 +76,12 @@ export interface EmbeddedInputFields extends InputFields{
 
 export interface EmbeddedSingleOutputFields extends OutputFields{
     showElement?:React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedSinglePropertyRecord,
+    record: Record,
     model: Model
 }
 
 export interface EmbeddedMultipleOutputFields extends OutputFields{
     showElement?:React.DetailedReactHTMLElement<any, any>;
-    record: EmbeddedMultiplePropertyRecord,
+    record: Map<number,Record>,
     model: Model
 }

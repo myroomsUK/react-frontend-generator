@@ -207,7 +207,7 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
     const showClearFilters = !!components.length;
     const getRowElement = (row, id, label, localModel) => {
-        const record = Record.createFromJson(row);
+        const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
         return propertyModel.getOutputField({ record: record.getPropertyRecord(id), showLabel: false });

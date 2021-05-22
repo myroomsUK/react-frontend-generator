@@ -20,7 +20,7 @@ export class SinglePropertyModel extends PropertyModel {
     getOutputField(props) {
         const { record, showLabel } = props;
         // @ts-ignore
-        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record === null || record === void 0 ? void 0 : record.value });
+        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
     getRecord(jsonValue) {
