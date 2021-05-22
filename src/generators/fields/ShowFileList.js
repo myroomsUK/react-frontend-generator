@@ -48,9 +48,9 @@ function ShowImageGrid({images}){
             <div className={classes.root}>
                 <GridList cellHeight={180} cols={cols} className={classes.gridList}>
                     {images.map((elements,index) => {
-                        const actionIcon = elements.getPropertyRecordValue("actionIcon")
-                        const url = elements.getPropertyRecordValue("url")
-                        const title = elements.getPropertyRecordValue("title")
+                        const actionIcon = elements.get("actionIcon")
+                        const url = elements.get("url")
+                        const title = elements.get("title")
                         return <GridListTile key={index} onClick={()=>selectElement(index)}>
                                 <img src={url} alt={title} />
                                 <GridListTileBar
