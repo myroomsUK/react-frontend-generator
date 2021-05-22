@@ -1,4 +1,3 @@
-import { FormValue } from "../../../resource-models/formvalue/FormValue";
 export declare function loading(resource: string, loading: boolean): {
     type: string;
     resource: string;
@@ -16,6 +15,6 @@ export declare function genericSuccess(): {
 };
 export declare function useCreate(): {
     data: never[];
-    create: (resource: string, values: FormValue) => Promise<any>;
+    create: (resource: string, values: any) => Promise<any>;
     errors: {};
 };

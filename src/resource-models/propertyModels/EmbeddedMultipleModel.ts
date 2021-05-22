@@ -3,6 +3,8 @@ import {EmbeddedInputFields, EmbeddedMultipleOutputFields, EmbeddedPropertyModel
 import {IterableFormContent} from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 import {EmbeddedMultiplePropertyRecord} from "../PropertyRecord";
+import {Record} from "../Record";
+import {FormValue} from "../formvalue/FormValue";
 
 
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
@@ -42,5 +44,42 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             resourceName: this.resourceName,
             showElement:showElement
         });
+    }
+
+    getRecord(jsonValue: any[]): Map<number, Record> {
+        Array.isArray(jsonValue);
+        const map = new Map<number,Record>();
+        jsonValue.forEach((element:any, index:number) => {
+            if(typeof element === "object"){
+                return map.set(index, Record.createFromJson(element,this.getResource().getModel()))
+            }else{
+                map.set(index, element)
+            }
+        })
+        return map;
+    }
+
+    getFormValue(value: Map<string, Record>): any {
+        const map = new Map();
+        const nestedEntries = Array.from(value.entries());
+        nestedEntries.forEach(([nestedKey, nestedValue], nestedIndex) =>{
+            if(typeof nestedValue === "object"){
+                map.set(nestedKey, FormValue.createFromRecord(nestedValue, this.getResource().getModel()))
+            }else{
+                map.set(nestedKey, nestedValue)
+            }
+        })
+        return map;
+    }
+
+    getJsonFormValue(value: Map<string,any>): any {
+        return Array.from(value.values()).map((item) => {
+            if(item instanceof FormValue){
+                item.toJson(this.getResource().getModel())
+            }else{
+                return item;
+            }
+
+        })
     }
 }

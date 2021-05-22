@@ -19,8 +19,7 @@ interface Props{
  */
 export const ShowPage: React.FC<Props> = ({propResourceName, propId, propShowPage}) => {
 
-    const {record:recordJson} = useResource(propResourceName, propId);
-    const record = Record.createFromJson(recordJson);
+    const {record} = useResource(propResourceName, propId);
     return <Show propResourceName={propResourceName} propId={propId} record={record} propShowPage={propShowPage} />
 }
 

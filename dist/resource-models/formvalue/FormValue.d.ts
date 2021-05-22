@@ -1,16 +1,12 @@
-import { PropertyRecord } from "../PropertyRecord";
 import { Record } from "../Record";
+import { Model } from "../Model";
 export declare class FormValue extends Map<string, any> {
-    /**
-     * This method allows to fetch the property Model from the Model. It accepts a dotted name, as it can get inside nested properties.
-     * @param name
-     */
-    getPropertyValue(name: string): PropertyRecord | undefined;
     /**
      * Create a FormValue from a valid Record.
      * @param record
+     * @param model
      */
-    static createFromRecord(record: Record): FormValue;
+    static createFromRecord(record: Record, model: Model): FormValue;
     updateFormValue(name: string, value: any): FormValue;
-    toJson(): {};
+    toJson(model: Model): {};
 }

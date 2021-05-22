@@ -23,4 +23,13 @@ export class SinglePropertyModel extends PropertyModel {
         const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record === null || record === void 0 ? void 0 : record.value });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
+    getFormValue(value) {
+        return value;
+    }
+    getJsonFormValue(value) {
+        return value;
+    }
 }

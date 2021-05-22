@@ -30,7 +30,7 @@ export function useEdit() {
     const [errors, setErrors] = useState({});
     const edit = (resource, id, values) => __awaiter(this, void 0, void 0, function* () {
         setErrors({});
-        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values.toJson()) })
+        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
             .then(response => {
             dispatch(loading(resource, false));
             return response.json();

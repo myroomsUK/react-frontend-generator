@@ -1,6 +1,5 @@
 import React, {ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
-import {Model} from "./Model";
 import {PropertyRecord} from "./PropertyRecord";
 import {FormValue} from "./formvalue/FormValue";
 
@@ -80,6 +79,12 @@ export abstract class PropertyModel {
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
 
     abstract getInputField(props:InputFields): ReactElement<any,any>|null;
+
+    abstract getRecord(jsonValue: any): any;
+
+    abstract getFormValue(value: any):any;
+
+    abstract getJsonFormValue(value: any): any;
 }
 
 export interface InputOnChangeHandler{

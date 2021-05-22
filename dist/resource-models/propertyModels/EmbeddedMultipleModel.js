@@ -2,6 +2,8 @@ import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { IterableFormContent } from "../../generators/forms/IterableFormContent";
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
 import { EmbeddedMultiplePropertyRecord } from "../PropertyRecord";
+import { Record } from "../Record";
+import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule } = props;
@@ -34,6 +36,42 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             record: record !== null && record !== void 0 ? record : new EmbeddedMultiplePropertyRecord(this.id, []),
             resourceName: this.resourceName,
             showElement: showElement
+        });
+    }
+    getRecord(jsonValue) {
+        Array.isArray(jsonValue);
+        const map = new Map();
+        jsonValue.forEach((element, index) => {
+            if (typeof element === "object") {
+                return map.set(index, Record.createFromJson(element, this.getResource().getModel()));
+            }
+            else {
+                map.set(index, element);
+            }
+        });
+        return map;
+    }
+    getFormValue(value) {
+        const map = new Map();
+        const nestedEntries = Array.from(value.entries());
+        nestedEntries.forEach(([nestedKey, nestedValue], nestedIndex) => {
+            if (typeof nestedValue === "object") {
+                map.set(nestedKey, FormValue.createFromRecord(nestedValue, this.getResource().getModel()));
+            }
+            else {
+                map.set(nestedKey, nestedValue);
+            }
+        });
+        return map;
+    }
+    getJsonFormValue(value) {
+        return Array.from(value.values()).map((item) => {
+            if (item instanceof FormValue) {
+                item.toJson(this.getResource().getModel());
+            }
+            else {
+                return item;
+            }
         });
     }
 }

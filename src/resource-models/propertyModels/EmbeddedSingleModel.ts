@@ -4,6 +4,7 @@ import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 import {Record} from "../Record";
 import {EmbeddedSinglePropertyRecord} from "../PropertyRecord";
 import {EmbeddedShowContent} from "../../generators/fields/EmbeddedShowContent";
+import {FormValue} from "../formvalue/FormValue";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
@@ -33,6 +34,17 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
         };
     }
 
+    getRecord(jsonValue: object): Record {
+        return Record.createFromJson(jsonValue,this.getResource().getModel());
+    }
+
+    getFormValue(value: Record): any {
+        return FormValue.createFromRecord(value, this.getResource().getModel());
+    }
+
+    getJsonFormValue(value: FormValue): any {
+        return value.toJson(this.getResource().getModel());
+    }
 
 
 }

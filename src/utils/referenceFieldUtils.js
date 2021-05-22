@@ -54,7 +54,6 @@ export function UpdateListings(){
 
     useEffect(()=>updateListings(),[resourceBuffer]);
 
-    console.log("listings", listings)
     return {listings,updateListings};
 
 }

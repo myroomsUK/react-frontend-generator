@@ -8,16 +8,17 @@ import {Record} from "../../../resource-models/Record";
 interface ShowProps {
     propResourceName: string,
     propId: number,
-    record: Record,
+    record: object,
     propShowPage?: any
 }
 
-export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowProps) => JSX.Element = ({propResourceName, propId:id, record, propShowPage}:ShowProps) =>{
+export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowProps) => JSX.Element = ({propResourceName, propId:id, record:recordJson, propShowPage}:ShowProps) =>{
 
     const resourceModel = useGetResourceModel(propResourceName);
     const {model, showPage} = resourceModel;
     const showPageToUse:any = useMemo(()=> propShowPage ? propShowPage: showPage,[propShowPage, showPage])
     const [genericShowRender, setGenericShowRender] = useState(<div/>);
+    const record = Record.createFromJson(recordJson, model);
 
 
     const showFormProps = useMemo(()=>{

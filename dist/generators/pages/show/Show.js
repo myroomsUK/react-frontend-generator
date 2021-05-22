@@ -3,11 +3,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useGetResourceModel } from "../../../resource-models/modelsRegistry";
 import Grid from "@material-ui/core/Grid";
 import { ShowContent } from "../../fields/ShowContent";
-export const Show = ({ propResourceName, propId: id, record, propShowPage }) => {
+import { Record } from "../../../resource-models/Record";
+export const Show = ({ propResourceName, propId: id, record: recordJson, propShowPage }) => {
     const resourceModel = useGetResourceModel(propResourceName);
     const { model, showPage } = resourceModel;
     const showPageToUse = useMemo(() => propShowPage ? propShowPage : showPage, [propShowPage, showPage]);
     const [genericShowRender, setGenericShowRender] = useState(_jsx("div", {}, void 0));
+    const record = Record.createFromJson(recordJson, model);
     const showFormProps = useMemo(() => {
         return {
             model: model,

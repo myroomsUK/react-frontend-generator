@@ -21,8 +21,8 @@ export declare class PropertyRecord {
 export declare class EmbeddedSinglePropertyRecord extends PropertyRecord {
     value: Record;
     constructor(name: string, value: Record);
-    getPropertyRecord(name: string): PropertyRecord | undefined;
-    generatePropertyValue(): FormValue;
+    getPropertyRecord(name: string): any;
+    generatePropertyValue(): void;
 }
 export declare class EmbeddedMultiplePropertyRecord extends PropertyRecord {
     value: Record[];

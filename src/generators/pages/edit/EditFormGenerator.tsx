@@ -5,14 +5,14 @@ import {useEdit} from "../../../redux/actions/verbs/edit";
 import {getFormValueFromRecord} from "../../forms/formHelpers";
 import {FormGenerator} from "../../forms/FormGenerator";
 import {Error, Errors} from "../../errors/Errors";
-import {Record} from '../../../resource-models/Record'
 import {FormValue} from "../../../resource-models/formvalue/FormValue";
-import {listings} from "../../../mock/listings";
+import {Record} from "../../../resource-models/Record";
+import {Form} from "redux-form";
 
 interface EditFormGeneratorProps {
     propResourceName: string,
     propId: number,
-    record: Record,
+    record: object,
     propEditPage?: any,
     thenFunction?: any,
     catchfunction?: any
@@ -30,7 +30,7 @@ interface EditFormGeneratorProps {
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
+export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef(new FormValue());
@@ -39,6 +39,8 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
 
+    console.log("FormValue", formValue);
+    console.log("json", formValue.toJson(model));
     useEffect(()=>{
         // @ts-ignore
         const {_error, ...errorFields} = responseErrors;
@@ -47,11 +49,14 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
         setErrors(newErrors)},[responseErrors])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
-    useEffect(()=>setFormValue(FormValue.createFromRecord(record)), [record])
+    useEffect(()=>{
+        const record = Record.createFromJson(recordJson, model);
+        setFormValue(FormValue.createFromRecord(record, model))
+    }, [recordJson])
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
-    const submitHandler = async (formValue:any)=> edit(resourceName,propId, formValue).then(response => {
+    const submitHandler = async (formValue:FormValue)=> edit(resourceName,propId, formValue.toJson(model)).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
         return response;
     }).then(thenFunction).catch(catchfunction);

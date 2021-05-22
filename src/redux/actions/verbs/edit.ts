@@ -27,9 +27,9 @@ export function useEdit() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
 
-    const edit = async (resource:string,id:number,values:FormValue) => {
+    const edit = async (resource:string,id:number,values:any) => {
         setErrors({});
-        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values.toJson()) })
+        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
             .then(response => {
                 dispatch(loading(resource,false));
                 return response.json();

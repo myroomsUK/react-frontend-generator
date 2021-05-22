@@ -11,6 +11,7 @@ import { propertyShow } from "./mock/propertyShow";
 import { units } from "./mock/units";
 import { landlordRelationship } from "./mock/landlordRelationship";
 import { EditPage } from "./generators/pages/EditPageGenerator";
+import { landlord } from "./mock/landlord";
 export default function Test() {
     createServer({
         routes() {
@@ -21,12 +22,13 @@ export default function Test() {
             this.post("http://localhost:1000/api/resources/listings", () => listings);
             this.get("http://localhost:1000/resources", () => model);
             this.get("http://localhost:1000/api/units", () => units);
+            this.get("http://localhost:1000/api/landlords/1", () => landlord);
         },
     });
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
     const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
-            _jsx(EditPage, { propResourceName: "properties", propId: 1 }, void 0)] }, void 0);
+            _jsx(EditPage, { propResourceName: "landlords", propId: 1 }, void 0)] }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
 function ShowPageCustom(props) {

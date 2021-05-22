@@ -1,5 +1,4 @@
 import {Record} from "./Record";
-import {EmbeddedMultiplePropertyValue, EmbeddedSinglePropertyValue, PropertyValue} from "./formvalue/PropertyValue";
 import {FormValue} from "./formvalue/FormValue";
 
 export interface PropertyRecord{
@@ -47,8 +46,8 @@ export class EmbeddedSinglePropertyRecord extends PropertyRecord{
         return this.value.getPropertyRecord(name)
     }
 
-    generatePropertyValue(): FormValue {
-        return this.value.generateFormValue()
+    generatePropertyValue() {
+
     }
 }
 
@@ -62,7 +61,7 @@ export class EmbeddedMultiplePropertyRecord extends PropertyRecord{
 
     generatePropertyValue(): Map<number, FormValue> {
         const map = new Map();
-        this.value.forEach((record, index) => map.set(index, FormValue.createFromRecord(record) ))
+        //this.value.forEach((record, index) => map.set(index, FormValue.createFromRecord(record) ))
         return map;
     }
 

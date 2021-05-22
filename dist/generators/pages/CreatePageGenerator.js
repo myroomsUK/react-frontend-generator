@@ -27,7 +27,8 @@ import { FormGeneratorPropsObject } from "../forms/FormGeneratorProps";
 import { FormGenerator } from "../forms/FormGenerator";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
 import { Error, Errors } from "../errors/Errors";
-export const Create = ({ propResourceName: resourceName, propCreatePage, lockedFormValue = {}, thenFunction = () => { }, catchFunction = () => { } }) => {
+import { FormValue } from "../../resource-models/formvalue/FormValue";
+export const Create = ({ propResourceName: resourceName, propCreatePage, lockedFormValue = new FormValue(), thenFunction = () => { }, catchFunction = () => { } }) => {
     const { model, createPage } = useGetResourceModel(resourceName);
     const createPageToUse = useMemo(() => propCreatePage ? propCreatePage : createPage, [createPage, propCreatePage]);
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
@@ -60,7 +61,7 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     },[referencesMap])*/
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
-    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue).then(thenFunction).catch(catchFunction); });
+    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue.toJson(model)).then(thenFunction).catch(catchFunction); });
     const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, formContent: createPageToUse, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, resourceName: resourceName, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, resourceName, errors, lockedFormValue]);
     useEffect(() => {
         setGenericCreateRender(_jsx(FormGenerator, Object.assign({ formContent: createPageToUse }, createFormProps, { errors: errors }), void 0));

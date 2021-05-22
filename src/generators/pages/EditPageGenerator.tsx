@@ -19,8 +19,7 @@ interface Props{
  */
 export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
 
-    const {record:recordJson} = useResource(resourceName, propId);
-    const record = Record.createFromJson(recordJson);
+    const {record} = useResource(resourceName, propId);
 
     return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
 }

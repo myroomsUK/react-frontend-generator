@@ -1,8 +1,9 @@
 import React from "react";
+import { FormValue } from "../../resource-models/formvalue/FormValue";
 interface Props {
     propResourceName: string;
     propCreatePage?: any;
-    lockedFormValue?: any;
+    lockedFormValue?: FormValue;
     thenFunction?: any;
     catchFunction?: any;
 }

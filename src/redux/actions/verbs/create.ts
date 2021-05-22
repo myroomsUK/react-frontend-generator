@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {genericError} from "./edit";
 import {FEEDBACK_MESSAGE} from "../app/actions";
 import {FormValue} from "../../../resource-models/formvalue/FormValue";
+import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 
 export function loading(resource:string, loading:boolean) {
     return { type: 'CREATE_LOADING', resource:resource, loading:loading };
@@ -24,10 +25,10 @@ export function useCreate() {
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
+    const create = (resource:string,values:any) => {
 
-    const create = (resource:string,values:FormValue) => {
         setErrors({});
-        return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values.toJson()) })
+        return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values) })
             .then(response => {
                 dispatch(loading(resource,false));
                 return response.json();

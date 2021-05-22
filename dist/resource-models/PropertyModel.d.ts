@@ -54,6 +54,9 @@ export declare abstract class PropertyModel {
     abstract setOutputField(props: OutputFields): ReactElement<any, any> | null;
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars: any) => void;
     abstract getInputField(props: InputFields): ReactElement<any, any> | null;
+    abstract getRecord(jsonValue: any): any;
+    abstract getFormValue(value: any): any;
+    abstract getJsonFormValue(value: any): any;
 }
 export interface InputOnChangeHandler {
     formValue: FormValue;

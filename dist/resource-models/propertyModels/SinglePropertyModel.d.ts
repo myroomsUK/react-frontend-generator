@@ -14,6 +14,9 @@ export declare abstract class SinglePropertyModel extends PropertyModel {
     manipulateErrors(errors: Errors): SingleErrors;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
     getOutputField(props: SingleOutputFields): React.ReactElement<any, any> | null;
+    getRecord(jsonValue: any): any;
+    getFormValue(value: any): any;
+    getJsonFormValue(value: any): any;
 }
 interface SingleInputFields extends InputFields {
     inputHandler: (vars: any) => void;

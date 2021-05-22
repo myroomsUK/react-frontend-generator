@@ -31,6 +31,11 @@ export class ReferenceModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return ReferenceShow({...props, propertyModel:this});
     }
+
+    getRecord(jsonValue: any): any{
+        console.log("jsonvalue", jsonValue);
+        return jsonValue;
+    }
 }
 
 interface ReferenceInputFields{

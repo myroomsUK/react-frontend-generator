@@ -1,4 +1,3 @@
-import { FormValue } from "../../../resource-models/formvalue/FormValue";
 export declare function genericError(message: string): {
     type: string;
     message: string;
@@ -21,6 +20,6 @@ export declare function success(resource: string, created: boolean): {
 };
 export declare function useEdit(): {
     data: never[];
-    edit: (resource: string, id: number, values: FormValue) => Promise<any>;
+    edit: (resource: string, id: number, values: any) => Promise<any>;
     errors: {};
 };

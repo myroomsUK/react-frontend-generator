@@ -43,6 +43,18 @@ export abstract class SinglePropertyModel extends PropertyModel{
             {this.setOutputField(newProps)}
         </>
     }
+
+    getRecord(jsonValue: any): any{
+        return jsonValue;
+    }
+
+    getFormValue(value:any){
+        return value;
+    }
+
+    getJsonFormValue(value: any){
+        return value
+    }
 }
 
 interface SingleInputFields extends InputFields{

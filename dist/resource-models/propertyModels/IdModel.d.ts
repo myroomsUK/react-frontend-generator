@@ -8,4 +8,7 @@ export declare class IdModel extends PropertyModel {
     manipulateErrors(errors: Errors): any;
     getInputField(props: InputFields): React.ReactElement<any, any> | null;
     getOutputField(props: any): React.ReactElement<any, any> | null;
+    getRecord(jsonValue: any): any;
+    getFormValue(value: any): any;
+    getJsonFormValue(value: any): any;
 }

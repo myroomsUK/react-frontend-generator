@@ -26,4 +26,16 @@ export class IdModel extends PropertyModel{
         return null;
     }
 
+    getRecord(jsonValue: any): any {
+        return jsonValue;
+    }
+
+    getFormValue(value: any): any {
+        return value;
+    }
+
+    getJsonFormValue(value: any): any {
+        return value;
+    }
+
 }
