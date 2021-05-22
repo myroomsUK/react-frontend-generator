@@ -1,25 +1,21 @@
-export function error(resource: any, error: any): {
+import { FormValue } from "../../../resource-models/formvalue/FormValue";
+export declare function loading(resource: string, loading: boolean): {
     type: string;
-    resource: any;
-    error: any;
+    resource: string;
+    loading: boolean;
 };
-export function loading(resource: any, loading: any): {
+export declare function success(resource: string, created: boolean): {
     type: string;
-    resource: any;
-    loading: any;
+    resource: string;
+    created: boolean;
 };
-export function success(resource: any, created: any): {
-    type: string;
-    resource: any;
-    created: any;
-};
-export function genericSuccess(): {
+export declare function genericSuccess(): {
     type: string;
     message: string;
     severity: string;
 };
-export function useCreate(): {
+export declare function useCreate(): {
     data: never[];
-    create: (resource: any, values: any) => Promise<any>;
+    create: (resource: string, values: FormValue) => Promise<any>;
     errors: {};
 };

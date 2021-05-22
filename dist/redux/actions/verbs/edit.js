@@ -12,9 +12,6 @@ import { fetch } from '../dataAccess';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { FEEDBACK_MESSAGE } from "../app/actions";
-export function error(resource, error) {
-    return { type: 'PATCH_ERROR', resource: resource, error: error };
-}
 export function genericError(message) {
     return { type: FEEDBACK_MESSAGE, message: message, severity: "error" };
 }
@@ -33,9 +30,9 @@ export function useEdit() {
     const [errors, setErrors] = useState({});
     const edit = (resource, id, values) => __awaiter(this, void 0, void 0, function* () {
         setErrors({});
-        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
+        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values.toJson()) })
             .then(response => {
-            dispatch(loading(false));
+            dispatch(loading(resource, false));
             return response.json();
         })
             .then(retrieved => {
@@ -55,10 +52,4 @@ export function useEdit() {
         });
     });
     return { data, edit, errors };
-}
-export function reset(resource) {
-    return dispatch => {
-        dispatch(loading(resource, false));
-        dispatch(error(resource, null));
-    };
 }

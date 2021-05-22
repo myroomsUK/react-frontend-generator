@@ -4,9 +4,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { genericError } from "./edit";
 import { FEEDBACK_MESSAGE } from "../app/actions";
-export function error(resource, error) {
-    return { type: 'CREATE_ERROR', resource: resource, error: error };
-}
 export function loading(resource, loading) {
     return { type: 'CREATE_LOADING', resource: resource, loading: loading };
 }
@@ -22,9 +19,9 @@ export function useCreate() {
     const [errors, setErrors] = useState({});
     const create = (resource, values) => {
         setErrors({});
-        return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values) })
+        return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values.toJson()) })
             .then(response => {
-            dispatch(loading(false));
+            dispatch(loading(resource, false));
             return response.json();
         })
             .then(retrieved => {

@@ -1,31 +1,26 @@
-export function error(resource: any, error: any): {
-    type: string;
-    resource: any;
-    error: any;
-};
-export function genericError(message: any): {
-    type: string;
-    message: any;
-    severity: string;
-};
-export function genericSuccess(): {
+import { FormValue } from "../../../resource-models/formvalue/FormValue";
+export declare function genericError(message: string): {
     type: string;
     message: string;
     severity: string;
 };
-export function loading(resource: any, loading: any): {
+export declare function genericSuccess(): {
     type: string;
-    resource: any;
-    loading: any;
+    message: string;
+    severity: string;
 };
-export function success(resource: any, created: any): {
+export declare function loading(resource: string, loading: boolean): {
     type: string;
-    resource: any;
-    created: any;
+    resource: string;
+    loading: boolean;
 };
-export function useEdit(): {
+export declare function success(resource: string, created: boolean): {
+    type: string;
+    resource: string;
+    created: boolean;
+};
+export declare function useEdit(): {
     data: never[];
-    edit: (resource: any, id: any, values: any) => Promise<any>;
+    edit: (resource: string, id: number, values: FormValue) => Promise<any>;
     errors: {};
 };
-export function reset(resource: any): (dispatch: any) => void;
