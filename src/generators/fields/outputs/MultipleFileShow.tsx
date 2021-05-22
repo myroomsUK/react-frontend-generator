@@ -3,10 +3,9 @@ import React from "react";
 import {Record} from "../../../resource-models/Record";
 
 interface MultipleFileShowProps{
-    propertyRecord: Record[]
+    propertyRecord: Map<number, any>
 }
 
 export default function ({propertyRecord}:MultipleFileShowProps){
-
-    return <ShowFileList filesList={propertyRecord} />
+    return <ShowFileList filesList={Array.from(propertyRecord.values())} />
 }

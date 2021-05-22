@@ -27,7 +27,7 @@ export class MultipleFileModel extends SinglePropertyModel{
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
 
-        return MultipleFileShow({...props, propertyRecord: props.propertyRecord ?? []});
+        return MultipleFileShow({...props, propertyRecord: props.propertyRecord ?? new Map()});
     }
 
     getRecord(jsonValue: any): any {

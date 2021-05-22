@@ -39,7 +39,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         const {record, model, showElement} = props;
         return IterableShowContent({
             model:model,
-            record:record,
+            record:record ?? new Map(),
             resourceName: this.resourceName,
             showElement:showElement
         });
