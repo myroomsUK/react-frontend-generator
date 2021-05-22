@@ -25,8 +25,28 @@ export class Record extends Map {
             else
                 return accumulator;
         };
+        console.log("name", name);
         // @ts-ignore
         return split.reduce(reducerModel, this);
+    }
+    static fromJson(jsonModel) {
+        if (Array.isArray(jsonModel)) {
+            const map = new Map();
+            jsonModel.forEach((element, index) => {
+                map.set(index, Record.fromJson(element));
+            });
+            return map;
+        }
+        else if (typeof jsonModel === "object") {
+            const record = new Record();
+            Object.keys(jsonModel).forEach(key => {
+                record.set(key, Record.fromJson(jsonModel[key]));
+            });
+            return record;
+        }
+        else {
+            return jsonModel;
+        }
     }
     toJson() {
         const json = {};

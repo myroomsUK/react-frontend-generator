@@ -18,4 +18,7 @@ export class TextareaModel extends SinglePropertyModel {
     setOutputField(props) {
         return TextareaShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

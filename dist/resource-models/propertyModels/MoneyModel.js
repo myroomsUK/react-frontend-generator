@@ -16,4 +16,7 @@ export class MoneyModel extends SinglePropertyModel {
     setOutputField(props) {
         return MoneyShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

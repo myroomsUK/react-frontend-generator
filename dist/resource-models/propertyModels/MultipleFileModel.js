@@ -1,6 +1,7 @@
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
+import { Record } from "../Record";
 export class MultipleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, errors } = props;
@@ -17,5 +18,8 @@ export class MultipleFileModel extends SinglePropertyModel {
     setOutputField(props) {
         var _a;
         return MultipleFileShow(Object.assign(Object.assign({}, props), { propertyRecord: (_a = props.propertyRecord) !== null && _a !== void 0 ? _a : [] }));
+    }
+    getRecord(jsonValue) {
+        return Record.fromJson(jsonValue);
     }
 }

@@ -1,6 +1,7 @@
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import SingleFileInput from "../../generators/forms/inputs/SingleFileInput";
 import SingleFileShow from "../../generators/fields/outputs/SingleFileShow";
+import { Record } from "../Record";
 export class SingleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, inputHandler } = props;
@@ -16,5 +17,8 @@ export class SingleFileModel extends SinglePropertyModel {
     }
     setOutputField(props) {
         return SingleFileShow(props);
+    }
+    getRecord(jsonValue) {
+        return Record.fromJson(jsonValue);
     }
 }

@@ -3,6 +3,7 @@ import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/in
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {Record} from "../Record";
 
 interface EnumMultipleInputFields extends SinglePropertyInputFields{
     options: any;
@@ -39,6 +40,11 @@ export class EnumMultipleModel extends SinglePropertyModel{
             const eachProp = {...props, propertyRecord: singleRecord }
             return ChipGenerator({propertyModel:this, propertyRecord:singleRecord, colorMap:"suca"});
         })
+    }
+
+    getRecord(jsonValue: any): any {
+        return jsonValue;
+        return Record.fromJson(jsonValue)
     }
 
 }

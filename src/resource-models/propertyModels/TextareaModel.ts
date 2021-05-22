@@ -2,6 +2,7 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import {TextareaInput} from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {Record} from "../Record";
 
 export class TextareaModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -21,6 +22,10 @@ export class TextareaModel extends SinglePropertyModel{
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return TextareaShow(props);
+    }
+
+    getRecord(jsonValue: any): any {
+        return jsonValue
     }
 
 }

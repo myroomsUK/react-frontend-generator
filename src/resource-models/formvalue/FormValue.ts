@@ -13,9 +13,13 @@ export class FormValue extends Map<string, any>{
         const formValue = new FormValue();
         const entries = Array.from(record.entries());
         entries.forEach(([key, value], index) =>{
-            const propertyModel = model.getProperty(key);
-            const propertyValue = propertyModel.getFormValue(value);
-            formValue.set(key, propertyValue);
+
+            try{
+                const propertyModel = model.getProperty(key);
+                const propertyValue = propertyModel.getFormValue(value);
+                formValue.set(key, propertyValue);
+            }catch(error){
+            }
          /*
             if(value instanceof Record){
                 formValue.set(key, FormValue.createFromRecord(value));

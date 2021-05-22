@@ -369,6 +369,7 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
         const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
+
         return propertyModel.getOutputField({record: record.getPropertyRecord(id), showLabel:false})
     }
 

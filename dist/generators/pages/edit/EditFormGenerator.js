@@ -48,8 +48,6 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     const [errors, setErrors] = useState(new Errors([]));
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const { edit, errors: responseErrors } = useEdit();
-    console.log("FormValue", formValue);
-    console.log("json", formValue.toJson(model));
     useEffect(() => {
         // @ts-ignore
         const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
@@ -60,6 +58,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => {
         const record = Record.createFromJson(recordJson, model);
+        console.log("record", record);
         setFormValue(FormValue.createFromRecord(record, model));
     }, [recordJson]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));

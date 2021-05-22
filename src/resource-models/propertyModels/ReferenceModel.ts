@@ -1,11 +1,11 @@
 import {PropertyModelCore} from "../PropertyModelCore";
-import {AutocompleteInput} from "../../generators/forms/inputs/AutocompleteInput";
 import React from "react";
 import {SinglePropertyModel} from "./SinglePropertyModel";
 import ReferenceShow from "../../generators/fields/outputs/ReferenceShow";
 import {InputOnChangeHandler} from "../PropertyModel";
-import {Listing, ListingOption} from "../listings/Listing";
+import {ListingOption} from "../listings/Listing";
 import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
+import {Record} from "../Record";
 
 export class ReferenceModel extends SinglePropertyModel{
     constructor(id:string, other:PropertyModelCore) {
@@ -33,7 +33,7 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any{
-        return jsonValue;
+        return Record.fromJson(jsonValue)
     }
 
     getFormValue(value:any){
@@ -45,10 +45,6 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 }
 
-interface ReferenceJson{
-    id: number;
-    label:string;
-}
 
 interface ReferenceInputFields{
     inputHandler:any,

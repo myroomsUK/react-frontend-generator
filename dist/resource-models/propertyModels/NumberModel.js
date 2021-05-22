@@ -16,4 +16,7 @@ export class NumberModel extends SinglePropertyModel {
     setOutputField(props) {
         return NumberShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

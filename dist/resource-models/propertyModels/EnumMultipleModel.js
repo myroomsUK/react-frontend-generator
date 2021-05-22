@@ -1,6 +1,7 @@
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import { EnumInput, getAutocompleteValuePosition } from "../../generators/forms/inputs/EnumInput";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
+import { Record } from "../Record";
 export class EnumMultipleModel extends SinglePropertyModel {
     constructor(id, others) {
         super(id, others);
@@ -27,5 +28,9 @@ export class EnumMultipleModel extends SinglePropertyModel {
             const eachProp = Object.assign(Object.assign({}, props), { propertyRecord: singleRecord });
             return ChipGenerator({ propertyModel: this, propertyRecord: singleRecord, colorMap: "suca" });
         });
+    }
+    getRecord(jsonValue) {
+        return jsonValue;
+        return Record.fromJson(jsonValue);
     }
 }

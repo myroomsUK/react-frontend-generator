@@ -24,4 +24,8 @@ export class BooleanModel extends SinglePropertyModel {
         return BooleanShow(props);
     }
 
+    getRecord(jsonValue: any): any {
+        return jsonValue;
+    }
+
 }

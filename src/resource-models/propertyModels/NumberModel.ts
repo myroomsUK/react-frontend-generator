@@ -22,5 +22,9 @@ export class NumberModel extends SinglePropertyModel{
         return NumberShow(props);
     }
 
+    getRecord(jsonValue: any): any {
+        return jsonValue
+    }
+
 
 }

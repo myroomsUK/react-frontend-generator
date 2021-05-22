@@ -23,4 +23,8 @@ export class FloatModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return FloatShow(props);
     }
+
+    getRecord(jsonValue: any): any {
+        return jsonValue;
+    }
 }

@@ -16,4 +16,7 @@ export class PhoneModel extends SinglePropertyModel {
     setOutputField(props) {
         return PhoneShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

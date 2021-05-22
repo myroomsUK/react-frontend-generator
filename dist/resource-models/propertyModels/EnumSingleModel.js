@@ -2,6 +2,7 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 import { EnumInput, getAutocompleteValuePosition } from "../../generators/forms/inputs/EnumInput";
 import { green, red, yellow } from "@material-ui/core/colors";
 import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
+import { Record } from "../Record";
 export class EnumSingleModel extends SinglePropertyModel {
     constructor(id, other) {
         super(id, other);
@@ -37,5 +38,9 @@ export class EnumSingleModel extends SinglePropertyModel {
                     backgroundColor: yellow.A100,
                 },
             } });
+    }
+    getRecord(jsonValue) {
+        return jsonValue;
+        return Record.fromJson(jsonValue);
     }
 }

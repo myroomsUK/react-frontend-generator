@@ -20,4 +20,8 @@ export class PhoneModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return PhoneShow(props);
     }
+
+    getRecord(jsonValue: any): any {
+        return jsonValue
+    }
 }

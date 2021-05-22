@@ -28,7 +28,7 @@ export default function Test() {
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
     const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
-            _jsx(RouteFilterList, { resourceName: "landlords", filters: {} }, void 0)] }, void 0);
+            _jsx(RouteFilterList, { resourceName: "properties", filters: {} }, void 0)] }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
 function ShowPageCustom(props) {

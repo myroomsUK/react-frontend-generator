@@ -3,6 +3,7 @@ import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {Record} from "../Record";
 
 interface MultipleFileInputFields extends SinglePropertyInputFields{
 
@@ -27,5 +28,9 @@ export class MultipleFileModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
 
         return MultipleFileShow({...props, propertyRecord: props.propertyRecord ?? []});
+    }
+
+    getRecord(jsonValue: any): any {
+        return Record.fromJson(jsonValue)
     }
 }

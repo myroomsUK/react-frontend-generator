@@ -4,6 +4,7 @@ import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import {green, red, yellow} from "@material-ui/core/colors";
 import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {Record} from "../Record";
 
 interface EnumSingleInputFields extends SinglePropertyInputFields{
     options:any,
@@ -52,4 +53,8 @@ export class EnumSingleModel extends SinglePropertyModel{
             }});
     }
 
+    getRecord(jsonValue: any): any {
+        return jsonValue
+        return Record.fromJson(jsonValue)
+    }
 }

@@ -43,10 +43,6 @@ export abstract class SinglePropertyModel extends PropertyModel{
         </>
     }
 
-    getRecord(jsonValue: any): any{
-        return jsonValue;
-    }
-
     getFormValue(value:any){
         return value;
     }

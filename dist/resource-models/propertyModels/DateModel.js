@@ -18,4 +18,7 @@ export class DateModel extends SinglePropertyModel {
     setOutputField(props) {
         return DateShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

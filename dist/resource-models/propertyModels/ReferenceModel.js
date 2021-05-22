@@ -2,6 +2,7 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 import ReferenceShow from "../../generators/fields/outputs/ReferenceShow";
 import { ListingOption } from "../listings/Listing";
 import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
+import { Record } from "../Record";
 export class ReferenceModel extends SinglePropertyModel {
     constructor(id, other) {
         super(id, other);
@@ -24,7 +25,7 @@ export class ReferenceModel extends SinglePropertyModel {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
     getRecord(jsonValue) {
-        return jsonValue;
+        return Record.fromJson(jsonValue);
     }
     getFormValue(value) {
         return value;

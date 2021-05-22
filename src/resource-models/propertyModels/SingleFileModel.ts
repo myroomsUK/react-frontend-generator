@@ -3,6 +3,7 @@ import SingleFileInput from "../../generators/forms/inputs/SingleFileInput";
 import React from "react";
 import SingleFileShow from "../../generators/fields/outputs/SingleFileShow";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {Record} from "../Record";
 
 export class SingleFileModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
@@ -22,5 +23,9 @@ export class SingleFileModel extends SinglePropertyModel{
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return SingleFileShow(props);
+    }
+
+    getRecord(jsonValue: any): any {
+        return Record.fromJson(jsonValue)
     }
 }

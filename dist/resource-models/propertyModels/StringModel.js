@@ -19,4 +19,7 @@ export class StringModel extends SinglePropertyModel {
     setOutputField(props) {
         return _jsx(StringShow, Object.assign({}, props), void 0);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

@@ -22,4 +22,8 @@ export class DateModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         return DateShow(props);
     }
+
+    getRecord(jsonValue: any): any {
+        return jsonValue;
+    }
 }

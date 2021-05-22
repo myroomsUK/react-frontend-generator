@@ -19,4 +19,7 @@ export class FloatModel extends SinglePropertyModel {
     setOutputField(props) {
         return FloatShow(props);
     }
+    getRecord(jsonValue) {
+        return jsonValue;
+    }
 }

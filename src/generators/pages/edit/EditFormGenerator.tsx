@@ -39,8 +39,8 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
 
-    console.log("FormValue", formValue);
-    console.log("json", formValue.toJson(model));
+
+
     useEffect(()=>{
         // @ts-ignore
         const {_error, ...errorFields} = responseErrors;
@@ -51,6 +51,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
     useEffect(()=>{
         const record = Record.createFromJson(recordJson, model);
+        console.log("record",record)
         setFormValue(FormValue.createFromRecord(record, model))
     }, [recordJson])
 
