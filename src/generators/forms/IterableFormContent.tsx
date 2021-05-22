@@ -50,7 +50,6 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
 
     useEffect(()=>{
         if(formValueArray!==undefined){
-            console.log("formvalue array", formValueArray)
             setLocalFormValueMap(formValueArray);
         }
     },[formValueArray])
@@ -62,7 +61,6 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
     }
 
     const deleteForm = (key:any)=>{
-        console.log("key", key);
         localFormValueMap.delete(key);
         if(key < creationTime.current){
             remove(key);
@@ -79,7 +77,6 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
     const classes = useStyles();
 
     const entries = Array.from(localFormValueMap.entries());
-    console.log("entries",entries);
     const hasNewEntry = entries.map(([key, formValue] )=> key).some((key)=> {
         return key > creationTime.current
     });

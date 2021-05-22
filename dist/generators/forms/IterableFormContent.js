@@ -25,7 +25,6 @@ export const IterableFormContent = ({ model, resourceName, setParentFormValue, f
     const [localFormValueMap, setLocalFormValueMap] = useState(new Map());
     useEffect(() => {
         if (formValueArray !== undefined) {
-            console.log("formvalue array", formValueArray);
             setLocalFormValueMap(formValueArray);
         }
     }, [formValueArray]);
@@ -35,7 +34,6 @@ export const IterableFormContent = ({ model, resourceName, setParentFormValue, f
         setParentFormValue(newMap);
     };
     const deleteForm = (key) => {
-        console.log("key", key);
         localFormValueMap.delete(key);
         if (key < creationTime.current) {
             remove(key);
@@ -49,7 +47,6 @@ export const IterableFormContent = ({ model, resourceName, setParentFormValue, f
     };
     const classes = useStyles();
     const entries = Array.from(localFormValueMap.entries());
-    console.log("entries", entries);
     const hasNewEntry = entries.map(([key, formValue]) => key).some((key) => {
         return key > creationTime.current;
     });

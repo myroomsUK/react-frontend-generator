@@ -3,12 +3,9 @@ import { fetch } from '../dataAccess';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {FEEDBACK_MESSAGE} from "../app/actions";
+import {FormValue} from "../../../resource-models/formvalue/FormValue";
 
-export function error(resource, error) {
-    return { type: 'PATCH_ERROR', resource:resource, error:error };
-}
-
-export function genericError(message) {
+export function genericError(message:string) {
     return { type: FEEDBACK_MESSAGE, message:message, severity:"error"};
 }
 
@@ -16,11 +13,11 @@ export function genericSuccess() {
     return { type: FEEDBACK_MESSAGE, message:"Edit Success", severity:"success"};
 }
 
-export function loading(resource, loading) {
+export function loading(resource:string, loading:boolean) {
     return { type: 'PATCH_LOADING', resource:resource, loading:loading };
 }
 
-export function success(resource,created) {
+export function success(resource:string,created:boolean) {
     return { type: 'PATCH_SUCCESS', resource:resource, created: created };
 }
 
@@ -30,12 +27,11 @@ export function useEdit() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
 
-    const edit = async (resource,id,values) => {
+    const edit = async (resource:string,id:number,values:FormValue) => {
         setErrors({});
-        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
+        return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values.toJson()) })
             .then(response => {
-                dispatch(loading(false));
-
+                dispatch(loading(resource,false));
                 return response.json();
             })
             .then(retrieved => {
@@ -56,11 +52,4 @@ export function useEdit() {
             });
     }
     return {data, edit, errors};
-}
-
-export function reset(resource) {
-    return dispatch => {
-        dispatch(loading(resource,false));
-        dispatch(error(resource,null));
-    };
 }

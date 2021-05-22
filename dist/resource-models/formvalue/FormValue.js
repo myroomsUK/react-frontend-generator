@@ -2,9 +2,6 @@ import _ from 'lodash';
 import { EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord } from "../PropertyRecord";
 import { Record } from "../Record";
 export class FormValue extends Map {
-    constructor() {
-        super();
-    }
     /**
      * This method allows to fetch the property Model from the Model. It accepts a dotted name, as it can get inside nested properties.
      * @param name
@@ -43,5 +40,24 @@ export class FormValue extends Map {
         const newFormValue = _.cloneDeep(this);
         newFormValue.set(name, value);
         return newFormValue;
+    }
+    toJson() {
+        const json = {};
+        const entries = Array.from(this.entries());
+        entries.forEach(([key, value], index) => {
+            if (value instanceof FormValue) {
+                // @ts-ignore
+                json[key] = value.toJson();
+            }
+            else if (value instanceof Map) {
+                // @ts-ignore
+                json[key] = Array.from(value.values()).map((item) => item.toJson());
+            }
+            else {
+                // @ts-ignore
+                json[key] = value;
+            }
+        });
+        return json;
     }
 }

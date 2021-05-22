@@ -56,3 +56,41 @@ export class Record {
     }
     ;
 }
+export class NewRecord extends Map {
+    static createFromJson(jsonModel) {
+        const record = new NewRecord();
+        Object.keys(jsonModel).forEach(key => {
+            if (Array.isArray(jsonModel[key])) {
+                const map = new Map();
+                jsonModel[key].forEach((element, index) => map.set(index, NewRecord.createFromJson(element)));
+                record.set(key, map);
+            }
+            else if (typeof jsonModel[key] === "object") {
+                record.set(key, NewRecord.createFromJson(jsonModel[key]));
+            }
+            else {
+                record.set(key, jsonModel[key]);
+                return new PropertyRecord(key, jsonModel[key]);
+            }
+        });
+        return record;
+    }
+    toJson() {
+        const json = {};
+        const entries = Array.from(this.entries());
+        entries.forEach(([key, value], index) => {
+            if (value instanceof NewRecord) {
+                // @ts-ignore
+                json[key] = value.toJson();
+            }
+            else if (value instanceof Map) {
+                // @ts-ignore
+                json[key] = Array.from(value.values()).map((item) => item.toJson());
+            }
+            else {
+                // @ts-ignore
+                json[key] = value;
+            }
+        });
+    }
+}

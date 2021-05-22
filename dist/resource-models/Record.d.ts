@@ -18,3 +18,7 @@ export declare class Record {
     static createFromJson(jsonModel: any): Record;
     getPropertyRecordValue(name: string): any;
 }
+export declare class NewRecord extends Map<string, any> {
+    static createFromJson(jsonModel: any): NewRecord;
+    toJson(): void;
+}

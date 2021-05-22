@@ -57,8 +57,6 @@ export const EditForm = ({ record, propId, propResourceName, propEditPage, catch
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => setFormValue(FormValue.createFromRecord(record)), [record]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
-    useEffect(() => { console.log("formvalue", formValue); }, [formValue]);
-    useEffect(() => { console.log("ref map", referencesMap); }, [referencesMap]);
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
         return edit(resourceName, propId, formValue).then(response => {
             setFormValue(getFormValueFromRecord(response, model));

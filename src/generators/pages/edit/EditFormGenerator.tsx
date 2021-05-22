@@ -51,9 +51,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record, propId, prop
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
-    useEffect(()=>{console.log("formvalue", formValue)},[formValue])
-    useEffect(()=>{console.log("ref map", referencesMap)},[referencesMap])
-
     const submitHandler = async (formValue:any)=> edit(resourceName,propId, formValue).then(response => {
         setFormValue(getFormValueFromRecord(response, model))
         return response;

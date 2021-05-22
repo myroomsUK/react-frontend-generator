@@ -1,5 +1,4 @@
 import { FormValue } from "./FormValue";
-import { EmbeddedMultiplePropertyRecord, EmbeddedSinglePropertyRecord } from "../PropertyRecord";
 export interface PropertyValue {
     name: string;
     value: any;
@@ -19,11 +18,8 @@ export declare class PropertyValue {
 export declare class EmbeddedSinglePropertyValue extends PropertyValue {
     value: FormValue;
     constructor(name: string, value: FormValue);
-    createFromPropertyRecord(propertyRecord: EmbeddedSinglePropertyRecord): EmbeddedSinglePropertyValue;
-    getPropertyRecord(name: string): void;
 }
 export declare class EmbeddedMultiplePropertyValue extends PropertyValue {
     value: FormValue[];
     constructor(name: string, value: FormValue[]);
-    createFromPropertyRecord(propertyRecord: EmbeddedMultiplePropertyRecord): EmbeddedMultiplePropertyValue;
 }

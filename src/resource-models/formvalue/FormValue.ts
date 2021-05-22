@@ -5,9 +5,6 @@ import {Record} from "../Record";
 import {Form} from "redux-form";
 
 export class FormValue extends Map<string, any>{
-    constructor() {
-        super();
-    }
 
     /**
      * This method allows to fetch the property Model from the Model. It accepts a dotted name, as it can get inside nested properties.
@@ -52,5 +49,22 @@ export class FormValue extends Map<string, any>{
         return newFormValue;
     }
 
+    toJson(){
+        const json = {};
+        const entries = Array.from(this.entries())
+        entries.forEach(([key, value], index) =>{
+            if(value instanceof FormValue){
+                // @ts-ignore
+                json[key] = value.toJson();
+            }else if(value instanceof Map){
+                // @ts-ignore
+                json[key] = Array.from(value.values()).map((item:FormValue) => item.toJson())
+            }else{
+                // @ts-ignore
+                json[key] = value;
+            }
+        })
+        return json;
+    }
 
 }
