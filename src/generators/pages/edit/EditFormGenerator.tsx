@@ -58,7 +58,8 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
     const submitHandler = async (formValue:FormValue)=> edit(resourceName,propId, formValue.toJson(model)).then(response => {
-        setFormValue(getFormValueFromRecord(response, model))
+        const record = Record.createFromJson(response, model);
+        setFormValue(FormValue.createFromRecord(record, model))
         return response;
     }).then(thenFunction).catch(catchfunction);
 
