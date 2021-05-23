@@ -23,7 +23,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useGetResourceModel } from "../../../resource-models/modelsRegistry";
 import { UpdateListings } from "../../../utils/referenceFieldUtils";
 import { useEdit } from "../../../redux/actions/verbs/edit";
-import { getFormValueFromRecord } from "../../forms/formHelpers";
 import { FormGenerator } from "../../forms/FormGenerator";
 import { Error, Errors } from "../../errors/Errors";
 import { FormValue } from "../../../resource-models/formvalue/FormValue";
@@ -64,7 +63,8 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
         return edit(resourceName, propId, formValue.toJson(model)).then(response => {
-            setFormValue(getFormValueFromRecord(response, model));
+            const record = Record.createFromJson(response, model);
+            setFormValue(FormValue.createFromRecord(record, model));
             return response;
         }).then(thenFunction).catch(catchfunction);
     });
