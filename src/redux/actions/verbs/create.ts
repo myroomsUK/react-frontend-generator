@@ -1,11 +1,9 @@
-import { SubmissionError } from 'redux-form';
+import {SubmissionError} from 'redux-form';
 import {fetch} from '../dataAccess';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {genericError} from "./edit";
 import {FEEDBACK_MESSAGE} from "../app/actions";
-import {FormValue} from "../../../resource-models/formvalue/FormValue";
-import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 
 export function loading(resource:string, loading:boolean) {
     return { type: 'CREATE_LOADING', resource:resource, loading:loading };
