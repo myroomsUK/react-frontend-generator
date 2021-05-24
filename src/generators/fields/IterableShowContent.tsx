@@ -8,7 +8,7 @@ export interface IterableShowContentProps{
     record: Map<number,Record>;
     model: Model,
     resourceName: string;
-    showElement?: any;
+    showElement?: React.DetailedReactHTMLElement<any, any>;
 
 }
 
@@ -25,7 +25,7 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
 
                     return <>
                         <ListItem alignItems="center">
-                            {React.cloneElement(showElement, {record:singleRecord, model:model})}
+                            {React.cloneElement(showElement, {...showElement?.props,record:singleRecord, model:model})}
                         </ListItem>
                         <Divider component="li" />
                     </>
