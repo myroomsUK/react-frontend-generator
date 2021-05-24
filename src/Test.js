@@ -8,11 +8,12 @@ import {overrideRegistry} from "./mock/overrideRegistry";
 import {landlords} from "./mock/landlords";
 import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
-import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import {landlordRelationship} from "./mock/landlordRelationship";
-import {EditPage} from "./generators/pages/EditPageGenerator";
 import {landlord} from "./mock/landlord";
-import {RouteFilterList} from "./generators/pages/ListPageGenerator";
+import {Create} from "./generators/pages/CreatePageGenerator";
+import {tenancies} from "./mock/tenancies";
+import {FilterList, RouteFilterList} from "./generators/pages/ListPageGenerator";
+import {GenericFilterList} from "./generators/pages/list/GenericFilterList";
 
 export default function Test(){
 
@@ -27,6 +28,7 @@ export default function Test(){
             this.get("http://localhost:1000/resources", ()=> model)
             this.get("http://localhost:1000/api/units", ()=> units)
             this.get("http://localhost:1000/api/landlords/1", ()=> landlord)
+            this.get("http://localhost:1000/api/landlord_relationships", ()=> tenancies)
         },
     })
 
@@ -38,12 +40,28 @@ export default function Test(){
     const render = <div>
 
         <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
-        <RouteFilterList resourceName={"properties"} filters={{}}/>
+        {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
-{/*        <EditPage propResourceName={"properties"} propId={1} />*/}
+        {/*<EditPage propResourceName={"properties"} propId={1} />*/}
+        <Create propResourceName={"landlord_tenancy_payments"} propCreatePage={<LandlordTenancy></LandlordTenancy>}></Create>
+{/*        <FilterList resourceName={"landlord_relationships"} filters={{}}/>*/}
 
     </div>
     return modelLoaded ? render : <div></div>;
+}
+
+
+function LandlordTenancy(props){
+    const {model} = props
+    return <div>
+        {model.getInputField("paymentItems", props, <PaymentItem/> )}
+    </div>
+}
+function PaymentItem(props){
+    const {model} = props
+    return <div>
+        {model.getInputField("description", props )}
+    </div>
 }
 
 function ShowPageCustom(props){

@@ -4,6 +4,7 @@ import {
 import { success as deleteSuccess } from './delete';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
+import {routeManipulatorWithFilters} from "../../../utils/routeUtils";
 
 export function error(resource,error) {
   return { type: 'LIST_ERROR', error:error, resource:resource };
@@ -23,7 +24,7 @@ export function useList() {
   const dispatch = useDispatch();
 
   const get = (resource,page, filters=[]) => {
-    let route = `/api/${resource}?`;
+   /* let route = `/api/${resource}?`;
 
       Object.keys(filters).forEach((key,index)=> {
         if(index===0){
@@ -33,6 +34,16 @@ export function useList() {
         }
 
       })
+    //add page
+    if(filters.length===0){
+      route = route.concat(`page=${page}`)
+    }else{
+      route = route.concat(`&page=${page}`)
+    }*/
+
+    let route = `/api/${resource}?`;
+
+    route = routeManipulatorWithFilters(route, filters);
     //add page
     if(filters.length===0){
       route = route.concat(`page=${page}`)

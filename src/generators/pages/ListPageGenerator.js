@@ -249,65 +249,6 @@ function randomArray(){
     return new Array(getRandomInt(3,7)).fill(1);
 }
 
-
-export function ResourceList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}){
-    const {model, title, table} = useGetResourceModel(resourceName)
-    const headCells = table.map(({id, label}) => {return {propertyModel:model.getProperty(id), tableItemName:{id:id, label:label}}}).map(({propertyModel, tableItemName:{id, label}}) => {
-        return { id: id, numeric:false, disablePadding:false, label: label};
-    })
-    const {filters, components, clearFilters} = useTableFilters(resourceName,lockedFilters);
-    const {data, get, loading} = useList();
-    const [selected, setSelected] = useState([]);
-    const [page, setPage] = useState(0);
-
-    const debounced = useDebouncedCallback(
-        ()=>get(resourceName,page+1, filters),
-        1000
-    );
-
-    useEffect(()=>{
-        debounced();
-    },[resourceName, filters, page])
-
-    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
-
-    const showClearFilters = !!components.length;
-
-
-    const columns = (row) => table.map(({id, label}) =>
-    {
-        const split = _.split(id, ".");
-        const reducer = (start, value) => (start) ? start[value] : undefined;
-        const record = split.reduce(reducer, row);
-        const propertyModel = model.getProperty(id);
-        propertyModel.label = label;
-        return {propertyModel: propertyModel , record: record}
-    }).map(({propertyModel, record}) => {
-        propertyModel.getOutputField({record:row, showLabel:false})
-    })
-
-    return <GenericList
-        data={data.list}
-        totalItems={data.totalItems}
-        getDataHandler={debounced}
-        loading={loading}
-        page={page}
-        setPage={setPage}
-        selected={selected}
-        setSelected={setSelected}
-        title={title}
-        clearFilters={clearFilters}
-        filterBarComponents={filterBarComponents}
-        showClearFilters={showClearFilters}
-        components={components}
-        columns={columns}
-        headCells={headCells}
-        itemOperations={itemOperations}
-        collectionOperations={collectionOperations}
-    />
-
-}
-
 export function RouteFilterList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}) {
     const {model, table, title} = useGetResourceModel(resourceName)
     const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
@@ -401,6 +342,102 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     />
 
 }
+
+export function FilterList({resourceName, filters:lockedFilters,  itemOperations = [], collectionOperations = []}) {
+    const {model, table, title} = useGetResourceModel(resourceName)
+    const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
+    const [localTable, setLocalTable] = useState(cookies[`list-${resourceName}`] ?? table);
+    const [localModel, setLocalModel] = useState(model);
+    const [rows, setRows] = useState([])
+
+    useEffect(()=>{setRows([])}, [resourceName])
+    useEffect(()=>{setLocalModel(model)},[model]) //Change model
+    useEffect(()=>{setLocalTable(cookies[`list-${resourceName}`] ?? table)},[table, resourceName, cookies]) //Change tables
+
+    const propSetLocalTable = (value) => {
+        setCookie(`list-${resourceName}`, value, {path: '/'});
+        setLocalTable(value);
+    }
+
+    const allProperties = localModel.getAllPropertiesReadableNames();
+    const tableWithStats = allProperties.map(tableElement => {
+        return {
+            ...tableElement,
+            inColumn: localTable.some(localTableElement => localTableElement.id === tableElement.id)
+        }
+    })
+
+
+    const headCells = useMemo(()=>{
+        const localHeadcells = localTable.map(({id, label}) => {
+            return {propertyModel: localModel.getProperty(id), tableItemName: {id: id, label: label}}
+        }).map(({propertyModel, tableItemName: {id, label}}) => {
+            return {id: id, numeric: false, disablePadding: false, label: label};
+        })
+        return localHeadcells;
+    }, [localTable, localModel])
+
+
+    const {filters, components, clearFilters} = useTableFilters(resourceName, lockedFilters);
+    const {data, get, loading} = useList();
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
+
+    const debounced = useDebouncedCallback(
+        () => get(resourceName, page + 1, filters),
+        1000
+    );
+
+    useEffect(() => {
+        debounced();
+    }, [resourceName, filters, page])
+
+    useEffect(()=>{
+        setRows(data.list);
+    },[data])
+
+    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name))
+
+    const showClearFilters = !!components.length;
+
+    const getRowElement = (row, id, label, localModel)=> {
+        const record = Record.createFromJson(row, localModel);
+        const propertyModel = localModel.getProperty(id);
+        propertyModel.label = label;
+
+        return propertyModel.getOutputField({record: record.getPropertyRecord(id), showLabel:false})
+    }
+
+    const columns = useCallback((row) => localTable.map( ({id, label}) => {
+        return getRowElement(row, id, label, localModel)
+    }),[localModel, localTable])
+
+
+    return <GenericList
+        data={rows}
+        totalItems={data.totalItems}
+        getDataHandler={debounced}
+        loading={loading}
+        page={page}
+        setPage={setPage}
+        selected={selected}
+        setSelected={setSelected}
+        title={title}
+        clearFilters={clearFilters}
+        filterBarComponents={filterBarComponents}
+        showClearFilters={showClearFilters}
+        components={components}
+        columns={columns}
+        headCells={headCells}
+        itemOperations={itemOperations}
+        collectionOperations={collectionOperations}
+        allColumns={tableWithStats}
+        setTable={propSetLocalTable}
+    />
+
+}
+
+
 
 export function GenericList({data:rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
     headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells

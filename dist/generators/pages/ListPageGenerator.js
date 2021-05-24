@@ -20,7 +20,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from "@material-ui/core/Button";
 import { useDebouncedCallback } from "use-debounce";
-import _ from 'lodash';
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 import ListPageFilterBar from "./utils/ListPageFilterBar";
@@ -140,33 +139,6 @@ function getRandomInt(min, max) {
 function randomArray() {
     return new Array(getRandomInt(3, 7)).fill(1);
 }
-export function ResourceList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
-    const { model, title, table } = useGetResourceModel(resourceName);
-    const headCells = table.map(({ id, label }) => { return { propertyModel: model.getProperty(id), tableItemName: { id: id, label: label } }; }).map(({ propertyModel, tableItemName: { id, label } }) => {
-        return { id: id, numeric: false, disablePadding: false, label: label };
-    });
-    const { filters, components, clearFilters } = useTableFilters(resourceName, lockedFilters);
-    const { data, get, loading } = useList();
-    const [selected, setSelected] = useState([]);
-    const [page, setPage] = useState(0);
-    const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
-    useEffect(() => {
-        debounced();
-    }, [resourceName, filters, page]);
-    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
-    const showClearFilters = !!components.length;
-    const columns = (row) => table.map(({ id, label }) => {
-        const split = _.split(id, ".");
-        const reducer = (start, value) => (start) ? start[value] : undefined;
-        const record = split.reduce(reducer, row);
-        const propertyModel = model.getProperty(id);
-        propertyModel.label = label;
-        return { propertyModel: propertyModel, record: record };
-    }).map(({ propertyModel, record }) => {
-        propertyModel.getOutputField({ record: row, showLabel: false });
-    });
-    return _jsx(GenericList, { data: data.list, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations }, void 0);
-}
 export function RouteFilterList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
     var _a;
     const { model, table, title } = useGetResourceModel(resourceName);
@@ -194,6 +166,56 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
         return localHeadcells;
     }, [localTable, localModel]);
     const { filters, components, clearFilters } = useRouteFilters(resourceName, lockedFilters);
+    const { data, get, loading } = useList();
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
+    const debounced = useDebouncedCallback(() => get(resourceName, page + 1, filters), 1000);
+    useEffect(() => {
+        debounced();
+    }, [resourceName, filters, page]);
+    useEffect(() => {
+        setRows(data.list);
+    }, [data]);
+    const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
+    const showClearFilters = !!components.length;
+    const getRowElement = (row, id, label, localModel) => {
+        const record = Record.createFromJson(row, localModel);
+        const propertyModel = localModel.getProperty(id);
+        propertyModel.label = label;
+        return propertyModel.getOutputField({ record: record.getPropertyRecord(id), showLabel: false });
+    };
+    const columns = useCallback((row) => localTable.map(({ id, label }) => {
+        return getRowElement(row, id, label, localModel);
+    }), [localModel, localTable]);
+    return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
+}
+export function FilterList({ resourceName, filters: lockedFilters, itemOperations = [], collectionOperations = [] }) {
+    var _a;
+    const { model, table, title } = useGetResourceModel(resourceName);
+    const [cookies, setCookie] = useCookies([`list-${resourceName}`]);
+    const [localTable, setLocalTable] = useState((_a = cookies[`list-${resourceName}`]) !== null && _a !== void 0 ? _a : table);
+    const [localModel, setLocalModel] = useState(model);
+    const [rows, setRows] = useState([]);
+    useEffect(() => { setRows([]); }, [resourceName]);
+    useEffect(() => { setLocalModel(model); }, [model]); //Change model
+    useEffect(() => { var _a; setLocalTable((_a = cookies[`list-${resourceName}`]) !== null && _a !== void 0 ? _a : table); }, [table, resourceName, cookies]); //Change tables
+    const propSetLocalTable = (value) => {
+        setCookie(`list-${resourceName}`, value, { path: '/' });
+        setLocalTable(value);
+    };
+    const allProperties = localModel.getAllPropertiesReadableNames();
+    const tableWithStats = allProperties.map(tableElement => {
+        return Object.assign(Object.assign({}, tableElement), { inColumn: localTable.some(localTableElement => localTableElement.id === tableElement.id) });
+    });
+    const headCells = useMemo(() => {
+        const localHeadcells = localTable.map(({ id, label }) => {
+            return { propertyModel: localModel.getProperty(id), tableItemName: { id: id, label: label } };
+        }).map(({ propertyModel, tableItemName: { id, label } }) => {
+            return { id: id, numeric: false, disablePadding: false, label: label };
+        });
+        return localHeadcells;
+    }, [localTable, localModel]);
+    const { filters, components, clearFilters } = useTableFilters(resourceName, lockedFilters);
     const { data, get, loading } = useList();
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);

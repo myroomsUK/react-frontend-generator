@@ -7,7 +7,7 @@ import {InputOnChangeHandler} from "../PropertyModel";
 export class BooleanModel extends SinglePropertyModel {
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
       const {inputHandler, formValue} = props;
-      const propsWithModel = {...props, onClick:inputHandler,checked:formValue.get(this.id)}
+      const propsWithModel = {...props, onClick:inputHandler,checked:formValue.get(this.id) ?? false}
       return BooleanInput(propsWithModel)
     }
 

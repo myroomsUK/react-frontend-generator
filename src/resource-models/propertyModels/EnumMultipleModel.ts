@@ -27,6 +27,7 @@ export class EnumMultipleModel extends SinglePropertyModel{
 
     getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): (vars: any) => void {
         return (vars:any) =>{
+            console.log("vars", vars)
             const [name, value] = vars;
             setFormValue( formValue.updateFormValue(name, value));
         }

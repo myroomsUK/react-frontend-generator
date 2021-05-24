@@ -20,6 +20,8 @@ export function useListHelpers(resourceName, filters){
 }
 
 
+
+
 //const {filters, components, clearFilters} = useTableFilters(resourceName,lockedFilters);
 export function GenericFilterList({resourceName, data, loading, page, setPage, selected, setSelected, components,clearFilters, itemOperations = [], collectionOperations = []}){
     const {model, title, table} = useGetResourceModel(resourceName)

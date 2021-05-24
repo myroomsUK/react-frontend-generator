@@ -5,6 +5,7 @@ import _ from "lodash";
 import {replace} from "connected-react-router";
 import {FilterList} from "./FilterList";
 import {useGetResourceModel} from "../../resource-models/modelsRegistry";
+import {routeManipulatorWithFilters} from "../../utils/routeUtils";
 
 
 export const useRouteFilters: (resourceNameToUse:string, presetFilters:any) => { components: any; filters: any; clearFilters: () => void } = (resourceNameToUse, presetFilters) => {
@@ -62,14 +63,15 @@ export const useRouteFilters: (resourceNameToUse:string, presetFilters:any) => {
         if(!isEmbeddedTable){
             if(!checkIfFiltersEqualToRouteFilters()){
                 let route = location.pathname+"?";
-                Object.keys(filterObject).forEach((key,index)=> {
+                route = routeManipulatorWithFilters(route, filterObject);
+                /*Object.keys(filterObject).forEach((key,index)=> {
                     if(index===0){
                         route = route.concat(`${key}=${filterObject[key]}`);
                     }else{
                         route = route.concat(`&${key}=${filterObject[key]}`);
                     }
 
-                })
+                })*/
                 dispatch(replace(route));
             }
         }

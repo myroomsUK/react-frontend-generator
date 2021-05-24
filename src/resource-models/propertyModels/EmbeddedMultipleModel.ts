@@ -9,7 +9,7 @@ import {FormValue} from "../formvalue/FormValue";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule} =  props;
+        const {formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
 
@@ -27,6 +27,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             submitHandler:submitHandler,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
+            inputElement
         })
     }
 

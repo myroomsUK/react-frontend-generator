@@ -11,7 +11,7 @@ export class EnumSingleModel extends SinglePropertyModel {
     }
     setInputField(props) {
         const { formValue, setFormValue, errors, value } = props;
-        const valuePositionInOptions = getAutocompleteValuePosition(value, this.options);
+        const valuePositionInOptions = (value) ? getAutocompleteValuePosition(value, this.options) : -1;
         const propsWithModel = Object.assign(Object.assign({}, props), { model: this, inheritedValue: valuePositionInOptions, onChange: this.getInputOnChangeHandler({ formValue, setFormValue }) });
         return EnumInput(propsWithModel);
     }

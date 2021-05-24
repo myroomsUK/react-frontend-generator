@@ -3,8 +3,9 @@ import BooleanInput from "../../generators/forms/inputs/BooleanInput";
 import BooleanShow from "../../generators/fields/outputs/BooleanShow";
 export class BooleanModel extends SinglePropertyModel {
     setInputField(props) {
+        var _a;
         const { inputHandler, formValue } = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), { onClick: inputHandler, checked: formValue.get(this.id) });
+        const propsWithModel = Object.assign(Object.assign({}, props), { onClick: inputHandler, checked: (_a = formValue.get(this.id)) !== null && _a !== void 0 ? _a : false });
         return BooleanInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {

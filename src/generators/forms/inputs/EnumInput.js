@@ -19,9 +19,11 @@ export function EnumInput({model, inheritedValue, onChange}){
         const localOptionsLengthCondition = localOptions.length!==0;
         if(inheritedValue!==-1 && localOptionsLengthCondition){
         setValue(localOptions[inheritedValue]);
-    }}, [ localOptions])
+    }}, [inheritedValue, localOptions])
 
-    const autocompleteOnChange = (item)=> onChange(id,parseInt(item.id))
+    const autocompleteOnChange = (item)=> {
+        onChange([id,parseInt(item.id)])
+    }
 
     return <>
         <Autocomplete
