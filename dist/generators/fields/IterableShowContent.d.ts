@@ -5,6 +5,6 @@ export interface IterableShowContentProps {
     record: Map<number, Record>;
     model: Model;
     resourceName: string;
-    showElement?: any;
+    showElement?: React.DetailedReactHTMLElement<any, any>;
 }
 export declare const IterableShowContent: React.FC<IterableShowContentProps>;
