@@ -19,6 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Carousel from "react-material-ui-carousel";
+import { getFromMap } from "../../utils/mapUtils";
 const styles = (theme) => ({
     root: {
         margin: 0,
@@ -51,7 +52,10 @@ export default function ImageDialog({ open, setOpen, selectedImage, images }) {
     const handleClose = () => {
         setOpen(false);
     };
-    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: selectedImage !== undefined && images[selectedImage].url }), void 0),
-                _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(Carousel, Object.assign({ index: selectedImage }, { children: images.map((item, i) => _jsx("img", { width: "100%", alt: item.url, src: item.url }, i)) }), void 0) }), void 0),
+    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: selectedImage !== undefined && images[selectedImage].get("url") }), void 0),
+                _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(Carousel, Object.assign({ index: selectedImage }, { children: images.map((item, i) => {
+                            const { url } = getFromMap(item);
+                            return _jsx("img", { width: "100%", alt: url, src: url }, i);
+                        }) }), void 0) }), void 0),
                 _jsx(DialogActions, {}, void 0)] }), void 0) }, void 0));
 }
