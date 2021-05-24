@@ -2,7 +2,7 @@ import {PropertyModel} from "./PropertyModel";
 import _ from 'lodash';
 import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {EmbeddedPropertyModel} from "./propertyModels/NestedPropertyModel";
-import React, {ReactElement} from "react";
+import React, {DetailedReactHTMLElement, ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
 import {Record} from "./Record";
 
@@ -69,14 +69,14 @@ export class Model{
         return new Model(properties);
     }
 
-    getInputField(requestedName:string, props:ModelGetInputFieldProps): ReactElement<any, any>|null{
-        return this.getProperty(requestedName).getInputField({...props, model:this.getProperty(requestedName)});
+    getInputField(requestedName:string, props:ModelGetInputFieldProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
+        return this.getProperty(requestedName).getInputField({...props, model:this.getProperty(requestedName)}, inputElement);
     }
 
-    getOutputField(requestedName:string, props: OutputPropertyProps, showLabel:boolean = true): ReactElement<any, any>|null{
+    getOutputField(requestedName:string, props: OutputPropertyProps, outputElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
         const {record} = props;
         const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({record: record.getPropertyRecord(propertyModel.id), showLabel:showLabel})
+        return propertyModel.getOutputField({record: record.getPropertyRecord(propertyModel.id), showLabel:showLabel}, outputElement)
     }
 
     getAllPropertiesReadableNames(){

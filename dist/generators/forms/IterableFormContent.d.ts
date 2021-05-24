@@ -1,4 +1,4 @@
-import React from "react";
+import React, { DetailedReactHTMLElement } from "react";
 import { Errors } from "../errors/Errors";
 import { Model } from "../../resource-models/Model";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
@@ -16,6 +16,7 @@ interface IterableFormContentProps {
     partialSubmitHandler: (e: any) => Promise<any>;
     modifyOnlyLastElement?: boolean;
     modifyRule?: (formvalue: any) => boolean;
+    inputElement?: DetailedReactHTMLElement<any, any>;
 }
 export declare const IterableFormContent: React.FC<IterableFormContentProps>;
 export {};

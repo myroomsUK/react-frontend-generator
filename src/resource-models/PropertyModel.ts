@@ -1,4 +1,4 @@
-import React, {ReactElement} from "react";
+import React, {DetailedReactHTMLElement, ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
 import {FormValue} from "./formvalue/FormValue";
 import {Record} from "./Record";
@@ -72,13 +72,13 @@ export abstract class PropertyModel {
 
     abstract setInputField(props: any): ReactElement<any, any> | null;
 
-    abstract getOutputField(props:OutputFields): ReactElement<any, any> |null;
+    abstract getOutputField(props:OutputFields, outputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> |null;
 
     abstract setOutputField(props:OutputFields): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
 
-    abstract getInputField(props:InputFields): ReactElement<any,any>|null;
+    abstract getInputField(props:InputFields, inputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any,any>|null;
 
     abstract getRecord(jsonValue: any): any;
 
@@ -101,7 +101,9 @@ export interface InputFields{
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
+    form?: React.DetailedReactHTMLElement<any, any>,
     refreshReferencesMap:()=>void;
+    inputElement?: DetailedReactHTMLElement<any, any>
 }
 
 export interface OutputFields{

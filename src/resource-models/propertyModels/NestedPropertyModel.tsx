@@ -27,19 +27,20 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
 
-    getInputField(props: InputFields): React.ReactElement<any, any> | null {
+    getInputField(props: InputFields, inputElement = undefined): React.ReactElement<any, any> | null {
         const {errors, formValue, setFormValue} = props;
         const model = this;
         model.label = _.startCase(this.label)
+
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue.get(this.id), model:model}
+        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue.get(this.id), model:model, inputElement: inputElement}
         return this.setInputField(newProps);
     }
 
-    getOutputField(props:OutputFields): React.ReactElement<any, any> | null {
+    getOutputField(props:OutputFields, outputElement=undefined): React.ReactElement<any, any> | null {
         const {showLabel} = props;
-        const newProps = {...props, model: this.getResource().getModel()}
+        const newProps = {...props, model: this.getResource().getModel(), showElement:outputElement}
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
             {this.setOutputField(newProps)}

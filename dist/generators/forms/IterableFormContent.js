@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         borderRight: `1px solid ${theme.palette.divider}`,
     },
 }));
-export const IterableFormContent = ({ model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true }) => {
+export const IterableFormContent = ({ model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true, inputElement }) => {
     const { remove } = useDelete(resourceName);
     const creationTime = useRef(Date.now());
     //local map with formvalues: if is edit, I have values from db, otherwise it is a map with no elements.
@@ -55,7 +55,7 @@ export const IterableFormContent = ({ model, resourceName, setParentFormValue, f
     const button = modifyOnlyLastElement ? (!hasNewEntry && basicButton) : basicButton;
     const forms = entries.map(([key, formValue], index) => {
         const isEditable = modifyRule(formValue);
-        const formElement = _jsx(FormContent, { lockedFormValue: new FormValue(), formContent: formContent, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
+        const formElement = _jsx(FormContent, { lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement : formElement) : formElement;
         return _jsxs(React.Fragment, { children: [_jsx(Grid, Object.assign({ item: true, xs: 1 }, { children: _jsx(Typography, { children: index + 1 }, void 0) }), void 0),
                 _jsx(Grid, Object.assign({ item: true, xs: 10 }, { children: formFinal }), void 0),

@@ -16,18 +16,18 @@ export class EmbeddedPropertyModel extends PropertyModel {
     manipulateErrors(fetchErrors) {
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
-    getInputField(props) {
+    getInputField(props, inputElement = undefined) {
         const { errors, formValue, setFormValue } = props;
         const model = this;
         model.label = _.startCase(this.label);
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue.get(this.id), model: model });
+        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, value: formValue.get(this.id), model: model, inputElement: inputElement });
         return this.setInputField(newProps);
     }
-    getOutputField(props) {
+    getOutputField(props, outputElement = undefined) {
         const { showLabel } = props;
-        const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel() });
+        const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel(), showElement: outputElement });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
 }

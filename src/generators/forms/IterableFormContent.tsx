@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {DetailedReactHTMLElement, useEffect, useMemo, useRef, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import {Divider, Typography} from "@material-ui/core";
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
@@ -27,7 +27,8 @@ interface IterableFormContentProps{
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
     modifyOnlyLastElement?:boolean;
-    modifyRule?: (formvalue:any)=> boolean
+    modifyRule?: (formvalue:any)=> boolean,
+    inputElement?: DetailedReactHTMLElement<any, any>
 
 }
 
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true}) => {
+export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true, inputElement}) => {
 
     const {remove} = useDelete(resourceName);
     const creationTime = useRef(Date.now());
@@ -89,7 +90,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
         const isEditable = modifyRule(formValue);
 
 
-        const formElement = <FormContent lockedFormValue={new FormValue()} formContent={formContent} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>

@@ -1,5 +1,5 @@
 import { PropertyModel } from "./PropertyModel";
-import React, { ReactElement } from "react";
+import React, { DetailedReactHTMLElement, ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
 import { Record } from "./Record";
 export interface Model {
@@ -25,8 +25,8 @@ export declare class Model {
      * @param jsonModel
      */
     static createFromJson(jsonModel: any): Model;
-    getInputField(requestedName: string, props: ModelGetInputFieldProps): ReactElement<any, any> | null;
-    getOutputField(requestedName: string, props: OutputPropertyProps, showLabel?: boolean): ReactElement<any, any> | null;
+    getInputField(requestedName: string, props: ModelGetInputFieldProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
+    getOutputField(requestedName: string, props: OutputPropertyProps, outputElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;
     getAllPropertiesReadableNames(): {
         id: string;
         label: string;

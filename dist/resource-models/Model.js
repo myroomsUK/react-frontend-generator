@@ -57,13 +57,13 @@ export class Model {
         const properties = Object.keys(jsonModel).map(key => PropertyModelRegistry.get(key, jsonModel[key]));
         return new Model(properties);
     }
-    getInputField(requestedName, props) {
-        return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }));
+    getInputField(requestedName, props, inputElement) {
+        return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }), inputElement);
     }
-    getOutputField(requestedName, props, showLabel = true) {
+    getOutputField(requestedName, props, outputElement, showLabel = true) {
         const { record } = props;
         const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({ record: record.getPropertyRecord(propertyModel.id), showLabel: showLabel });
+        return propertyModel.getOutputField({ record: record.getPropertyRecord(propertyModel.id), showLabel: showLabel }, outputElement);
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

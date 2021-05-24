@@ -11,8 +11,8 @@ export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     constructor(id: string, others: PropertyModelCore);
     getResource(): Resource;
     manipulateErrors(fetchErrors: Errors): Errors;
-    getInputField(props: InputFields): React.ReactElement<any, any> | null;
-    getOutputField(props: OutputFields): React.ReactElement<any, any> | null;
+    getInputField(props: InputFields, inputElement?: undefined): React.ReactElement<any, any> | null;
+    getOutputField(props: OutputFields, outputElement?: undefined): React.ReactElement<any, any> | null;
 }
 export interface EmbeddedInputFields extends InputFields {
     inputHandler: (vars: any) => void;
