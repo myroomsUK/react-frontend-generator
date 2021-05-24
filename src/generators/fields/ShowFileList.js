@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ShowImageGrid({images}){
-    console.log("images", images)
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);

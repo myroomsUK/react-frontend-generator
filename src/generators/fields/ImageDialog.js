@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Carousel from "react-material-ui-carousel";
+import {getFromMap} from "../../utils/mapUtils";
 
 const styles = (theme) => ({
     root: {
@@ -61,12 +62,15 @@ export default function ImageDialog({open,setOpen, selectedImage, images}) {
         <div>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {selectedImage!==undefined && images[selectedImage].url}
+                    {selectedImage!==undefined && images[selectedImage].get("url")}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Carousel index={selectedImage}>
                         {
-                            images.map( (item, i) => <img width="100%" alt={item.url} key={i} src={item.url} /> )
+                            images.map( (item, i) => {
+                                const {url} = getFromMap(item);
+                                return <img width="100%" alt={url} key={i} src={url} />
+                            } )
                         }
                     </Carousel>
                 </DialogContent>

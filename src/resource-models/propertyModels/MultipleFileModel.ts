@@ -5,10 +5,6 @@ import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 
-interface MultipleFileInputFields extends SinglePropertyInputFields{
-
-}
-
 export class MultipleFileModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors} = props;
@@ -26,7 +22,6 @@ export class MultipleFileModel extends SinglePropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-
         return MultipleFileShow({...props, propertyRecord: props.propertyRecord ?? new Map()});
     }
 

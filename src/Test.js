@@ -10,10 +10,9 @@ import {propertyShow} from "./mock/propertyShow";
 import {units} from "./mock/units";
 import {landlordRelationship} from "./mock/landlordRelationship";
 import {landlord} from "./mock/landlord";
-import {Create} from "./generators/pages/CreatePageGenerator";
 import {tenancies} from "./mock/tenancies";
-import {FilterList, RouteFilterList} from "./generators/pages/ListPageGenerator";
-import {GenericFilterList} from "./generators/pages/list/GenericFilterList";
+import {ShowPage} from "./generators/pages/ShowPageGenerator";
+import PropertyUnitShow from "./mock/pages/PropertyUnitShow";
 
 export default function Test(){
 
@@ -43,30 +42,14 @@ export default function Test(){
         {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
         {/*<EditPage propResourceName={"properties"} propId={1} />*/}
-        <Create propResourceName={"landlord_tenancy_payments"} propCreatePage={<LandlordTenancy></LandlordTenancy>}></Create>
+        <ShowPage propResourceName={"properties"} propId={1} propShowPage={<Property/>}/>
 {/*        <FilterList resourceName={"landlord_relationships"} filters={{}}/>*/}
 
     </div>
     return modelLoaded ? render : <div></div>;
 }
 
-
-function LandlordTenancy(props){
-    const {model} = props
-    return <div>
-        {model.getInputField("paymentItems", props, <PaymentItem/> )}
-    </div>
-}
-function PaymentItem(props){
-    const {model} = props
-    return <div>
-        {model.getInputField("description", props )}
-    </div>
-}
-
-function ShowPageCustom(props){
-    const {model} = props
-    return <div>
-        {model.getOutputField("postcode", props )}
-    </div>
+function Property(props){
+    const {model, record} = props
+    return model.getOutputField("units", props, <PropertyUnitShow parentRecord={record}/>)
 }

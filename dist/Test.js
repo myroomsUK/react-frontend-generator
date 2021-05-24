@@ -11,8 +11,9 @@ import { propertyShow } from "./mock/propertyShow";
 import { units } from "./mock/units";
 import { landlordRelationship } from "./mock/landlordRelationship";
 import { landlord } from "./mock/landlord";
-import { Create } from "./generators/pages/CreatePageGenerator";
 import { tenancies } from "./mock/tenancies";
+import { ShowPage } from "./generators/pages/ShowPageGenerator";
+import PropertyUnitShow from "./mock/pages/PropertyUnitShow";
 export default function Test() {
     createServer({
         routes() {
@@ -30,18 +31,10 @@ export default function Test() {
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
     const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
-            _jsx(Create, { propResourceName: "landlord_tenancy_payments", propCreatePage: _jsx(LandlordTenancy, {}, void 0) }, void 0)] }, void 0);
+            _jsx(ShowPage, { propResourceName: "properties", propId: 1, propShowPage: _jsx(Property, {}, void 0) }, void 0)] }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
-function LandlordTenancy(props) {
-    const { model } = props;
-    return _jsx("div", { children: model.getInputField("paymentItems", props, _jsx(PaymentItem, {}, void 0)) }, void 0);
-}
-function PaymentItem(props) {
-    const { model } = props;
-    return _jsx("div", { children: model.getInputField("description", props) }, void 0);
-}
-function ShowPageCustom(props) {
-    const { model } = props;
-    return _jsx("div", { children: model.getOutputField("postcode", props) }, void 0);
+function Property(props) {
+    const { model, record } = props;
+    return model.getOutputField("units", props, _jsx(PropertyUnitShow, { parentRecord: record }, void 0));
 }
