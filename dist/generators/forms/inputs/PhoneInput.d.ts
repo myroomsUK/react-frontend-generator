@@ -10,4 +10,4 @@ export interface PhoneInput {
     errorMessage?: string;
     adornment?: any;
 }
-export default function ({ label, model, hasError, errorMessage, onClick, value, adornment, ...rest }: PhoneInput): JSX.Element;
+export default function ({ label, model, hasError, errorMessage, onClick, value, adornment }: PhoneInput): JSX.Element;
