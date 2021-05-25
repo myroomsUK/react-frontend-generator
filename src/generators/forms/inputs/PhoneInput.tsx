@@ -14,10 +14,15 @@ export interface PhoneInput{
     adornment?: any;
 }
 
-export default function ({label, model, hasError, errorMessage, onClick, value, adornment, ...rest}:PhoneInput){
+export default function ({label, model, hasError, errorMessage, onClick, value, adornment}:PhoneInput){
 
-    // @ts-ignore
-    const localOnChange = (value) => onClick(rest.id, value);
+
+    const localOnChange = (value:any) => {
+
+        console.log("value", value)
+        // @ts-ignore
+        onClick([model.id, value]);
+    }
 
     return <MuiPhoneInput
         defaultCountry='gb'

@@ -17,7 +17,7 @@ export interface MoneyInput{
 export default function ({model, id= model.id, label= model.label, onClick, value}:MoneyInput){
 
     // @ts-ignore
-    const localOnChange = (money:any) =>onClick(rest.id, money )
+    const localOnChange = (money:any) =>onClick([id, money] )
 
     return (
         <CurrencyTextField
