@@ -20,6 +20,6 @@ export declare function success(resource: string, created: boolean): {
 };
 export declare function useEdit(): {
     data: never[];
-    edit: (resource: string, id: number, values: any) => Promise<any>;
+    edit: (resource: string, id: number, values: any, sendDispatch?: boolean) => Promise<any>;
     errors: {};
 };

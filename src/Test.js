@@ -13,6 +13,8 @@ import {landlord} from "./mock/landlord";
 import {tenancies} from "./mock/tenancies";
 import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import PropertyUnitShow from "./mock/pages/PropertyUnitShow";
+import {FilterList} from "./generators/filters/FilterList";
+import {RouteFilterList} from "./generators/pages/ListPageGenerator";
 
 export default function Test(){
 
@@ -42,8 +44,8 @@ export default function Test(){
         {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
         {/*<EditPage propResourceName={"properties"} propId={1} />*/}
-        <ShowPage propResourceName={"properties"} propId={1} propShowPage={<Property/>}/>
-{/*        <FilterList resourceName={"landlord_relationships"} filters={{}}/>*/}
+        <div style={{height: 100}}>ciaoooo</div>
+        {<ShowPage propResourceName={resourceName ? "properties" : "landlords"} propId={1} />}
 
     </div>
     return modelLoaded ? render : <div></div>;

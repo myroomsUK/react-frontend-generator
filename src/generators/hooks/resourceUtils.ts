@@ -9,7 +9,7 @@ export function useResource(resourceName:string, propId:number){
     const getNewResource = useCallback(()=>getOne(resourceName,propId),[resourceName,propId]);
     useEffect(()=> {
         getNewResource()
-    },[])
+    },[resourceName, getNewResource])
 
     useEffect(()=>{
         if(downloadedRecord!==undefined){

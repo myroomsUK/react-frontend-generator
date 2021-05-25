@@ -29,9 +29,14 @@ export function getDistinctKeyValues(array, key){
 }
 
 export function getFromMap (map) {
-    return new Proxy(map, {
-        get (obj, prop) {
-            return obj.get(prop)
-        }
-    })
+    if(map){
+        return new Proxy(map, {
+            get (obj, prop) {
+                return obj.get(prop)
+            }
+        })
+    }else{
+        return {}
+    }
+
 }

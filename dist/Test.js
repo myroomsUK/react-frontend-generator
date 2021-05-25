@@ -31,7 +31,8 @@ export default function Test() {
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
     const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
-            _jsx(ShowPage, { propResourceName: "properties", propId: 1, propShowPage: _jsx(Property, {}, void 0) }, void 0)] }, void 0);
+            _jsx("div", Object.assign({ style: { height: 100 } }, { children: "ciaoooo" }), void 0),
+            _jsx(ShowPage, { propResourceName: resourceName ? "properties" : "landlords", propId: 1 }, void 0)] }, void 0);
     return modelLoaded ? render : _jsx("div", {}, void 0);
 }
 function Property(props) {

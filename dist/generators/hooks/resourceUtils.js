@@ -8,7 +8,7 @@ export function useResource(resourceName, propId) {
     const getNewResource = useCallback(() => getOne(resourceName, propId), [resourceName, propId]);
     useEffect(() => {
         getNewResource();
-    }, []);
+    }, [resourceName, getNewResource]);
     useEffect(() => {
         if (downloadedRecord !== undefined) {
             // @ts-ignore

@@ -28,25 +28,29 @@ export function useEdit() {
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
-    const edit = (resource, id, values) => __awaiter(this, void 0, void 0, function* () {
+    const edit = (resource, id, values, sendDispatch = true) => __awaiter(this, void 0, void 0, function* () {
         setErrors({});
         return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
             .then(response => {
-            dispatch(loading(resource, false));
+            if (sendDispatch)
+                dispatch(loading(resource, false));
             return response.json();
         })
             .then(retrieved => {
             setData(retrieved);
-            dispatch(genericSuccess());
+            if (sendDispatch)
+                dispatch(genericSuccess());
             return retrieved;
         })
             .catch(e => {
             if (e instanceof SubmissionError) {
-                dispatch(genericError(e.message));
+                if (sendDispatch)
+                    dispatch(genericError(e.message));
                 setErrors(e.errors);
             }
             else {
-                dispatch(genericError(e.message));
+                if (sendDispatch)
+                    dispatch(genericError(e.message));
             }
             throw new Error(e.message);
         });
