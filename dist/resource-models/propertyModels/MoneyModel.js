@@ -9,9 +9,7 @@ export class MoneyModel extends SinglePropertyModel {
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return (vars) => {
-            const target = vars.target;
-            let value = target.value;
-            const name = target.id;
+            const [name, value] = vars;
             setFormValue(formValue.updateFormValue(name, value));
         };
     }
