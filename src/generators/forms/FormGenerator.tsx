@@ -47,7 +47,7 @@ export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
         <FormContent formContent={formContent} model={model} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} lockedFormValue={lockedFormValue}  errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
         {showButton && <div style={{margin: "10px 0"}}>
             <ButtonsHorizontalList>
-                <Button style={{float: "right"}} variant="contained" color="secondary" onClick={onClickHandler}>{text}</Button>
+                <Button variant="contained" color="secondary" onClick={onClickHandler}>{text}</Button>
             </ButtonsHorizontalList>
         </div>}
     </ValidatorForm>

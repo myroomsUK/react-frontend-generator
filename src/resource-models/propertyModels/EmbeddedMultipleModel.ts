@@ -75,7 +75,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
     getJsonFormValue(value: Map<string,any>): any {
         return Array.from(value.values()).map((item) => {
             if(item instanceof FormValue){
-                item.toJson(this.getResource().getModel())
+                return item.toJson(this.getResource().getModel())
             }else{
                 return item;
             }
