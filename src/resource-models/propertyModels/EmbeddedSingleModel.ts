@@ -34,7 +34,12 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     }
 
     getRecord(jsonValue: object): Record {
-        return Record.createFromJson(jsonValue,this.getResource().getModel());
+        console.log("id", this.id)
+        console.log("json value", jsonValue)
+        console.log("model", this.getResource().getModel())
+        const record = Record.createFromJson(jsonValue,this.getResource().getModel());
+        console.log("record", record)
+        return record
     }
 
     getFormValue(value: Record): any {

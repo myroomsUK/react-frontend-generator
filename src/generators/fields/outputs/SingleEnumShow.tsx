@@ -28,9 +28,7 @@ export default function SingleEnumShow({propertyModel, propertyRecord, colorMap}
     const correct = classes[id];*/
 
 
-    return <Chip
-        label={label}
-    />
+    return (propertyRecord) ? <Chip label={label}/> : <div>Not defined</div>
 }
 
 /*
