@@ -23,5 +23,5 @@ export default function SingleEnumShow({ propertyModel, propertyRecord, colorMap
 
     // @ts-ignore
     const correct = classes[id];*/
-    return _jsx(Chip, { label: label }, void 0);
+    return (propertyRecord) ? _jsx(Chip, { label: label }, void 0) : _jsx("div", { children: "Not defined" }, void 0);
 }
