@@ -14,7 +14,7 @@ export class ReferenceModel extends SinglePropertyModel{
 
     setInputField(props: ReferenceInputFields): React.ReactElement<any, any> | null {
         const {inputHandler, value} = props;
-        const finalValue = (value) ? new ListingOption(value.get("id"), value.get(this.optionText)) : undefined
+        const finalValue = (value) ? (typeof value === "number" ? new ListingOption(value, "")  : new ListingOption(value.get("id"), "")): undefined
         const propsWithModel = Object.assign(Object.assign({}, props), {model:this,onChange: inputHandler, inheritedValue:finalValue });
         return ReferenceInput(propsWithModel)
     }
@@ -33,7 +33,7 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any{
-        return Record.fromJson(jsonValue)
+        return (typeof jsonValue === "object") ? Record.fromJson(jsonValue) : parseInt(jsonValue.substring(jsonValue.lastIndexOf("/")+1, jsonValue.length));
     }
 
     getFormValue(value:any){
@@ -48,7 +48,7 @@ export class ReferenceModel extends SinglePropertyModel{
 
 interface ReferenceInputFields{
     inputHandler:any,
-    value: Map<string, any>,
+    value: Map<string, any>|number,
     model:this,
     refreshReferencesMap:any
 }

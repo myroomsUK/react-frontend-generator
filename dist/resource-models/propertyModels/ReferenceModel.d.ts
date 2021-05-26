@@ -13,7 +13,7 @@ export declare class ReferenceModel extends SinglePropertyModel {
 }
 interface ReferenceInputFields {
     inputHandler: any;
-    value: Map<string, any>;
+    value: Map<string, any> | number;
     model: this;
     refreshReferencesMap: any;
 }

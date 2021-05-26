@@ -9,7 +9,7 @@ export class ReferenceModel extends SinglePropertyModel {
     }
     setInputField(props) {
         const { inputHandler, value } = props;
-        const finalValue = (value) ? new ListingOption(value.get("id"), value.get(this.optionText)) : undefined;
+        const finalValue = (value) ? (typeof value === "number" ? new ListingOption(value, "") : new ListingOption(value.get("id"), "")) : undefined;
         const propsWithModel = Object.assign(Object.assign({}, props), { model: this, onChange: inputHandler, inheritedValue: finalValue });
         return ReferenceInput(propsWithModel);
     }
@@ -25,7 +25,7 @@ export class ReferenceModel extends SinglePropertyModel {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
     getRecord(jsonValue) {
-        return Record.fromJson(jsonValue);
+        return (typeof jsonValue === "object") ? Record.fromJson(jsonValue) : parseInt(jsonValue.substring(jsonValue.lastIndexOf("/") + 1, jsonValue.length));
     }
     getFormValue(value) {
         return value;
