@@ -25,7 +25,7 @@ export function getDistinctKeyValues(array, key) {
     return Object.keys(orderByKey(array, key));
 }
 export function getFromMap(map) {
-    if (map) {
+    if (map instanceof Map) {
         return new Proxy(map, {
             get(obj, prop) {
                 return obj.get(prop);

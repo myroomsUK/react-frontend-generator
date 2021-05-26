@@ -53,7 +53,6 @@ export class EnumSingleModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any {
-        return jsonValue
         return Record.fromJson(jsonValue)
     }
 }

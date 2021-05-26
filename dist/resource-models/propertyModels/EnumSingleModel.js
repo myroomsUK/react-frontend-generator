@@ -40,7 +40,6 @@ export class EnumSingleModel extends SinglePropertyModel {
             } });
     }
     getRecord(jsonValue) {
-        return jsonValue;
         return Record.fromJson(jsonValue);
     }
 }
