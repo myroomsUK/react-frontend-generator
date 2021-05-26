@@ -1,6 +1,17 @@
 import React from "react";
 import {Link} from "@material-ui/core";
+import {ReferenceModel} from "../../../resource-models/propertyModels/ReferenceModel";
 
-export default function ReferenceShow({propertyModel,propertyRecord}:any){
-    return propertyRecord ? <Link color="secondary" href={`/${propertyModel.resourceName}/${propertyRecord.get("id")}/show`}>{propertyRecord.get(propertyModel.optionText)}</Link> :<></>
+export default function ReferenceShow({propertyModel,propertyRecord}:ReferenceOutput){
+    if(propertyRecord){
+        const id = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord.get("id")
+        const name = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord.get(propertyModel.optionText)
+        return <Link color="secondary" href={`/${propertyModel.resourceName}/${id}/show`}>{name}</Link>
+    }
+    return <></>
+}
+
+interface ReferenceOutput{
+    propertyModel:ReferenceModel,
+    propertyRecord: Map<string, any>|number
 }
