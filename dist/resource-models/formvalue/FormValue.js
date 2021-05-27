@@ -37,6 +37,20 @@ export class FormValue extends Map {
         newFormValue.set(name, value);
         return newFormValue;
     }
+    getPropertyFormValue(name) {
+        const split = _.split(name, ".");
+        const reducerModel = (accumulator, value) => {
+            if (accumulator instanceof FormValue) {
+                return accumulator.get(value);
+            }
+            else if (accumulator instanceof Map) {
+            }
+            else
+                return accumulator;
+        };
+        // @ts-ignore
+        return split.reduce(reducerModel, this);
+    }
     toJson(model) {
         const json = {};
         const entries = Array.from(this.entries());
