@@ -12,5 +12,5 @@ export function success(retrieved: any): {
 };
 export function useGetOne(): {
     data: undefined;
-    getOne: (resourceName: any, id: any) => Promise<void>;
+    getOne: (resourceName: any, id: any) => Promise<any>;
 };
