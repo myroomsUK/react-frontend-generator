@@ -2,7 +2,6 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 import ReferenceShow from "../../generators/fields/outputs/ReferenceShow";
 import { ListingOption } from "../listings/Listing";
 import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
-import { Record } from "../Record";
 export class ReferenceModel extends SinglePropertyModel {
     constructor(id, other) {
         super(id, other);
@@ -24,8 +23,11 @@ export class ReferenceModel extends SinglePropertyModel {
     setOutputField(props) {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
-    getRecord(jsonValue) {
-        return (typeof jsonValue === "object") ? Record.fromJson(jsonValue) : parseInt(jsonValue.substring(jsonValue.lastIndexOf("/") + 1, jsonValue.length));
+    getRecord(record) {
+        if (record) {
+            return (record instanceof Map) ? record : parseInt(record.substring(record.lastIndexOf("/") + 1, record.length));
+        }
+        return record;
     }
     getFormValue(value) {
         return value;

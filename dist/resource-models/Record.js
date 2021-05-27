@@ -14,6 +14,23 @@ export class Record extends Map {
         });
         return record;
     }
+    static createFromJsonNoModel(jsonModel) {
+        const record = new Record();
+        Object.keys(jsonModel).forEach(key => {
+            if (Array.isArray(jsonModel[key])) {
+                const map = new Map();
+                jsonModel[key].forEach((item, index) => map.set(index, Record.createFromJsonNoModel(item)));
+                record.set(key, map);
+            }
+            else if (typeof jsonModel[key] === "object") {
+                record.set(key, Record.createFromJsonNoModel(jsonModel[key]));
+            }
+            else {
+                record.set(key, jsonModel[key]);
+            }
+        });
+        return record;
+    }
     getPropertyRecord(name) {
         const split = _.split(name, ".");
         const reducerModel = (accumulator, value) => {

@@ -20,7 +20,7 @@ export class SinglePropertyModel extends PropertyModel {
     getOutputField(props) {
         const { record, showLabel } = props;
         // @ts-ignore
-        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: record });
+        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: this.getRecord(record) });
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
     getFormValue(value) {
