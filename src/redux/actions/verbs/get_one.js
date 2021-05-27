@@ -29,6 +29,7 @@ export function useGetOne() {
                 dispatch(loading(false));
                 dispatch(success(retrieved));
                 setData(retrieved);
+                return retrieved
             })
             .catch(e => {
                 dispatch(loading(false));
