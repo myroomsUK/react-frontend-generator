@@ -5,7 +5,7 @@ import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
-        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule } = props;
+        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
         return IterableFormContent({
@@ -22,7 +22,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             submitHandler: submitHandler,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
-            inputElement
+            inputElement,
+            record: record !== null && record !== void 0 ? record : new Map()
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {

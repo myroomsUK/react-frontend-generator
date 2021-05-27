@@ -2,12 +2,10 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 import {UpdateListings} from "../../../utils/referenceFieldUtils";
 import {useEdit} from "../../../redux/actions/verbs/edit";
-import {getFormValueFromRecord} from "../../forms/formHelpers";
 import {FormGenerator} from "../../forms/FormGenerator";
 import {Error, Errors} from "../../errors/Errors";
 import {FormValue} from "../../../resource-models/formvalue/FormValue";
 import {Record} from "../../../resource-models/Record";
-import {Form} from "redux-form";
 
 interface EditFormGeneratorProps {
     propResourceName: string,
@@ -34,7 +32,9 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef(new FormValue());
+    const initialValueRecord = useRef(new Record());
     const [formValue, setFormValue] = useState<FormValue>(initialValue.current);
+    const [record, setRecord] = useState<Record>(initialValueRecord.current);
     const [errors, setErrors] = useState(new Errors([]));
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
@@ -50,15 +50,19 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
     useEffect(()=>{
-        const record = Record.createFromJson(recordJson, model);
-        setFormValue(FormValue.createFromRecord(record, model))
+        const record = Record.createFromJsonNoModel(recordJson)
+        setRecord(record)
+        const recordFormValue = Record.createFromJson(recordJson, model);
+        setFormValue(FormValue.createFromRecord(recordFormValue, model))
     }, [recordJson])
 
     const [genericEditRender, setGenericEditRender] = useState(<div/>)
 
     const submitHandler = async (formValue:FormValue)=> edit(resourceName,propId, formValue.toJson(model)).then(response => {
-        const record = Record.createFromJson(response, model);
-        setFormValue(FormValue.createFromRecord(record, model))
+        const record = Record.createFromJsonNoModel(recordJson)
+        const recordFormValue = Record.createFromJson(response, model);
+        setRecord(record)
+        setFormValue(FormValue.createFromRecord(recordFormValue, model))
         return response;
     }).then(thenFunction).catch(catchfunction);
 
@@ -68,6 +72,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             referencesMap:referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
+            record:record,
             lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler:()=>submitHandler(formValue),
@@ -75,7 +80,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             resourceName: resourceName,
             resourceId:propId.toString()
         }
-    },[model,referencesMap, formValue, resourceName, propId])
+    },[model,referencesMap, formValue, record, resourceName, propId])
 
 
     useEffect(()=>{

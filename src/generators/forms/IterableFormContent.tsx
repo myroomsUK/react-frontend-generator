@@ -13,9 +13,11 @@ import {Errors} from "../errors/Errors";
 import {Model} from "../../resource-models/Model";
 import {FormGeneratorProps} from "./FormGeneratorProps";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
+import {Record} from "../../resource-models/Record";
 
 interface IterableFormContentProps{
     model: Model,
+    record: Map<number,Record>;
     resourceName: string,
     setParentFormValue: (values:any) => void,
     formContent?:  React.DetailedReactHTMLElement<any, any>
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true, inputElement}) => {
+export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue) => true, inputElement}) => {
 
     const {remove} = useDelete(resourceName);
     const creationTime = useRef(Date.now());
@@ -90,7 +92,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
         const isEditable = modifyRule(formValue);
 
 
-        const formElement = <FormContent lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent record={record.get(key)} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>

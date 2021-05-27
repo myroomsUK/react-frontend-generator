@@ -7,7 +7,7 @@ import {FormValue} from "../formvalue/FormValue";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler} =  props;
+        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
         return EmbeddedFormContent({
             model:this.getResource().getModel(),
@@ -18,7 +18,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
             formValue:formValue.get(this.id),
             errors:errors,
             partialSubmitHandler:partialSubmitHandler,
-            submitHandler:submitHandler
+            submitHandler:submitHandler,
+            record: record ?? new Record()
         })
     }
 

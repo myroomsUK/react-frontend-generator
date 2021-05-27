@@ -95,6 +95,7 @@ export interface InputOnChangeHandler{
 export interface InputFields{
     model: PropertyModel,
     formValue: FormValue,
+    record?: Record,
     setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
     lockedFormValue: any,
     errors: Errors,

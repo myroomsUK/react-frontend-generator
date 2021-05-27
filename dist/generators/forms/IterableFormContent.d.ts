@@ -2,8 +2,10 @@ import React, { DetailedReactHTMLElement } from "react";
 import { Errors } from "../errors/Errors";
 import { Model } from "../../resource-models/Model";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
+import { Record } from "../../resource-models/Record";
 interface IterableFormContentProps {
     model: Model;
+    record: Map<number, Record>;
     resourceName: string;
     setParentFormValue: (values: any) => void;
     formContent?: React.DetailedReactHTMLElement<any, any>;

@@ -2,6 +2,7 @@ import React from 'react';
 import {Model} from "../../resource-models/Model";
 import {Errors} from "../errors/Errors";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
+import {Record} from "../../resource-models/Record";
 
 export interface FormGeneratorProps{
     resourceId?: string;
@@ -11,6 +12,7 @@ export interface FormGeneratorProps{
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     formValue: FormValue;
+    record?: Record;
     lockedFormValue:FormValue;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     text?:string;
@@ -22,6 +24,7 @@ export interface FormGeneratorProps{
 export class FormGeneratorPropsObject{
     model:Model;
     formValue: FormValue;
+    record: Record;
     setFormValue:React.Dispatch<React.SetStateAction<FormValue>>;
     resourceId?:string;
     submitHandler: (e: any) => Promise<any>;
@@ -33,13 +36,14 @@ export class FormGeneratorPropsObject{
     errors: Errors;
     showButton?:boolean;
 
-    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }:FormGeneratorProps) {
+    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record() }:FormGeneratorProps) {
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
         this.model = model;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;
         this.formValue = formValue;
+        this.record = record;
         this.lockedFormValue = lockedFormValue;
         this.setFormValue = setFormValue;
         this.text = text;

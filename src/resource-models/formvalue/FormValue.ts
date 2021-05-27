@@ -43,6 +43,20 @@ export class FormValue extends Map<string, any>{
         return newFormValue;
     }
 
+    getPropertyFormValue(name:string): any{
+        const split = _.split(name, ".");
+        const reducerModel = (accumulator:any, value:string):any |undefined => {
+            if(accumulator instanceof FormValue) {
+                return accumulator.get(value)
+            }else if(accumulator instanceof Map){
+
+            }else
+                return accumulator;
+        }
+        // @ts-ignore
+        return split.reduce(reducerModel, this);
+    }
+
     toJson(model:Model){
         const json = {};
         const entries = Array.from(this.entries())

@@ -43,7 +43,9 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef(new FormValue());
+    const initialValueRecord = useRef(new Record());
     const [formValue, setFormValue] = useState(initialValue.current);
+    const [record, setRecord] = useState(initialValueRecord.current);
     const [errors, setErrors] = useState(new Errors([]));
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const { edit, errors: responseErrors } = useEdit();
@@ -56,14 +58,18 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     }, [responseErrors]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => {
-        const record = Record.createFromJson(recordJson, model);
-        setFormValue(FormValue.createFromRecord(record, model));
+        const record = Record.createFromJsonNoModel(recordJson);
+        setRecord(record);
+        const recordFormValue = Record.createFromJson(recordJson, model);
+        setFormValue(FormValue.createFromRecord(recordFormValue, model));
     }, [recordJson]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
         return edit(resourceName, propId, formValue.toJson(model)).then(response => {
-            const record = Record.createFromJson(response, model);
-            setFormValue(FormValue.createFromRecord(record, model));
+            const record = Record.createFromJsonNoModel(recordJson);
+            const recordFormValue = Record.createFromJson(response, model);
+            setRecord(record);
+            setFormValue(FormValue.createFromRecord(recordFormValue, model));
             return response;
         }).then(thenFunction).catch(catchfunction);
     });
@@ -73,6 +79,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
+            record: record,
             lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler: () => submitHandler(formValue),
@@ -80,7 +87,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             resourceName: resourceName,
             resourceId: propId.toString()
         };
-    }, [model, referencesMap, formValue, resourceName, propId]);
+    }, [model, referencesMap, formValue, record, resourceName, propId]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
             setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, errors: errors, text: "Save" }), void 0));
