@@ -36,7 +36,7 @@ export abstract class SinglePropertyModel extends PropertyModel{
     getOutputField(props:SingleOutputFields): React.ReactElement<any, any> | null {
         const {record, showLabel} = props;
         // @ts-ignore
-        const newProps:SingleOutputFields = {...props, propertyRecord:record  }
+        const newProps:SingleOutputFields = {...props, propertyRecord:this.getRecord(record)  }
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
             {this.setOutputField(newProps)}

@@ -32,8 +32,12 @@ export class ReferenceModel extends SinglePropertyModel{
         return ReferenceShow({...props, propertyModel:this});
     }
 
-    getRecord(jsonValue: any): any{
-        return (typeof jsonValue === "object") ? Record.fromJson(jsonValue) : parseInt(jsonValue.substring(jsonValue.lastIndexOf("/")+1, jsonValue.length));
+    getRecord(record: any): any{
+        if(record){
+            return (record instanceof Map) ? record : parseInt(record.substring(record.lastIndexOf("/")+1, record.length));
+        }
+        return record;
+
     }
 
     getFormValue(value:any){

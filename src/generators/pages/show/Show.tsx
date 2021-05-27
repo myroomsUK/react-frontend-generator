@@ -18,8 +18,8 @@ export const Show: ({propResourceName, propId: id, record, propShowPage}: ShowPr
     const {model, showPage} = resourceModel;
     const showPageToUse:any = useMemo(()=> propShowPage ? propShowPage: showPage,[propShowPage, showPage])
     const [genericShowRender, setGenericShowRender] = useState(<div/>);
-    const record = useMemo( ()=> Record.createFromJson(recordJson, model),[recordJson, model]);
-
+    const record = useMemo( ()=> Record.createFromJsonNoModel(recordJson),[recordJson]);
+    console.log("record", record)
 
     const showFormProps = useMemo(()=>{
         return {

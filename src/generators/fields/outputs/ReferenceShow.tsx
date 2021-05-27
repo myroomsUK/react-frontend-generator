@@ -3,6 +3,7 @@ import {Link} from "@material-ui/core";
 import {ReferenceModel} from "../../../resource-models/propertyModels/ReferenceModel";
 
 export default function ReferenceShow({propertyModel,propertyRecord}:ReferenceOutput){
+    console.log("propertyRecord", propertyRecord)
     if(propertyRecord){
         const id = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord.get("id")
         const name = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord.get(propertyModel.optionText)
