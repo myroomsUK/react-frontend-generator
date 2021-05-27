@@ -1,5 +1,7 @@
 import React from "react";
+import { Errors } from "../errors/Errors";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
+import { Model } from "../../resource-models/Model";
 interface Props {
     propResourceName: string;
     propCreatePage?: any;
@@ -7,5 +9,16 @@ interface Props {
     thenFunction?: any;
     catchFunction?: any;
 }
+interface GenericProps {
+    model: Model;
+    errors?: Errors;
+    propCreatePage?: any;
+    submitHandler: (formValue: FormValue) => Promise<any>;
+    lockedFormValue?: FormValue;
+    thenFunction?: any;
+    catchFunction?: any;
+}
 export declare const Create: React.FC<Props>;
+export declare const GenericCreate: React.FC<GenericProps>;
+export declare const CreateResource: React.FC<Props>;
 export {};

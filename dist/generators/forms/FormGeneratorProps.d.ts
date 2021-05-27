@@ -3,7 +3,6 @@ import { Model } from "../../resource-models/Model";
 import { Errors } from "../errors/Errors";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
 export interface FormGeneratorProps {
-    resourceName: string;
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
@@ -22,7 +21,6 @@ export declare class FormGeneratorPropsObject {
     model: Model;
     formValue: FormValue;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    resourceName: string;
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
@@ -32,5 +30,5 @@ export declare class FormGeneratorPropsObject {
     text?: string;
     errors: Errors;
     showButton?: boolean;
-    constructor({ resourceName, submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }: FormGeneratorProps);
+    constructor({ submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId }: FormGeneratorProps);
 }
