@@ -76,7 +76,7 @@ export class Model{
     getOutputField(requestedName:string, props: OutputPropertyProps, outputElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
         const {record} = props;
         const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({record: record.getPropertyRecord(propertyModel.id), showLabel:showLabel}, outputElement)
+        return propertyModel.getOutputField({record: record.getPropertyRecord(requestedName), showLabel:showLabel}, outputElement)
     }
 
     getAllPropertiesReadableNames(){
