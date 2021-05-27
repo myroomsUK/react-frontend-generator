@@ -52,7 +52,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         const map = new Map<number,Record>();
         jsonValue.forEach((element:any, index:number) => {
             if(typeof element === "object"){
-                return map.set(index, Record.createFromJson(element,this.getResource().getModel()))
+                map.set(index, Record.createFromJson(element,this.getResource().getModel()))
             }else{
                 map.set(index, element)
             }
