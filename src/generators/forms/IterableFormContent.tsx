@@ -1,17 +1,14 @@
-import React, {DetailedReactHTMLElement, useEffect, useMemo, useRef, useState} from "react";
+import React, {DetailedReactHTMLElement, useEffect, useRef, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import {Divider, Typography} from "@material-ui/core";
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import {makeStyles} from "@material-ui/core/styles";
-import {getFormValueFromRecord} from "./formHelpers";
 import {useDelete} from "../../redux/actions/verbs/delete";
-import {createArrayFromMap, createMapFromArray} from "../../utils/mapUtils";
 import CustomDeleteButton from "../../rendering/components/buttons/CustomDeleteButton";
 import {FormContent} from "./FormContent";
 import {Errors} from "../errors/Errors";
 import {Model} from "../../resource-models/Model";
-import {FormGeneratorProps} from "./FormGeneratorProps";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
 import {Record} from "../../resource-models/Record";
 
@@ -92,7 +89,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
         const isEditable = modifyRule(formValue);
 
 
-        const formElement = <FormContent record={record.get(key)} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent record={record.get(key) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>

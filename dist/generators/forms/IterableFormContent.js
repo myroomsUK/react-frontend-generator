@@ -9,6 +9,7 @@ import { useDelete } from "../../redux/actions/verbs/delete";
 import CustomDeleteButton from "../../rendering/components/buttons/CustomDeleteButton";
 import { FormContent } from "./FormContent";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
+import { Record } from "../../resource-models/Record";
 // @ts-ignore
 const useStyles = makeStyles((theme) => ({
     embeddedTitle: {
@@ -54,8 +55,9 @@ export const IterableFormContent = ({ model, record, resourceName, setParentForm
     const basicButton = _jsx(IconButton, Object.assign({ variant: "contained", color: "primary", onClick: addForm }, { children: _jsx(AddOutlinedIcon, {}, void 0) }), void 0);
     const button = modifyOnlyLastElement ? (!hasNewEntry && basicButton) : basicButton;
     const forms = entries.map(([key, formValue], index) => {
+        var _a;
         const isEditable = modifyRule(formValue);
-        const formElement = _jsx(FormContent, { record: record.get(key), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
+        const formElement = _jsx(FormContent, { record: (_a = record.get(key)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement : formElement) : formElement;
         return _jsxs(React.Fragment, { children: [_jsx(Grid, Object.assign({ item: true, xs: 1 }, { children: _jsx(Typography, { children: index + 1 }, void 0) }), void 0),
                 _jsx(Grid, Object.assign({ item: true, xs: 10 }, { children: formFinal }), void 0),
