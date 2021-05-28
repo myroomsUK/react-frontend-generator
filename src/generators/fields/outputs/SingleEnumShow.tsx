@@ -6,8 +6,10 @@ import {green, red, yellow} from "@material-ui/core/colors";
 export default function SingleEnumShow({propertyModel, propertyRecord, colorMap}:any){
     const {options} = propertyModel;
 
-    const label = options?.find((option:any) => option.id === propertyRecord)?.label;
-    const id = options?.find((option:any) => option.id === propertyRecord)?.id;
+    const optionFound = options?.find((option:any) => option.id === propertyRecord)
+
+    const label = optionFound?.label;
+    const id = optionFound?.id;
     /*const classes = makeStyles({
         not_managed: {
             backgroundColor: red.A700,
@@ -28,7 +30,7 @@ export default function SingleEnumShow({propertyModel, propertyRecord, colorMap}
     const correct = classes[id];*/
 
 
-    return (propertyRecord) ? <Chip label={label}/> : <div>Not defined</div>
+    return (optionFound) ? <Chip label={label}/> : <div>Not defined</div>
 }
 
 /*

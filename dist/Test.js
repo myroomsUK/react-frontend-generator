@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSetResourceModel } from "./resource-models/modelsRegistry";
 import { createServer } from "miragejs";
@@ -13,7 +13,6 @@ import { landlordRelationship } from "./mock/landlordRelationship";
 import { landlord } from "./mock/landlord";
 import { tenancies } from "./mock/tenancies";
 import { ShowPage } from "./generators/pages/ShowPageGenerator";
-import PropertyUnitShow from "./mock/pages/PropertyUnitShow";
 export default function Test() {
     createServer({
         routes() {
@@ -30,12 +29,11 @@ export default function Test() {
     });
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
-    const render = _jsxs("div", { children: [_jsx("button", Object.assign({ onClick: () => setResourceName(!resourceName) }, { children: "SWITCHA" }), void 0),
-            _jsx("div", Object.assign({ style: { height: 100 } }, { children: "ciaoooo" }), void 0),
-            _jsx(ShowPage, { propResourceName: resourceName ? "properties" : "landlords", propId: 1 }, void 0)] }, void 0);
-    return modelLoaded ? render : _jsx("div", {}, void 0);
+    const render = _jsx("div", { children: _jsx(ShowPage, { propResourceName: "landlord_relationships", propId: 1 }, void 0) }, void 0);
+    return modelLoaded ? _jsx("div", Object.assign({ style: { padding: 30 } }, { children: render }), void 0) : _jsx("div", {}, void 0);
 }
 function Property(props) {
-    const { model, record } = props;
-    return model.getOutputField("units", props, _jsx(PropertyUnitShow, { parentRecord: record }, void 0));
+    const { model, formValue, record } = props;
+    console.log("record", record);
+    return _jsx(_Fragment, { children: model.getOutputField("city", props) }, void 0);
 }

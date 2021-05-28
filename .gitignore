@@ -12,10 +12,12 @@
 /build
 
 /.idea
+/src
+/dist/mock
+/srcnew
 
 # mock
 
-/src/mock
 # misc
 .DS_Store
 .env.local

@@ -31,11 +31,16 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getRecord(record: any): any{
+        console.log("record", record)
         if(record){
-            return (typeof record === "object") ? Record.createFromJsonNoModel(record) : parseInt(record.substring(record.lastIndexOf("/")+1, record.length));
+            if(record instanceof Map){
+                return record;
+            }else if(typeof record === "object"){
+                return Record.createFromJsonNoModel(record);
+            }else{
+                return parseInt(record.substring(record.lastIndexOf("/")+1, record.length))
+            }
         }
-        return record;
-
     }
 
     getFormValue(value:any){

@@ -15,6 +15,7 @@ import {ShowPage} from "./generators/pages/ShowPageGenerator";
 import PropertyUnitShow from "./mock/pages/PropertyUnitShow";
 import {FilterList} from "./generators/filters/FilterList";
 import {RouteFilterList} from "./generators/pages/ListPageGenerator";
+import {EditPage} from "./generators/pages/EditPageGenerator";
 
 export default function Test(){
 
@@ -38,20 +39,24 @@ export default function Test(){
 
     const [resourceName, setResourceName] = useState(true)
 
+
     const render = <div>
 
-        <button onClick={()=>setResourceName(!resourceName)}>SWITCHA</button>
+
         {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
-        {/*<EditPage propResourceName={"properties"} propId={1} />*/}
-        <div style={{height: 100}}>ciaoooo</div>
-        {<ShowPage propResourceName={resourceName ? "properties" : "landlords"} propId={1} />}
+        <ShowPage propResourceName={"landlord_relationships"} propId={1}  />
+
 
     </div>
-    return modelLoaded ? render : <div></div>;
+    return modelLoaded ? <div style={{padding:30}}>{render}</div> : <div></div>;
 }
 
 function Property(props){
-    const {model, record} = props
-    return model.getOutputField("units", props, <PropertyUnitShow parentRecord={record}/>)
+    const {model, formValue, record} = props
+
+    console.log("record", record)
+    return <>
+        {model.getOutputField("city", props)}
+    </>
 }

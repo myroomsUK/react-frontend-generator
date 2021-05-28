@@ -1,10 +1,10 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import Chip from "@material-ui/core/Chip";
 export default function SingleEnumShow({ propertyModel, propertyRecord, colorMap }) {
-    var _a, _b;
     const { options } = propertyModel;
-    const label = (_a = options === null || options === void 0 ? void 0 : options.find((option) => option.id === propertyRecord)) === null || _a === void 0 ? void 0 : _a.label;
-    const id = (_b = options === null || options === void 0 ? void 0 : options.find((option) => option.id === propertyRecord)) === null || _b === void 0 ? void 0 : _b.id;
+    const optionFound = options === null || options === void 0 ? void 0 : options.find((option) => option.id === propertyRecord);
+    const label = optionFound === null || optionFound === void 0 ? void 0 : optionFound.label;
+    const id = optionFound === null || optionFound === void 0 ? void 0 : optionFound.id;
     /*const classes = makeStyles({
         not_managed: {
             backgroundColor: red.A700,
@@ -23,5 +23,5 @@ export default function SingleEnumShow({ propertyModel, propertyRecord, colorMap
 
     // @ts-ignore
     const correct = classes[id];*/
-    return (propertyRecord) ? _jsx(Chip, { label: label }, void 0) : _jsx("div", { children: "Not defined" }, void 0);
+    return (optionFound) ? _jsx(Chip, { label: label }, void 0) : _jsx("div", { children: "Not defined" }, void 0);
 }
