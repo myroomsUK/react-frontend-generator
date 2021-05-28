@@ -31,7 +31,6 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 
     getRecord(record: any): any{
-        console.log("record", record)
         if(record){
             if(record instanceof Map){
                 return record;

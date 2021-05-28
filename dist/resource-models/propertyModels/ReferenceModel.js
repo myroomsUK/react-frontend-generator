@@ -23,7 +23,6 @@ export class ReferenceModel extends SinglePropertyModel {
         return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
     }
     getRecord(record) {
-        console.log("record", record);
         if (record) {
             if (record instanceof Map) {
                 return record;

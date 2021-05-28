@@ -57,8 +57,20 @@ export class Model {
         const properties = Object.keys(jsonModel).map(key => PropertyModelRegistry.get(key, jsonModel[key]));
         return new Model(properties);
     }
+    setFieldProps(requestedName, props) {
+        const { formValue, record, setFormValue } = props;
+        const localFormValue = (formvalue) => {
+            const split = _.split(requestedName, ".");
+            split.pop();
+            const reqName = split.join(".");
+            const newFormValue = split.length === 0 ? formvalue : formValue.updateFormValue(reqName, formvalue);
+            setFormValue(newFormValue);
+        };
+        return Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName), formValue: formValue.getPropertyFormValue(requestedName), record: record.getPropertyRecord(requestedName), setFormValue: localFormValue });
+    }
     getInputField(requestedName, props, inputElement) {
-        return this.getProperty(requestedName).getInputField(Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName) }), inputElement);
+        const newProps = this.setFieldProps(requestedName, props);
+        return this.getProperty(requestedName).getInputField(newProps, inputElement);
     }
     getOutputField(requestedName, props, outputElement, showLabel = true) {
         const { record } = props;

@@ -13,7 +13,7 @@ export class SinglePropertyModel extends PropertyModel {
         const { hasError, errorMessage } = this.manipulateErrors(errors);
         const label = _.startCase(this.label);
         const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const value = formValue.get(this.id);
+        const value = (formValue) ? formValue.get(this.id) : undefined;
         const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: value, label: label });
         return this.setInputField(newProps);
     }

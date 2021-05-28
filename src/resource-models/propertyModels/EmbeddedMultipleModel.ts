@@ -21,7 +21,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             referencesMap:referencesMap,
             refreshReferencesMap:refreshReferencesMap,
             errors:newErrors,
-            formValueArray:formValue.get(this.id),
+            formValueArray: (formValue) ? formValue.get(this.id) : new Map(),
             label:this.label,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,

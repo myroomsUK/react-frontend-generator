@@ -38,18 +38,43 @@ export class FormValue extends Map<string, any>{
     }
 
     updateFormValue(name:string, value:any):FormValue{
-        const newFormValue = _.cloneDeep(this)
-        newFormValue.set(name, value);
-        return newFormValue;
+        const split = _.split(name, ".");
+        const current = split.shift();
+            if (split.length!==0) {
+
+                // @ts-ignore
+                const currentFormValue = this.get(current);
+                const result = currentFormValue.updateFormValue(split.join("."), value)
+                const newFormValue = _.cloneDeep(this)
+                // @ts-ignore
+                newFormValue.set(current, result )
+                return newFormValue;
+            }else{
+                const newFormValue = _.cloneDeep(this)
+                // @ts-ignore
+                newFormValue.set(current, value)
+                return newFormValue;
+            }
+
+
+    }
+
+    accessPropertyFormValue(name:string){
+        const split = _.split(name, ".");
+        const reducer = (accumulator:FormValue, value:string) => {
+            return accumulator.get(value);
+        }
+        return split.reduce(reducer,this);
+
     }
 
     getPropertyFormValue(name:string): any{
         const split = _.split(name, ".");
+        split.pop();
         const reducerModel = (accumulator:any, value:string):any |undefined => {
             if(accumulator instanceof FormValue) {
                 return accumulator.get(value)
             }else if(accumulator instanceof Map){
-
             }else
                 return accumulator;
         }
@@ -66,6 +91,24 @@ export class FormValue extends Map<string, any>{
 
             // @ts-ignore
             json[key] = propertyJsonValue;
+        })
+        return json;
+    }
+
+    toJsonNoModel(){
+        const json = {};
+        const entries = Array.from(this.entries())
+        entries.forEach(([key, value], index) =>{
+            if(value instanceof Map){
+                // @ts-ignore
+                json[key] = Array.from(value.values()).map(item => item.toJsonNoModel())
+            }else if(value instanceof FormValue){
+                // @ts-ignore
+                json[key] = value.toJsonNoModel()
+            }else{
+                // @ts-ignore
+                json[key] = value
+            }
         })
         return json;
     }

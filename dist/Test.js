@@ -12,7 +12,7 @@ import { units } from "./mock/units";
 import { landlordRelationship } from "./mock/landlordRelationship";
 import { landlord } from "./mock/landlord";
 import { tenancies } from "./mock/tenancies";
-import { ShowPage } from "./generators/pages/ShowPageGenerator";
+import { EditPage } from "./generators/pages/EditPageGenerator";
 export default function Test() {
     createServer({
         routes() {
@@ -29,11 +29,10 @@ export default function Test() {
     });
     const modelLoaded = useSetResourceModel(overrideRegistry, "http://localhost:1000/resources");
     const [resourceName, setResourceName] = useState(true);
-    const render = _jsx("div", { children: _jsx(ShowPage, { propResourceName: "landlord_relationships", propId: 1 }, void 0) }, void 0);
+    const render = _jsx("div", { children: _jsx(EditPage, { propResourceName: "landlord_relationships", propId: 1, propEditPage: _jsx(Property, {}, void 0) }, void 0) }, void 0);
     return modelLoaded ? _jsx("div", Object.assign({ style: { padding: 30 } }, { children: render }), void 0) : _jsx("div", {}, void 0);
 }
 function Property(props) {
     const { model, formValue, record } = props;
-    console.log("record", record);
-    return _jsx(_Fragment, { children: model.getOutputField("city", props) }, void 0);
+    return _jsx(_Fragment, { children: model.getInputField("firstLandlordTenancy.landlordContract.payments", props) }, void 0);
 }

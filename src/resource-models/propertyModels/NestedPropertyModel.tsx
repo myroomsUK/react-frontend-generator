@@ -31,10 +31,9 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
         const {errors, formValue, setFormValue} = props;
         const model = this;
         model.label = _.startCase(this.label)
-
         const nestedErrors = this.manipulateErrors(errors);
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, value:formValue.get(this.id), model:model, inputElement: inputElement}
+        const newProps:EmbeddedInputFields = {...props, errors:nestedErrors, inputHandler:inputHandler, model:model, inputElement: inputElement}
         return this.setInputField(newProps);
     }
 
@@ -51,7 +50,6 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
 
 export interface EmbeddedInputFields extends InputFields{
     inputHandler: (vars:any) => void,
-    value: any,
     model: EmbeddedPropertyModel,
     errors: Errors,
     form?: React.DetailedReactHTMLElement<any, any>;

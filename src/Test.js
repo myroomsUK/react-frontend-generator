@@ -45,7 +45,7 @@ export default function Test(){
 
         {/*<RouteFilterList resourceName={"properties"} filters={{}}/>*/}
         {/*<ShowPage propResourceName={"properties"} propId={1} propShowPage={<ShowPageCustom/>}/>*/}
-        <ShowPage propResourceName={"landlord_relationships"} propId={1}  />
+        <EditPage propResourceName={"landlord_relationships"} propId={1} propEditPage={<Property></Property>}  />
 
 
     </div>
@@ -55,8 +55,7 @@ export default function Test(){
 function Property(props){
     const {model, formValue, record} = props
 
-    console.log("record", record)
     return <>
-        {model.getOutputField("city", props)}
+        {model.getInputField("firstLandlordTenancy.landlordContract.payments", props)}
     </>
 }

@@ -13,7 +13,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             setParentFormValue: setParentFormValue,
             refreshReferencesMap: refreshReferencesMap,
             referencesMap: referencesMap,
-            formValue: formValue.get(this.id),
+            formValue: (formValue) ? formValue.get(this.id) : new FormValue(),
             errors: errors,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,

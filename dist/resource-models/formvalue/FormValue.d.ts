@@ -8,6 +8,8 @@ export declare class FormValue extends Map<string, any> {
      */
     static createFromRecord(record: Record, model: Model): FormValue;
     updateFormValue(name: string, value: any): FormValue;
+    accessPropertyFormValue(name: string): FormValue;
     getPropertyFormValue(name: string): any;
     toJson(model: Model): {};
+    toJsonNoModel(): {};
 }

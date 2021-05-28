@@ -16,7 +16,6 @@ export declare abstract class EmbeddedPropertyModel extends PropertyModel {
 }
 export interface EmbeddedInputFields extends InputFields {
     inputHandler: (vars: any) => void;
-    value: any;
     model: EmbeddedPropertyModel;
     errors: Errors;
     form?: React.DetailedReactHTMLElement<any, any>;
