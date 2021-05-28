@@ -9,7 +9,7 @@ export declare class ReferenceModel extends SinglePropertyModel {
     setOutputField(props: any): React.ReactElement<any, any> | null;
     getRecord(record: any): any;
     getFormValue(value: any): any;
-    getJsonFormValue(value: Map<string, any>): any;
+    getJsonFormValue(value: Map<string, any> | number): any;
 }
 interface ReferenceInputFields {
     inputHandler: any;

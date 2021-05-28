@@ -39,6 +39,11 @@ export class ReferenceModel extends SinglePropertyModel {
         return value;
     }
     getJsonFormValue(value) {
-        return value.get("id");
+        if (value instanceof Map) {
+            return value.get("id");
+        }
+        else {
+            return value;
+        }
     }
 }
