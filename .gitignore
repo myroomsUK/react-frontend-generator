@@ -12,9 +12,7 @@
 /build
 
 /.idea
-/src
 /dist/mock
-/srcnew
 
 # mock
 

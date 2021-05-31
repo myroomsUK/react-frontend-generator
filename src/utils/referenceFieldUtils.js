@@ -1,7 +1,6 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useGetResourceModel} from "../resource-models/modelsRegistry";
-import {useGetListing, useGetListingGroup} from "../redux/actions/verbs/get_listing";
+import {useGetListingGroup} from "../redux/actions/verbs/get_listing";
 import {getReferenceKeys, initializeReferenceFields} from "../generators/forms/formHelpers";
 import {updateResourceListings} from "../redux/actions/app/actions";
 import {Listings} from "../resource-models/listings/Listings";

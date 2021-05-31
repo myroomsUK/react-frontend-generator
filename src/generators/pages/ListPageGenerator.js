@@ -19,7 +19,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from "@material-ui/core/Button";
 import {useDebouncedCallback} from "use-debounce";
-import _ from 'lodash';
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
@@ -29,15 +28,14 @@ import {useList} from "../../redux/actions/verbs/list";
 import {getComparator, stableSort} from "./utils/ListPageGeneratorUtils";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import {useRouteFilters, useTableFilters} from "../filters/TableFilters";
-import ShowField from "../fields/ShowField";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useCookies} from "react-cookie";
 import {Record} from "../../resource-models/Record";
 
 
-function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters} = props;
+export function EnhancedTableHead(props) {
+    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters = []} = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
@@ -78,7 +76,7 @@ function EnhancedTableHead(props) {
             <TableRow>
                 <TableCell padding="checkbox">
                 </TableCell>
-                {headCells.map((headCell, index) => (
+                {filters.length!==0 && headCells.map((headCell, index) => (
                     <TableCell
                         key={index}
                         align="left"
@@ -450,9 +448,6 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(30);
-
-
-
 
 
     const handleRequestSort = (event, property) => {

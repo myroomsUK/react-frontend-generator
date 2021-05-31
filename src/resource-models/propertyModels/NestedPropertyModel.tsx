@@ -82,5 +82,7 @@ export interface EmbeddedSingleOutputFields extends OutputFields{
 export interface EmbeddedMultipleOutputFields extends OutputFields{
     showElement?:React.DetailedReactHTMLElement<any, any>;
     record: Map<number,Record>,
-    model: Model
+    model: Model,
+    list: boolean,
+    table: any[]
 }

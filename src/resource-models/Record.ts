@@ -86,5 +86,6 @@ export class Record extends Map<string,any>{
                 json[key] = value;
             }
         })
+        return json;
     }
 }

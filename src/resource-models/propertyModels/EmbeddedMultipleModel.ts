@@ -37,8 +37,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         };
     }
 
-    setOutputField(props: EmbeddedMultipleOutputFields): React.ReactElement<any, any> | null {
-        const {record, model, showElement} = props;
+    setOutputField({record, model, showElement, list, table}: EmbeddedMultipleOutputFields): React.ReactElement<any, any> | null {
         return IterableShowContent({
             model:model,
             record:record ?? new Map(),
