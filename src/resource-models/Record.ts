@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {Model} from "./Model";
 
 
-export class Record extends Map<string,any>{
+export class Record extends Object{
 
     static createFromJson(jsonModel:any, model: Model):Record{
         const record = new Record();
@@ -10,51 +10,51 @@ export class Record extends Map<string,any>{
             try{
                 const propertyModel = model.getProperty(key);
                 const recordValue = propertyModel.getRecord(jsonModel[key]);
-                record.set(key, recordValue);
+                // @ts-ignore
+                record[key] = recordValue;
             }catch(error){
-                record.set(key, jsonModel[key])
+                // @ts-ignore
+                record[key] = jsonModel[key]
             }
-
         });
         return record;
     }
 
     static createFromJsonNoModel(jsonModel:any):Record{
         const record = new Record();
-        Object.keys(jsonModel).forEach(key =>
+        Object.keys(jsonModel).forEach(key =>{
+            // @ts-ignore
+            record[key] = jsonModel[key]
+        })
+        return record;
+        /*Object.keys(jsonModel).forEach(key =>
         {
             if(Array.isArray(jsonModel[key])) {
                 const map = new Map();
                 jsonModel[key].forEach((item:object, index:number) => map.set(index,Record.createFromJsonNoModel(item)))
-                record.set(key, map);
+                record[key] map);
             }else if(typeof jsonModel[key] === "object"){
                 record.set(key, Record.createFromJsonNoModel(jsonModel[key]));
             }else{
                 record.set(key, jsonModel[key])
             }
         })
-        return record;
+        return record;*/
     }
-
 
 
     getPropertyRecord(name:string): any{
         const split = _.split(name, ".");
         const reducerModel = (accumulator:any, value:string):any |undefined => {
-            if(accumulator instanceof Record) {
-               return accumulator.get(value)
-            }else if(accumulator instanceof Map){
-
-            }else
-
-                return accumulator;
+            return accumulator[value]
         }
         // @ts-ignore
         return split.reduce(reducerModel, this);
     }
 
     static fromJson(jsonModel:any):any{
-        if(Array.isArray(jsonModel)){
+        return jsonModel
+        /*if(Array.isArray(jsonModel)){
             const map = new Map();
             jsonModel.forEach((element:any, index:number) => {
                 map.set(index,Record.fromJson(element));
@@ -68,11 +68,12 @@ export class Record extends Map<string,any>{
             return record
         }else{
             return jsonModel
-        }
+        }*/
     }
 
     toJson(){
-        const json = {};
+        return this;
+        /*const json = {};
         const entries = Array.from(this.entries())
         entries.forEach(([key, value], index) =>{
             if(value instanceof Record){
@@ -86,6 +87,6 @@ export class Record extends Map<string,any>{
                 json[key] = value;
             }
         })
-        return json;
+        return json;*/
     }
 }

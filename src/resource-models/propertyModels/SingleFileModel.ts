@@ -8,7 +8,8 @@ import {Record} from "../Record";
 export class SingleFileModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
         const {formValue, inputHandler} = props;
-        const propsWithModel = {...props, model:this,  file:formValue.get(this.id)}
+        // @ts-ignore
+        const propsWithModel = {...props, model:this,  file:formValue[this.id]}
         // @ts-ignore
         return SingleFileInput(propsWithModel);
 

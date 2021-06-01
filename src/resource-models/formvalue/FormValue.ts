@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {Record} from "../Record";
 import {Model} from "../Model";
 
-export class FormValue extends Map<string, any>{
+export class FormValue extends Object{
 
     /**
      * Create a FormValue from a valid Record.
@@ -11,13 +11,15 @@ export class FormValue extends Map<string, any>{
      */
     static createFromRecord(record:Record, model: Model): FormValue{
         const formValue = new FormValue();
-        const entries = Array.from(record.entries());
-        entries.forEach(([key, value], index) =>{
+
+        Object.keys(record).forEach(key =>{
 
             try{
                 const propertyModel = model.getProperty(key);
-                const propertyValue = propertyModel.getFormValue(value);
-                formValue.set(key, propertyValue);
+                // @ts-ignore
+                const propertyValue = propertyModel.getFormValue(record[key]);
+                // @ts-ignore
+                formValue[key] =  propertyValue;
             }catch(error){
             }
          /*
@@ -52,28 +54,20 @@ export class FormValue extends Map<string, any>{
             }else{
                 const newFormValue = _.cloneDeep(this)
                 // @ts-ignore
-                newFormValue.set(current, value)
-                return newFormValue;
+                newFormValue[current] = value;
+                return newFormValue
             }
 
 
     }
-
-    accessPropertyFormValue(name:string){
-        const split = _.split(name, ".");
-        const reducer = (accumulator:FormValue, value:string) => {
-            return accumulator.get(value);
-        }
-        return split.reduce(reducer,this);
-
-    }
-
     getPropertyFormValue(name:string): any{
         const split = _.split(name, ".");
         split.pop();
         const reducerModel = (accumulator:any, value:string):any |undefined => {
             if(accumulator instanceof FormValue) {
-                return accumulator.get(value)
+                // @ts-ignore
+                const accumulatorElement :FormValue = accumulator[value];
+                return accumulatorElement
             }else if(accumulator instanceof Map){
             }else
                 return accumulator;
@@ -83,7 +77,8 @@ export class FormValue extends Map<string, any>{
     }
 
     toJson(model:Model){
-        const json = {};
+        return this;
+        /*const json = {};
         const entries = Array.from(this.entries())
         entries.forEach(([key, value], index) =>{
             const propertyModel = model.getProperty(key)
@@ -92,12 +87,13 @@ export class FormValue extends Map<string, any>{
             // @ts-ignore
             json[key] = propertyJsonValue;
         })
-        return json;
+        return json;*/
     }
 
     toJsonNoModel(){
+        return this;
         const json = {};
-        const entries = Array.from(this.entries())
+        /*const entries = Array.from(this.entries())
         entries.forEach(([key, value], index) =>{
             if(value instanceof Map){
                 // @ts-ignore
@@ -110,7 +106,7 @@ export class FormValue extends Map<string, any>{
                 json[key] = value
             }
         })
-        return json;
+        return json;*/
     }
 
 }

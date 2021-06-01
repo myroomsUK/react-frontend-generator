@@ -32,11 +32,18 @@ export class ReferenceModel extends SinglePropertyModel{
 
     getRecord(record: any): any{
         if(record){
+            console.log("record", record);
             if(record instanceof Map){
                 return record;
             }else if(typeof record === "object"){
+                console.log("it is an object")
                 return Record.createFromJsonNoModel(record);
-            }else{
+            }else if(typeof record ==="number"){
+                console.log("it is a number")
+                return record;
+            }
+            else{
+                console.log("it's something else")
                 return parseInt(record.substring(record.lastIndexOf("/")+1, record.length))
             }
         }

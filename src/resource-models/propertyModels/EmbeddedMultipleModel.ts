@@ -13,6 +13,9 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
 
+        // @ts-ignore
+        const formValueArray = (formValue) ? formValue[this.id] : [];
+
         return IterableFormContent({
             model:this.getResource().getModel(),
             resourceName:this.resourceName,
@@ -21,14 +24,14 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             referencesMap:referencesMap,
             refreshReferencesMap:refreshReferencesMap,
             errors:newErrors,
-            formValueArray: (formValue) ? formValue.get(this.id) : new Map(),
+            formValueArray: formValueArray,
             label:this.label,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record:record ?? new Map()
+            record:record ?? []
         })
     }
 
@@ -47,7 +50,6 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
     }
 
     getRecord(jsonValue: any[]): Map<number, Record> {
-        Array.isArray(jsonValue);
         const map = new Map<number,Record>();
         jsonValue.forEach((element:any, index:number) => {
             if(typeof element === "object"){

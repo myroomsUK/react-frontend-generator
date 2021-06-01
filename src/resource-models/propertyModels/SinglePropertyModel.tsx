@@ -26,9 +26,9 @@ export abstract class SinglePropertyModel extends PropertyModel{
         const {errors, formValue, setFormValue} = props;
         const {hasError, errorMessage} = this.manipulateErrors(errors);
         const label = _.startCase(this.label)
-
         const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const value = (formValue) ? formValue.get(this.id) : undefined;
+        // @ts-ignore
+        const value = (formValue) ? formValue[this.id] : undefined;
         const newProps:SinglePropertyInputFields = {...props,  hasError, errorMessage, inputHandler:inputHandler, value:value, label: label}
         return this.setInputField(newProps);
     }
