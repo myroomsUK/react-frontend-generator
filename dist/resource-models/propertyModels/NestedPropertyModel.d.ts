@@ -36,7 +36,7 @@ export interface EmbeddedInputFields extends InputFields {
     refreshReferencesMap: () => void;
     single?: boolean;
     modifyRule?: any;
-    record: Record[];
+    record: Map<number, Record>;
 }
 export interface EmbeddedSingleInputFields extends InputFields {
     inputHandler: (vars: any) => void;

@@ -5,7 +5,7 @@ import { FormValue } from "../../resource-models/formvalue/FormValue";
 import { Record } from "../../resource-models/Record";
 interface IterableFormContentProps {
     model: Model;
-    record: Record[];
+    record: Map<number, Record>;
     resourceName: string;
     setParentFormValue: (values: any) => void;
     formContent?: React.DetailedReactHTMLElement<any, any>;

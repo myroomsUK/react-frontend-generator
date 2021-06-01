@@ -25,7 +25,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record: record !== null && record !== void 0 ? record : []
+            record: record !== null && record !== void 0 ? record : new Map()
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
