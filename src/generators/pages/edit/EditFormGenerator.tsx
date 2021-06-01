@@ -51,7 +51,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
     useEffect(()=>{
         const record = Record.createFromJson(recordJson, model)
-        console.log("record", record)
         setRecord(record)
         setFormValue(FormValue.createFromRecord(record, model))
     }, [recordJson])

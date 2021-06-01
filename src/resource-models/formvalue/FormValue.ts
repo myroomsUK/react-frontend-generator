@@ -88,7 +88,6 @@ export class FormValue extends Object{
 
     toJson(): object{
         const json = {}
-        console.log("object entries", Object.entries(this))
         Object.entries(this).forEach(([key, value])=>{
             if(value instanceof FormValue){
                 // @ts-ignore
@@ -102,7 +101,6 @@ export class FormValue extends Object{
                 json[key] = value;
             }
         })
-        console.log("json", json)
         return json;
 
     }
