@@ -46,7 +46,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
     const [genericCreateRender, setGenericCreateRender] = useState(<div/>)
     useEffect(()=>{ setGenericCreateRender(<div/>)},[resourceName])
 
-    const submitHandler = async ()=>create(resourceName, formValue.toJson(model)).then(thenFunction).catch(catchFunction);
+    const submitHandler = async ()=>create(resourceName, formValue.toJson()).then(thenFunction).catch(catchFunction);
 
     const createFormProps = useMemo(()=> new FormGeneratorPropsObject({model: model, formContent:createPageToUse, referencesMap:referencesMap, refreshReferencesMap: refreshReferencesMap, formValue:formValue, setFormValue:setFormValue, submitHandler: submitHandler, partialSubmitHandler:submitHandler, errors:errors, lockedFormValue:lockedFormValue})
     ,[model, referencesMap, formValue, resourceName, errors, lockedFormValue])
@@ -95,7 +95,7 @@ export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, 
         const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new Error(field,errorFields[field])))
         setErrors(newErrors)},[responseErrors])
 
-    const submitHandler = async (formValue:FormValue)=>create(resourceName, formValue.toJson(model)).then(thenFunction).catch(catchFunction);
+    const submitHandler = async (formValue:FormValue)=>create(resourceName, formValue.toJson()).then(thenFunction).catch(catchFunction);
 
     return GenericCreate({model:model, propCreatePage:createPageToUse, lockedFormValue, errors, submitHandler})
 }

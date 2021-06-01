@@ -17,25 +17,35 @@ export class FormValue extends Object{
             try{
                 const propertyModel = model.getProperty(key);
                 // @ts-ignore
-                const propertyValue = propertyModel.getFormValue(record[key]);
-                // @ts-ignore
-                formValue[key] =  propertyValue;
+                formValue[key] =  propertyModel.getFormValue(record[key]);
             }catch(error){
+
             }
-         /*
-            if(value instanceof Record){
-                formValue.set(key, FormValue.createFromRecord(value));
-            }else if(value instanceof Map){
+        } )
+        return formValue;
+    }
+
+    static createFromRecordNoModel(record:Record){
+        const formValue = new FormValue();
+        Object.keys(record).forEach(key => {
+            // @ts-ignore
+            const value = record[key];
+            if (value instanceof Record) {
+                // @ts-ignore
+                formValue[key] = FormValue.createFromRecordNoModel(value);
+            } else if (value instanceof Map) {
                 const map = new Map();
                 const nestedEntries = Array.from(value.entries());
-                nestedEntries.forEach(([nestedKey, nestedValue], nestedIndex) =>{
-                    map.set(nestedKey, FormValue.createFromRecord(nestedValue))
+                nestedEntries.forEach(([nestedKey, nestedValue], nestedIndex) => {
+                    map.set(nestedKey, FormValue.createFromRecordNoModel(nestedValue))
                 })
-                formValue.set(key, map);
-            }else{
-                formValue.set(key, value);
-            }*/
-        } )
+                // @ts-ignore
+                formValue[key] = map;
+            } else {
+                // @ts-ignore
+                formValue[key] = record[key];
+            }
+        })
         return formValue;
     }
 
@@ -76,37 +86,24 @@ export class FormValue extends Object{
         return split.reduce(reducerModel, this);
     }
 
-    toJson(model:Model){
-        return this;
-        /*const json = {};
-        const entries = Array.from(this.entries())
-        entries.forEach(([key, value], index) =>{
-            const propertyModel = model.getProperty(key)
-            const propertyJsonValue = propertyModel.getJsonFormValue(value)
-
-            // @ts-ignore
-            json[key] = propertyJsonValue;
-        })
-        return json;*/
-    }
-
-    toJsonNoModel(){
-        return this;
-        const json = {};
-        /*const entries = Array.from(this.entries())
-        entries.forEach(([key, value], index) =>{
-            if(value instanceof Map){
+    toJson(): object{
+        const json = {}
+        console.log("object entries", Object.entries(this))
+        Object.entries(this).forEach(([key, value])=>{
+            if(value instanceof FormValue){
                 // @ts-ignore
-                json[key] = Array.from(value.values()).map(item => item.toJsonNoModel())
-            }else if(value instanceof FormValue){
+                json[key] = value.toJson()
+            }else if(value instanceof Map){
+                const nestedEntries = Array.from(value.values());
                 // @ts-ignore
-                json[key] = value.toJsonNoModel()
-            }else{
+                json[key] = nestedEntries.map((nestedValue, nestedIndex) => nestedValue.toJson())
+            }else {
                 // @ts-ignore
-                json[key] = value
+                json[key] = value;
             }
         })
-        return json;*/
-    }
+        console.log("json", json)
+        return json;
 
+    }
 }

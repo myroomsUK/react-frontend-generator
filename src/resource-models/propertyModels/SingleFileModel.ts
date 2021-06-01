@@ -27,6 +27,6 @@ export class SingleFileModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any {
-        return Record.fromJson(jsonValue)
+        return Record.createFromJsonNoModel(jsonValue)
     }
 }

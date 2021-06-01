@@ -48,12 +48,11 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     }
 
     getFormValue(value: Record): any {
-        console.log("emb, single",value);
         return FormValue.createFromRecord(value, this.getResource().getModel());
     }
 
     getJsonFormValue(value: FormValue): any {
-        return value.toJson(this.getResource().getModel());
+        return value.toJson();
     }
 
 
