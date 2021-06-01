@@ -11,9 +11,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import ButtonsHorizontalList from "../../../rendering/components/buttons/ButtonsHorizontalList";
 import TablePagination from "@material-ui/core/TablePagination";
 import { SimpleTableToolbar } from "./listHelpers/SimpleToolbar";
-import Tooltip from "@material-ui/core/Tooltip";
-import { OperationButtonFactory } from "./listHelpers/OperationButtonFactory";
 import { makeStyles } from "@material-ui/core/styles";
+import { getOperationButton } from "../ListPageGenerator";
 import { SimpleTableHead } from "./listHelpers/SimpleTableHead";
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,19 +82,20 @@ export const SmallList = ({ data: rows, totalItems, page, setPage, selected, set
     return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [!noToolbar && _jsx(SimpleTableToolbar, { selected: selected, numSelected: numSelected, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
                     _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(SimpleTableHead, { useSelect: selected !== undefined, classes: classes, numSelected: numSelected, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
                                 _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
-                                        .slice(0, rowsPerPage)
+                                        .slice(rowsPerPage * page, rowsPerPage * (page + 1))
                                         .map((row, index) => {
-                                        console.log("row", row);
                                         const isItemSelected = isSelected(row.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (_jsxs(TableRow, Object.assign({ hover: true, 
                                             //onClick={(event) => handleClick(event, row.id)}
                                             role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [selected && _jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                 columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map((operation) => {
-                                                            operation.onClick = () => operation.onClick(row);
-                                                            return _jsx(Tooltip, Object.assign({ title: operation.text }, { children: OperationButtonFactory.getOperationButton(operation) }), void 0);
-                                                        }) }, void 0) }), void 0)] }), index));
+                                                (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text }) => getOperationButton({
+                                                            color: color,
+                                                            text: text,
+                                                            icon: icon,
+                                                            onClick: () => onClick(row)
+                                                        })) }, void 0) }), void 0)] }), index));
                                     }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
 };

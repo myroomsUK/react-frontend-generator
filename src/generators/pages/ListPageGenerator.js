@@ -594,7 +594,7 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
     );
 }
 
-function getOperationButton({color, onClick,text, icon}){
+export function getOperationButton({color, onClick,text, icon}){
     if(icon){
         return <IconButton variant="contained" color={color} onClick={onClick}>{icon}</IconButton>
     }

@@ -308,7 +308,7 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
 }
-function getOperationButton({ color, onClick, text, icon }) {
+export function getOperationButton({ color, onClick, text, icon }) {
     if (icon) {
         return _jsx(IconButton, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: icon }), void 0);
     }

@@ -10,11 +10,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import ButtonsHorizontalList from "../../../rendering/components/buttons/ButtonsHorizontalList";
 import TablePagination from "@material-ui/core/TablePagination";
 import {SimpleTableToolbar} from "./listHelpers/SimpleToolbar";
-import Tooltip from "@material-ui/core/Tooltip";
-import {OperationButtonFactory} from "./listHelpers/OperationButtonFactory";
 import {makeStyles} from "@material-ui/core/styles";
 import {Operation} from "./listHelpers/Operation";
-import {EnhancedTableHead} from "../ListPageGenerator";
+import {getOperationButton} from "../ListPageGenerator";
 import {Direction, SimpleTableHead} from "./listHelpers/SimpleTableHead";
 
 const useStyles = makeStyles((theme) => ({
@@ -136,9 +134,8 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                             />
                             <TableBody>
                                 {stableSort(rows, getComparator(order, orderBy))
-                                    .slice(0, rowsPerPage)
+                                    .slice(rowsPerPage * page, rowsPerPage * (page+1))
                                     .map((row: any, index: React.Key | null | undefined) => {
-                                        console.log("row", row)
                                         const isItemSelected = isSelected(row.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -168,14 +165,12 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                                                 }
                                                 {itemOperations?.length!==0 && <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map((operation) => {
-                                                            operation.onClick = () => operation.onClick(row);
-                                                            return <Tooltip title={operation.text}>
-                                                                {
-                                                                    OperationButtonFactory.getOperationButton(operation)
-                                                                }
-                                                            </Tooltip>
-                                                        })}
+                                                        {itemOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                                            color:color,
+                                                            text:text,
+                                                            icon:icon,
+                                                            onClick: ()=>onClick(row)
+                                                        })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>}
                                             </TableRow>
