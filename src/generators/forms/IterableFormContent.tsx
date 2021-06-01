@@ -14,7 +14,7 @@ import {Record} from "../../resource-models/Record";
 
 interface IterableFormContentProps{
     model: Model,
-    record: Record[];
+    record: Map<number, Record>;
     resourceName: string,
     setParentFormValue: (values:any) => void,
     formContent?:  React.DetailedReactHTMLElement<any, any>
@@ -89,7 +89,7 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
         const isEditable = modifyRule(formValue);
 
 
-        const formElement = <FormContent record={record[key] ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent record={record.get(key) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>

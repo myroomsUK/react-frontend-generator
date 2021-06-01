@@ -59,6 +59,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => {
         const record = Record.createFromJson(recordJson, model);
+        console.log("record", record);
         setRecord(record);
         setFormValue(FormValue.createFromRecord(record, model));
     }, [recordJson]);

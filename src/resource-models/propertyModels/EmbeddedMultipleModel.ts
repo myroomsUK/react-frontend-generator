@@ -31,7 +31,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record:record ?? []
+            record:record ?? new Map()
         })
     }
 
