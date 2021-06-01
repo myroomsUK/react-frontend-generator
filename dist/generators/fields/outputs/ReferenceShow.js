@@ -3,8 +3,10 @@ import { Link } from "@material-ui/core";
 export default function ReferenceShow({ propertyModel, propertyRecord }) {
     console.log("propertyRecord", propertyRecord);
     if (propertyRecord) {
-        const id = (typeof propertyRecord === "number") ? propertyRecord : propertyRecord.get("id");
-        const name = (typeof propertyRecord === "number") ? propertyRecord : propertyRecord.get(propertyModel.optionText);
+        // @ts-ignore
+        const id = (typeof propertyRecord === "number") ? propertyRecord : propertyRecord["id"];
+        // @ts-ignore
+        const name = (typeof propertyRecord === "number") ? propertyRecord : propertyRecord[propertyModel.optionText];
         return _jsx(Link, Object.assign({ color: "secondary", href: `/${propertyModel.resourceName}/${id}/show` }, { children: name }), void 0);
     }
     return _jsx(_Fragment, {}, void 0);
