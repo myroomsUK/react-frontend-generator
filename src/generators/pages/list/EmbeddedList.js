@@ -2,7 +2,7 @@ import {SmallList} from "./SmallList";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Record} from "../../../resource-models/Record";
 
-export default function EmbeddedList({model, data, totalItems, table}){
+export default function EmbeddedList({model, title, data, totalItems, table, itemOperations}){
     const [localModel, setLocalModel] = useState(model);
     const [page, setPage] = useState(0)
 
@@ -31,5 +31,5 @@ export default function EmbeddedList({model, data, totalItems, table}){
 
 
 
-    return <SmallList data={data} totalItems={totalItems} headCells={headCells} columns={columns} page={page} setPage={setPage}/>
+    return <SmallList title={title} data={data} totalItems={totalItems} headCells={headCells} columns={columns} page={page} setPage={setPage} itemOperations={itemOperations}/>
 }

@@ -2,7 +2,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { SmallList } from "./SmallList";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Record } from "../../../resource-models/Record";
-export default function EmbeddedList({ model, data, totalItems, table }) {
+export default function EmbeddedList({ model, title, data, totalItems, table, itemOperations }) {
     const [localModel, setLocalModel] = useState(model);
     const [page, setPage] = useState(0);
     useEffect(() => { setLocalModel(model); }, [model]); //Change model
@@ -23,5 +23,5 @@ export default function EmbeddedList({ model, data, totalItems, table }) {
     const columns = useCallback((row) => table.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);
     }), [localModel, table]);
-    return _jsx(SmallList, { data: data, totalItems: totalItems, headCells: headCells, columns: columns, page: page, setPage: setPage }, void 0);
+    return _jsx(SmallList, { title: title, data: data, totalItems: totalItems, headCells: headCells, columns: columns, page: page, setPage: setPage, itemOperations: itemOperations }, void 0);
 }

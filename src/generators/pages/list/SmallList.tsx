@@ -55,10 +55,11 @@ export interface SmallListProps{
     collectionOperations?: Operation[],
     allColumns?: any[],
     setTable?: any,
+    noToolbar?: boolean
 
 }
 
-export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  page, setPage, selected, setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns= [], setTable}) => {
+export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  page, setPage, selected, setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns= [], setTable, noToolbar= false,}) => {
     headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells
 
     const classes = useStyles();
@@ -112,7 +113,9 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
         <>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    <SimpleTableToolbar selected={selected} numSelected={numSelected} title={title} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} />
+                    {!noToolbar && <SimpleTableToolbar selected={selected} numSelected={numSelected} title={title}
+                                         collectionOperations={collectionOperations} setTable={setTable}
+                                         allColumns={allColumns}/>}
                     <TableContainer>
                         <Table
                             className={classes.table}

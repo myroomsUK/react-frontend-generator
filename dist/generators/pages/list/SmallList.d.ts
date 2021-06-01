@@ -14,5 +14,6 @@ export interface SmallListProps {
     collectionOperations?: Operation[];
     allColumns?: any[];
     setTable?: any;
+    noToolbar?: boolean;
 }
 export declare const SmallList: React.FC<SmallListProps>;

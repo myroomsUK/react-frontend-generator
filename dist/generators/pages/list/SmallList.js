@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         width: 1,
     },
 }));
-export const SmallList = ({ data: rows, totalItems, page, setPage, selected, setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns = [], setTable }) => {
+export const SmallList = ({ data: rows, totalItems, page, setPage, selected, setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns = [], setTable, noToolbar = false, }) => {
     headCells = (itemOperations.length !== 0) ? headCells.concat({ numeric: true, disablePadding: false, label: "Actions" }) : headCells;
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
@@ -80,7 +80,7 @@ export const SmallList = ({ data: rows, totalItems, page, setPage, selected, set
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => (selected) ? selected.indexOf(name) !== -1 : false;
     const numSelected = (selected) ? selected.length : 0;
-    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(SimpleTableToolbar, { selected: selected, numSelected: numSelected, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
+    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [!noToolbar && _jsx(SimpleTableToolbar, { selected: selected, numSelected: numSelected, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
                     _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(SimpleTableHead, { useSelect: selected !== undefined, classes: classes, numSelected: numSelected, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
                                 _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
                                         .slice(0, rowsPerPage)
