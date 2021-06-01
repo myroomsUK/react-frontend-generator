@@ -4,5 +4,5 @@ export declare class Record extends Map<string, any> {
     static createFromJsonNoModel(jsonModel: any): Record;
     getPropertyRecord(name: string): any;
     static fromJson(jsonModel: any): any;
-    toJson(): void;
+    toJson(): {};
 }

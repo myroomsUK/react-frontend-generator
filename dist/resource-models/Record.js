@@ -81,5 +81,6 @@ export class Record extends Map {
                 json[key] = value;
             }
         });
+        return json;
     }
 }

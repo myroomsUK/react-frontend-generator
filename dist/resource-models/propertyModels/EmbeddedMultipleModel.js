@@ -30,8 +30,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         return function (p1) {
         };
     }
-    setOutputField(props) {
-        const { record, model, showElement } = props;
+    setOutputField({ record, model, showElement, list, table }) {
         return IterableShowContent({
             model: model,
             record: record !== null && record !== void 0 ? record : new Map(),

@@ -1,3 +1,16 @@
+export function EnhancedTableHead(props: any): JSX.Element;
+export namespace EnhancedTableHead {
+    namespace propTypes {
+        const classes: PropTypes.Validator<object>;
+        const numSelected: PropTypes.Validator<number>;
+        const onRequestSort: PropTypes.Validator<(...args: any[]) => any>;
+        const onSelectAllClick: PropTypes.Validator<(...args: any[]) => any>;
+        const order: PropTypes.Validator<string>;
+        const orderBy: PropTypes.Validator<string>;
+        const rowCount: PropTypes.Validator<number>;
+        const headCells: PropTypes.Validator<any[]>;
+    }
+}
 export function RouteFilterList({ resourceName, filters: lockedFilters, itemOperations, collectionOperations }: {
     resourceName: any;
     filters: any;
@@ -30,3 +43,4 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
     allColumns: any;
     setTable: any;
 }): JSX.Element;
+import PropTypes from "prop-types";

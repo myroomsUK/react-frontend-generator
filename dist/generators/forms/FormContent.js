@@ -11,9 +11,6 @@ import { Grid } from "@material-ui/core";
 export const FormContent = (props) => {
     const { partialSubmitHandler, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue = {}, setFormValue, errors, formContent, record } = props;
     if (formContent) {
-        if (record === undefined) {
-            debugger;
-        }
         return React.cloneElement(formContent, props);
     }
     return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties //TODO va reso indipendente da material ui nel rendering
