@@ -8,7 +8,8 @@ import {Record} from "../Record";
 export class MultipleFileModel extends SinglePropertyModel{
     setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors} = props;
-        const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue.get(this.id)}
+        // @ts-ignore
+        const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue[this.id]}
 
         // @ts-ignore
         return FileListInput(propsWithModel);
@@ -26,6 +27,6 @@ export class MultipleFileModel extends SinglePropertyModel{
     }
 
     getRecord(jsonValue: any): any {
-        return Record.fromJson(jsonValue)
+        return Record.createFromJsonNoModel(jsonValue)
     }
 }

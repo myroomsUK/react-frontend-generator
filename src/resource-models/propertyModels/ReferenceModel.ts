@@ -14,7 +14,8 @@ export class ReferenceModel extends SinglePropertyModel{
 
     setInputField(props: ReferenceInputFields): React.ReactElement<any, any> | null {
         const {inputHandler, value} = props;
-        const finalValue = (value) ? (typeof value === "number" ? new ListingOption(value, "")  : new ListingOption(value.get("id"), "")): undefined
+        // @ts-ignore
+        const finalValue = (value) ? (typeof value === "number" ? new ListingOption(value, "")  : new ListingOption(value["id"], "")): undefined
         const propsWithModel = Object.assign(Object.assign({}, props), {model:this,onChange: inputHandler, inheritedValue:finalValue });
         return ReferenceInput(propsWithModel)
     }
@@ -22,7 +23,7 @@ export class ReferenceModel extends SinglePropertyModel{
     getInputOnChangeHandler({formValue, setFormValue}:InputOnChangeHandler){
         return (vars:any)=>{
             const [name, value] = vars;
-            setFormValue( formValue.updateFormValue(name, value.toMap()));
+            setFormValue( formValue.updateFormValue(name, value["id"]));
         }
     }
 
@@ -35,8 +36,14 @@ export class ReferenceModel extends SinglePropertyModel{
             if(record instanceof Map){
                 return record;
             }else if(typeof record === "object"){
+                /*console.log("it is an object")*/
                 return Record.createFromJsonNoModel(record);
-            }else{
+            }else if(typeof record ==="number"){
+                /*console.log("it is a number")*/
+                return record;
+            }
+            else{
+                /*console.log("it's something else")*/
                 return parseInt(record.substring(record.lastIndexOf("/")+1, record.length))
             }
         }

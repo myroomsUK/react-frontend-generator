@@ -1,21 +1,30 @@
 import React from "react";
-import {EmbeddedInputFields, EmbeddedPropertyModel, EmbeddedSingleOutputFields} from "./NestedPropertyModel";
+import {
+    EmbeddedInputFields,
+    EmbeddedPropertyModel,
+    EmbeddedSingleInputFields,
+    EmbeddedSingleOutputFields
+} from "./NestedPropertyModel";
 import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 import {Record} from "../Record";
 import {EmbeddedShowContent} from "../../generators/fields/EmbeddedShowContent";
 import {FormValue} from "../formvalue/FormValue";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
-    setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: EmbeddedSingleInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
+
+        // @ts-ignore
+        const finalFormValue = (formValue) ? formValue[this.id] : new FormValue()
+
         return EmbeddedFormContent({
             model:this.getResource().getModel(),
             formContent: this.form,
             setParentFormValue:setParentFormValue,
             refreshReferencesMap:refreshReferencesMap,
             referencesMap:referencesMap,
-            formValue:(formValue) ? formValue.get(this.id) : new FormValue(),
+            formValue:finalFormValue,
             errors:errors,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,
@@ -43,7 +52,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     }
 
     getJsonFormValue(value: FormValue): any {
-        return value.toJson(this.getResource().getModel());
+        return value.toJson();
     }
 
 

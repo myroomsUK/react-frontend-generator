@@ -29,6 +29,7 @@ export function useEdit() {
 
     const edit = async (resource:string,id:number,values:any, sendDispatch:boolean = true) => {
         setErrors({});
+        console.log("value", JSON.stringify(values))
         return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
             .then(response => {
                 if(sendDispatch)dispatch(loading(resource,false));
