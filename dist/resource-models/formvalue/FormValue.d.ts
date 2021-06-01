@@ -1,15 +1,14 @@
 import { Record } from "../Record";
 import { Model } from "../Model";
-export declare class FormValue extends Map<string, any> {
+export declare class FormValue extends Object {
     /**
      * Create a FormValue from a valid Record.
      * @param record
      * @param model
      */
     static createFromRecord(record: Record, model: Model): FormValue;
+    static createFromRecordNoModel(record: Record): FormValue;
     updateFormValue(name: string, value: any): FormValue;
-    accessPropertyFormValue(name: string): FormValue;
     getPropertyFormValue(name: string): any;
-    toJson(model: Model): {};
-    toJsonNoModel(): {};
+    toJson(): object;
 }

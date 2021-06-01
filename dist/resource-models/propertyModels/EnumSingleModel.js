@@ -25,6 +25,6 @@ export class EnumSingleModel extends SinglePropertyModel {
         return SingleEnumShow({ propertyModel: this, propertyRecord, colorMap: this.colorMap });
     }
     getRecord(jsonValue) {
-        return Record.fromJson(jsonValue);
+        return Record.createFromJsonNoModel(jsonValue);
     }
 }

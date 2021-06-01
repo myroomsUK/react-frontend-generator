@@ -1,9 +1,9 @@
 import React from "react";
-import { EmbeddedInputFields, EmbeddedPropertyModel, EmbeddedSingleOutputFields } from "./NestedPropertyModel";
+import { EmbeddedPropertyModel, EmbeddedSingleInputFields, EmbeddedSingleOutputFields } from "./NestedPropertyModel";
 import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
 export declare class EmbeddedSingleModel extends EmbeddedPropertyModel {
-    setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null;
+    setInputField(props: EmbeddedSingleInputFields): React.ReactElement<any, any> | null;
     setOutputField(props: EmbeddedSingleOutputFields): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
     getRecord(jsonValue: object): Record;

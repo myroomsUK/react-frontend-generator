@@ -7,13 +7,15 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
+        // @ts-ignore
+        const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
         return EmbeddedFormContent({
             model: this.getResource().getModel(),
             formContent: this.form,
             setParentFormValue: setParentFormValue,
             refreshReferencesMap: refreshReferencesMap,
             referencesMap: referencesMap,
-            formValue: (formValue) ? formValue.get(this.id) : new FormValue(),
+            formValue: finalFormValue,
             errors: errors,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
@@ -36,6 +38,6 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         return FormValue.createFromRecord(value, this.getResource().getModel());
     }
     getJsonFormValue(value) {
-        return value.toJson(this.getResource().getModel());
+        return value.toJson();
     }
 }

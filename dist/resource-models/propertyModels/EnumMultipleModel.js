@@ -31,7 +31,6 @@ export class EnumMultipleModel extends SinglePropertyModel {
         });
     }
     getRecord(jsonValue) {
-        return jsonValue;
-        return Record.fromJson(jsonValue);
+        return Record.createFromJsonNoModel(jsonValue);
     }
 }

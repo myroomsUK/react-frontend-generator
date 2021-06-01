@@ -58,18 +58,16 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     }, [responseErrors]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => {
-        const record = Record.createFromJsonNoModel(recordJson);
+        const record = Record.createFromJson(recordJson, model);
         setRecord(record);
-        const recordFormValue = Record.createFromJson(recordJson, model);
-        setFormValue(FormValue.createFromRecord(recordFormValue, model));
+        setFormValue(FormValue.createFromRecord(record, model));
     }, [recordJson]);
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
-        return edit(resourceName, propId, formValue.toJson(model)).then(response => {
-            const record = Record.createFromJsonNoModel(recordJson);
-            const recordFormValue = Record.createFromJson(response, model);
+        return edit(resourceName, propId, formValue.toJson()).then(response => {
+            const record = Record.createFromJson(recordJson, model);
             setRecord(record);
-            setFormValue(FormValue.createFromRecord(recordFormValue, model));
+            setFormValue(FormValue.createFromRecord(record, model));
             return response;
         }).then(thenFunction).catch(catchfunction);
     });

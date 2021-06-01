@@ -36,6 +36,31 @@ export interface EmbeddedInputFields extends InputFields {
     refreshReferencesMap: () => void;
     single?: boolean;
     modifyRule?: any;
+    record: Record[];
+}
+export interface EmbeddedSingleInputFields extends InputFields {
+    inputHandler: (vars: any) => void;
+    model: EmbeddedPropertyModel;
+    errors: Errors;
+    form?: React.DetailedReactHTMLElement<any, any>;
+    options?: Option[];
+    xs?: GridRange;
+    md?: GridRange;
+    adornment?: string;
+    modifyOnlyLastElement?: boolean;
+    editabilityRule?: () => any;
+    write?: boolean;
+    read?: boolean;
+    listValue?: any;
+    listDataTransformer?: any;
+    areImages?: boolean;
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap: () => void;
+    single?: boolean;
+    modifyRule?: any;
+    record: Record;
 }
 export interface EmbeddedSingleOutputFields extends OutputFields {
     showElement?: React.DetailedReactHTMLElement<any, any>;

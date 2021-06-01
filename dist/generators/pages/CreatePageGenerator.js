@@ -43,7 +43,7 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     }, [responseErrors]);
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
-    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue.toJson(model)).then(thenFunction).catch(catchFunction); });
+    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue.toJson()).then(thenFunction).catch(catchFunction); });
     const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, formContent: createPageToUse, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, resourceName, errors, lockedFormValue]);
     useEffect(() => {
         setGenericCreateRender(_jsx(FormGenerator, Object.assign({ formContent: createPageToUse }, createFormProps, { errors: errors }), void 0));
@@ -75,6 +75,6 @@ export const CreateResource = ({ propResourceName: resourceName, propCreatePage,
         const newErrors = new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
         setErrors(newErrors);
     }, [responseErrors]);
-    const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue.toJson(model)).then(thenFunction).catch(catchFunction); });
+    const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, formValue.toJson()).then(thenFunction).catch(catchFunction); });
     return GenericCreate({ model: model, propCreatePage: createPageToUse, lockedFormValue, errors, submitHandler });
 };

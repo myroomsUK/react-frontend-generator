@@ -5,7 +5,8 @@ import { Record } from "../Record";
 export class SingleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, inputHandler } = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, file: formValue.get(this.id) });
+        // @ts-ignore
+        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, file: formValue[this.id] });
         // @ts-ignore
         return SingleFileInput(propsWithModel);
     }
@@ -19,6 +20,6 @@ export class SingleFileModel extends SinglePropertyModel {
         return SingleFileShow(props);
     }
     getRecord(jsonValue) {
-        return Record.fromJson(jsonValue);
+        return Record.createFromJsonNoModel(jsonValue);
     }
 }

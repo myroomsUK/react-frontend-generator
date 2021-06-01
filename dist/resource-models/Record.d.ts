@@ -1,8 +1,13 @@
 import { Model } from "./Model";
-export declare class Record extends Map<string, any> {
+export declare class Record extends Object {
+    /**
+     * This method allows to create a Record object where each recognised property correctly gives its record value.
+     * If the json record does not have a property listed within the model, that property won't be mapped by means of the model
+     * @param jsonModel
+     * @param model
+     */
     static createFromJson(jsonModel: any, model: Model): Record;
-    static createFromJsonNoModel(jsonModel: any): Record;
+    static createFromJsonNoModel(jsonModel: any): any;
     getPropertyRecord(name: string): any;
-    static fromJson(jsonModel: any): any;
-    toJson(): {};
+    toJson(): this;
 }

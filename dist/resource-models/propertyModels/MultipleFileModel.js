@@ -5,7 +5,8 @@ import { Record } from "../Record";
 export class MultipleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, errors } = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, resourceName: this.resourceName, onChange: this.getInputOnChangeHandler({ formValue, setFormValue }), files: formValue.get(this.id) });
+        // @ts-ignore
+        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, resourceName: this.resourceName, onChange: this.getInputOnChangeHandler({ formValue, setFormValue }), files: formValue[this.id] });
         // @ts-ignore
         return FileListInput(propsWithModel);
     }
@@ -20,6 +21,6 @@ export class MultipleFileModel extends SinglePropertyModel {
         return MultipleFileShow(Object.assign(Object.assign({}, props), { propertyRecord: (_a = props.propertyRecord) !== null && _a !== void 0 ? _a : new Map() }));
     }
     getRecord(jsonValue) {
-        return Record.fromJson(jsonValue);
+        return Record.createFromJsonNoModel(jsonValue);
     }
 }

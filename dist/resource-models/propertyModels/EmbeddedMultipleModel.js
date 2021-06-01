@@ -8,6 +8,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
+        // @ts-ignore
+        const formValueArray = (formValue) ? formValue[this.id] : [];
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
@@ -16,14 +18,14 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             errors: newErrors,
-            formValueArray: (formValue) ? formValue.get(this.id) : new Map(),
+            formValueArray: formValueArray,
             label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record: record !== null && record !== void 0 ? record : new Map()
+            record: record !== null && record !== void 0 ? record : []
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
@@ -39,7 +41,6 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         });
     }
     getRecord(jsonValue) {
-        Array.isArray(jsonValue);
         const map = new Map();
         jsonValue.forEach((element, index) => {
             if (typeof element === "object") {
@@ -67,7 +68,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     getJsonFormValue(value) {
         return Array.from(value.values()).map((item) => {
             if (item instanceof FormValue) {
-                return item.toJson(this.getResource().getModel());
+                return item.toJson();
             }
             else {
                 return item;
