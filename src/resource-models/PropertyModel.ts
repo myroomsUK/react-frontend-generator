@@ -2,6 +2,7 @@ import React, {DetailedReactHTMLElement, ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
 import {FormValue} from "./formvalue/FormValue";
 import {Record} from "./Record";
+import {Model} from "./Model";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -27,6 +28,7 @@ export interface PropertyModel{
     listValue?:any,
     listDataTransformer?:any,
     areImages?: boolean;
+    colorMap ?: object;
 }
 
 export type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
@@ -51,9 +53,10 @@ export abstract class PropertyModel {
     md?: GridRange;
     write?: boolean;
     read?: boolean;
+    colorMap ?: object;
 
     constructor(id: string, rest: any) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false} = rest;
+        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap} = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -66,6 +69,7 @@ export abstract class PropertyModel {
         this.md = md;
         this.write = write;
         this.read = read;
+        this.colorMap = colorMap;
     }
 
     abstract manipulateErrors(errors:Errors):any;
