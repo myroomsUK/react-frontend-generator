@@ -1,5 +1,4 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {useLocation} from "react-router-dom";
 import {useGetResourceModel} from "../../resource-models/modelsRegistry";
 import {useCreate} from "../../redux/actions/verbs/create";
 import {FormGeneratorPropsObject} from "../forms/FormGeneratorProps";
