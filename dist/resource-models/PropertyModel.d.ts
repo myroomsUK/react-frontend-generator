@@ -25,6 +25,7 @@ export interface PropertyModel {
     listValue?: any;
     listDataTransformer?: any;
     areImages?: boolean;
+    colorMap?: object;
 }
 export declare type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
 export declare type Option = {
@@ -47,6 +48,7 @@ export declare abstract class PropertyModel {
     md?: GridRange;
     write?: boolean;
     read?: boolean;
+    colorMap?: object;
     constructor(id: string, rest: any);
     abstract manipulateErrors(errors: Errors): any;
     abstract setInputField(props: any): ReactElement<any, any> | null;

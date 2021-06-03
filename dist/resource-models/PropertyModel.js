@@ -3,7 +3,7 @@
  */
 export class PropertyModel {
     constructor(id, rest) {
-        const { type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false } = rest;
+        const { type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap } = rest;
         this.id = id;
         this.type = type;
         this.label = label;
@@ -16,5 +16,6 @@ export class PropertyModel {
         this.md = md;
         this.write = write;
         this.read = read;
+        this.colorMap = colorMap;
     }
 }

@@ -41,14 +41,6 @@ export class Model {
         const propertyModel = this.getProperty(name);
         return { propertyModel: propertyModel, record: record };
     }
-    getElement(name, formValue) {
-        const split = _.split(name, ".");
-        split.pop();
-        const reducer = (start, value) => (start) ? start[value] : undefined;
-        const record = split.reduce(reducer, formValue);
-        const propertyModel = this.getProperty(name);
-        return { propertyModel: propertyModel, record: record };
-    }
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel

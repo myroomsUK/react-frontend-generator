@@ -17,10 +17,6 @@ export declare class Model {
         propertyModel: PropertyModel;
         record: any;
     };
-    getElement(name: string, formValue: any): {
-        propertyModel: PropertyModel;
-        record: any;
-    };
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
