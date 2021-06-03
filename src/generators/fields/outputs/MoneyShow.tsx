@@ -1,5 +1,7 @@
 import React from "react";
+import {Typography} from "@material-ui/core";
 
 export default function MoneyShow({propertyRecord}:any){
-    return <div>{propertyRecord}</div>
+    const value = propertyRecord ? `£ ${propertyRecord}`: "Amount not specified"
+    return <Typography >{value}</Typography>
 }
