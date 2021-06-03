@@ -1,4 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+import { Typography } from "@material-ui/core";
 export default function MoneyShow({ propertyRecord }) {
-    return _jsx("div", { children: propertyRecord }, void 0);
+    const value = propertyRecord ? `£ ${propertyRecord}` : "Amount not specified";
+    return _jsx(Typography, { children: value }, void 0);
 }
