@@ -5,13 +5,14 @@ import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
+        var _a;
         const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
         // @ts-ignore
-        const arrayRecord = record[this.id];
+        const mapRecord = (_a = record[this.id]) !== null && _a !== void 0 ? _a : new Map();
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
@@ -27,7 +28,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record: arrayRecord !== null && arrayRecord !== void 0 ? arrayRecord : new Map()
+            record: mapRecord
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {

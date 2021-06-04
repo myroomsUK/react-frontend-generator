@@ -4,6 +4,7 @@ import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
+import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 
 interface EnumMultipleInputFields extends SinglePropertyInputFields{
     options: any;
@@ -35,10 +36,15 @@ export class EnumMultipleModel extends SinglePropertyModel{
     setOutputField(props: any): React.ReactElement<any, any> | null {
         const {propertyRecord} = props;
         const record: any = (propertyRecord===undefined) ? []: (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
-        return record.map((singleRecord:any) =>{
-            const eachProp = {...props, propertyRecord: singleRecord }
-            return <ChipGenerator propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}></ChipGenerator>
-        })
+        return <ButtonsHorizontalList>
+            {
+                record.map((singleRecord:any) =>{
+                    const eachProp = {...props, propertyRecord: singleRecord }
+                    return <ChipGenerator propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
+                })
+            }
+        </ButtonsHorizontalList>
+
     }
 
     getRecord(jsonValue: any): any {

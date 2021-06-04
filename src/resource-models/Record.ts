@@ -29,7 +29,8 @@ export class Record extends Object{
 
             if(Array.isArray(jsonModel)){
                 const map = new Map();
-                 return jsonModel.forEach((item:object, index:number) => map.set(index,Record.createFromJsonNoModel(item)))
+                jsonModel.forEach((item:object, index:number) => map.set(index,Record.createFromJsonNoModel(item)))
+                return map;
                 // @ts-ignore
             }else if(jsonModel===null){
                 return null;

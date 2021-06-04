@@ -17,7 +17,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         const formValueArray = (formValue) ? formValue[this.id] : [];
 
         // @ts-ignore
-        const arrayRecord = record[this.id]
+        const mapRecord = record[this.id] ?? new Map()
 
         return IterableFormContent({
             model:this.getResource().getModel(),
@@ -34,7 +34,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record:arrayRecord ?? new Map()
+            record: mapRecord
         })
     }
 

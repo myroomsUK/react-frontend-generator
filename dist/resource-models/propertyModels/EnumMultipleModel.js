@@ -3,6 +3,7 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 import { EnumInput, getAutocompleteValuePosition } from "../../generators/forms/inputs/EnumInput";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import { Record } from "../Record";
+import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 export class EnumMultipleModel extends SinglePropertyModel {
     constructor(id, others) {
         super(id, others);
@@ -24,10 +25,10 @@ export class EnumMultipleModel extends SinglePropertyModel {
     setOutputField(props) {
         const { propertyRecord } = props;
         const record = (propertyRecord === undefined) ? [] : (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
-        return record.map((singleRecord) => {
-            const eachProp = Object.assign(Object.assign({}, props), { propertyRecord: singleRecord });
-            return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: singleRecord, colorMap: this.colorMap }, void 0);
-        });
+        return _jsx(ButtonsHorizontalList, { children: record.map((singleRecord) => {
+                const eachProp = Object.assign(Object.assign({}, props), { propertyRecord: singleRecord });
+                return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: singleRecord, colorMap: this.colorMap }, void 0);
+            }) }, void 0);
     }
     getRecord(jsonValue) {
         return Record.createFromJsonNoModel(jsonValue);

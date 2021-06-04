@@ -23,7 +23,7 @@ export class MultipleFileModel extends SinglePropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-        return MultipleFileShow({...props, propertyRecord: props.propertyRecord ?? new Map()});
+        return MultipleFileShow({...props, record: props.record ?? new Map()});
     }
 
     getRecord(jsonValue: any): any {
