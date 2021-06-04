@@ -43,10 +43,11 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
     allColumns: any;
     setTable: any;
 }): JSX.Element;
-export function getOperationButton({ color, onClick, text, icon }: {
+export function getOperationButton({ color, onClick, text, icon, visible }: {
     color: any;
     onClick: any;
     text: any;
     icon: any;
+    visible?: boolean | undefined;
 }): JSX.Element;
 import PropTypes from "prop-types";

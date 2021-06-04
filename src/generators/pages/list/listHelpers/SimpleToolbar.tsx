@@ -84,11 +84,12 @@ export const SimpleTableToolbar = ({numSelected, selected, title, collectionOper
                                 <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                                     {numSelected} selected
                                 </Typography>
-                                {collectionOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                {collectionOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
                                     color:color,
                                     text:text,
                                     icon:icon,
-                                    onClick: ()=>onClick(selected)
+                                    onClick: ()=>onClick(selected),
+                                    visible:visibility(selected)
                                 })) }
                             </Paper>
                         ) : (

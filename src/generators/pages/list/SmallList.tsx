@@ -165,11 +165,12 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                                                 }
                                                 {itemOperations?.length!==0 && <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                                        {itemOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
                                                             color:color,
                                                             text:text,
                                                             icon:icon,
-                                                            onClick: ()=>onClick(row)
+                                                            onClick: ()=>onClick(row),
+                                                            visible: visibility(row)
                                                         })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>}

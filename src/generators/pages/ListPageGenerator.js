@@ -565,11 +565,12 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
                                                 }
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text}) => getOperationButton({
+                                                        {itemOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
                                                             color:color,
                                                             text:text,
                                                             icon:icon,
-                                                            onClick: ()=>onClick(row)
+                                                            onClick: ()=>onClick(row),
+                                                            visible: visibility(row)
                                                         })) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>
@@ -594,7 +595,9 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
     );
 }
 
-export function getOperationButton({color, onClick,text, icon}){
+export function getOperationButton({color, onClick,text, icon, visible = true}){
+    if(!visible) return <></>
+
     if(icon){
         return <IconButton variant="contained" color={color} onClick={onClick}>{icon}</IconButton>
     }

@@ -299,16 +299,19 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
                                                     //onClick={(event) => handleClick(event, row.id)}
                                                     role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                         columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text }) => getOperationButton({
+                                                        _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility }) => getOperationButton({
                                                                     color: color,
                                                                     text: text,
                                                                     icon: icon,
-                                                                    onClick: () => onClick(row)
+                                                                    onClick: () => onClick(row),
+                                                                    visible: visibility(row)
                                                                 })) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
 }
-export function getOperationButton({ color, onClick, text, icon }) {
+export function getOperationButton({ color, onClick, text, icon, visible = true }) {
+    if (!visible)
+        return _jsx(_Fragment, {}, void 0);
     if (icon) {
         return _jsx(IconButton, Object.assign({ variant: "contained", color: color, onClick: onClick }, { children: icon }), void 0);
     }

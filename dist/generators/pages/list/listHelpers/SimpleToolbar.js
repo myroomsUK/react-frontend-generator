@@ -53,11 +53,12 @@ export const SimpleTableToolbar = ({ numSelected, selected, title, collectionOpe
     const handleChange = () => { setExpanded(!expanded); };
     return (_jsx(_Fragment, { children: _jsxs(Accordion, Object.assign({ expanded: expanded, elevation: 0 }, { children: [_jsx(AccordionSummary, Object.assign({ "aria-controls": "panel1a-content", id: "panel1a-header" }, { children: _jsxs(Toolbar, Object.assign({ className: classes.root }, { children: [numSelected > 0 ? (_jsxs(Paper, Object.assign({ elevation: 0, className: clsx(classes.paper, {
                                     [classes.highlight]: numSelected > 0,
-                                }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0), collectionOperations.map(({ color, icon, onClick, text }) => getOperationButton({
+                                }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0), collectionOperations.map(({ color, icon, onClick, text, visibility }) => getOperationButton({
                                         color: color,
                                         text: text,
                                         icon: icon,
-                                        onClick: () => onClick(selected)
+                                        onClick: () => onClick(selected),
+                                        visible: visibility(selected)
                                     }))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: title }), void 0)),
                             setTable && _jsx(TextField, Object.assign({ id: "standard-select-currency", select: true, label: "", value: selectedColumns, onChange: handleChangeCols, SelectProps: {
                                     multiple: true
