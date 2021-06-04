@@ -38,9 +38,9 @@ function ShowImageGrid({ images }) {
     };
     const cols = matches ? 6 : 3;
     return (_jsxs(_Fragment, { children: [_jsx("div", Object.assign({ className: classes.root }, { children: _jsx(GridList, Object.assign({ cellHeight: 180, cols: cols, className: classes.gridList }, { children: images.map((elements, index) => {
-                        const actionIcon = elements.get("actionIcon");
-                        const url = elements.get("url");
-                        const title = elements.get("title");
+                        const actionIcon = elements.actionIcon;
+                        const url = elements.url;
+                        const title = elements.title;
                         return _jsxs(GridListTile, Object.assign({ onClick: () => selectElement(index) }, { children: [_jsx("img", { src: url, alt: title }, void 0),
                                 _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }), index);
                     }) }), void 0) }), void 0),
