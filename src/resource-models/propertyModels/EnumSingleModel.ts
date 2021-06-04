@@ -1,6 +1,5 @@
 import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
-import {green, red, yellow} from "@material-ui/core/colors";
 import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
@@ -20,7 +19,7 @@ export class EnumSingleModel extends SinglePropertyModel{
 
     setInputField(props: EnumSingleInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors, value} = props;
-        const valuePositionInOptions = (value) ? getAutocompleteValuePosition(value, this.options) : -1;
+        const valuePositionInOptions = (value!==undefined) ? getAutocompleteValuePosition(value, this.options) : -1;
         const propsWithModel = {...props, model:this, inheritedValue:valuePositionInOptions, onChange:this.getInputOnChangeHandler({formValue, setFormValue})}
         return EnumInput(propsWithModel);
     }

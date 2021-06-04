@@ -10,7 +10,6 @@ export function EnumInput({model, inheritedValue, onChange}){
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState("");
 
-
     useEffect(()=>{
         setLocalOptions(options)
     }, [options])
