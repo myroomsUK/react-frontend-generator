@@ -10,6 +10,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
+        // @ts-ignore
+        const arrayRecord = record[this.id];
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
@@ -25,7 +27,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             modifyOnlyLastElement: modifyOnlyLastElement,
             modifyRule,
             inputElement,
-            record: record !== null && record !== void 0 ? record : new Map()
+            record: arrayRecord !== null && arrayRecord !== void 0 ? arrayRecord : new Map()
         });
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
