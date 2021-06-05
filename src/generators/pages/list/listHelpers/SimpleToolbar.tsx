@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import ListPageFilterBar from "../../utils/ListPageFilterBar";
 import {Operation} from "./Operation";
-import {getOperationButton} from "../../ListPageGenerator";
+import OperationButton from "../../../../rendering/components/buttons/OperationButton";
 
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -84,13 +84,7 @@ export const SimpleTableToolbar = ({numSelected, selected, title, collectionOper
                                 <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                                     {numSelected} selected
                                 </Typography>
-                                {collectionOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
-                                    color:color,
-                                    text:text,
-                                    icon:icon,
-                                    onClick: ()=>onClick(selected),
-                                    visible:visibility(selected)
-                                })) }
+                                {collectionOperations.map(({color, icon, onClick,text, visibility, requiresConfirmation}) => <OperationButton color={color} text={text} icon={icon} onClick={() => onClick(selected)} visible={visibility(selected)} requiresConfirmation={requiresConfirmation}/>) }
                             </Paper>
                         ) : (
                             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">

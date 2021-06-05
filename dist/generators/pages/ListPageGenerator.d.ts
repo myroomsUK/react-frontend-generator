@@ -49,5 +49,5 @@ export function getOperationButton({ color, onClick, text, icon, visible }: {
     text: any;
     icon: any;
     visible?: boolean | undefined;
-}): JSX.Element;
+}): void;
 import PropTypes from "prop-types";

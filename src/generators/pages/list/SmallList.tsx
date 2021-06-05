@@ -12,8 +12,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {SimpleTableToolbar} from "./listHelpers/SimpleToolbar";
 import {makeStyles} from "@material-ui/core/styles";
 import {Operation} from "./listHelpers/Operation";
-import {getOperationButton} from "../ListPageGenerator";
 import {Direction, SimpleTableHead} from "./listHelpers/SimpleTableHead";
+import OperationButton from "../../../rendering/components/buttons/OperationButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -165,13 +165,7 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                                                 }
                                                 {itemOperations?.length!==0 && <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
-                                                            color:color,
-                                                            text:text,
-                                                            icon:icon,
-                                                            onClick: ()=>onClick(row),
-                                                            visible: visibility(row)
-                                                        })) }
+                                                        {itemOperations.map(({color, icon, onClick,text, visibility, requiresConfirmation}) => <OperationButton color={color} text={text} icon={icon} onClick={() => onClick(row)} visible={visibility(row)} requiresConfirmation={requiresConfirmation}/>) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>}
                                             </TableRow>

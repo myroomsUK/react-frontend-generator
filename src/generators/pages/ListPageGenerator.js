@@ -32,6 +32,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useCookies} from "react-cookie";
 import {Record} from "../../resource-models/Record";
+import OperationButton from "../../rendering/components/buttons/OperationButton";
 
 
 export function EnhancedTableHead(props) {
@@ -162,11 +163,9 @@ const EnhancedTableToolbar = (props) => {
                             <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                                 {numSelected} selected
                             </Typography>
-                                {collectionOperations.map(({color, text, icon, onClick}) =>
+                                {collectionOperations.map(({color, text, icon, onClick, requiresConfirmation}) =>
                                     <Tooltip title={text}>
-                                        {
-                                            getOperationButton({color:color, text:text, icon:icon, onClick: ()=>onClick(selected)})
-                                        }
+                                        <OperationButton color={color} text={text} icon={icon} onClick={() => onClick(selected)} requiresConfirmation={requiresConfirmation}/>
                                     </Tooltip>
                                 )}
                             </Paper>
@@ -565,13 +564,9 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
                                                 }
                                                 <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text, visibility}) => getOperationButton({
-                                                            color:color,
-                                                            text:text,
-                                                            icon:icon,
-                                                            onClick: ()=>onClick(row),
-                                                            visible: visibility(row)
-                                                        })) }
+                                                        {itemOperations.map(({color, icon, onClick,text, visibility, requiresConfirmation}) =>
+                                                            <OperationButton color={color} text={text} icon={icon} onClick={() => onClick(row)} visible={visibility(row)} requiresConfirmation={requiresConfirmation}/>
+                                                            ) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>
                                             </TableRow>
@@ -596,10 +591,5 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
 }
 
 export function getOperationButton({color, onClick,text, icon, visible = true}){
-    if(!visible) return <></>
-
-    if(icon){
-        return <IconButton variant="contained" color={color} onClick={onClick}>{icon}</IconButton>
-    }
-    return <Button  variant="contained" color={color} onClick={onClick}>{text}</Button>
+    return
 }

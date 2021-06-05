@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import ListPageFilterBar from "../../utils/ListPageFilterBar";
-import { getOperationButton } from "../../ListPageGenerator";
+import OperationButton from "../../../../rendering/components/buttons/OperationButton";
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
@@ -53,13 +53,8 @@ export const SimpleTableToolbar = ({ numSelected, selected, title, collectionOpe
     const handleChange = () => { setExpanded(!expanded); };
     return (_jsx(_Fragment, { children: _jsxs(Accordion, Object.assign({ expanded: expanded, elevation: 0 }, { children: [_jsx(AccordionSummary, Object.assign({ "aria-controls": "panel1a-content", id: "panel1a-header" }, { children: _jsxs(Toolbar, Object.assign({ className: classes.root }, { children: [numSelected > 0 ? (_jsxs(Paper, Object.assign({ elevation: 0, className: clsx(classes.paper, {
                                     [classes.highlight]: numSelected > 0,
-                                }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0), collectionOperations.map(({ color, icon, onClick, text, visibility }) => getOperationButton({
-                                        color: color,
-                                        text: text,
-                                        icon: icon,
-                                        onClick: () => onClick(selected),
-                                        visible: visibility(selected)
-                                    }))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: title }), void 0)),
+                                }) }, { children: [_jsxs(Typography, Object.assign({ className: classes.title, color: "inherit", variant: "subtitle1", component: "div" }, { children: [numSelected, " selected"] }), void 0),
+                                    collectionOperations.map(({ color, icon, onClick, text, visibility, requiresConfirmation }) => _jsx(OperationButton, { color: color, text: text, icon: icon, onClick: () => onClick(selected), visible: visibility(selected), requiresConfirmation: requiresConfirmation }, void 0))] }), void 0)) : (_jsx(Typography, Object.assign({ className: classes.title, variant: "h6", id: "tableTitle", component: "div" }, { children: title }), void 0)),
                             setTable && _jsx(TextField, Object.assign({ id: "standard-select-currency", select: true, label: "", value: selectedColumns, onChange: handleChangeCols, SelectProps: {
                                     multiple: true
                                 } }, { children: allColumns.map((option) => (_jsx(MenuItem, Object.assign({ value: option }, { children: option.label }), option.id))) }), void 0),

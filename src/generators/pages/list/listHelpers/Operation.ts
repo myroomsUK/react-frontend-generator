@@ -5,7 +5,8 @@ interface OperationProps{
     text:string;
     icon?:React.DetailedReactHTMLElement<any, any>;
     onClick: (arg: any)=> void
-    visibility?: (arg: any)=> boolean
+    visibility?: (arg: any)=> boolean,
+    requiresConfirmation?: boolean
 }
 
 export class Operation{
@@ -14,12 +15,14 @@ export class Operation{
     icon?:React.DetailedReactHTMLElement<any, any>;
     onClick: (arg: any)=> void
     visibility: (arg: any)=> boolean
+    requiresConfirmation: boolean
 
-    constructor({color, text, icon,onClick, visibility = (arg)=> true}:OperationProps) {
+    constructor({color, text, icon,onClick, visibility = (arg)=> true, requiresConfirmation = false }:OperationProps) {
         this.color = color;
         this.text = text;
         this.icon = icon;
         this.onClick = onClick;
         this.visibility = visibility;
+        this.requiresConfirmation = requiresConfirmation;
     }
 }

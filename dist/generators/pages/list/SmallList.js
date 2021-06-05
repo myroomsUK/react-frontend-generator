@@ -12,8 +12,8 @@ import ButtonsHorizontalList from "../../../rendering/components/buttons/Buttons
 import TablePagination from "@material-ui/core/TablePagination";
 import { SimpleTableToolbar } from "./listHelpers/SimpleToolbar";
 import { makeStyles } from "@material-ui/core/styles";
-import { getOperationButton } from "../ListPageGenerator";
 import { SimpleTableHead } from "./listHelpers/SimpleTableHead";
+import OperationButton from "../../../rendering/components/buttons/OperationButton";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -90,13 +90,7 @@ export const SmallList = ({ data: rows, totalItems, page, setPage, selected, set
                                             //onClick={(event) => handleClick(event, row.id)}
                                             role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [selected && _jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
                                                 columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility }) => getOperationButton({
-                                                            color: color,
-                                                            text: text,
-                                                            icon: icon,
-                                                            onClick: () => onClick(row),
-                                                            visible: visibility(row)
-                                                        })) }, void 0) }), void 0)] }), index));
+                                                (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility, requiresConfirmation }) => _jsx(OperationButton, { color: color, text: text, icon: icon, onClick: () => onClick(row), visible: visibility(row), requiresConfirmation: requiresConfirmation }, void 0)) }, void 0) }), void 0)] }), index));
                                     }) }, void 0)] }), void 0) }, void 0),
                     _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
 };
