@@ -19,8 +19,7 @@ interface Props{
  */
 export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
 
-    const {record} = useResource(resourceName, propId);
-
-    return <EditForm propResourceName={resourceName} propId={propId} record={record} propEditPage={propEditPage}/>
+    const {record, getNewResource} = useResource(resourceName, propId);
+    return <EditForm propResourceName={resourceName} propId={propId} record={record} refresh={getNewResource} propEditPage={propEditPage}/>
 }
 

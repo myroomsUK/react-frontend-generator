@@ -39,7 +39,7 @@ import { Record } from "../../../resource-models/Record";
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, catchfunction = () => { }, thenFunction = () => { } }) => {
+export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = () => { }, thenFunction = () => { } }) => {
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef(new FormValue());
@@ -59,7 +59,6 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);
     useEffect(() => {
         const record = Record.createFromJson(recordJson, model);
-        console.log("record", record);
         setRecord(record);
         setFormValue(FormValue.createFromRecord(record, model));
     }, [recordJson]);
@@ -79,6 +78,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
             record: record,
+            refresh: refresh,
             lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler: () => submitHandler(formValue),
@@ -86,7 +86,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             resourceName: resourceName,
             resourceId: propId.toString()
         };
-    }, [model, referencesMap, formValue, record, resourceName, propId]);
+    }, [model, referencesMap, formValue, record, resourceName, propId, refresh]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
             setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, errors: errors, text: "Save" }), void 0));

@@ -5,7 +5,7 @@ import { EmbeddedShowContent } from "../../generators/fields/EmbeddedShowContent
 import { FormValue } from "../formvalue/FormValue";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
-        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record } = props;
+        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         // @ts-ignore
         const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
@@ -19,7 +19,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             errors: errors,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
-            record: record !== null && record !== void 0 ? record : new Record()
+            record: record !== null && record !== void 0 ? record : new Record(),
+            refresh: refresh
         });
     }
     setOutputField(props) {

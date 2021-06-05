@@ -11,7 +11,7 @@ import {genericError} from "../../redux/actions/verbs/edit";
 
 export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
 
-    const {submitHandler, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Salva", showButton=true } = props
+    const {submitHandler, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Salva", showButton=true } = props
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref= useRef(null);
@@ -44,7 +44,7 @@ export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
     }
 
     return <ValidatorForm ref={ref} className={classes.form} onSubmit={validationSubmitHandler} onError={()=>dispatch(genericError("Validation Error"))}>
-        <FormContent formContent={formContent} model={model} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} record={record} lockedFormValue={lockedFormValue}  errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
+        <FormContent refresh={refresh} formContent={formContent} model={model} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} record={record} lockedFormValue={lockedFormValue}  errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
         {!formContent && <div style={{margin: "10px 0"}}>
             <ButtonsHorizontalList>
                 <Button variant="contained" color="secondary" onClick={onClickHandler}>{text}</Button>

@@ -17,7 +17,7 @@ export function useResource(resourceName:string, propId:number){
             setRecord(downloadedRecord)
         }
     },[downloadedRecord])
-    return {record, setRecord};
+    return {record, setRecord, getNewResource};
 }
 
 export function useResources(resourceName:string){

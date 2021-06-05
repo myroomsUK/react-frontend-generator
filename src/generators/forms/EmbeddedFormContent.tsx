@@ -16,9 +16,10 @@ interface EmbeddedFormContentProps{
     errors: Errors,
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    refresh?: ()=>void
 }
 
-export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValue, partialSubmitHandler, submitHandler, errors, record}) => {
+export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, refresh, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValue, partialSubmitHandler, submitHandler, errors, record}) => {
 
     const [localFormValue, setLocalFormValue] = useState(new FormValue());
 
@@ -28,6 +29,6 @@ export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, 
         }
     },[formValue])
 
-    return <FormContent record={record} referencesMap={referencesMap} formContent={formContent} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
+    return <FormContent refresh={refresh} record={record} referencesMap={referencesMap} formContent={formContent} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={new FormValue()}/>
 }

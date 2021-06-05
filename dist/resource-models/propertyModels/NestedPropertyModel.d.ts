@@ -61,6 +61,7 @@ export interface EmbeddedSingleInputFields extends InputFields {
     single?: boolean;
     modifyRule?: any;
     record: Record;
+    refresh?: () => void;
 }
 export interface EmbeddedSingleOutputFields extends OutputFields {
     showElement?: React.DetailedReactHTMLElement<any, any>;

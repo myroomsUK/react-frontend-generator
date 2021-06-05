@@ -9,6 +9,6 @@ import { useResource } from "../hooks/resourceUtils";
  * @constructor
  */
 export const EditPage = ({ propResourceName: resourceName, propId, propEditPage }) => {
-    const { record } = useResource(resourceName, propId);
-    return _jsx(EditForm, { propResourceName: resourceName, propId: propId, record: record, propEditPage: propEditPage }, void 0);
+    const { record, getNewResource } = useResource(resourceName, propId);
+    return _jsx(EditForm, { propResourceName: resourceName, propId: propId, record: record, refresh: getNewResource, propEditPage: propEditPage }, void 0);
 };

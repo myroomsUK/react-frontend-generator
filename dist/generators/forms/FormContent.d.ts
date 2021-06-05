@@ -15,6 +15,7 @@ interface FormContentProps {
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?: React.DetailedReactHTMLElement<any, any>;
+    refresh?: () => void;
 }
 /**
  *

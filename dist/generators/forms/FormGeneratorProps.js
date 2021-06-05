@@ -1,6 +1,6 @@
 import { Record } from "../../resource-models/Record";
 export class FormGeneratorPropsObject {
-    constructor({ submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record() }) {
+    constructor({ submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record(), refresh }) {
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
         this.model = model;
@@ -14,5 +14,6 @@ export class FormGeneratorPropsObject {
         this.errors = errors;
         this.showButton = showButton;
         this.resourceId = resourceId;
+        this.refresh = refresh;
     }
 }

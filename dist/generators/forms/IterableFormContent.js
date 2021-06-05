@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         borderRight: `1px solid ${theme.palette.divider}`,
     },
 }));
-export const IterableFormContent = ({ model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true, inputElement }) => {
+export const IterableFormContent = ({ model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true, inputElement, refresh }) => {
     const { remove } = useDelete(resourceName);
     const creationTime = useRef(Date.now());
     //local map with formvalues: if is edit, I have values from db, otherwise it is a map with no elements.
@@ -57,7 +57,7 @@ export const IterableFormContent = ({ model, record, resourceName, setParentForm
     const forms = entries.map(([key, formValue], index) => {
         var _a;
         const isEditable = modifyRule(formValue);
-        const formElement = _jsx(FormContent, { record: (_a = record.get(key)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
+        const formElement = _jsx(FormContent, { refresh: refresh, record: (_a = record.get(key)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement : formElement) : formElement;
         return _jsxs(React.Fragment, { children: [_jsx(Grid, Object.assign({ item: true, xs: 1 }, { children: _jsx(Typography, { children: index + 1 }, void 0) }), void 0),
                 _jsx(Grid, Object.assign({ item: true, xs: 10 }, { children: formFinal }), void 0),

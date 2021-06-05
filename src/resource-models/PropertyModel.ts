@@ -108,7 +108,8 @@ export interface InputFields{
     referencesMap: Map<string, any>;
     form?: React.DetailedReactHTMLElement<any, any>,
     refreshReferencesMap:()=>void;
-    inputElement?: DetailedReactHTMLElement<any, any>
+    inputElement?: DetailedReactHTMLElement<any, any>,
+    refresh?: () => void
 }
 
 export interface OutputFields{

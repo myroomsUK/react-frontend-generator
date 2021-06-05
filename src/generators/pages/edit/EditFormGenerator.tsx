@@ -13,7 +13,8 @@ interface EditFormGeneratorProps {
     record: object,
     propEditPage?: any,
     thenFunction?: any,
-    catchfunction?: any
+    catchfunction?: any,
+    refresh: ()=>void
 }
 
 /**
@@ -28,7 +29,7 @@ interface EditFormGeneratorProps {
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
+export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef(new FormValue());
@@ -38,7 +39,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     const [errors, setErrors] = useState(new Errors([]));
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const {edit, errors:responseErrors} = useEdit();
-
 
 
     useEffect(()=>{
@@ -51,7 +51,6 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
     useEffect(()=>{
         const record = Record.createFromJson(recordJson, model)
-        console.log("record", record)
         setRecord(record)
         setFormValue(FormValue.createFromRecord(record, model))
     }, [recordJson])
@@ -72,6 +71,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             refreshReferencesMap: refreshReferencesMap,
             formValue: formValue,
             record:record,
+            refresh:refresh,
             lockedFormValue: new FormValue(),
             setFormValue: setFormValue,
             submitHandler:()=>submitHandler(formValue),
@@ -79,12 +79,13 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             resourceName: resourceName,
             resourceId:propId.toString()
         }
-    },[model,referencesMap, formValue, record, resourceName, propId])
+    },[model,referencesMap, formValue, record, resourceName, propId, refresh])
 
 
     useEffect(()=>{
         if(formValue!==initialValue.current){
-            setGenericEditRender(<FormGenerator {...editFormProps} formContent={createEditPageToUse} errors={errors} text="Save"/>)
+            setGenericEditRender(
+                <FormGenerator {...editFormProps} formContent={createEditPageToUse} errors={errors} text="Save"/>)
         }
     },[formValue, errors])
 

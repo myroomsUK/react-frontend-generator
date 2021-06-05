@@ -14,6 +14,7 @@ interface EmbeddedFormContentProps {
     errors: Errors;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    refresh?: () => void;
 }
 export declare const EmbeddedFormContent: React.FC<EmbeddedFormContentProps>;
 export {};

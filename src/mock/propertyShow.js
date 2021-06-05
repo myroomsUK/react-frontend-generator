@@ -3,8 +3,8 @@ export const propertyShow = {
     "service": "",
     "hmo": false,
     "type": {
-        "id": 1,
-        "description": "Council Flat"
+        "id": 5,
+        "description": "Residential"
     },
     "propertyName": "805 ADMIRALTY HOUSE",
     "address": "805 ADMIRALTY HOUSE, 150 VAUGHAN WAY, LONDON, TOWER HAMLETS, E1W 2AH, United Kingdom (Canary Wharf)",
@@ -62,22 +62,7 @@ export const propertyShow = {
     "terrace": false,
     "patio": false,
     "sharedBathroom": [],
-    "images": [
-        {
-            "id": 1733,
-            "filename": "609e2d2f5f1e9_Schermata-da-2021-05-12-14-40-15-png",
-            "ext": "png",
-            "subDir": "files",
-            "path": "/files/609e2d2f5f1e9_Schermata-da-2021-05-12-14-40-15-png.png",
-            "url": "http://pms.myrooms.local/files/609e2d2f5f1e9_Schermata-da-2021-05-12-14-40-15-png.png",
-            "weight": 303937,
-            "width": 1920,
-            "height": 1080,
-            "md5": "232ce91614f47cd5c7167f96df608faf",
-            "title": "Schermata da 2021-05-12 14-40-15.png",
-            "mimeType": "image/png"
-        }
-    ],
+    "images": [],
     "units": [
         {
             "id": 1,
@@ -91,11 +76,11 @@ export const propertyShow = {
             "images": [
                 {
                     "id": 1,
-                    "filename": "607ea6367f287_GOPR8977-Fotor-1-scaled-jpg",
+                    "filename": "60b8665adcadc_GOPR8977-Fotor-1-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6367f287_GOPR8977-Fotor-1-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6367f287_GOPR8977-Fotor-1-scaled-jpg.jpeg",
+                    "path": "/files/60b8665adcadc_GOPR8977-Fotor-1-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665adcadc_GOPR8977-Fotor-1-scaled-jpg.jpeg",
                     "weight": 399475,
                     "width": 2560,
                     "height": 1920,
@@ -105,11 +90,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 2,
-                    "filename": "607ea6373d773_GOPR8979-Fotor-scaled-jpg",
+                    "filename": "60b8665b7f0a7_GOPR8979-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6373d773_GOPR8979-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6373d773_GOPR8979-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665b7f0a7_GOPR8979-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665b7f0a7_GOPR8979-Fotor-scaled-jpg.jpeg",
                     "weight": 434566,
                     "width": 2560,
                     "height": 1920,
@@ -119,11 +104,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 3,
-                    "filename": "607ea637e2220_GOPR8981-Fotor-scaled-jpg",
+                    "filename": "60b8665c3d989_GOPR8981-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea637e2220_GOPR8981-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea637e2220_GOPR8981-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665c3d989_GOPR8981-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665c3d989_GOPR8981-Fotor-scaled-jpg.jpeg",
                     "weight": 436976,
                     "width": 2560,
                     "height": 1920,
@@ -133,11 +118,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 4,
-                    "filename": "607ea6386e476_GOPR8983-Fotor-scaled-jpg",
+                    "filename": "60b8665cd478c_GOPR8983-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6386e476_GOPR8983-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6386e476_GOPR8983-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665cd478c_GOPR8983-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665cd478c_GOPR8983-Fotor-scaled-jpg.jpeg",
                     "weight": 402271,
                     "width": 2560,
                     "height": 1920,
@@ -147,11 +132,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 5,
-                    "filename": "607ea6390474e_GOPR8964-Fotor-scaled-jpg",
+                    "filename": "60b8665d7890d_GOPR8964-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
                     "weight": 430776,
                     "width": 2560,
                     "height": 1920,
@@ -161,11 +146,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 6,
-                    "filename": "607ea63982eea_GOPR8966-Fotor-scaled-jpg",
+                    "filename": "60b8665e14531_GOPR8966-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
                     "weight": 426371,
                     "width": 2560,
                     "height": 1920,
@@ -175,11 +160,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 7,
-                    "filename": "607ea63a121ff_GOPR8969-Fotor-scaled-jpg",
+                    "filename": "60b8665eb8cee_GOPR8969-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
                     "weight": 467410,
                     "width": 2560,
                     "height": 1920,
@@ -189,11 +174,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 8,
-                    "filename": "607ea63ab27d5_GOPR8972-Fotor-scaled-jpg",
+                    "filename": "60b8665f56708_GOPR8972-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
                     "weight": 491431,
                     "width": 2560,
                     "height": 2247,
@@ -203,11 +188,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 9,
-                    "filename": "607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg",
+                    "filename": "60b8665ff26ac_GOPR8976-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
                     "weight": 424669,
                     "width": 2560,
                     "height": 1920,
@@ -217,11 +202,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 10,
-                    "filename": "607ea63bde9b5_GOPR9009-Fotor-scaled-jpg",
+                    "filename": "60b8666122cb7_GOPR9009-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
                     "weight": 345577,
                     "width": 2560,
                     "height": 1920,
@@ -230,8 +215,15 @@ export const propertyShow = {
                     "mimeType": "image/jpeg"
                 }
             ],
-            "currentPlace": "let",
-            "eligibleTransitions": []
+            "currentPlace": {
+                "managed": 1,
+                "occupied": 1,
+                "unavailable_to_let": 1
+            },
+            "eligibleTransitions": [
+                "turn_to_available_to_let_when_occupied",
+                "turn_to_vacant_when_unavailable_to_let"
+            ]
         },
         {
             "id": 2,
@@ -245,11 +237,11 @@ export const propertyShow = {
             "images": [
                 {
                     "id": 5,
-                    "filename": "607ea6390474e_GOPR8964-Fotor-scaled-jpg",
+                    "filename": "60b8665d7890d_GOPR8964-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
                     "weight": 430776,
                     "width": 2560,
                     "height": 1920,
@@ -259,11 +251,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 6,
-                    "filename": "607ea63982eea_GOPR8966-Fotor-scaled-jpg",
+                    "filename": "60b8665e14531_GOPR8966-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
                     "weight": 426371,
                     "width": 2560,
                     "height": 1920,
@@ -273,11 +265,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 7,
-                    "filename": "607ea63a121ff_GOPR8969-Fotor-scaled-jpg",
+                    "filename": "60b8665eb8cee_GOPR8969-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
                     "weight": 467410,
                     "width": 2560,
                     "height": 1920,
@@ -287,11 +279,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 8,
-                    "filename": "607ea63ab27d5_GOPR8972-Fotor-scaled-jpg",
+                    "filename": "60b8665f56708_GOPR8972-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
                     "weight": 491431,
                     "width": 2560,
                     "height": 2247,
@@ -301,11 +293,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 9,
-                    "filename": "607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg",
+                    "filename": "60b8665ff26ac_GOPR8976-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
                     "weight": 424669,
                     "width": 2560,
                     "height": 1920,
@@ -315,11 +307,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 10,
-                    "filename": "607ea63bde9b5_GOPR9009-Fotor-scaled-jpg",
+                    "filename": "60b8666122cb7_GOPR9009-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
                     "weight": 345577,
                     "width": 2560,
                     "height": 1920,
@@ -329,11 +321,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 11,
-                    "filename": "607ea63d47a96_GOPR8986-Fotor-1-scaled-jpg",
+                    "filename": "60b86662f05f2_GOPR8986-Fotor-1-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63d47a96_GOPR8986-Fotor-1-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63d47a96_GOPR8986-Fotor-1-scaled-jpg.jpeg",
+                    "path": "/files/60b86662f05f2_GOPR8986-Fotor-1-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b86662f05f2_GOPR8986-Fotor-1-scaled-jpg.jpeg",
                     "weight": 455130,
                     "width": 2560,
                     "height": 1920,
@@ -343,11 +335,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 12,
-                    "filename": "607ea63dc4df8_GOPR8988-Fotor-scaled-jpg",
+                    "filename": "60b86663a9542_GOPR8988-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63dc4df8_GOPR8988-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63dc4df8_GOPR8988-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b86663a9542_GOPR8988-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b86663a9542_GOPR8988-Fotor-scaled-jpg.jpeg",
                     "weight": 383269,
                     "width": 2560,
                     "height": 1920,
@@ -357,11 +349,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 13,
-                    "filename": "607ea63e5a389_GOPR8990-Fotor-scaled-jpg",
+                    "filename": "60b8666444912_GOPR8990-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63e5a389_GOPR8990-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63e5a389_GOPR8990-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666444912_GOPR8990-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666444912_GOPR8990-Fotor-scaled-jpg.jpeg",
                     "weight": 316915,
                     "width": 2560,
                     "height": 1920,
@@ -371,11 +363,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 14,
-                    "filename": "607ea63ed9492_GOPR8993-Fotor-scaled-jpg",
+                    "filename": "60b86665a8447_GOPR8993-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63ed9492_GOPR8993-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63ed9492_GOPR8993-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b86665a8447_GOPR8993-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b86665a8447_GOPR8993-Fotor-scaled-jpg.jpeg",
                     "weight": 439680,
                     "width": 2560,
                     "height": 1920,
@@ -384,8 +376,15 @@ export const propertyShow = {
                     "mimeType": "image/jpeg"
                 }
             ],
-            "currentPlace": "let",
-            "eligibleTransitions": []
+            "currentPlace": {
+                "managed": 1,
+                "occupied": 1,
+                "unavailable_to_let": 1
+            },
+            "eligibleTransitions": [
+                "turn_to_available_to_let_when_occupied",
+                "turn_to_vacant_when_unavailable_to_let"
+            ]
         },
         {
             "id": 3,
@@ -393,17 +392,17 @@ export const propertyShow = {
             "type": {
                 "description": "En-Suite – Single"
             },
-            "weeklyPrice": 425,
-            "availableFrom": "2021-09-01",
+            "weeklyPrice": 319,
+            "availableFrom": "2021-05-28",
             "floorNumber": 0,
             "images": [
                 {
                     "id": 5,
-                    "filename": "607ea6390474e_GOPR8964-Fotor-scaled-jpg",
+                    "filename": "60b8665d7890d_GOPR8964-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6390474e_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665d7890d_GOPR8964-Fotor-scaled-jpg.jpeg",
                     "weight": 430776,
                     "width": 2560,
                     "height": 1920,
@@ -413,11 +412,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 6,
-                    "filename": "607ea63982eea_GOPR8966-Fotor-scaled-jpg",
+                    "filename": "60b8665e14531_GOPR8966-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63982eea_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665e14531_GOPR8966-Fotor-scaled-jpg.jpeg",
                     "weight": 426371,
                     "width": 2560,
                     "height": 1920,
@@ -427,11 +426,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 7,
-                    "filename": "607ea63a121ff_GOPR8969-Fotor-scaled-jpg",
+                    "filename": "60b8665eb8cee_GOPR8969-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63a121ff_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665eb8cee_GOPR8969-Fotor-scaled-jpg.jpeg",
                     "weight": 467410,
                     "width": 2560,
                     "height": 1920,
@@ -441,11 +440,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 8,
-                    "filename": "607ea63ab27d5_GOPR8972-Fotor-scaled-jpg",
+                    "filename": "60b8665f56708_GOPR8972-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63ab27d5_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665f56708_GOPR8972-Fotor-scaled-jpg.jpeg",
                     "weight": 491431,
                     "width": 2560,
                     "height": 2247,
@@ -455,11 +454,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 9,
-                    "filename": "607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg",
+                    "filename": "60b8665ff26ac_GOPR8976-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63b3bd1c_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8665ff26ac_GOPR8976-Fotor-scaled-jpg.jpeg",
                     "weight": 424669,
                     "width": 2560,
                     "height": 1920,
@@ -469,11 +468,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 10,
-                    "filename": "607ea63bde9b5_GOPR9009-Fotor-scaled-jpg",
+                    "filename": "60b8666122cb7_GOPR9009-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea63bde9b5_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666122cb7_GOPR9009-Fotor-scaled-jpg.jpeg",
                     "weight": 345577,
                     "width": 2560,
                     "height": 1920,
@@ -483,11 +482,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 15,
-                    "filename": "607ea6430ef19_GOPR8995-Fotor-scaled-jpg",
+                    "filename": "60b8666b1f8b7_GOPR8995-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6430ef19_GOPR8995-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6430ef19_GOPR8995-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666b1f8b7_GOPR8995-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666b1f8b7_GOPR8995-Fotor-scaled-jpg.jpeg",
                     "weight": 439339,
                     "width": 2560,
                     "height": 1920,
@@ -497,11 +496,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 16,
-                    "filename": "607ea64390252_GOPR8998-Fotor-scaled-jpg",
+                    "filename": "60b8666ba3287_GOPR8998-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea64390252_GOPR8998-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea64390252_GOPR8998-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666ba3287_GOPR8998-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666ba3287_GOPR8998-Fotor-scaled-jpg.jpeg",
                     "weight": 430532,
                     "width": 2560,
                     "height": 1920,
@@ -511,11 +510,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 17,
-                    "filename": "607ea6442461e_GOPR9002-Fotor-scaled-jpg",
+                    "filename": "60b8666c42f46_GOPR9002-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6442461e_GOPR9002-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6442461e_GOPR9002-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666c42f46_GOPR9002-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666c42f46_GOPR9002-Fotor-scaled-jpg.jpeg",
                     "weight": 455524,
                     "width": 2560,
                     "height": 1920,
@@ -525,11 +524,11 @@ export const propertyShow = {
                 },
                 {
                     "id": 18,
-                    "filename": "607ea6449a8f9_GOPR9004-Fotor-scaled-jpg",
+                    "filename": "60b8666d66c1e_GOPR9004-Fotor-scaled-jpg",
                     "ext": "jpeg",
                     "subDir": "files",
-                    "path": "/files/607ea6449a8f9_GOPR9004-Fotor-scaled-jpg.jpeg",
-                    "url": "http://pms.myrooms.local/files/607ea6449a8f9_GOPR9004-Fotor-scaled-jpg.jpeg",
+                    "path": "/files/60b8666d66c1e_GOPR9004-Fotor-scaled-jpg.jpeg",
+                    "url": "http://pms.myrooms.local/files/60b8666d66c1e_GOPR9004-Fotor-scaled-jpg.jpeg",
                     "weight": 362468,
                     "width": 2560,
                     "height": 1920,
@@ -538,8 +537,15 @@ export const propertyShow = {
                     "mimeType": "image/jpeg"
                 }
             ],
-            "currentPlace": "let",
-            "eligibleTransitions": []
+            "currentPlace": {
+                "managed": 1,
+                "vacant": 1,
+                "available_to_let": 1
+            },
+            "eligibleTransitions": [
+                "turn_to_unavailable_to_let_when_vacant",
+                "turn_to_occupied_when_available_to_let"
+            ]
         }
     ],
     "askedMonthlyPrice": 0,
@@ -559,6 +565,6 @@ export const propertyShow = {
     "eligibleTransitions": [
         "turn_to_not_managed"
     ],
-    "createdAt": "20/04/2021 12:00:20",
-    "updatedAt": "14/05/2021 09:56:31"
+    "createdAt": "03/06/2021 07:18:13",
+    "updatedAt": "03/06/2021 07:19:38"
 }

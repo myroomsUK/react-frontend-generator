@@ -18,6 +18,7 @@ interface FormContentProps {
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?:React.DetailedReactHTMLElement<any, any>;
+    refresh?:()=>void
 }
 
 /**
@@ -29,7 +30,7 @@ interface FormContentProps {
  */
 export const FormContent: React.FC<FormContentProps> = (props) => {
 
-    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, formContent, record}=props;
+    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, formContent, record, refresh}=props;
     if(formContent){
         return React.cloneElement(formContent, props);
     }
@@ -39,7 +40,7 @@ export const FormContent: React.FC<FormContentProps> = (props) => {
             .filter((propertyModel:PropertyModel) => propertyModel.write === true)
             .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors};
+                const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, refresh};
                 return <Grid item xs={xs} md={md} key={index}>
                     {propertyModel.getInputField(props)}
                 </Grid>

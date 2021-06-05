@@ -19,6 +19,7 @@ export interface FormGeneratorProps{
     errors: Errors;
     showButton?:boolean;
     formContent?:any;
+    refresh?: () => void
 }
 
 export class FormGeneratorPropsObject{
@@ -35,8 +36,9 @@ export class FormGeneratorPropsObject{
     text?:string;
     errors: Errors;
     showButton?:boolean;
+    refresh?: () => void;
 
-    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record() }:FormGeneratorProps) {
+    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record(), refresh }:FormGeneratorProps) {
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
         this.model = model;
@@ -50,5 +52,6 @@ export class FormGeneratorPropsObject{
         this.errors = errors;
         this.showButton = showButton;
         this.resourceId = resourceId;
+        this.refresh = refresh;
     }
 }

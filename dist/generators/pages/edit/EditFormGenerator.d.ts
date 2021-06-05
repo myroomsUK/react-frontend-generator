@@ -6,6 +6,7 @@ interface EditFormGeneratorProps {
     propEditPage?: any;
     thenFunction?: any;
     catchfunction?: any;
+    refresh: () => void;
 }
 /**
  *

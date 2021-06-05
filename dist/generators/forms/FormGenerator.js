@@ -8,7 +8,7 @@ import { useFormStyles } from "../../rendering/styles/formStyles";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import { genericError } from "../../redux/actions/verbs/edit";
 export const FormGenerator = (props) => {
-    const { submitHandler, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Salva", showButton = true } = props;
+    const { submitHandler, refresh, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Salva", showButton = true } = props;
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -34,6 +34,6 @@ export const FormGenerator = (props) => {
             ref.current.submit(e);
         }
     };
-    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { formContent: formContent, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, record: record, lockedFormValue: lockedFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0),
+    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { refresh: refresh, formContent: formContent, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, record: record, lockedFormValue: lockedFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0),
             !formContent && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsx(ButtonsHorizontalList, { children: _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: onClickHandler }, { children: text }), void 0) }, void 0) }), void 0)] }), void 0);
 };

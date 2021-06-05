@@ -77,6 +77,7 @@ export interface InputFields {
     form?: React.DetailedReactHTMLElement<any, any>;
     refreshReferencesMap: () => void;
     inputElement?: DetailedReactHTMLElement<any, any>;
+    refresh?: () => void;
 }
 export interface OutputFields {
     record: Record | Map<number, Record> | undefined;
