@@ -2,10 +2,8 @@ import React, { DetailedReactHTMLElement, ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
 import { FormValue } from "./formvalue/FormValue";
 import { Record } from "./Record";
-import { PropertyProps } from "./models/PropertyProps";
 import { InputPropsInterface } from "./models/InputProps";
-import { OutputProps } from "./models/OutputProps";
-import { FieldProps } from "./models/FieldProps";
+import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
 export declare type InputType = "id" | "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea" | "enum_single" | "enum_multiple";
 export interface PropertyModel {
     id: string;
@@ -32,6 +30,7 @@ export interface PropertyModel {
     colorMap?: object;
 }
 export declare type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
+export declare type FieldType = "edit" | "show";
 export declare type Option = {
     id: string;
     label: string;
@@ -55,15 +54,14 @@ export declare abstract class PropertyModel {
     colorMap?: object;
     constructor(id: string, rest: any);
     abstract manipulateErrors(errors: Errors): any;
-    setFieldProps(requestedName: string, props: FieldProps): PropertyProps;
-    abstract setInputField(props: InputPropsInterface): ReactElement<any, any> | null;
-    abstract getInputField(props: InputPropsInterface, inputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
-    abstract getOutputField(props: OutputProps, outputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
-    abstract setOutputField(props: OutputProps): ReactElement<any, any> | null;
+    abstract setInputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract getInputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract getOutputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract setOutputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars: any) => void;
     abstract getRecord(jsonValue: any): any;
     abstract getFormValue(value: any): any;
-    abstract getJsonFormValue(value: any): any;
+    getPropertyField(props: InputPropsInterface, isEdit?: boolean): React.ReactElement<any, any> | null;
 }
 export interface InputOnChangeHandler {
     formValue: FormValue;
@@ -83,8 +81,4 @@ export interface InputFields {
     refreshReferencesMap: () => void;
     inputElement?: DetailedReactHTMLElement<any, any>;
     refresh?: () => void;
-}
-export interface OutputFields {
-    record: Record | Map<number, Record> | undefined;
-    showLabel: boolean;
 }

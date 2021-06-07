@@ -6,6 +6,7 @@ import {Errors} from "../errors/Errors";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
 import {Record} from "../../resource-models/Record";
 import {InputProps} from "../../resource-models/models/InputProps";
+import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
 
 interface FormContentProps {
     submitHandler: (e:any) => Promise<any>;
@@ -18,8 +19,8 @@ interface FormContentProps {
     lockedFormValue:FormValue;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    formContent?:React.DetailedReactHTMLElement<any, any>;
-    refresh?:()=>void
+    refresh?:()=>void,
+    configuration: PropertyFieldConfiguration
 }
 
 /**
@@ -31,19 +32,19 @@ interface FormContentProps {
  */
 export const FormContent: React.FC<FormContentProps> = (props) => {
 
-    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, formContent, record, refresh}=props;
-    if(formContent){
-        return React.cloneElement(formContent, props);
+    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, configuration, record, refresh}=props;
+    if(configuration.viewElement){
+        return React.cloneElement(configuration.viewElement, props);
     }
 
     return <Grid container spacing={2}>
-        {model.properties //TODO va reso indipendente da material ui nel rendering
+        {model.properties
             .filter((propertyModel:PropertyModel) => propertyModel.write === true)
             .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
                 const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
                 return <Grid item xs={xs} md={md} key={index}>
-                    {!lockedFormValue.has(propertyModel.id) && propertyModel.getInputField(props)}
+                    {!lockedFormValue.has(propertyModel.id) && propertyModel.getPropertyField(props,configuration.isEdit)}
                 </Grid>
             }
         )}

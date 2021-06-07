@@ -10,15 +10,15 @@ import { InputProps } from "../../resource-models/models/InputProps";
  * @param props
  */
 export const FormContent = (props) => {
-    const { partialSubmitHandler, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, formContent, record, refresh } = props;
-    if (formContent) {
-        return React.cloneElement(formContent, props);
+    const { partialSubmitHandler, submitHandler, model, referencesMap, refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, configuration, record, refresh } = props;
+    if (configuration.viewElement) {
+        return React.cloneElement(configuration.viewElement, props);
     }
-    return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties //TODO va reso indipendente da material ui nel rendering
+    return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model.properties
             .filter((propertyModel) => propertyModel.write === true)
             .map((propertyModel, index) => {
             const { xs, md } = propertyModel;
             const props = new InputProps({ model: propertyModel, partialSubmitHandler, submitHandler, referencesMap, refreshReferencesMap, formValue, record: record === null || record === void 0 ? void 0 : record.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh });
-            return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: !lockedFormValue.has(propertyModel.id) && propertyModel.getInputField(props) }), index);
+            return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: !lockedFormValue.has(propertyModel.id) && propertyModel.getPropertyField(props, configuration.isEdit) }), index);
         }) }), void 0);
 };

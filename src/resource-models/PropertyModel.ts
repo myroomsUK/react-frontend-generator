@@ -7,6 +7,10 @@ import {PropertyProps} from "./models/PropertyProps";
 import {InputProps, InputPropsInterface} from "./models/InputProps";
 import {OutputProps} from "./models/OutputProps";
 import {FieldProps} from "./models/FieldProps";
+import {
+    PropertyFieldConfiguration,
+    PropertyFieldConfigurationInterface
+} from "./configurations/PropertyFieldConfiguration";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -36,6 +40,7 @@ export interface PropertyModel{
 }
 
 export type GridRange = boolean | 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
+export type FieldType = "edit"| "show";
 export type Option = {
     id: string;
     label:string;
@@ -78,13 +83,13 @@ export abstract class PropertyModel {
 
     abstract manipulateErrors(errors:Errors):any;
 
-    abstract setInputField(props: InputPropsInterface): ReactElement<any, any> | null;
+    abstract setInputField(props: InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> | null;
 
-    abstract getInputField(props:InputPropsInterface, inputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any,any>|null;
+    abstract getInputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any,any>|null;
 
-    abstract getOutputField(props:OutputProps, outputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> |null;
+    abstract getOutputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
 
-    abstract setOutputField(props:OutputProps): ReactElement<any, any> |null;
+    abstract setOutputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
 
@@ -92,7 +97,10 @@ export abstract class PropertyModel {
 
     abstract getFormValue(value: any):any;
 
-    abstract getJsonFormValue(value: any): any;
+    getPropertyField(props:InputPropsInterface, isEdit: boolean = true ){
+        console.log("is edit", isEdit)
+        return (isEdit) ? this.getInputField(props) : this.getOutputField(props)
+    }
 
 }
 
@@ -117,7 +125,4 @@ export interface InputFields{
     refresh?: () => void
 }
 
-export interface OutputFields{
-    record:Record| Map<number, Record> |undefined,
-    showLabel:boolean
-}
+

@@ -11,6 +11,7 @@ import {Errors} from "../errors/Errors";
 import {Model} from "../../resource-models/Model";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
 import {Record} from "../../resource-models/Record";
+import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
 
 interface IterableFormContentProps{
     model: Model,
@@ -88,9 +89,9 @@ export const IterableFormContent: React.FC<IterableFormContentProps> = ({model, 
 
     const forms = entries.map(([key, formValue], index) =>{
         const isEditable = modifyRule(formValue);
+        const configuration = new PropertyFieldConfiguration({viewElement:inputElement})
 
-
-        const formElement = <FormContent refresh={refresh} record={record.get(key) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
+        const formElement = <FormContent configuration={configuration} refresh={refresh} record={record.get(key) ?? new Record()} lockedFormValue={new FormValue()} referencesMap={referencesMap} setFormValue={localSetFormValue(key)} model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}/>;
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement  : formElement ) : formElement;
 
         return <React.Fragment key={index}>

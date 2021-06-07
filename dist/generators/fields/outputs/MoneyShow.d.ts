@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export default function MoneyShow({ propertyRecord }: any): JSX.Element;
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export default function MoneyShow({ value }: SingleSetInputFieldProps): JSX.Element;

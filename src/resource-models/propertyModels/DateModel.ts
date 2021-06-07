@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import DateInput from "../../generators/forms/inputs/DateInput";
 import DateShow from "../../generators/fields/outputs/DateShow";
 import {InputOnChangeHandler} from "../PropertyModel";
@@ -20,7 +20,7 @@ export class DateModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         return DateShow(props);
     }
 

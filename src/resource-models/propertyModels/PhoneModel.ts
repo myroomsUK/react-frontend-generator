@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import PhoneInput from "../../generators/forms/inputs/PhoneInput";
 import PhoneShow from "../../generators/fields/outputs/PhoneShow";
 import {InputOnChangeHandler} from "../PropertyModel";

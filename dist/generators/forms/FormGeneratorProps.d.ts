@@ -19,6 +19,7 @@ export interface FormGeneratorProps {
     showButton?: boolean;
     formContent?: any;
     refresh?: () => void;
+    isEdit?: boolean;
 }
 export declare class FormGeneratorPropsObject {
     model: Model;
@@ -35,5 +36,6 @@ export declare class FormGeneratorPropsObject {
     errors: Errors;
     showButton?: boolean;
     refresh?: () => void;
-    constructor({ submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record, refresh }: FormGeneratorProps);
+    isEdit: boolean;
+    constructor({ submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record, refresh, isEdit }: FormGeneratorProps);
 }

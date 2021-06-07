@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { ShowContent } from "./ShowContent";
-export const EmbeddedShowContent = ({ model, record, showElement }) => {
-    return _jsx(ShowContent, { model: model, record: record, showElement: showElement }, void 0);
+export const EmbeddedShowContent = (props) => {
+    return _jsx(ShowContent, Object.assign({}, props), void 0);
 };

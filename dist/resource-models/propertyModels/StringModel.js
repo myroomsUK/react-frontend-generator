@@ -3,7 +3,7 @@ import { StringInput } from "../../generators/forms/inputs/StringInput";
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
 export class StringModel extends SinglePropertyModel {
-    setInputField(props) {
+    setInputField(props, configuration) {
         const { inputHandler } = props;
         const propsWithModel = Object.assign(Object.assign({}, props), { onClick: inputHandler });
         return StringInput(propsWithModel);
@@ -16,7 +16,7 @@ export class StringModel extends SinglePropertyModel {
             setFormValue(formValue.updateFormValue(name, value));
         };
     }
-    setOutputField(props) {
+    setOutputField(props, configuration) {
         return _jsx(StringShow, Object.assign({}, props), void 0);
     }
     getRecord(jsonValue) {

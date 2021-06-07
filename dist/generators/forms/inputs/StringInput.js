@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { CustomTextValidator } from "../formHelpers";
 export const StringInput = ({ model, id = model.id, label = model.label, onClick, value, hasError, errorMessage, adornment }) => {
+    console.log("value", value);
     const [localValue, setLocalValue] = useState("");
     useEffect(() => setLocalValue(value), [value]);
     const debounced = useDebouncedCallback(onClick, 1000);

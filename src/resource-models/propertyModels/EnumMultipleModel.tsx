@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
@@ -34,13 +34,12 @@ export class EnumMultipleModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
-        const {propertyRecord} = props;
-        const record: any = (propertyRecord===undefined) ? []: (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
+        const {value} = props;
+        const record: any = (value===undefined) ? []: (Array.isArray(value) ? value : Object.keys(value));
         return <ButtonsHorizontalList>
             {
                 record.map((singleRecord:any) =>{
-                    const eachProp = {...props, propertyRecord: singleRecord }
                     return <ChipGenerator propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
                 })
             }

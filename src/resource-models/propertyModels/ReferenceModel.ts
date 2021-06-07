@@ -29,8 +29,8 @@ export class ReferenceModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
-        return ReferenceShow({...props, propertyModel:this});
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
+        return ReferenceShow(props);
     }
 
     getRecord(record: any): any{

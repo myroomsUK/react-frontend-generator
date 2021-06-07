@@ -1,5 +1,6 @@
 import React from "react";
+import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
-export function FloatShow({propertyRecord}:any){
-    return <div>{propertyRecord}</div>
+export function FloatShow({value}:SingleSetInputFieldProps){
+    return <div>{value}</div>
 }

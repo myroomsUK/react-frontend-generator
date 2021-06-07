@@ -7,6 +7,7 @@ interface Props{
     propResourceName:string,
     propId:number,
     propEditPage?:any,
+    isEdit?: boolean,
 
 }
 
@@ -15,11 +16,12 @@ interface Props{
  * @param resourceName Resource that we get from the model
  * @param propId which id
  * @param propEditPage custom page
+ * @param isEdit
  * @constructor
  */
-export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage}) => {
+export const EditPage: React.FC<Props> = ({propResourceName:resourceName, propId, propEditPage, isEdit=true}) => {
 
     const {record, getNewResource} = useResource(resourceName, propId);
-    return <EditForm propResourceName={resourceName} propId={propId} record={record} refresh={getNewResource} propEditPage={propEditPage}/>
+    return <EditForm isEdit={isEdit} propResourceName={resourceName} propId={propId} record={record} refresh={getNewResource} propEditPage={propEditPage}/>
 }
 

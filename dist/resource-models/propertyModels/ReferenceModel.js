@@ -21,7 +21,7 @@ export class ReferenceModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        return ReferenceShow(Object.assign(Object.assign({}, props), { propertyModel: this }));
+        return ReferenceShow(props);
     }
     getRecord(record) {
         if (record) {

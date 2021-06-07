@@ -22,8 +22,8 @@ export declare class Model {
      */
     static createFromJson(jsonModel: any): Model;
     setFieldProps(requestedName: string, props: FieldProps): PropertyProps;
-    getInputField(requestedName: string, props: FieldProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
-    getOutputField(requestedName: string, props: FieldProps, outputElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;
+    getInputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
+    getOutputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;
     getAllPropertiesReadableNames(): {
         id: string;
         label: string;

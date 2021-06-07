@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import MoneyShow from "../../generators/fields/outputs/MoneyShow";
 import MoneyInput from "../../generators/forms/inputs/MoneyInput";
 import {InputOnChangeHandler} from "../PropertyModel";
@@ -17,7 +17,7 @@ export class MoneyModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         return MoneyShow(props);
     }
 

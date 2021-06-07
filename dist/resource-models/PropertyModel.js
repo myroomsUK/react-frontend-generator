@@ -1,4 +1,3 @@
-import { PropertyProps } from "./models/PropertyProps";
 /**
  * @Property {id} - Name of the property
  */
@@ -19,7 +18,8 @@ export class PropertyModel {
         this.read = read;
         this.colorMap = colorMap;
     }
-    setFieldProps(requestedName, props) {
-        return PropertyProps.createFromFieldProps(requestedName, props);
+    getPropertyField(props, isEdit = true) {
+        console.log("is edit", isEdit);
+        return (isEdit) ? this.getInputField(props) : this.getOutputField(props);
     }
 }

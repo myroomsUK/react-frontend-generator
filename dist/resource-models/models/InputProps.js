@@ -21,6 +21,7 @@ export class SingleInputProps extends InputProps {
         const inputHandler = this.model.getInputOnChangeHandler({ formValue, setFormValue });
         // @ts-ignore
         const value = (formValue) ? formValue[this.model.id] : undefined;
+        console.log("single value", value);
         return new SingleSetInputFieldProps(Object.assign(Object.assign({}, this), { inputHandler, label, hasError, errorMessage, value }));
     }
 }

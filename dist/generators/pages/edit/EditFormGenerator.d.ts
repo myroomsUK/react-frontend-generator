@@ -7,6 +7,7 @@ interface EditFormGeneratorProps {
     thenFunction?: any;
     catchfunction?: any;
     refresh: () => void;
+    isEdit?: boolean;
 }
 /**
  *

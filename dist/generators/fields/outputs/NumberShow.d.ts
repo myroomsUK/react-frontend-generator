@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export default function NumberShow({ propertyRecord }: any): JSX.Element;
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export default function NumberShow({ value }: SingleSetInputFieldProps): JSX.Element;

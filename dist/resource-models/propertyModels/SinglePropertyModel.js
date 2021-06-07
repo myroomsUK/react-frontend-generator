@@ -9,20 +9,16 @@ export class SinglePropertyModel extends PropertyModel {
         const hasError = errors.containsError(this.id);
         return { errorMessage, hasError };
     }
-    getInputField(props) {
+    getInputField(props, configuration) {
         const inputProps = new SingleInputProps(props);
-        return this.setInputField(inputProps.handleForSet());
+        return this.setInputField(inputProps.handleForSet(), configuration);
     }
-    getOutputField(props) {
-        const { record, showLabel } = props;
-        // @ts-ignore
-        const newProps = Object.assign(Object.assign({}, props), { propertyRecord: this.getRecord(record) });
-        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
+    getOutputField(props, configuration) {
+        var _a;
+        const inputProps = new SingleInputProps(props);
+        return _jsxs(_Fragment, { children: [((_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true) && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(inputProps.handleForSet(), configuration)] }, void 0);
     }
     getFormValue(value) {
-        return value;
-    }
-    getJsonFormValue(value) {
         return value;
     }
 }

@@ -1,11 +1,14 @@
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { EmbeddedFormContent } from "../../generators/forms/EmbeddedFormContent";
 import { Record } from "../Record";
 import { EmbeddedShowContent } from "../../generators/fields/EmbeddedShowContent";
 import { FormValue } from "../formvalue/FormValue";
 import { EmbeddedSingleInputProps } from "../models/InputProps";
+import { Typography } from "@material-ui/core";
+import _ from "lodash";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
-    setInputField(props) {
+    setInputField(props, configuration) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         // @ts-ignore
@@ -24,14 +27,37 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             refresh: refresh
         });
     }
-    getInputField(props, inputElement = undefined) {
+    getInputField(props, configuration) {
         const newProps = new EmbeddedSingleInputProps(props);
         return this.setInputField(newProps.handleForSet());
     }
-    setOutputField(props) {
+    getOutputField(props, configuration) {
         var _a;
-        const newProps = Object.assign(Object.assign({}, props), { record: (_a = props.record) !== null && _a !== void 0 ? _a : new Record() });
-        return EmbeddedShowContent(newProps);
+        const showLabel = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true;
+        const newProps = new EmbeddedSingleInputProps(props);
+        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
+    }
+    setOutputField(props, configuration) {
+        var _a;
+        const { formValue, refreshReferencesMap, referencesMap, setFormValue, errors, lockedFormValue, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
+        // @ts-ignore
+        const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
+        return _jsxs(_Fragment, { children: [((_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true) && _jsx(Typography, { children: _.startCase(this.label) }, void 0),
+                EmbeddedShowContent({
+                    model: this.getResource().getModel(),
+                    formContent: this.form,
+                    setFormValue: setParentFormValue,
+                    lockedFormValue: lockedFormValue,
+                    refreshReferencesMap: refreshReferencesMap,
+                    referencesMap: referencesMap,
+                    formValue: finalFormValue,
+                    errors: errors,
+                    partialSubmitHandler: partialSubmitHandler,
+                    submitHandler: submitHandler,
+                    record: record !== null && record !== void 0 ? record : new Record(),
+                    refresh: refresh
+                })] }, void 0);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return function (p1) {
@@ -42,8 +68,5 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     }
     getFormValue(value) {
         return FormValue.createFromRecord(value, this.getResource().getModel());
-    }
-    getJsonFormValue(value) {
-        return value.toJson();
     }
 }

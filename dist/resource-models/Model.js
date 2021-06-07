@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { PropertyModelRegistry } from "./PropertyModelRegistry";
 import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
 import { PropertyProps } from "./models/PropertyProps";
+import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -53,13 +54,13 @@ export class Model {
     setFieldProps(requestedName, props) {
         return PropertyProps.createFromFieldProps(requestedName, props);
     }
-    getInputField(requestedName, props, inputElement) {
+    getInputField(requestedName, props, viewElement) {
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getInputField(newProps, inputElement);
+        return this.getProperty(requestedName).getInputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement }));
     }
-    getOutputField(requestedName, props, outputElement, showLabel = true) {
+    getOutputField(requestedName, props, viewElement, showLabel = true) {
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getOutputField(newProps, outputElement);
+        return this.getProperty(requestedName).getOutputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement, showLabel: true }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

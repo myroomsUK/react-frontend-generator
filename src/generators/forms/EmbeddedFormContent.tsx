@@ -4,6 +4,7 @@ import {Model} from "../../resource-models/Model";
 import {Errors} from "../errors/Errors";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
 import {Record} from "../../resource-models/Record";
+import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
 
 interface EmbeddedFormContentProps{
     model:Model,
@@ -29,6 +30,9 @@ export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, 
         }
     },[formValue])
 
-    return <FormContent refresh={refresh} record={record} referencesMap={referencesMap} formContent={formContent} setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
+    const configuration = new PropertyFieldConfiguration({viewElement: formContent});
+
+
+    return <FormContent refresh={refresh} record={record} referencesMap={referencesMap} configuration={configuration}  setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={new FormValue()}/>
 }

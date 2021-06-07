@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 import React from "react";

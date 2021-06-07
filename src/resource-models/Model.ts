@@ -5,6 +5,7 @@ import {EmbeddedPropertyModel} from "./propertyModels/NestedPropertyModel";
 import {DetailedReactHTMLElement, ReactElement} from "react";
 import {FieldProps} from "./models/FieldProps";
 import {PropertyProps} from "./models/PropertyProps";
+import {PropertyFieldConfiguration} from "./configurations/PropertyFieldConfiguration";
 
 export interface Model{
     properties: PropertyModel[]
@@ -64,14 +65,14 @@ export class Model{
         return PropertyProps.createFromFieldProps(requestedName,props);
     }
 
-    getInputField(requestedName:string, props:FieldProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
+    getInputField(requestedName:string, props:FieldProps, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props)
-        return this.getProperty(requestedName).getInputField(newProps, inputElement);
+        return this.getProperty(requestedName).getInputField(newProps, new PropertyFieldConfiguration({viewElement:viewElement}));
     }
 
-    getOutputField(requestedName:string, props: FieldProps, outputElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
+    getOutputField(requestedName:string, props: FieldProps, viewElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getOutputField(newProps, outputElement)
+        return this.getProperty(requestedName).getOutputField(newProps,new PropertyFieldConfiguration({viewElement:viewElement, showLabel:true}));
     }
 
     getAllPropertiesReadableNames(){

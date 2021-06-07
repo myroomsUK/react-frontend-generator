@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export declare function FloatShow({ propertyRecord }: any): JSX.Element;
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export declare function FloatShow({ value }: SingleSetInputFieldProps): JSX.Element;

@@ -10,7 +10,7 @@ export declare class EnumSingleModel extends SinglePropertyModel {
     constructor(id: string, other: any);
     setInputField(props: EnumSingleInputFields): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: InputOnChangeHandler): (vars: any) => void;
-    setOutputField(props: any): JSX.Element;
+    setOutputField(props: SingleSetInputFieldProps): JSX.Element;
     getRecord(jsonValue: any): any;
 }
 export {};

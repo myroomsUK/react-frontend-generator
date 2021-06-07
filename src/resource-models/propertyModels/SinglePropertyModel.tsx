@@ -1,16 +1,12 @@
-import {InputFields, OutputFields, PropertyModel} from "../PropertyModel";
+import {InputFields, PropertyModel} from "../PropertyModel";
 import {Errors} from "../../generators/errors/Errors";
 import {Typography} from "@material-ui/core";
 import React from "react";
 import _ from 'lodash'
-import {InputProps, InputPropsInterface, SingleInputProps, SingleInputPropsInterface} from "../models/InputProps";
+import {SingleInputProps, SingleInputPropsInterface} from "../models/InputProps";
+import {PropertyFieldConfiguration} from "../configurations/PropertyFieldConfiguration";
 
 interface SingleErrors{
-    hasError:boolean,
-    errorMessage?: string
-}
-
-export interface SinglePropertyInputFields extends SingleInputFields{
     hasError:boolean,
     errorMessage?: string
 }
@@ -23,27 +19,21 @@ export abstract class SinglePropertyModel extends PropertyModel{
         return {errorMessage, hasError};
     }
 
-    getInputField(props: SingleInputPropsInterface): React.ReactElement<any, any> | null {
+    getInputField(props: SingleInputPropsInterface, configuration?:PropertyFieldConfiguration): React.ReactElement<any, any> | null {
         const inputProps = new SingleInputProps(props);
-        return this.setInputField(inputProps.handleForSet());
+        return this.setInputField(inputProps.handleForSet(), configuration);
     }
 
-    getOutputField(props:SingleOutputFields): React.ReactElement<any, any> | null {
-        const {record, showLabel} = props;
-        // @ts-ignore
-        const newProps:SingleOutputFields = {...props, propertyRecord:this.getRecord(record)  }
+    getOutputField(props:SingleInputPropsInterface, configuration?:PropertyFieldConfiguration): React.ReactElement<any, any> | null {
+        const inputProps = new SingleInputProps(props);
         return <>
-            {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
-            {this.setOutputField(newProps)}
+            {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}
+            {this.setOutputField(inputProps.handleForSet(), configuration)}
         </>
     }
 
     getFormValue(value:any){
         return value;
-    }
-
-    getJsonFormValue(value: any){
-        return value
     }
 }
 
@@ -51,8 +41,4 @@ interface SingleInputFields extends InputFields{
     inputHandler: (vars:any) => void,
     value: any,
     label:string
-}
-
-interface SingleOutputFields extends OutputFields{
-    propertyRecord:any
 }

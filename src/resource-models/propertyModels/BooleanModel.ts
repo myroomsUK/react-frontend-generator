@@ -1,4 +1,4 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import BooleanInput from "../../generators/forms/inputs/BooleanInput";
 import React from "react";
 import BooleanShow from "../../generators/fields/outputs/BooleanShow";
@@ -22,7 +22,7 @@ export class BooleanModel extends SinglePropertyModel {
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         return BooleanShow(props);
     }
 

@@ -1,8 +1,7 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import {TextareaInput} from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
 import {InputOnChangeHandler} from "../PropertyModel";
-import {Record} from "../Record";
 import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class TextareaModel extends SinglePropertyModel{

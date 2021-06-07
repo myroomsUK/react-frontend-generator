@@ -1,18 +1,35 @@
-import React from "react";
+import React, {DetailedReactHTMLElement} from "react";
 import Grid from "@material-ui/core/Grid";
 import {Divider, List, ListItem} from "@material-ui/core";
 import {Model} from "../../resource-models/Model";
 import {Record} from "../../resource-models/Record";
+import {FormValue} from "../../resource-models/formvalue/FormValue";
+import {Errors} from "../errors/Errors";
+import {ShowContent} from "./ShowContent";
+import {FormContent} from "../forms/FormContent";
 
 export interface IterableShowContentProps{
-    record: Map<number,Record>;
     model: Model,
-    resourceName: string;
+    record: Map<number, Record>;
+    resourceName: string,
+    setParentFormValue: (values:any) => void,
+    formContent?:  React.DetailedReactHTMLElement<any, any>
+    referencesMap: Map<string, any>
+    refreshReferencesMap:()=>void
+    formValueArray: Map<string,FormValue>,
+    errors: Errors,
+    label:string,
+    submitHandler: (e:any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    modifyOnlyLastElement?:boolean;
+    modifyRule?: (formvalue:any)=> boolean,
+    inputElement?: DetailedReactHTMLElement<any, any>,
+    refresh?: () => void
     showElement?: React.DetailedReactHTMLElement<any, any>;
 
 }
 
-export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, showElement}) => {
+export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue:any) => true, inputElement, refresh,showElement}) => {
 
     const recordsList = record;
     if(recordsList.size===0){
@@ -39,10 +56,14 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
                 <Grid item xs={12} md={12}>
                     <Grid container spacing={2}>
                         {
-                            model.properties.filter(propertyModel=> propertyModel.read ===true).map(propertyModel => {
+                            model.properties.filter((propertyModel)=> propertyModel.read ===true).map((propertyModel, index) => {
                                 const {xs, md, id} = propertyModel;
+
+                                // @ts-ignore
+                                const formValue = formValueArray[index]
+
                                 return <Grid item xs={xs} md={md}>
-                                    {propertyModel.getOutputField({record:singleRecord.getPropertyRecord(propertyModel.id), showLabel:true})}
+                                    <ShowContent setFormValue={setParentFormValue} refresh={refresh} record={record.get(index) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap}  model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}></ShowContent>
                                 </Grid>
                             })
                         }
