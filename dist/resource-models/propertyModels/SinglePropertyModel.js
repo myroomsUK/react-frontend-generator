@@ -2,6 +2,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import { PropertyModel } from "../PropertyModel";
 import { Typography } from "@material-ui/core";
 import _ from 'lodash';
+import { SingleInputProps } from "../models/InputProps";
 export class SinglePropertyModel extends PropertyModel {
     manipulateErrors(errors) {
         const errorMessage = errors.returnMessageByName(this.id);
@@ -9,14 +10,8 @@ export class SinglePropertyModel extends PropertyModel {
         return { errorMessage, hasError };
     }
     getInputField(props) {
-        const { errors, formValue, setFormValue } = props;
-        const { hasError, errorMessage } = this.manipulateErrors(errors);
-        const label = _.startCase(this.label);
-        const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        // @ts-ignore
-        const value = (formValue) ? formValue[this.id] : undefined;
-        const newProps = Object.assign(Object.assign({}, props), { hasError, errorMessage, inputHandler: inputHandler, value: value, label: label });
-        return this.setInputField(newProps);
+        const inputProps = new SingleInputProps(props);
+        return this.setInputField(inputProps.handleForSet());
     }
     getOutputField(props) {
         const { record, showLabel } = props;

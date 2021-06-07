@@ -3,9 +3,10 @@ import {TextareaInput} from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class TextareaModel extends SinglePropertyModel{
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {formValue, inputHandler} = props;
         const propsWithModel = {...props, model:this, onClick:inputHandler}
         return TextareaInput(propsWithModel);

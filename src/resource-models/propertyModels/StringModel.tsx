@@ -3,11 +3,12 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import StringShow from "../../generators/fields/outputs/StringShow";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 
 export class StringModel extends SinglePropertyModel{
 
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {inputHandler} = props;
         const propsWithModel: StringInput = {...props, onClick:inputHandler}
         return StringInput(propsWithModel);

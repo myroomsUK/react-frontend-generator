@@ -2,10 +2,9 @@ import {PropertyModel} from "./PropertyModel";
 import _ from 'lodash';
 import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {EmbeddedPropertyModel} from "./propertyModels/NestedPropertyModel";
-import React, {DetailedReactHTMLElement, ReactElement} from "react";
-import {Errors} from "../generators/errors/Errors";
-import {Record} from "./Record";
-import {FormValue} from "./formvalue/FormValue";
+import {DetailedReactHTMLElement, ReactElement} from "react";
+import {FieldProps} from "./models/FieldProps";
+import {PropertyProps} from "./models/PropertyProps";
 
 export interface Model{
     properties: PropertyModel[]
@@ -61,35 +60,18 @@ export class Model{
         return new Model(properties);
     }
 
-    setFieldProps(requestedName:string, props:PropertyProps){
-
-        const {formValue, record, setFormValue} = props
-        const localFormValue = (formvalue:any)=>{
-            const split = _.split(requestedName, ".");
-            split.pop();
-            const reqName = split.join(".");
-            const newFormValue = split.length===0 ? formvalue : formValue.updateFormValue(reqName, formvalue);
-            setFormValue(newFormValue)
-        }
-        return {
-            ...props,
-            model: this.getProperty(requestedName),
-            formValue: formValue.getPropertyFormValue(requestedName),
-            record: record.getPropertyRecord(requestedName),
-            setFormValue: localFormValue
-        }
-
+    setFieldProps(requestedName:string, props:FieldProps):PropertyProps{
+        return PropertyProps.createFromFieldProps(requestedName,props);
     }
 
-    getInputField(requestedName:string, props:PropertyProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
+    getInputField(requestedName:string, props:FieldProps, inputElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props)
         return this.getProperty(requestedName).getInputField(newProps, inputElement);
     }
 
-    getOutputField(requestedName:string, props: PropertyProps, outputElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
-        const {record} = props;
-        const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({record: record.getPropertyRecord(requestedName), showLabel:showLabel}, outputElement)
+    getOutputField(requestedName:string, props: FieldProps, outputElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
+        const newProps = this.setFieldProps(requestedName, props);
+        return this.getProperty(requestedName).getOutputField(newProps, outputElement)
     }
 
     getAllPropertiesReadableNames(){
@@ -100,20 +82,6 @@ export class Model{
             }
         } );
     }
-}
-
-interface PropertyProps{
-    model: Model,
-    record: Record,
-    formValue: FormValue,
-    setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
-    lockedFormValue: FormValue,
-    errors: Errors,
-    submitHandler: (e: any) => Promise<any>;
-    partialSubmitHandler: (e: any) => Promise<any>;
-    referencesMap: Map<string, any>;
-    refreshReferencesMap:()=>void;
-
 }
 
 

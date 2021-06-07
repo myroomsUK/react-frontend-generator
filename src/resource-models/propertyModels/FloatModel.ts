@@ -2,9 +2,10 @@ import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyMo
 import {FloatInput} from "../../generators/forms/inputs/FloatInput";
 import {FloatShow} from "../../generators/fields/outputs/FloatShow";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class FloatModel extends SinglePropertyModel{
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {inputHandler} = props;
         const propsWithModel = {...props, model:this, onClick:inputHandler}
         return FloatInput(propsWithModel);

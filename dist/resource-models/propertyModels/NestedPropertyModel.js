@@ -16,15 +16,6 @@ export class EmbeddedPropertyModel extends PropertyModel {
     manipulateErrors(fetchErrors) {
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
-    getInputField(props, inputElement = undefined) {
-        const { errors, formValue, setFormValue } = props;
-        const model = this;
-        model.label = _.startCase(this.label);
-        const nestedErrors = this.manipulateErrors(errors);
-        const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, inputElement: inputElement });
-        return this.setInputField(newProps);
-    }
     getOutputField(props, outputElement = undefined) {
         const { showLabel } = props;
         const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel(), showElement: outputElement });

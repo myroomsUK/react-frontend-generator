@@ -4,9 +4,10 @@ import React from "react";
 import SingleFileShow from "../../generators/fields/outputs/SingleFileShow";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class SingleFileModel extends SinglePropertyModel{
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {formValue, inputHandler} = props;
         // @ts-ignore
         const propsWithModel = {...props, model:this,  file:formValue[this.id]}

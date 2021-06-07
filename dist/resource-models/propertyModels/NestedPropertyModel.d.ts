@@ -1,20 +1,20 @@
-import { GridRange, InputFields, Option, OutputFields, PropertyModel } from "../PropertyModel";
+import { GridRange, Option, OutputFields, PropertyModel } from "../PropertyModel";
 import { Resource } from "../Resource";
 import { Errors } from "../../generators/errors/Errors";
 import { PropertyModelCore } from "../PropertyModelCore";
 import React from "react";
 import { Model } from "../Model";
 import { Record } from "../Record";
+import { InputProps } from "../models/InputProps";
 export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     resourceName: string;
     resource: Resource;
     constructor(id: string, others: PropertyModelCore);
     getResource(): Resource;
     manipulateErrors(fetchErrors: Errors): Errors;
-    getInputField(props: InputFields, inputElement?: undefined): React.ReactElement<any, any> | null;
     getOutputField(props: OutputFields, outputElement?: undefined): React.ReactElement<any, any> | null;
 }
-export interface EmbeddedInputFields extends InputFields {
+export interface EmbeddedInputFields extends InputProps {
     inputHandler: (vars: any) => void;
     model: EmbeddedPropertyModel;
     errors: Errors;
@@ -38,7 +38,7 @@ export interface EmbeddedInputFields extends InputFields {
     modifyRule?: any;
     record: Map<number, Record>;
 }
-export interface EmbeddedSingleInputFields extends InputFields {
+export interface EmbeddedSingleInputFields extends InputProps {
     inputHandler: (vars: any) => void;
     model: EmbeddedPropertyModel;
     errors: Errors;

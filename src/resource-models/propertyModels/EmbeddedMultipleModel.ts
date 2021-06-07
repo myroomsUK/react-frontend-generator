@@ -4,17 +4,29 @@ import {IterableFormContent} from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 import {Record} from "../Record";
 import {FormValue} from "../formvalue/FormValue";
+import {
+    EmbeddedMultipleInputProps,
+    EmbeddedMultipleInputPropsInterface,
+    EmbeddedSingleInputProps
+} from "../models/InputProps";
+import {EmbeddedMultipleSetInputFieldProps, EmbeddedSingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
-    setInputField(props: EmbeddedInputFields): React.ReactElement<any, any> | null {
-        const {formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record, refresh} =  props;
-        const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
+    setInputField(props: EmbeddedMultipleSetInputFieldProps): React.ReactElement<any, any> | null {
+
+        const {formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler,  record, refresh} =  props;
+        const setParentFormValue = (values:any) => {
+            console.log("formvalue to update", formValue)
+            setFormValue( formValue.updateFormValue(props.model.id, values));
+        }
         const newErrors = this.manipulateErrors(errors);
 
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
+        // @ts-ignore
+        const recordMap = (record) ? record : new Map();
 
         return IterableFormContent({
             model:this.getResource().getModel(),
@@ -28,12 +40,15 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             label:this.label,
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,
-            modifyOnlyLastElement: modifyOnlyLastElement,
-            modifyRule,
             inputElement,
-            record: record ?? new Map(),
+            record: recordMap,
             refresh:refresh
         })
+    }
+
+    getInputField(props: EmbeddedMultipleInputPropsInterface, inputElement = undefined): React.ReactElement<any, any> | null {
+        const newProps = new EmbeddedMultipleInputProps(props)
+        return this.setInputField(newProps.handleForSet());
     }
 
     getInputOnChangeHandler({formValue, setFormValue}: any): (vars: any) => void {

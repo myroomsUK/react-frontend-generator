@@ -5,6 +5,7 @@ import {Model} from "../../resource-models/Model";
 import {Errors} from "../errors/Errors";
 import {FormValue} from "../../resource-models/formvalue/FormValue";
 import {Record} from "../../resource-models/Record";
+import {InputProps} from "../../resource-models/models/InputProps";
 
 interface FormContentProps {
     submitHandler: (e:any) => Promise<any>;
@@ -30,7 +31,7 @@ interface FormContentProps {
  */
 export const FormContent: React.FC<FormContentProps> = (props) => {
 
-    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue={}, setFormValue, errors, formContent, record, refresh}=props;
+    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, formContent, record, refresh}=props;
     if(formContent){
         return React.cloneElement(formContent, props);
     }
@@ -40,9 +41,9 @@ export const FormContent: React.FC<FormContentProps> = (props) => {
             .filter((propertyModel:PropertyModel) => propertyModel.write === true)
             .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = {model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, refresh};
+                const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
                 return <Grid item xs={xs} md={md} key={index}>
-                    {propertyModel.getInputField(props)}
+                    {!lockedFormValue.has(propertyModel.id) && propertyModel.getInputField(props)}
                 </Grid>
             }
         )}

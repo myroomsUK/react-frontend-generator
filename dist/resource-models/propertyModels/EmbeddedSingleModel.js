@@ -3,6 +3,7 @@ import { EmbeddedFormContent } from "../../generators/forms/EmbeddedFormContent"
 import { Record } from "../Record";
 import { EmbeddedShowContent } from "../../generators/fields/EmbeddedShowContent";
 import { FormValue } from "../formvalue/FormValue";
+import { EmbeddedSingleInputProps } from "../models/InputProps";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
@@ -22,6 +23,10 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             record: record !== null && record !== void 0 ? record : new Record(),
             refresh: refresh
         });
+    }
+    getInputField(props, inputElement = undefined) {
+        const newProps = new EmbeddedSingleInputProps(props);
+        return this.setInputField(newProps.handleForSet());
     }
     setOutputField(props) {
         var _a;

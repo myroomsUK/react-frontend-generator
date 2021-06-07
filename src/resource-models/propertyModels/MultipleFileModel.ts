@@ -4,9 +4,10 @@ import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class MultipleFileModel extends SinglePropertyModel{
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors} = props;
         // @ts-ignore
         const propsWithModel = {...props, model:this, resourceName: this.resourceName, onChange:this.getInputOnChangeHandler({formValue, setFormValue}), files:formValue[this.id]}

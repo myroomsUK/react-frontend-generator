@@ -5,8 +5,9 @@ import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
-interface EnumSingleInputFields extends SinglePropertyInputFields{
+interface EnumSingleInputFields extends SingleSetInputFieldProps{
     options:any,
 }
 

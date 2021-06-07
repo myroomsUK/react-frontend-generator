@@ -23,7 +23,7 @@ export interface FormGeneratorProps {
 export declare class FormGeneratorPropsObject {
     model: Model;
     formValue: FormValue;
-    record: Record;
+    record?: Record;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;

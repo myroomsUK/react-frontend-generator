@@ -1,3 +1,4 @@
+import { PropertyProps } from "./models/PropertyProps";
 /**
  * @Property {id} - Name of the property
  */
@@ -17,5 +18,8 @@ export class PropertyModel {
         this.write = write;
         this.read = read;
         this.colorMap = colorMap;
+    }
+    setFieldProps(requestedName, props) {
+        return PropertyProps.createFromFieldProps(requestedName, props);
     }
 }

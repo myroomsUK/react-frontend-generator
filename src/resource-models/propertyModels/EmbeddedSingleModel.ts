@@ -1,17 +1,14 @@
 import React from "react";
-import {
-    EmbeddedInputFields,
-    EmbeddedPropertyModel,
-    EmbeddedSingleInputFields,
-    EmbeddedSingleOutputFields
-} from "./NestedPropertyModel";
+import {EmbeddedPropertyModel, EmbeddedSingleOutputFields} from "./NestedPropertyModel";
 import {EmbeddedFormContent} from "../../generators/forms/EmbeddedFormContent";
 import {Record} from "../Record";
 import {EmbeddedShowContent} from "../../generators/fields/EmbeddedShowContent";
 import {FormValue} from "../formvalue/FormValue";
+import {EmbeddedSingleSetInputFieldProps} from "../models/SetInputFieldProps";
+import {EmbeddedSingleInputProps, EmbeddedSingleInputPropsInterface} from "../models/InputProps";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
-    setInputField(props: EmbeddedSingleInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: EmbeddedSingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
 
@@ -31,6 +28,11 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
             record: record ?? new Record(),
             refresh: refresh
         })
+    }
+
+    getInputField(props: EmbeddedSingleInputPropsInterface, inputElement = undefined): React.ReactElement<any, any> | null {
+        const newProps = new EmbeddedSingleInputProps(props)
+        return this.setInputField(newProps.handleForSet());
     }
 
     setOutputField(props: EmbeddedSingleOutputFields): React.ReactElement<any, any> | null {

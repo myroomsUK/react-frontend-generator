@@ -3,6 +3,7 @@ import {Errors} from "../../generators/errors/Errors";
 import {Typography} from "@material-ui/core";
 import React from "react";
 import _ from 'lodash'
+import {InputProps, InputPropsInterface, SingleInputProps, SingleInputPropsInterface} from "../models/InputProps";
 
 interface SingleErrors{
     hasError:boolean,
@@ -22,15 +23,9 @@ export abstract class SinglePropertyModel extends PropertyModel{
         return {errorMessage, hasError};
     }
 
-    getInputField(props: InputFields): React.ReactElement<any, any> | null {
-        const {errors, formValue, setFormValue} = props;
-        const {hasError, errorMessage} = this.manipulateErrors(errors);
-        const label = _.startCase(this.label)
-        const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        // @ts-ignore
-        const value = (formValue) ? formValue[this.id] : undefined;
-        const newProps:SinglePropertyInputFields = {...props,  hasError, errorMessage, inputHandler:inputHandler, value:value, label: label}
-        return this.setInputField(newProps);
+    getInputField(props: SingleInputPropsInterface): React.ReactElement<any, any> | null {
+        const inputProps = new SingleInputProps(props);
+        return this.setInputField(inputProps.handleForSet());
     }
 
     getOutputField(props:SingleOutputFields): React.ReactElement<any, any> | null {

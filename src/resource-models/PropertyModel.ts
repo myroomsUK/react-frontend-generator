@@ -3,6 +3,10 @@ import {Errors} from "../generators/errors/Errors";
 import {FormValue} from "./formvalue/FormValue";
 import {Record} from "./Record";
 import {Model} from "./Model";
+import {PropertyProps} from "./models/PropertyProps";
+import {InputProps, InputPropsInterface} from "./models/InputProps";
+import {OutputProps} from "./models/OutputProps";
+import {FieldProps} from "./models/FieldProps";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -74,21 +78,22 @@ export abstract class PropertyModel {
 
     abstract manipulateErrors(errors:Errors):any;
 
-    abstract setInputField(props: any): ReactElement<any, any> | null;
+    abstract setInputField(props: InputPropsInterface): ReactElement<any, any> | null;
 
-    abstract getOutputField(props:OutputFields, outputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> |null;
+    abstract getInputField(props:InputPropsInterface, inputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any,any>|null;
 
-    abstract setOutputField(props:OutputFields): ReactElement<any, any> |null;
+    abstract getOutputField(props:OutputProps, outputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any, any> |null;
+
+    abstract setOutputField(props:OutputProps): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
-
-    abstract getInputField(props:InputFields, inputContent?: React.DetailedReactHTMLElement<any, any>): ReactElement<any,any>|null;
 
     abstract getRecord(jsonValue: any): any;
 
     abstract getFormValue(value: any):any;
 
     abstract getJsonFormValue(value: any): any;
+
 }
 
 export interface InputOnChangeHandler{
@@ -98,10 +103,10 @@ export interface InputOnChangeHandler{
 
 export interface InputFields{
     model: PropertyModel,
-    formValue: FormValue,
-    record?: object,
+    formValue: FormValue | Map<number, FormValue>,
+    record?: Record | Map<number,Record>,
     setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
-    lockedFormValue: any,
+    lockedFormValue: FormValue,
     errors: Errors,
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;

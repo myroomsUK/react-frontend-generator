@@ -5,8 +5,9 @@ import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
-interface EnumMultipleInputFields extends SinglePropertyInputFields{
+interface EnumMultipleInputFields extends SingleSetInputFieldProps{
     options: any;
 }
 

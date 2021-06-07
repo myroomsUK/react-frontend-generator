@@ -104,4 +104,19 @@ export class FormValue extends Object{
         return json;
 
     }
+
+    set(name:string, value:any):FormValue{
+        FormValue.defineProperty(this, name, {
+            value: value,
+            writable: true,
+            enumerable:true
+        });
+
+        return this;
+    }
+
+    has(name:string):boolean{
+        return FormValue.keys(this).includes(name);
+    }
+
 }

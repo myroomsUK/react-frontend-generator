@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { PropertyModelRegistry } from "./PropertyModelRegistry";
 import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
+import { PropertyProps } from "./models/PropertyProps";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -50,24 +51,15 @@ export class Model {
         return new Model(properties);
     }
     setFieldProps(requestedName, props) {
-        const { formValue, record, setFormValue } = props;
-        const localFormValue = (formvalue) => {
-            const split = _.split(requestedName, ".");
-            split.pop();
-            const reqName = split.join(".");
-            const newFormValue = split.length === 0 ? formvalue : formValue.updateFormValue(reqName, formvalue);
-            setFormValue(newFormValue);
-        };
-        return Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName), formValue: formValue.getPropertyFormValue(requestedName), record: record.getPropertyRecord(requestedName), setFormValue: localFormValue });
+        return PropertyProps.createFromFieldProps(requestedName, props);
     }
     getInputField(requestedName, props, inputElement) {
         const newProps = this.setFieldProps(requestedName, props);
         return this.getProperty(requestedName).getInputField(newProps, inputElement);
     }
     getOutputField(requestedName, props, outputElement, showLabel = true) {
-        const { record } = props;
-        const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({ record: record.getPropertyRecord(requestedName), showLabel: showLabel }, outputElement);
+        const newProps = this.setFieldProps(requestedName, props);
+        return this.getProperty(requestedName).getOutputField(newProps, outputElement);
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

@@ -8,6 +8,8 @@ import _ from "lodash";
 import {Model} from "../Model";
 import {Record} from "../Record";
 import {FormValue} from "../formvalue/FormValue";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
+import {InputProps} from "../models/InputProps";
 
 
 export abstract class EmbeddedPropertyModel extends PropertyModel{
@@ -28,16 +30,6 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
 
-    getInputField(props: InputFields, inputElement = undefined): React.ReactElement<any, any> | null {
-        const {errors, formValue, setFormValue} = props;
-        const model = this;
-        model.label = _.startCase(this.label)
-        const nestedErrors = this.manipulateErrors(errors);
-        const inputHandler = this.getInputOnChangeHandler({formValue, setFormValue});
-        const newProps:{ refreshReferencesMap: () => void; submitHandler: (e: any) => Promise<any>; referencesMap: Map<string, any>; setFormValue: React.Dispatch<React.SetStateAction<FormValue>>; form?: React.DetailedReactHTMLElement<any, any>; inputHandler: (vars: any) => void; record?: object; lockedFormValue: any; formValue: FormValue; errors: Errors; partialSubmitHandler: (e: any) => Promise<any>; inputElement: any } = {...props, errors:nestedErrors, inputHandler:inputHandler, inputElement: inputElement}
-        return this.setInputField(newProps);
-    }
-
     getOutputField(props:OutputFields, outputElement=undefined): React.ReactElement<any, any> | null {
         const {showLabel} = props;
         const newProps = {...props, model: this.getResource().getModel(), showElement:outputElement}
@@ -49,7 +41,7 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
 }
 
 
-export interface EmbeddedInputFields extends InputFields{
+export interface EmbeddedInputFields extends InputProps{
     inputHandler: (vars:any) => void,
     model: EmbeddedPropertyModel,
     errors: Errors,
@@ -74,7 +66,7 @@ export interface EmbeddedInputFields extends InputFields{
     record: Map<number, Record>;
 }
 
-export interface EmbeddedSingleInputFields extends InputFields{
+export interface EmbeddedSingleInputFields extends InputProps{
     inputHandler: (vars:any) => void,
     model: EmbeddedPropertyModel,
     errors: Errors,

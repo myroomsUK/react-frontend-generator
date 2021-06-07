@@ -3,9 +3,10 @@ import BooleanInput from "../../generators/forms/inputs/BooleanInput";
 import React from "react";
 import BooleanShow from "../../generators/fields/outputs/BooleanShow";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class BooleanModel extends SinglePropertyModel {
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
       const {inputHandler, formValue} = props;
       // @ts-ignore
         const propsWithModel = {...props, onClick:inputHandler,checked:formValue[this.id] ?? false}

@@ -1,7 +1,8 @@
-import { SinglePropertyInputFields, SinglePropertyModel } from "./SinglePropertyModel";
+import { SinglePropertyModel } from "./SinglePropertyModel";
 import React from "react";
 import { InputOnChangeHandler } from "../PropertyModel";
-interface EnumMultipleInputFields extends SinglePropertyInputFields {
+import { SingleSetInputFieldProps } from "../models/SetInputFieldProps";
+interface EnumMultipleInputFields extends SingleSetInputFieldProps {
     options: any;
 }
 export declare class EnumMultipleModel extends SinglePropertyModel {

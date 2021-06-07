@@ -3,13 +3,19 @@ import { IterableFormContent } from "../../generators/forms/IterableFormContent"
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
 import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
+import { EmbeddedMultipleInputProps } from "../models/InputProps";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props) {
-        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record, refresh } = props;
-        const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
+        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const setParentFormValue = (values) => {
+            console.log("formvalue to update", formValue);
+            setFormValue(formValue.updateFormValue(props.model.id, values));
+        };
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
+        // @ts-ignore
+        const recordMap = (record) ? record : new Map();
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
@@ -22,12 +28,14 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
-            modifyOnlyLastElement: modifyOnlyLastElement,
-            modifyRule,
             inputElement,
-            record: record !== null && record !== void 0 ? record : new Map(),
+            record: recordMap,
             refresh: refresh
         });
+    }
+    getInputField(props, inputElement = undefined) {
+        const newProps = new EmbeddedMultipleInputProps(props);
+        return this.setInputField(newProps.handleForSet());
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return function (p1) {
