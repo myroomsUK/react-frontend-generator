@@ -16,6 +16,7 @@ interface EmbeddedShowContentProps {
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?: React.DetailedReactHTMLElement<any, any>;
     refresh?: () => void;
+    showElement?: React.DetailedReactHTMLElement<any, any>;
 }
 export declare const EmbeddedShowContent: React.FC<EmbeddedShowContentProps>;
 export {};

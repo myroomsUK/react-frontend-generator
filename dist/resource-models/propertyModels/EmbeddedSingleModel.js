@@ -15,7 +15,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
         return EmbeddedFormContent({
             model: this.getResource().getModel(),
-            formContent: this.form,
+            formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
             setParentFormValue: setParentFormValue,
             refreshReferencesMap: refreshReferencesMap,
             referencesMap: referencesMap,
@@ -35,7 +35,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         var _a;
         const showLabel = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true;
         const newProps = new EmbeddedSingleInputProps(props);
-        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
+        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps, configuration)] }, void 0);
     }
     setOutputField(props, configuration) {
         var _a;
@@ -46,7 +46,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         return _jsxs(_Fragment, { children: [((_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true) && _jsx(Typography, { children: _.startCase(this.label) }, void 0),
                 EmbeddedShowContent({
                     model: this.getResource().getModel(),
-                    formContent: this.form,
+                    formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                    showElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
                     setFormValue: setParentFormValue,
                     lockedFormValue: lockedFormValue,
                     refreshReferencesMap: refreshReferencesMap,

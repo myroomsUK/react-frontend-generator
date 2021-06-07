@@ -23,7 +23,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
 
         return EmbeddedFormContent({
             model:this.getResource().getModel(),
-            formContent: this.form,
+            formContent: configuration?.viewElement,
             setParentFormValue:setParentFormValue,
             refreshReferencesMap:refreshReferencesMap,
             referencesMap:referencesMap,
@@ -46,7 +46,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
         const newProps = new EmbeddedSingleInputProps(props)
         return <>
             {showLabel && <Typography>{_.startCase(this.label)}</Typography>}
-        {this.setOutputField(newProps)}
+        {this.setOutputField(newProps, configuration)}
         </>
     }
 
@@ -62,7 +62,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
             {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}
             {EmbeddedShowContent({
                 model: this.getResource().getModel(),
-                formContent: this.form,
+                formContent: configuration?.viewElement,
+                showElement: configuration?.viewElement,
                 setFormValue: setParentFormValue,
                 lockedFormValue: lockedFormValue,
                 refreshReferencesMap: refreshReferencesMap,
