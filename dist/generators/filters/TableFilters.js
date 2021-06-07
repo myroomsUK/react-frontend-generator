@@ -19,8 +19,14 @@ export const useRouteFilters = (resourceNameToUse, presetFilters) => {
         const routeFilters = {};
         // @ts-ignore
         for (let key of searchParams.keys()) {
+            let value = searchParams.get(key);
+            if (key.endsWith("[]")) {
+                // @ts-ignore
+                value = [value];
+                key = key.substring(0, key.length - 2);
+            }
             // @ts-ignore
-            routeFilters[key] = searchParams.get(key);
+            routeFilters[key] = value;
         }
         return routeFilters;
     };
