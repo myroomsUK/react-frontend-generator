@@ -1,7 +1,8 @@
+import { jsx as _jsx } from "react/jsx-runtime";
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import { EnumInput, getAutocompleteValuePosition } from "../../generators/forms/inputs/EnumInput";
-import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
 import { Record } from "../Record";
+import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 export class EnumSingleModel extends SinglePropertyModel {
     constructor(id, other) {
         super(id, other);
@@ -22,7 +23,7 @@ export class EnumSingleModel extends SinglePropertyModel {
     }
     setOutputField(props) {
         const { propertyRecord } = props;
-        return SingleEnumShow({ propertyModel: this, propertyRecord, colorMap: this.colorMap });
+        return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: propertyRecord, colorMap: this.colorMap }, void 0);
     }
     getRecord(jsonValue) {
         return Record.createFromJsonNoModel(jsonValue);

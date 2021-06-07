@@ -1,6 +1,6 @@
-/// <reference types="react" />
 import { SinglePropertyInputFields, SinglePropertyModel } from "./SinglePropertyModel";
 import { InputOnChangeHandler } from "../PropertyModel";
+import React from "react";
 interface EnumSingleInputFields extends SinglePropertyInputFields {
     options: any;
 }
@@ -9,7 +9,7 @@ export declare class EnumSingleModel extends SinglePropertyModel {
     constructor(id: string, other: any);
     setInputField(props: EnumSingleInputFields): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: InputOnChangeHandler): (vars: any) => void;
-    setOutputField(props: any): React.ReactElement<any, any> | null;
+    setOutputField(props: any): JSX.Element;
     getRecord(jsonValue: any): any;
 }
 export {};
