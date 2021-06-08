@@ -23,10 +23,9 @@ export class PropertyProps {
             setFormValue(newFormValue);
         };
         const propertyProps = new PropertyProps(Object.assign(Object.assign({}, props), { model: model.getProperty(requestedName) }));
-        propertyProps.formValue = formValue.getPropertyFormValue(requestedName);
-        propertyProps.record = record.getPropertyRecord(requestedName);
+        propertyProps.formValue = (formValue) ? formValue.getPropertyFormValue(requestedName) : undefined;
+        propertyProps.record = record ? record.getPropertyRecord(requestedName) : undefined;
         propertyProps.setFormValue = localFormValue;
-        console.log("formValue", formValue.getPropertyFormValue(requestedName));
         return propertyProps;
     }
 }

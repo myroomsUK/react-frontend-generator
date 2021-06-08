@@ -33,6 +33,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { useCookies } from "react-cookie";
 import { Record } from "../../resource-models/Record";
 import OperationButton from "../../rendering/components/buttons/OperationButton";
+import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 export function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters = [] } = props;
     const createSortHandler = (property) => (event) => {
@@ -183,7 +184,10 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
         const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        return propertyModel.getOutputField({ record: record.getPropertyRecord(id), showLabel: false });
+        const configuration = new PropertyFieldConfiguration({ showLabel: false });
+        const recordID = record.getPropertyRecord(id);
+        console.log("recordid", recordID);
+        return propertyModel.getOutputField({ model: propertyModel, record: record.getPropertyRecord(id) }, configuration);
     };
     const columns = useCallback((row) => localTable.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);

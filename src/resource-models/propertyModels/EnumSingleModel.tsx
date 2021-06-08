@@ -34,8 +34,8 @@ export class EnumSingleModel extends SinglePropertyModel{
     }
 
     setOutputField(props: SingleSetInputFieldProps) {
-        const {value} = props
-        return <ChipGenerator propertyModel={this} propertyRecord={value} colorMap={this.colorMap}/>
+        const {value, record} = props
+        return <ChipGenerator propertyModel={this} propertyRecord={record} colorMap={this.colorMap}/>
     }
 
     getRecord(jsonValue: any): any {

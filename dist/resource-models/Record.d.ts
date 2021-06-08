@@ -9,5 +9,6 @@ export declare class Record extends Object {
     static createFromJson(jsonModel: any, model: Model): Record;
     static createFromJsonNoModel(jsonModel: any): any;
     getPropertyRecord(name: string): any;
+    getListPropertyRecord(name: string): any;
     toJson(): this;
 }

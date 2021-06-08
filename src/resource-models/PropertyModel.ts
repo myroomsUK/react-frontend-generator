@@ -98,7 +98,6 @@ export abstract class PropertyModel {
     abstract getFormValue(value: any):any;
 
     getPropertyField(props:InputPropsInterface, isEdit: boolean = true ){
-        console.log("is edit", isEdit)
         return (isEdit) ? this.getInputField(props) : this.getOutputField(props)
     }
 

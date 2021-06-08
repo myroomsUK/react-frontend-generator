@@ -1,6 +1,7 @@
 import { PropertyProps } from "./PropertyProps";
 import _ from "lodash";
 import { EmbeddedMultipleSetInputFieldProps, EmbeddedSingleSetInputFieldProps, SingleSetInputFieldProps } from "./SetInputFieldProps";
+import { Errors } from "../../generators/errors/Errors";
 export class InputProps extends PropertyProps {
     constructor(props) {
         super(props);
@@ -14,14 +15,14 @@ export class SingleInputProps extends InputProps {
         this.model = model;
     }
     handleForSet() {
+        var _a;
         const formValue = this.formValue;
         const setFormValue = this.setFormValue;
-        const { hasError, errorMessage } = this.model.manipulateErrors(this.errors);
+        const { hasError, errorMessage } = this.model.manipulateErrors((_a = this.errors) !== null && _a !== void 0 ? _a : new Errors([]));
         const label = _.startCase(this.model.label);
         const inputHandler = this.model.getInputOnChangeHandler({ formValue, setFormValue });
         // @ts-ignore
         const value = (formValue) ? formValue[this.model.id] : undefined;
-        console.log("single value", value);
         return new SingleSetInputFieldProps(Object.assign(Object.assign({}, this), { inputHandler, label, hasError, errorMessage, value }));
     }
 }

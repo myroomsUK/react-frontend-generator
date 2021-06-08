@@ -2,13 +2,13 @@ import React from "react";
 import {Link} from "@material-ui/core";
 import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
-export default function ReferenceShow({model,value}:SingleSetInputFieldProps){
-    console.log("propertyRecord", value)
-    if(value){
+export default function ReferenceShow({model,record}:SingleSetInputFieldProps){
+    console.log("propertyRecord", record)
+    if(record){
         // @ts-ignore
-        const id = (typeof value==="number") ? value : value["id"]
+        const id = (typeof record==="number") ? record : record["id"]
         // @ts-ignore
-        const name = (typeof value==="number") ? value : value[model.optionText]
+        const name = (typeof record==="number") ? record : record[model.optionText]
         return <Link color="secondary" href={`/${model.resourceName}/${id}/show`}>{name}</Link>
     }
     return <></>

@@ -60,7 +60,7 @@ export class Model {
     }
     getOutputField(requestedName, props, viewElement, showLabel = true) {
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getOutputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement, showLabel: true }));
+        return this.getProperty(requestedName).getOutputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement, showLabel: showLabel }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

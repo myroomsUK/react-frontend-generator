@@ -52,6 +52,15 @@ export class Record extends Object {
         // @ts-ignore
         return split.reduce(reducerModel, this);
     }
+    getListPropertyRecord(name) {
+        const split = _.split(name, ".");
+        split.pop();
+        const reducerModel = (accumulator, value) => {
+            return accumulator ? accumulator[value] : new Record();
+        };
+        // @ts-ignore
+        return split.reduce(reducerModel, this);
+    }
     toJson() {
         return this;
         /*const json = {};

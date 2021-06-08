@@ -11,6 +11,7 @@ import {
 import {Record} from "../Record";
 import {EmbeddedSingleModel} from "../propertyModels/EmbeddedSingleModel";
 import {EmbeddedMultipleModel} from "../propertyModels/EmbeddedMultipleModel";
+import {Errors} from "../../generators/errors/Errors";
 
 /**
  * INPUT PROPS
@@ -57,12 +58,11 @@ export class SingleInputProps extends InputProps{
     handleForSet(){
         const formValue = this.formValue;
         const setFormValue = this.setFormValue
-        const {hasError, errorMessage} = this.model.manipulateErrors(this.errors);
+        const {hasError, errorMessage} = this.model.manipulateErrors(this.errors ?? new Errors([]));
         const label = _.startCase(this.model.label)
         const inputHandler = this.model.getInputOnChangeHandler({formValue,setFormValue});
         // @ts-ignore
         const value = (formValue) ? formValue[this.model.id] : undefined;
-        console.log("single value", value)
         return new SingleSetInputFieldProps({...this, inputHandler, label, hasError, errorMessage, value})
     }
 

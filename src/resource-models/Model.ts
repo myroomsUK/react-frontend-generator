@@ -72,7 +72,7 @@ export class Model{
 
     getOutputField(requestedName:string, props: FieldProps, viewElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getOutputField(newProps,new PropertyFieldConfiguration({viewElement:viewElement, showLabel:true}));
+        return this.getProperty(requestedName).getOutputField(newProps,new PropertyFieldConfiguration({viewElement:viewElement, showLabel:showLabel}));
     }
 
     getAllPropertiesReadableNames(){
