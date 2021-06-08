@@ -4,6 +4,7 @@ const LD_MIME_TYPE = 'application/ld+json';
 const PATCH_MIME_TYPE = 'application/merge-patch+json';
 export function fetch(id, options = {}) {
     const ENTRYPOINT = process.env.REACT_APP_API_ENDPOINT;
+    console.log("Entrypoint", ENTRYPOINT);
     if ('undefined' === typeof options.headers)
         options.headers = new Headers();
     if (null === options.headers.get('Accept'))
@@ -36,6 +37,7 @@ export function fetch(id, options = {}) {
 }
 export function ldfetch(id, options = {}) {
     const ENTRYPOINT = process.env.REACT_APP_API_ENDPOINT;
+    console.log("Entrypoint", ENTRYPOINT);
     if ('undefined' === typeof options.headers)
         options.headers = new Headers();
     if (null === options.headers.get('Accept'))
