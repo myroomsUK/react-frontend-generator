@@ -23,8 +23,7 @@ export default function EmbeddedList({model, title, data, totalItems, table, ite
         const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        const configuration = new PropertyFieldConfiguration({showLabel:false})
-        return propertyModel.getOutputField({model:propertyModel,record: record.getPropertyRecord(id)}, configuration)
+        return localModel.getOutputField(id, {model:localModel,record: record}, undefined, false)
     }
 
     const columns = useCallback((row) => table.map( ({id, label}) => {

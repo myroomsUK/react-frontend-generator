@@ -2,7 +2,6 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { SmallList } from "./SmallList";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Record } from "../../../resource-models/Record";
-import { PropertyFieldConfiguration } from "../../../resource-models/configurations/PropertyFieldConfiguration";
 export default function EmbeddedList({ model, title, data, totalItems, table, itemOperations }) {
     const [localModel, setLocalModel] = useState(model);
     const [page, setPage] = useState(0);
@@ -19,8 +18,7 @@ export default function EmbeddedList({ model, title, data, totalItems, table, it
         const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
-        const configuration = new PropertyFieldConfiguration({ showLabel: false });
-        return propertyModel.getOutputField({ model: propertyModel, record: record.getPropertyRecord(id) }, configuration);
+        return localModel.getOutputField(id, { model: localModel, record: record }, undefined, false);
     };
     const columns = useCallback((row) => table.map(({ id, label }) => {
         return getRowElement(row, id, label, localModel);

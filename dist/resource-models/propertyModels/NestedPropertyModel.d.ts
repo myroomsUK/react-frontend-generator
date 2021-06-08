@@ -7,5 +7,5 @@ export declare abstract class EmbeddedPropertyModel extends PropertyModel {
     resource: Resource;
     constructor(id: string, others: PropertyModelCore);
     getResource(): Resource;
-    manipulateErrors(fetchErrors: Errors): Errors;
+    manipulateErrors(fetchErrors?: Errors): Errors;
 }

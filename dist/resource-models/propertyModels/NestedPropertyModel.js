@@ -1,5 +1,6 @@
 import { PropertyModel } from "../PropertyModel";
 import { Resource } from "../Resource";
+import { Errors } from "../../generators/errors/Errors";
 export class EmbeddedPropertyModel extends PropertyModel {
     constructor(id, others) {
         super(id, others);
@@ -10,7 +11,7 @@ export class EmbeddedPropertyModel extends PropertyModel {
         return this.resource;
         throw new Error(`Accessing inexistent resource for ${this.resourceName}`);
     }
-    manipulateErrors(fetchErrors) {
+    manipulateErrors(fetchErrors = new Errors([])) {
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
 }

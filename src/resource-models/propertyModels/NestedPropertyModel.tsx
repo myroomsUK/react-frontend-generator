@@ -21,7 +21,7 @@ export abstract class EmbeddedPropertyModel extends PropertyModel{
         throw new Error(`Accessing inexistent resource for ${this.resourceName}`);
     }
 
-    manipulateErrors(fetchErrors:Errors): Errors {
+    manipulateErrors(fetchErrors:Errors = new Errors([])): Errors {
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
     }
 }
