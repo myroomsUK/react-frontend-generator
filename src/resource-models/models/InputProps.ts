@@ -57,13 +57,16 @@ export class SingleInputProps extends InputProps{
 
     handleForSet(){
         const formValue = this.formValue;
+        const record = this.record;
         const setFormValue = this.setFormValue
         const {hasError, errorMessage} = this.model.manipulateErrors(this.errors ?? new Errors([]));
         const label = _.startCase(this.model.label)
         const inputHandler = this.model.getInputOnChangeHandler({formValue,setFormValue});
         // @ts-ignore
         const value = (formValue) ? formValue[this.model.id] : undefined;
-        return new SingleSetInputFieldProps({...this, inputHandler, label, hasError, errorMessage, value})
+        // @ts-ignore
+        const propertyRecord = (record) ? record[this.model.id] : undefined;
+        return new SingleSetInputFieldProps({...this, inputHandler, label, hasError, errorMessage, value, propertyRecord})
     }
 
 }

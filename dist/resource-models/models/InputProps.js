@@ -17,13 +17,16 @@ export class SingleInputProps extends InputProps {
     handleForSet() {
         var _a;
         const formValue = this.formValue;
+        const record = this.record;
         const setFormValue = this.setFormValue;
         const { hasError, errorMessage } = this.model.manipulateErrors((_a = this.errors) !== null && _a !== void 0 ? _a : new Errors([]));
         const label = _.startCase(this.model.label);
         const inputHandler = this.model.getInputOnChangeHandler({ formValue, setFormValue });
         // @ts-ignore
         const value = (formValue) ? formValue[this.model.id] : undefined;
-        return new SingleSetInputFieldProps(Object.assign(Object.assign({}, this), { inputHandler, label, hasError, errorMessage, value }));
+        // @ts-ignore
+        const propertyRecord = (record) ? record[this.model.id] : undefined;
+        return new SingleSetInputFieldProps(Object.assign(Object.assign({}, this), { inputHandler, label, hasError, errorMessage, value, propertyRecord }));
     }
 }
 export class EmbeddedSingleInputProps extends InputProps {

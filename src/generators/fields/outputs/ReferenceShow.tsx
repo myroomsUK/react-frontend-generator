@@ -3,7 +3,6 @@ import {Link} from "@material-ui/core";
 import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
 export default function ReferenceShow({model,record}:SingleSetInputFieldProps){
-    console.log("propertyRecord", record)
     if(record){
         // @ts-ignore
         const id = (typeof record==="number") ? record : record["id"]

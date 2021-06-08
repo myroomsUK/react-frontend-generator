@@ -1,7 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { Link } from "@material-ui/core";
 export default function ReferenceShow({ model, record }) {
-    console.log("propertyRecord", record);
     if (record) {
         // @ts-ignore
         const id = (typeof record === "number") ? record : record["id"];

@@ -78,7 +78,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         const recordMap = (record) ? record : new Map();
 
         return<>
-            {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}
+            {/*{(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}*/}
             {IterableShowContent({
                 model:this.getResource().getModel(),
                 resourceName:this.resourceName,

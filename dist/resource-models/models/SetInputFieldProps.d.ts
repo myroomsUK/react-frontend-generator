@@ -13,11 +13,13 @@ interface SingleSetInputFieldPropsInterface extends SingleInputPropsInterface {
     hasError: boolean;
     errorMessage?: string;
     value: any;
+    propertyRecord: any;
 }
 export declare class SingleSetInputFieldProps implements SingleInputPropsInterface {
     hasError: boolean;
     errorMessage?: string;
     value: any;
+    propertyRecord: any;
     inputHandler: (vars: any) => void;
     errors: Errors;
     formValue: FormValue;

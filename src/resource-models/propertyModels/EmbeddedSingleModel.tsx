@@ -59,7 +59,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
         const finalFormValue = (formValue) ? formValue[this.id] : new FormValue()
 
         return<>
-            {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}
+           {/* {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}*/}
             {EmbeddedShowContent({
                 model: this.getResource().getModel(),
                 formContent: configuration?.viewElement,

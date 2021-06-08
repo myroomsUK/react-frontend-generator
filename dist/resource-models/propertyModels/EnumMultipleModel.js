@@ -23,9 +23,9 @@ export class EnumMultipleModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        const { value } = props;
-        const record = (value === undefined) ? [] : (Array.isArray(value) ? value : Object.keys(value));
-        return _jsx(ButtonsHorizontalList, { children: record.map((singleRecord) => {
+        const { value, record, propertyRecord } = props;
+        const newrecord = (record === undefined) ? [] : (Array.isArray(record) ? record : Object.keys(record));
+        return _jsx(ButtonsHorizontalList, { children: newrecord.map((singleRecord) => {
                 return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: singleRecord, colorMap: this.colorMap }, void 0);
             }) }, void 0);
     }

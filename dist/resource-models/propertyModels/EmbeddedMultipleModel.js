@@ -51,31 +51,29 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps, configuration)] }, void 0);
     }
     setOutputField({ record, model, setFormValue, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }, configuration) {
-        var _a;
         const setParentFormValue = (values) => { setFormValue(formValue.updateFormValue(model.id, values)); };
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
         // @ts-ignore
         const recordMap = (record) ? record : new Map();
-        return _jsxs(_Fragment, { children: [((_a = configuration === null || configuration === void 0 ? void 0 : configuration.showLabel) !== null && _a !== void 0 ? _a : true) && _jsx(Typography, { children: _.startCase(this.label) }, void 0),
-                IterableShowContent({
-                    model: this.getResource().getModel(),
-                    resourceName: this.resourceName,
-                    setParentFormValue: setParentFormValue,
-                    formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
-                    referencesMap: referencesMap,
-                    refreshReferencesMap: refreshReferencesMap,
-                    errors: newErrors,
-                    formValueArray: formValueArray,
-                    label: this.label,
-                    partialSubmitHandler: partialSubmitHandler,
-                    submitHandler: submitHandler,
-                    inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
-                    showElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
-                    record: recordMap,
-                    refresh: refresh
-                })] }, void 0);
+        return _jsx(_Fragment, { children: IterableShowContent({
+                model: this.getResource().getModel(),
+                resourceName: this.resourceName,
+                setParentFormValue: setParentFormValue,
+                formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                referencesMap: referencesMap,
+                refreshReferencesMap: refreshReferencesMap,
+                errors: newErrors,
+                formValueArray: formValueArray,
+                label: this.label,
+                partialSubmitHandler: partialSubmitHandler,
+                submitHandler: submitHandler,
+                inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                showElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                record: recordMap,
+                refresh: refresh
+            }) }, void 0);
     }
     getRecord(jsonValue) {
         const map = new Map();

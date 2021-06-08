@@ -19,13 +19,15 @@ import React from "react";
 interface SingleSetInputFieldPropsInterface extends SingleInputPropsInterface{
     hasError: boolean,
     errorMessage?: string
-    value: any
+    value: any,
+    propertyRecord: any
 }
 
 export class SingleSetInputFieldProps implements SingleInputPropsInterface{
     hasError:boolean
     errorMessage?: string
     value: any
+    propertyRecord: any
     inputHandler: (vars:any)=>void
     errors: Errors;
     formValue: FormValue;
@@ -40,7 +42,7 @@ export class SingleSetInputFieldProps implements SingleInputPropsInterface{
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>
 
     constructor(props: SingleSetInputFieldPropsInterface) {
-        const {hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue} = props;
+        const {hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord} = props;
         this.hasError = hasError;
         this.errorMessage = errorMessage;
         this.value = value;
@@ -56,6 +58,7 @@ export class SingleSetInputFieldProps implements SingleInputPropsInterface{
         this.refreshReferencesMap = refreshReferencesMap;
         this.record = record;
         this.setFormValue = setFormValue
+        this.propertyRecord = propertyRecord;
     }
 }
 
