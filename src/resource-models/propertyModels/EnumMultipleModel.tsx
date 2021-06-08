@@ -35,12 +35,12 @@ export class EnumMultipleModel extends SinglePropertyModel{
     }
 
     setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
-        const {value, record, propertyRecord} = props;
+        const {record} = props;
         const newrecord: any = (record===undefined) ? []: (Array.isArray(record) ? record : Object.keys(record));
         return <ButtonsHorizontalList>
             {
-                newrecord.map((singleRecord:any) =>{
-                    return <ChipGenerator propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
+                newrecord.map((singleRecord:any, index:number) =>{
+                    return <ChipGenerator key={index} propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
                 })
             }
         </ButtonsHorizontalList>

@@ -15,8 +15,6 @@ export class PropertyProps {
     }
     static createFromFieldProps(requestedName, props) {
         const { formValue, record, setFormValue, model } = props;
-        console.log("model", model);
-        console.log("record", record);
         const localFormValue = (formvalue) => {
             const split = _.split(requestedName, ".");
             split.pop();
