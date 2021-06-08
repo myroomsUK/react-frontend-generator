@@ -12,7 +12,7 @@ import {PropertyFieldConfiguration} from "../../resource-models/configurations/P
 
 export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
 
-    const {submitHandler, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Salva", isEdit } = props
+    const {submitHandler, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Save", isEdit } = props
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref= useRef(null);

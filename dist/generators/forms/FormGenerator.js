@@ -9,7 +9,7 @@ import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHor
 import { genericError } from "../../redux/actions/verbs/edit";
 import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 export const FormGenerator = (props) => {
-    const { submitHandler, refresh, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Salva", isEdit } = props;
+    const { submitHandler, refresh, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Save", isEdit } = props;
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref = useRef(null);

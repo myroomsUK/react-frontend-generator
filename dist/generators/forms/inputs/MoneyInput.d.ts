@@ -10,4 +10,4 @@ export interface MoneyInput {
     errorMessage?: string;
     adornment?: any;
 }
-export default function ({ model, id, label, onClick, value }: MoneyInput): JSX.Element;
+export default function ({ model, id, label, onClick, value: integerValue }: MoneyInput): JSX.Element;

@@ -1,6 +1,6 @@
 // @ts-ignore
 import CurrencyTextField from '@unicef/material-ui-currency-textfield'
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {MoneyModel} from "../../../resource-models/propertyModels/MoneyModel";
 
 export interface MoneyInput{
@@ -14,10 +14,21 @@ export interface MoneyInput{
     adornment?: any;
 }
 
-export default function ({model, id= model.id, label= model.label, onClick, value}:MoneyInput){
+export default function ({model, id= model.id, label= model.label, onClick, value:integerValue}:MoneyInput){
+
+    const [localValue, setLocalValue] = useState(0)
+
+    useEffect(()=> {
+        const newValue = integerValue/100 ?? 0
+        console.log("new value", newValue)
+        setLocalValue(newValue)
+    } ,[integerValue])
 
     // @ts-ignore
-    const localOnChange = (money:any) =>onClick([id, money] )
+    const localOnChange = (money:any) =>{
+        console.log("money", money)
+        onClick([id, money*100] )
+    }
 
     return (
         <CurrencyTextField
@@ -25,7 +36,7 @@ export default function ({model, id= model.id, label= model.label, onClick, valu
             variant="outlined"
             fullWidth
             currencySymbol="£"
-            value={value}
+            value={localValue}
             minimumValue="0"
             outputFormat="number"
             decimalCharacter="."

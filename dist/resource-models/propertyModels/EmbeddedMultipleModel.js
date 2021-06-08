@@ -12,7 +12,6 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props, configuration) {
         const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
         const setParentFormValue = (values) => {
-            console.log("formvalue to update", formValue);
             setFormValue(formValue.updateFormValue(props.model.id, values));
         };
         const newErrors = this.manipulateErrors(errors);
@@ -24,7 +23,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
             setParentFormValue: setParentFormValue,
-            formContent: this.form,
+            formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
             referencesMap: referencesMap,
             refreshReferencesMap: refreshReferencesMap,
             errors: newErrors,
@@ -32,7 +31,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
-            inputElement,
+            inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
             record: recordMap,
             refresh: refresh
         });
