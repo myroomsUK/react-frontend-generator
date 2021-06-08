@@ -19,13 +19,14 @@ export interface FormGeneratorProps{
     errors: Errors;
     showButton?:boolean;
     formContent?:any;
-    refresh?: () => void
+    refresh?: () => void,
+    isEdit?: boolean,
 }
 
 export class FormGeneratorPropsObject{
     model:Model;
     formValue: FormValue;
-    record: Record;
+    record?: Record;
     setFormValue:React.Dispatch<React.SetStateAction<FormValue>>;
     resourceId?:string;
     submitHandler: (e: any) => Promise<any>;
@@ -37,8 +38,9 @@ export class FormGeneratorPropsObject{
     errors: Errors;
     showButton?:boolean;
     refresh?: () => void;
+    isEdit: boolean
 
-    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record(), refresh }:FormGeneratorProps) {
+    constructor({submitHandler, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, setFormValue, text, errors, showButton, lockedFormValue, resourceId, record = new Record(), refresh,isEdit=true }:FormGeneratorProps) {
         this.submitHandler = submitHandler;
         this.partialSubmitHandler = partialSubmitHandler;
         this.model = model;
@@ -53,5 +55,6 @@ export class FormGeneratorPropsObject{
         this.showButton = showButton;
         this.resourceId = resourceId;
         this.refresh = refresh;
+        this.isEdit = isEdit;
     }
 }

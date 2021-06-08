@@ -33,6 +33,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {useCookies} from "react-cookie";
 import {Record} from "../../resource-models/Record";
 import OperationButton from "../../rendering/components/buttons/OperationButton";
+import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
 
 
 export function EnhancedTableHead(props) {
@@ -306,9 +307,10 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
     const getRowElement = (row, id, label, localModel)=> {
         const record = Record.createFromJson(row, localModel);
         const propertyModel = localModel.getProperty(id);
-        propertyModel.label = label;
 
-        return propertyModel.getOutputField({record: record.getPropertyRecord(id), showLabel:false})
+        const configuration = new PropertyFieldConfiguration({showLabel:false})
+        return localModel.getOutputField(id, {record:record, model:localModel}, undefined, false);
+        return propertyModel.getOutputField({model: propertyModel, propertyRecord: record.getPropertyRecord(id)}, configuration)
     }
 
     const columns = useCallback((row) => localTable.map( ({id, label}) => {

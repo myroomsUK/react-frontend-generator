@@ -1,12 +1,12 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
-import SingleEnumShow from "../../generators/fields/outputs/SingleEnumShow";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
-interface EnumSingleInputFields extends SinglePropertyInputFields{
+interface EnumSingleInputFields extends SingleSetInputFieldProps{
     options:any,
 }
 
@@ -33,9 +33,9 @@ export class EnumSingleModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any) {
-        const {propertyRecord} = props
-        return <ChipGenerator propertyModel={this} propertyRecord={propertyRecord} colorMap={this.colorMap}/>
+    setOutputField(props: SingleSetInputFieldProps) {
+        const {value, record} = props
+        return <ChipGenerator propertyModel={this} propertyRecord={record} colorMap={this.colorMap}/>
     }
 
     getRecord(jsonValue: any): any {

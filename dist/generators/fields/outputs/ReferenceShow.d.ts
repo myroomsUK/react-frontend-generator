@@ -1,8 +1,3 @@
 /// <reference types="react" />
-import { ReferenceModel } from "../../../resource-models/propertyModels/ReferenceModel";
-export default function ReferenceShow({ propertyModel, propertyRecord }: ReferenceOutput): JSX.Element;
-interface ReferenceOutput {
-    propertyModel: ReferenceModel;
-    propertyRecord: Map<string, any> | number;
-}
-export {};
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export default function ReferenceShow({ model, record }: SingleSetInputFieldProps): JSX.Element;

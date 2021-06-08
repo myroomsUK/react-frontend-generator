@@ -1,6 +1,5 @@
 import {TextValidator} from "react-material-ui-form-validator";
 import React, {useEffect, useState} from "react";
-import {StringModel} from "../../../resource-models/propertyModels/StringModel";
 import {NumberModel} from "../../../resource-models/propertyModels/NumberModel";
 
 export interface NumberInput{

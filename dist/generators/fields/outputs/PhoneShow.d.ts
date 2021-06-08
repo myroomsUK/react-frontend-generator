@@ -1,2 +1,2 @@
 /// <reference types="react" />
-export default function PhoneShow({ propertyRecord }: any): JSX.Element;
+export default function PhoneShow({ record }: any): JSX.Element;

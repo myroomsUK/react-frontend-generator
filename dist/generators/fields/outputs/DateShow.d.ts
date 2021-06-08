@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export default function DateShow({ propertyRecord }: any): JSX.Element;
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export default function DateShow({ record }: SingleSetInputFieldProps): JSX.Element;

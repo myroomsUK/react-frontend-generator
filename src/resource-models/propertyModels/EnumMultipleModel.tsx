@@ -1,12 +1,13 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import {EnumInput, getAutocompleteValuePosition} from "../../generators/forms/inputs/EnumInput";
 import ChipGenerator from "../../generators/fields/outputs/chips/chipGenerator";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
-interface EnumMultipleInputFields extends SinglePropertyInputFields{
+interface EnumMultipleInputFields extends SingleSetInputFieldProps{
     options: any;
 }
 
@@ -33,14 +34,13 @@ export class EnumMultipleModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
-        const {propertyRecord} = props;
-        const record: any = (propertyRecord===undefined) ? []: (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
+        const {record} = props;
+        const newrecord: any = (record===undefined) ? []: (Array.isArray(record) ? record : Object.keys(record));
         return <ButtonsHorizontalList>
             {
-                record.map((singleRecord:any) =>{
-                    const eachProp = {...props, propertyRecord: singleRecord }
-                    return <ChipGenerator propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
+                newrecord.map((singleRecord:any, index:number) =>{
+                    return <ChipGenerator key={index} propertyModel={this} propertyRecord={singleRecord} colorMap={this.colorMap}/>
                 })
             }
         </ButtonsHorizontalList>

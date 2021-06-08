@@ -1,13 +1,15 @@
 import {StringInput} from "../../generators/forms/inputs/StringInput";
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import StringShow from "../../generators/fields/outputs/StringShow";
 import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
+import {PropertyFieldConfiguration} from "../configurations/PropertyFieldConfiguration";
 
 
 export class StringModel extends SinglePropertyModel{
 
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps, configuration?:PropertyFieldConfiguration): React.ReactElement<any, any> | null {
         const {inputHandler} = props;
         const propsWithModel: StringInput = {...props, onClick:inputHandler}
         return StringInput(propsWithModel);
@@ -22,7 +24,7 @@ export class StringModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: SingleSetInputFieldProps, configuration?: PropertyFieldConfiguration ): React.ReactElement<any, any> | null {
         return <StringShow {...props} />
     }
 

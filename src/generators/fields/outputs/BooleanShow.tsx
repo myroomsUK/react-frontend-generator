@@ -1,7 +1,12 @@
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import {FormControl} from "@material-ui/core";
+import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
-export default function Booleanshow({propertyRecord}:any){
-    return (propertyRecord) ? <CheckIcon/> : <CloseIcon/>
+export default function Booleanshow({record}:SingleSetInputFieldProps){
+    return (record) ? <CheckIcon/> : <CloseIcon/>
 }

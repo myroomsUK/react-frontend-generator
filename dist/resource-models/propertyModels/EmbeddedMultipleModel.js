@@ -1,15 +1,25 @@
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { IterableFormContent } from "../../generators/forms/IterableFormContent";
 import { IterableShowContent } from "../../generators/fields/IterableShowContent";
 import { Record } from "../Record";
 import { FormValue } from "../formvalue/FormValue";
+import { EmbeddedMultipleInputProps } from "../models/InputProps";
+import { EmbeddedMultipleSetInputFieldProps } from "../models/SetInputFieldProps";
+import { Typography } from "@material-ui/core";
+import _ from "lodash";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
-    setInputField(props) {
-        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, modifyOnlyLastElement, modifyRule, record, refresh } = props;
-        const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
+    setInputField(props, configuration) {
+        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const setParentFormValue = (values) => {
+            console.log("formvalue to update", formValue);
+            setFormValue(formValue.updateFormValue(props.model.id, values));
+        };
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
         const formValueArray = (formValue) ? formValue[this.id] : [];
+        // @ts-ignore
+        const recordMap = (record) ? record : new Map();
         return IterableFormContent({
             model: this.getResource().getModel(),
             resourceName: this.resourceName,
@@ -22,24 +32,48 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             label: this.label,
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
-            modifyOnlyLastElement: modifyOnlyLastElement,
-            modifyRule,
             inputElement,
-            record: record !== null && record !== void 0 ? record : new Map(),
+            record: recordMap,
             refresh: refresh
         });
+    }
+    getInputField(props, configuration) {
+        const newProps = new EmbeddedMultipleInputProps(props);
+        return this.setInputField(newProps.handleForSet(), configuration);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return function (p1) {
         };
     }
-    setOutputField({ record, model, showElement, list, table }) {
-        return IterableShowContent({
-            model: model,
-            record: record !== null && record !== void 0 ? record : new Map(),
-            resourceName: this.resourceName,
-            showElement: showElement
-        });
+    getOutputField(props, configuration) {
+        const { showLabel } = props;
+        const newProps = new EmbeddedMultipleSetInputFieldProps(props);
+        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps, configuration)] }, void 0);
+    }
+    setOutputField({ record, model, setFormValue, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }, configuration) {
+        const setParentFormValue = (values) => { setFormValue(formValue.updateFormValue(model.id, values)); };
+        const newErrors = this.manipulateErrors(errors);
+        // @ts-ignore
+        const formValueArray = (formValue) ? formValue[this.id] : [];
+        // @ts-ignore
+        const recordMap = (record) ? record : new Map();
+        return _jsx(_Fragment, { children: IterableShowContent({
+                model: this.getResource().getModel(),
+                resourceName: this.resourceName,
+                setParentFormValue: setParentFormValue,
+                formContent: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                referencesMap: referencesMap,
+                refreshReferencesMap: refreshReferencesMap,
+                errors: newErrors,
+                formValueArray: formValueArray,
+                label: this.label,
+                partialSubmitHandler: partialSubmitHandler,
+                submitHandler: submitHandler,
+                inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                showElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
+                record: recordMap,
+                refresh: refresh
+            }) }, void 0);
     }
     getRecord(jsonValue) {
         const map = new Map();
@@ -65,15 +99,5 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             }
         });
         return map;
-    }
-    getJsonFormValue(value) {
-        return Array.from(value.values()).map((item) => {
-            if (item instanceof FormValue) {
-                return item.toJson();
-            }
-            else {
-                return item;
-            }
-        });
     }
 }

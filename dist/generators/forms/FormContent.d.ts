@@ -3,6 +3,7 @@ import { Model } from "../../resource-models/Model";
 import { Errors } from "../errors/Errors";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
 import { Record } from "../../resource-models/Record";
+import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 interface FormContentProps {
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
@@ -14,8 +15,8 @@ interface FormContentProps {
     lockedFormValue: FormValue;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    formContent?: React.DetailedReactHTMLElement<any, any>;
     refresh?: () => void;
+    configuration: PropertyFieldConfiguration;
 }
 /**
  *

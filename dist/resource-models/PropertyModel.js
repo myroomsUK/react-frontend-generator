@@ -18,4 +18,7 @@ export class PropertyModel {
         this.read = read;
         this.colorMap = colorMap;
     }
+    getPropertyField(props, isEdit = true) {
+        return (isEdit) ? this.getInputField(props) : this.getOutputField(props);
+    }
 }

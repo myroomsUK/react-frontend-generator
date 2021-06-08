@@ -1,11 +1,12 @@
-import {SinglePropertyInputFields, SinglePropertyModel} from "./SinglePropertyModel";
+import {SinglePropertyModel} from "./SinglePropertyModel";
 import NumberShow from "../../generators/fields/outputs/NumberShow";
 import NumberInput from "../../generators/forms/inputs/NumberInput";
 import {InputOnChangeHandler} from "../PropertyModel";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class NumberModel extends SinglePropertyModel{
 
-    setInputField(props: SinglePropertyInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         return NumberInput({...props, onClick:props.inputHandler});
     }
 
@@ -19,7 +20,7 @@ export class NumberModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         return NumberShow(props);
     }
 

@@ -99,4 +99,15 @@ export class FormValue extends Object {
         });
         return json;
     }
+    set(name, value) {
+        FormValue.defineProperty(this, name, {
+            value: value,
+            writable: true,
+            enumerable: true
+        });
+        return this;
+    }
+    has(name) {
+        return FormValue.keys(this).includes(name);
+    }
 }

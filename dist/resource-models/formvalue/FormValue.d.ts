@@ -11,4 +11,6 @@ export declare class FormValue extends Object {
     updateFormValue(name: string, value: any): FormValue;
     getPropertyFormValue(name: string): any;
     toJson(): object;
+    set(name: string, value: any): FormValue;
+    has(name: string): boolean;
 }

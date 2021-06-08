@@ -23,11 +23,10 @@ export class EnumMultipleModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        const { propertyRecord } = props;
-        const record = (propertyRecord === undefined) ? [] : (Array.isArray(propertyRecord) ? propertyRecord : Object.keys(propertyRecord));
-        return _jsx(ButtonsHorizontalList, { children: record.map((singleRecord) => {
-                const eachProp = Object.assign(Object.assign({}, props), { propertyRecord: singleRecord });
-                return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: singleRecord, colorMap: this.colorMap }, void 0);
+        const { record } = props;
+        const newrecord = (record === undefined) ? [] : (Array.isArray(record) ? record : Object.keys(record));
+        return _jsx(ButtonsHorizontalList, { children: newrecord.map((singleRecord, index) => {
+                return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: singleRecord, colorMap: this.colorMap }, index);
             }) }, void 0);
     }
     getRecord(jsonValue) {

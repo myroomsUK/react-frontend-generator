@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export default function Booleanshow({ propertyRecord }: any): JSX.Element;
+import { SingleSetInputFieldProps } from "../../../resource-models/models/SetInputFieldProps";
+export default function Booleanshow({ record }: SingleSetInputFieldProps): JSX.Element;

@@ -14,7 +14,8 @@ interface EditFormGeneratorProps {
     propEditPage?: any,
     thenFunction?: any,
     catchfunction?: any,
-    refresh: ()=>void
+    refresh: ()=>void,
+    isEdit?: boolean
 }
 
 /**
@@ -29,7 +30,7 @@ interface EditFormGeneratorProps {
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = ()=>{}, thenFunction = ()=>{} }) => {
+export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = ()=>{}, thenFunction = ()=>{} , isEdit=true}) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef(new FormValue());
@@ -85,7 +86,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     useEffect(()=>{
         if(formValue!==initialValue.current){
             setGenericEditRender(
-                <FormGenerator {...editFormProps} formContent={createEditPageToUse} errors={errors} text="Save"/>)
+                <FormGenerator {...editFormProps} formContent={createEditPageToUse} isEdit={isEdit} errors={errors} text="Save"/>)
         }
     },[formValue, errors])
 

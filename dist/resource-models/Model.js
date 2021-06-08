@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { PropertyModelRegistry } from "./PropertyModelRegistry";
 import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
+import { PropertyProps } from "./models/PropertyProps";
+import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -50,24 +52,15 @@ export class Model {
         return new Model(properties);
     }
     setFieldProps(requestedName, props) {
-        const { formValue, record, setFormValue } = props;
-        const localFormValue = (formvalue) => {
-            const split = _.split(requestedName, ".");
-            split.pop();
-            const reqName = split.join(".");
-            const newFormValue = split.length === 0 ? formvalue : formValue.updateFormValue(reqName, formvalue);
-            setFormValue(newFormValue);
-        };
-        return Object.assign(Object.assign({}, props), { model: this.getProperty(requestedName), formValue: formValue.getPropertyFormValue(requestedName), record: record.getPropertyRecord(requestedName), setFormValue: localFormValue });
+        return PropertyProps.createFromFieldProps(requestedName, props);
     }
-    getInputField(requestedName, props, inputElement) {
+    getInputField(requestedName, props, viewElement) {
         const newProps = this.setFieldProps(requestedName, props);
-        return this.getProperty(requestedName).getInputField(newProps, inputElement);
+        return this.getProperty(requestedName).getInputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement }));
     }
-    getOutputField(requestedName, props, outputElement, showLabel = true) {
-        const { record } = props;
-        const propertyModel = this.getProperty(requestedName);
-        return propertyModel.getOutputField({ record: record.getPropertyRecord(requestedName), showLabel: showLabel }, outputElement);
+    getOutputField(requestedName, props, viewElement, showLabel = true) {
+        const newProps = this.setFieldProps(requestedName, props);
+        return this.getProperty(requestedName).getOutputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement, showLabel: showLabel }));
     }
     getAllPropertiesReadableNames() {
         return this.properties.filter((propertyModel) => propertyModel.read === true).map((propertyModel) => {

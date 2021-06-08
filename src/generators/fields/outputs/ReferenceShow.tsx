@@ -1,20 +1,14 @@
 import React from "react";
 import {Link} from "@material-ui/core";
-import {ReferenceModel} from "../../../resource-models/propertyModels/ReferenceModel";
+import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
-export default function ReferenceShow({propertyModel,propertyRecord}:ReferenceOutput){
-    console.log("propertyRecord", propertyRecord)
-    if(propertyRecord){
+export default function ReferenceShow({model,record}:SingleSetInputFieldProps){
+    if(record){
         // @ts-ignore
-        const id = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord["id"]
+        const id = (typeof record==="number") ? record : record["id"]
         // @ts-ignore
-        const name = (typeof propertyRecord==="number") ? propertyRecord : propertyRecord[propertyModel.optionText]
-        return <Link color="secondary" href={`/${propertyModel.resourceName}/${id}/show`}>{name}</Link>
+        const name = (typeof record==="number") ? record : record[model.optionText]
+        return <Link color="secondary" href={`/${model.resourceName}/${id}/show`}>{name}</Link>
     }
     return <></>
-}
-
-interface ReferenceOutput{
-    propertyModel:ReferenceModel,
-    propertyRecord: Map<string, any>|number
 }

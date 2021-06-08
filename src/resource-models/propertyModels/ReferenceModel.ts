@@ -6,13 +6,15 @@ import {InputOnChangeHandler} from "../PropertyModel";
 import {ListingOption} from "../listings/Listing";
 import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
 import {Record} from "../Record";
+import {SingleInputPropsInterface} from "../models/InputProps";
+import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class ReferenceModel extends SinglePropertyModel{
     constructor(id:string, other:PropertyModelCore) {
         super(id, other);
     }
 
-    setInputField(props: ReferenceInputFields): React.ReactElement<any, any> | null {
+    setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
         const {inputHandler, value} = props;
         // @ts-ignore
         const finalValue = (value) ? (typeof value === "number" ? new ListingOption(value, "")  : new ListingOption(value["id"], "")): undefined
@@ -27,8 +29,8 @@ export class ReferenceModel extends SinglePropertyModel{
         }
     }
 
-    setOutputField(props: any): React.ReactElement<any, any> | null {
-        return ReferenceShow({...props, propertyModel:this});
+    setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
+        return ReferenceShow(props);
     }
 
     getRecord(record: any): any{
@@ -62,10 +64,3 @@ export class ReferenceModel extends SinglePropertyModel{
     }
 }
 
-
-interface ReferenceInputFields{
-    inputHandler:any,
-    value: Map<string, any>|number,
-    model:this,
-    refreshReferencesMap:any
-}

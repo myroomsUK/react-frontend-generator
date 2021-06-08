@@ -6,7 +6,7 @@ const useStyles = (colorMap) => makeStyles(colorMap)
 
 export default function ChipGenerator({propertyRecord, propertyModel, colorMap}){
     const {options} = propertyModel;
-    const classes = useStyles(colorMap)()
+    const classes = useStyles(colorMap?? {})()
     const label = options?.find(option => option.id === propertyRecord)?.label;
     const id = options?.find(option => option.id === propertyRecord)?.id;
 

@@ -1,13 +1,15 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-export const ShowContent = ({ record, model, showElement }) => {
+import { InputProps } from "../../resource-models/models/InputProps";
+export const ShowContent = (props) => {
+    const { model, refresh, formValue, lockedFormValue, setFormValue, showElement, formContent, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler, errors, record } = props;
     if (showElement) {
-        const props = { model: model, record };
         return React.cloneElement(showElement, props);
     }
     return _jsx(Grid, Object.assign({ container: true, spacing: 2 }, { children: model === null || model === void 0 ? void 0 : model.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
+            const props = new InputProps({ model: propertyModel, partialSubmitHandler, submitHandler, referencesMap, refreshReferencesMap, formValue, record: record === null || record === void 0 ? void 0 : record.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh });
             const { xs, md, id } = propertyModel;
-            return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField({ record: record.getPropertyRecord(propertyModel.id), showLabel: true }) }), index);
+            return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: propertyModel.getOutputField(props) }), index);
         }) }), void 0);
 };

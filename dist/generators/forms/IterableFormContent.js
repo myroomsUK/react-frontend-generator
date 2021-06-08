@@ -10,6 +10,7 @@ import CustomDeleteButton from "../../rendering/components/buttons/CustomDeleteB
 import { FormContent } from "./FormContent";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
 import { Record } from "../../resource-models/Record";
+import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 // @ts-ignore
 const useStyles = makeStyles((theme) => ({
     embeddedTitle: {
@@ -57,7 +58,8 @@ export const IterableFormContent = ({ model, record, resourceName, setParentForm
     const forms = entries.map(([key, formValue], index) => {
         var _a;
         const isEditable = modifyRule(formValue);
-        const formElement = _jsx(FormContent, { refresh: refresh, record: (_a = record.get(key)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
+        const configuration = new PropertyFieldConfiguration({ viewElement: inputElement });
+        const formElement = _jsx(FormContent, { configuration: configuration, refresh: refresh, record: (_a = record.get(key)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), referencesMap: referencesMap, setFormValue: localSetFormValue(key), model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index);
         const formFinal = modifyOnlyLastElement ? ((isEditable) ? formElement : formElement) : formElement;
         return _jsxs(React.Fragment, { children: [_jsx(Grid, Object.assign({ item: true, xs: 1 }, { children: _jsx(Typography, { children: index + 1 }, void 0) }), void 0),
                 _jsx(Grid, Object.assign({ item: true, xs: 10 }, { children: formFinal }), void 0),

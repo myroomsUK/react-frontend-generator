@@ -39,7 +39,7 @@ import { Record } from "../../../resource-models/Record";
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = () => { }, thenFunction = () => { } }) => {
+export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = () => { }, thenFunction = () => { }, isEdit = true }) => {
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef(new FormValue());
@@ -89,7 +89,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     }, [model, referencesMap, formValue, record, resourceName, propId, refresh]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
-            setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, errors: errors, text: "Save" }), void 0));
+            setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, isEdit: isEdit, errors: errors, text: "Save" }), void 0));
         }
     }, [formValue, errors]);
     return genericEditRender;

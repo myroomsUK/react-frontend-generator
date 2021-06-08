@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function ({propertyRecord}:any){
-    if(propertyRecord){
-        return <a href={propertyRecord.url} target="_blank"> {propertyRecord.filename} </a>
+export default function ({record}:any){
+    if(record){
+        return <a href={record.url} target="_blank"> {record.filename} </a>
     }
     return <div>No file</div>
 }

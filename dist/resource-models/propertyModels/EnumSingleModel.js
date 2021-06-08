@@ -22,8 +22,8 @@ export class EnumSingleModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        const { propertyRecord } = props;
-        return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: propertyRecord, colorMap: this.colorMap }, void 0);
+        const { value, record } = props;
+        return _jsx(ChipGenerator, { propertyModel: this, propertyRecord: record, colorMap: this.colorMap }, void 0);
     }
     getRecord(jsonValue) {
         return Record.createFromJsonNoModel(jsonValue);

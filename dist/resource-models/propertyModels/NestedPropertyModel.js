@@ -1,8 +1,6 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { PropertyModel } from "../PropertyModel";
 import { Resource } from "../Resource";
-import { Typography } from "@material-ui/core";
-import _ from "lodash";
+import { Errors } from "../../generators/errors/Errors";
 export class EmbeddedPropertyModel extends PropertyModel {
     constructor(id, others) {
         super(id, others);
@@ -13,21 +11,7 @@ export class EmbeddedPropertyModel extends PropertyModel {
         return this.resource;
         throw new Error(`Accessing inexistent resource for ${this.resourceName}`);
     }
-    manipulateErrors(fetchErrors) {
+    manipulateErrors(fetchErrors = new Errors([])) {
         return fetchErrors.nestedSingleErrorExtrapolator(this.id);
-    }
-    getInputField(props, inputElement = undefined) {
-        const { errors, formValue, setFormValue } = props;
-        const model = this;
-        model.label = _.startCase(this.label);
-        const nestedErrors = this.manipulateErrors(errors);
-        const inputHandler = this.getInputOnChangeHandler({ formValue, setFormValue });
-        const newProps = Object.assign(Object.assign({}, props), { errors: nestedErrors, inputHandler: inputHandler, inputElement: inputElement });
-        return this.setInputField(newProps);
-    }
-    getOutputField(props, outputElement = undefined) {
-        const { showLabel } = props;
-        const newProps = Object.assign(Object.assign({}, props), { model: this.getResource().getModel(), showElement: outputElement });
-        return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps)] }, void 0);
     }
 }

@@ -165,7 +165,7 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                                                 }
                                                 {itemOperations?.length!==0 && <TableCell align="right">
                                                     <ButtonsHorizontalList>
-                                                        {itemOperations.map(({color, icon, onClick,text, visibility, requiresConfirmation}) => <OperationButton color={color} text={text} icon={icon} onClick={() => onClick(row)} visible={visibility(row)} requiresConfirmation={requiresConfirmation}/>) }
+                                                        {itemOperations.map(({color, icon, onClick,text, visibility, requiresConfirmation}, index) => <OperationButton key={index} color={color} text={text} icon={icon} onClick={() => onClick(row)} visible={visibility(row)} requiresConfirmation={requiresConfirmation}/>) }
                                                     </ButtonsHorizontalList>
                                                 </TableCell>}
                                             </TableRow>
