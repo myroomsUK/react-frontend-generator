@@ -7,6 +7,6 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import {FormControl} from "@material-ui/core";
 import {SingleSetInputFieldProps} from "../../../resource-models/models/SetInputFieldProps";
 
-export default function Booleanshow({value}:SingleSetInputFieldProps){
-    return (value) ? <CheckIcon/> : <CloseIcon/>
+export default function Booleanshow({record}:SingleSetInputFieldProps){
+    return (record) ? <CheckIcon/> : <CloseIcon/>
 }

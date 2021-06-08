@@ -50,7 +50,8 @@ export class PropertyProps{
 
     static createFromFieldProps(requestedName:string, props:FieldProps): PropertyProps{
         const {formValue, record, setFormValue, model} = props
-
+        console.log("model", model)
+        console.log("record", record)
         const localFormValue = (formvalue:any)=>{
             const split = _.split(requestedName, ".");
             split.pop();

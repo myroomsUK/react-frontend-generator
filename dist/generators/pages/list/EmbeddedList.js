@@ -16,6 +16,8 @@ export default function EmbeddedList({ model, title, data, totalItems, table, it
     }, [table, model]);
     const getRowElement = (row, id, label, localModel) => {
         const record = Record.createFromJson(row, localModel);
+        console.log("record", record);
+        console.log("local miodel", localModel);
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
         return localModel.getOutputField(id, { model: localModel, record: record }, undefined, false);

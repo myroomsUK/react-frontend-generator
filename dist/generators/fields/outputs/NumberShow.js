@@ -1,4 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-export default function NumberShow({ value }) {
-    return _jsx("div", { children: value }, void 0);
+export default function NumberShow({ record }) {
+    return _jsx("div", { children: record }, void 0);
 }
