@@ -185,8 +185,6 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
         const configuration = new PropertyFieldConfiguration({ showLabel: false });
-        const recordID = record.getPropertyRecord(id);
-        console.log("recordid", recordID);
         return propertyModel.getOutputField({ model: propertyModel, record: record.getPropertyRecord(id) }, configuration);
     };
     const columns = useCallback((row) => localTable.map(({ id, label }) => {

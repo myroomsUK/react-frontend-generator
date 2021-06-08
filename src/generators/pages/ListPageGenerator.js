@@ -309,8 +309,6 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
         const propertyModel = localModel.getProperty(id);
         propertyModel.label = label;
         const configuration = new PropertyFieldConfiguration({showLabel:false})
-        const recordID = record.getPropertyRecord(id)
-        console.log("recordid",recordID)
         return propertyModel.getOutputField({model: propertyModel,record: record.getPropertyRecord(id)}, configuration)
     }
 
