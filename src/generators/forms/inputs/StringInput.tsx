@@ -15,8 +15,6 @@ export interface StringInput{
 }
 
 export const StringInput: React.FC<StringInput> = ({ model,id = model.id, label = model.label, onClick, value, hasError, errorMessage, adornment}) => {
-
-    console.log("value", value);
     const [localValue, setLocalValue] = useState("");
     useEffect(()=>setLocalValue(value),[value])
 

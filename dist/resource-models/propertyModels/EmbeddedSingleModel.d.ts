@@ -3,9 +3,9 @@ import { EmbeddedPropertyModel } from "./NestedPropertyModel";
 import { Record } from "../Record";
 import { EmbeddedSingleSetInputFieldProps } from "../models/SetInputFieldProps";
 import { EmbeddedSingleInputPropsInterface } from "../models/InputProps";
-import { PropertyFieldConfiguration, PropertyFieldConfigurationInterface } from "../configurations/PropertyFieldConfiguration";
+import { PropertyFieldConfigurationInterface } from "../configurations/PropertyFieldConfiguration";
 export declare class EmbeddedSingleModel extends EmbeddedPropertyModel {
-    setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?: PropertyFieldConfiguration): React.ReactElement<any, any> | null;
+    setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
     getInputField(props: EmbeddedSingleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
     getOutputField(props: EmbeddedSingleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
     setOutputField(props: EmbeddedSingleSetInputFieldProps, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;

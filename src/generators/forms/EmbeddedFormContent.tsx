@@ -32,7 +32,6 @@ export const EmbeddedFormContent: React.FC<EmbeddedFormContentProps> = ({model, 
 
     const configuration = new PropertyFieldConfiguration({viewElement: formContent});
 
-
     return <FormContent refresh={refresh} record={record} referencesMap={referencesMap} configuration={configuration}  setFormValue={setParentFormValue} model={model} refreshReferencesMap={refreshReferencesMap}
                         formValue={localFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}  lockedFormValue={new FormValue()}/>
 }

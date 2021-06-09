@@ -14,7 +14,7 @@ import {
 } from "../configurations/PropertyFieldConfiguration";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
-    setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?:PropertyFieldConfiguration): React.ReactElement<any, any> | null {
+    setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
 
@@ -38,7 +38,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
 
     getInputField(props: EmbeddedSingleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
         const newProps = new EmbeddedSingleInputProps(props)
-        return this.setInputField(newProps.handleForSet());
+        return this.setInputField(newProps.handleForSet(), configuration);
     }
 
     getOutputField(props:EmbeddedSingleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {

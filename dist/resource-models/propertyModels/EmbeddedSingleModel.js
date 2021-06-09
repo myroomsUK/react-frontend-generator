@@ -29,7 +29,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     }
     getInputField(props, configuration) {
         const newProps = new EmbeddedSingleInputProps(props);
-        return this.setInputField(newProps.handleForSet());
+        return this.setInputField(newProps.handleForSet(), configuration);
     }
     getOutputField(props, configuration) {
         var _a;
