@@ -85,7 +85,7 @@ export class FormValue extends Object {
         Object.entries(formValue).forEach(([key, value]) => {
             if (value instanceof FormValue) {
                 // @ts-ignore
-                json[key] = value.toJson();
+                json[key] = FormValue.toJson(value);
             }
             else if (value instanceof Map) {
                 const nestedEntries = Array.from(value.values());
