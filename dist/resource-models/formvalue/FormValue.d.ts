@@ -10,7 +10,7 @@ export declare class FormValue extends Object {
     static createFromRecordNoModel(record: Record): FormValue;
     updateFormValue(name: string, value: any): FormValue;
     getPropertyFormValue(name: string): any;
-    toJson(): object;
+    static toJson(formValue: any): object;
     set(name: string, value: any): FormValue;
     has(name: string): boolean;
 }

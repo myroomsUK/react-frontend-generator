@@ -86,16 +86,16 @@ export class FormValue extends Object{
         return split.reduce(reducerModel, this);
     }
 
-    toJson(): object{
+    static toJson(formValue: any): object{
         const json = {}
-        Object.entries(this).forEach(([key, value])=>{
+        Object.entries(formValue).forEach(([key, value])=>{
             if(value instanceof FormValue){
                 // @ts-ignore
                 json[key] = value.toJson()
             }else if(value instanceof Map){
                 const nestedEntries = Array.from(value.values());
                 // @ts-ignore
-                json[key] = nestedEntries.map((nestedValue, nestedIndex) => nestedValue.toJson())
+                json[key] = nestedEntries.map((nestedValue, nestedIndex) => FormValue.toJson(nestedValue))
             }else {
                 // @ts-ignore
                 json[key] = value;
