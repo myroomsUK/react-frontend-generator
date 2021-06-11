@@ -8,6 +8,9 @@ import { EmbeddedMultipleInputProps } from "../models/InputProps";
 import { EmbeddedMultipleSetInputFieldProps } from "../models/SetInputFieldProps";
 import { Typography } from "@material-ui/core";
 import _ from "lodash";
+import { EmbeddedSingleModel } from "./EmbeddedSingleModel";
+import { PropertyModelCore } from "../PropertyModelCore";
+import { EMBEDDED_SINGLE } from "../../generators/forms/inputs/InputTypes";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props, configuration) {
         const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
@@ -98,5 +101,17 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             }
         });
         return map;
+    }
+    getEmbeddedSingleModel(id) {
+        return new EmbeddedSingleModel(id, new PropertyModelCore({
+            type: EMBEDDED_SINGLE,
+            resource: this.getResource().getModel(),
+            label: this.label,
+            resourceName: this.resourceName,
+            optionText: this.optionText,
+            form: this.form,
+            write: this.write,
+            read: this.read
+        }));
     }
 }

@@ -13,6 +13,9 @@ import {EmbeddedMultipleSetInputFieldProps} from "../models/SetInputFieldProps";
 import {PropertyFieldConfigurationInterface} from "../configurations/PropertyFieldConfiguration";
 import {Typography} from "@material-ui/core";
 import _ from "lodash";
+import {EmbeddedSingleModel} from "./EmbeddedSingleModel";
+import {PropertyModelCore} from "../PropertyModelCore";
+import {EMBEDDED_SINGLE} from "../../generators/forms/inputs/InputTypes";
 
 
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
@@ -124,5 +127,18 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             }
         })
         return map;
+    }
+
+    getEmbeddedSingleModel(id:string): EmbeddedSingleModel{
+        return new EmbeddedSingleModel(id, new PropertyModelCore({
+            type: EMBEDDED_SINGLE,
+            resource: this.getResource().getModel(),
+            label: this.label,
+            resourceName: this.resourceName,
+            optionText: this.optionText,
+            form: this.form,
+            write: this.write,
+            read:this.read
+        }));
     }
 }
