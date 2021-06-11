@@ -24,7 +24,7 @@ import { useGetResourceModel } from "../../../resource-models/modelsRegistry";
 import { UpdateListings } from "../../../utils/referenceFieldUtils";
 import { useEdit } from "../../../redux/actions/verbs/edit";
 import { FormGenerator } from "../../forms/FormGenerator";
-import { Error, Errors } from "../../errors/Errors";
+import { Error as CustomError, Errors } from "../../errors/Errors";
 import { FormValue } from "../../../resource-models/formvalue/FormValue";
 import { Record } from "../../../resource-models/Record";
 /**
@@ -39,7 +39,7 @@ import { Record } from "../../../resource-models/Record";
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = () => { }, thenFunction = () => { }, isEdit = true }) => {
+export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = (error) => { throw new Error(error.message); }, thenFunction = (response) => { return response; }, isEdit = true }) => {
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef(new FormValue());
@@ -53,7 +53,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
         // @ts-ignore
         const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
         // @ts-ignore
-        const newErrors = new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
+        const newErrors = new Errors(Object.keys(errorFields).map((field) => new CustomError(field, errorFields[field])));
         setErrors(newErrors);
     }, [responseErrors]);
     useEffect(() => { setGenericEditRender(_jsx("div", {}, void 0)); }, [resourceName]);

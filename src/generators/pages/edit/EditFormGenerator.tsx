@@ -3,7 +3,7 @@ import {useGetResourceModel} from "../../../resource-models/modelsRegistry";
 import {UpdateListings} from "../../../utils/referenceFieldUtils";
 import {useEdit} from "../../../redux/actions/verbs/edit";
 import {FormGenerator} from "../../forms/FormGenerator";
-import {Error, Errors} from "../../errors/Errors";
+import {Error as CustomError, Errors} from "../../errors/Errors";
 import {FormValue} from "../../../resource-models/formvalue/FormValue";
 import {Record} from "../../../resource-models/Record";
 
@@ -30,7 +30,7 @@ interface EditFormGeneratorProps {
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = ()=>{}, thenFunction = ()=>{} , isEdit=true}) => {
+export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = (error:any)=>{throw new Error(error.message)}, thenFunction = (response:any)=>{ return response} , isEdit=true}) => {
     const {model, resourceName, editPage} = useGetResourceModel(propResourceName);
     const createEditPageToUse:any = useMemo(()=> propEditPage ? propEditPage: editPage,[propEditPage, editPage])
     const initialValue = useRef(new FormValue());
@@ -46,7 +46,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
         // @ts-ignore
         const {_error, ...errorFields} = responseErrors;
         // @ts-ignore
-        const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new Error(field,errorFields[field])))
+        const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new CustomError(field,errorFields[field])))
         setErrors(newErrors)},[responseErrors])
 
     useEffect(()=>{ setGenericEditRender(<div/>)},[resourceName])
