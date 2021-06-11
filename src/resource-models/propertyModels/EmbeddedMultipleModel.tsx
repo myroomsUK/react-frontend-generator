@@ -132,7 +132,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
     getEmbeddedSingleModel(id:string): EmbeddedSingleModel{
         return new EmbeddedSingleModel(id, new PropertyModelCore({
             type: EMBEDDED_SINGLE,
-            resource: this.getResource().getModel(),
+            resource: this.getResource(),
             label: this.label,
             resourceName: this.resourceName,
             optionText: this.optionText,
