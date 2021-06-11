@@ -5,8 +5,9 @@ import { Typography } from "@material-ui/core";
 import { DropzoneArea } from "material-ui-dropzone";
 import { useDeleteFile } from "../../../redux/actions/verbs/deleteFile";
 import CustomDeleteButton from "../../../rendering/components/buttons/CustomDeleteButton";
-export default function SingleFileInput({ file, label, onChange, resourceName, resourceId, id }) {
+export default function SingleFileInput({ file, label, onChange, resourceName, resourceId, model }) {
     const creationTime = useRef(Date.now());
+    const id = model.id;
     const [localFile, setLocalFile] = useState();
     useEffect(() => {
         setLocalFile(file);
@@ -17,7 +18,7 @@ export default function SingleFileInput({ file, label, onChange, resourceName, r
             remove(resourceId, id, fileId);
         }
         setLocalFile(undefined);
-        onChange(id, null);
+        onChange([id, null]);
     };
     const dropZoneOnChange = (files) => {
         if (!files.length)
@@ -30,7 +31,7 @@ export default function SingleFileInput({ file, label, onChange, resourceName, r
                 title: file.name,
                 filename: file.name,
             };
-            onChange(id, newFile);
+            onChange([id, newFile]);
         };
         reader.readAsDataURL(file);
     };

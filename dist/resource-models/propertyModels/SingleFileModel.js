@@ -6,7 +6,7 @@ export class SingleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, inputHandler } = props;
         // @ts-ignore
-        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, file: formValue[this.id] });
+        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, file: formValue[this.id], onChange: inputHandler });
         // @ts-ignore
         return SingleFileInput(propsWithModel);
     }

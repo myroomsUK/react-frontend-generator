@@ -1,8 +1,8 @@
-export default function SingleFileInput({ file, label, onChange, resourceName, resourceId, id }: {
+export default function SingleFileInput({ file, label, onChange, resourceName, resourceId, model }: {
     file: any;
     label: any;
     onChange: any;
     resourceName: any;
     resourceId: any;
-    id: any;
+    model: any;
 }): JSX.Element;
