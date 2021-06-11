@@ -5,7 +5,7 @@ export class EmbeddedPropertyModel extends PropertyModel {
     constructor(id, others) {
         super(id, others);
         this.resourceName = others.resourceName;
-        this.resource = new Resource(others.resource);
+        this.resource = (others.resource instanceof Resource) ? others.resource : new Resource(others.resource);
     }
     getResource() {
         return this.resource;
