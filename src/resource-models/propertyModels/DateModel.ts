@@ -21,7 +21,6 @@ export class DateModel extends SinglePropertyModel{
     }
 
     setOutputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
-        console.log("props date", props)
         return DateShow(props);
     }
 

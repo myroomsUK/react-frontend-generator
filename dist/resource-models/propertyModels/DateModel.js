@@ -16,7 +16,6 @@ export class DateModel extends SinglePropertyModel {
         };
     }
     setOutputField(props) {
-        console.log("props date", props);
         return DateShow(props);
     }
     getRecord(jsonValue) {
