@@ -11,4 +11,4 @@ export interface DateInput {
     errorMessage?: string;
     adornment?: any;
 }
-export default function ({ model, name, onClick, value, label }: DateInput): JSX.Element;
+export default function ({ model, name, onClick, value, label, hasError, errorMessage }: DateInput): JSX.Element;

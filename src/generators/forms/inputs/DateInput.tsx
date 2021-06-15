@@ -1,7 +1,8 @@
-import {TextValidator} from "react-material-ui-form-validator";
 import React, {useEffect, useState} from "react";
 import {getDateInputFormat} from "../../../utils/timeUtils";
 import {DateModel} from "../../../resource-models/propertyModels/DateModel";
+import {CustomTextValidator} from "../formHelpers";
+
 
 export interface DateInput{
     model: DateModel;
@@ -16,7 +17,7 @@ export interface DateInput{
 }
 
 
-export default function ({model,name = model.id, onClick, value, label = model.label}:DateInput){
+export default function ({model,name = model.id, onClick, value, label = model.label, hasError,errorMessage}:DateInput){
     const [localValue, setLocalvalue] = useState(getDateInputFormat());
 
     const localChange = (event:any) => {
@@ -40,8 +41,10 @@ export default function ({model,name = model.id, onClick, value, label = model.l
     },[value])
 
 
-    return <TextValidator
+    return <CustomTextValidator
         name={name}
+        error={hasError}
+        errorMessage={errorMessage}
         label={label}
         onChange={onClick}
         value={localValue}
