@@ -2,15 +2,9 @@ import React, {DetailedReactHTMLElement, ReactElement} from "react";
 import {Errors} from "../generators/errors/Errors";
 import {FormValue} from "./formvalue/FormValue";
 import {Record} from "./Record";
-import {Model} from "./Model";
-import {PropertyProps} from "./models/PropertyProps";
-import {InputProps, InputPropsInterface} from "./models/InputProps";
-import {OutputProps} from "./models/OutputProps";
-import {FieldProps} from "./models/FieldProps";
-import {
-    PropertyFieldConfiguration,
-    PropertyFieldConfigurationInterface
-} from "./configurations/PropertyFieldConfiguration";
+import {InputPropsInterface} from "./models/InputProps";
+import {PropertyFieldConfiguration} from "./configurations/PropertyFieldConfiguration";
+import _ from "lodash";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -68,7 +62,7 @@ export abstract class PropertyModel {
         const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap} = rest;
         this.id = id;
         this.type = type;
-        this.label = label;
+        this.label = _.startCase(label);
         this.validators = validators;
         this.errorMessages = errorMessages;
         this.resourceName = resourceName;

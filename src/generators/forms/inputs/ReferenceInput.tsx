@@ -7,11 +7,14 @@ import {changeResourceBuffer} from "../../../redux/actions/app/actions";
 import {ReferenceModel} from "../../../resource-models/propertyModels/ReferenceModel";
 import {Listing, ListingOption} from "../../../resource-models/listings/Listing";
 import ReferenceInputModal from "./ReferenceInputModal/ReferenceInputModal";
+import {CustomTextValidator} from "../formHelpers";
 
 interface ReferenceInput{
     model: ReferenceModel,
     refreshReferencesMap: any,
     inheritedValue:ListingOption|undefined,
+    hasError?:boolean,
+    errorMessage?:string,
     createNew?:boolean,
     onChange:any
 }
@@ -35,7 +38,7 @@ class ReferenceInputOption{
     }
 }
 
-export default function ({model, refreshReferencesMap, inheritedValue, createNew=true, onChange}:ReferenceInput){
+export default function ({model, refreshReferencesMap, inheritedValue, createNew=true, onChange, hasError, errorMessage}:ReferenceInput){
 
     const {id, label, resourceName:modalResourceName} = useMemo(()=>{return model},[model]);
     const [open, setOpen] = React.useState(false);
@@ -94,15 +97,16 @@ export default function ({model, refreshReferencesMap, inheritedValue, createNew
             getOptionLabel={(option) => option.label}
             renderOption={(option) => (option.button) ? option.button :  <div>{option.label}</div>}
             style={{ width: "100%" }}
-            //TODO addlabel
             renderInput={({...params}) =>
-                <TextValidator {...params}
-                               id={model.id}
-                               name={model.id}
-                               variant="outlined" value={value}
-                               label={label}
-                               style={{width: "100%"}}
-                               autoComplete="nope"
+                <CustomTextValidator {...params}
+                   error={hasError}
+                   errorMessage={errorMessage}
+                   id={model.id}
+                   name={model.id}
+                   variant="outlined" value={value}
+                   label={label}
+                   style={{width: "100%"}}
+                   autoComplete="nope"
                 />
             }
         />

@@ -5,6 +5,8 @@ interface ReferenceInput {
     model: ReferenceModel;
     refreshReferencesMap: any;
     inheritedValue: ListingOption | undefined;
+    hasError?: boolean;
+    errorMessage?: string;
     createNew?: boolean;
     onChange: any;
 }
@@ -16,7 +18,7 @@ declare class ReferenceInputOption {
     static createFromListingOption(listingOption: ListingOption): ReferenceInputOption;
     toMap(): Map<any, any>;
 }
-export default function ({ model, refreshReferencesMap, inheritedValue, createNew, onChange }: ReferenceInput): JSX.Element;
+export default function ({ model, refreshReferencesMap, inheritedValue, createNew, onChange, hasError, errorMessage }: ReferenceInput): JSX.Element;
 /**
  * @param {int} value
  * @param {array} options
