@@ -13,7 +13,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import CustomDeleteButton from "../../../rendering/components/buttons/CustomDeleteButton";
-import { createArrayFromMap, createMapFromArray } from "../../../utils/mapUtils";
+import { createArrayFromMap } from "../../../utils/mapUtils";
 import { useDeleteFile } from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
@@ -26,14 +26,15 @@ export default function FileListInput(_a) {
     const [localFileListMap, setLocalFileListMap] = useState(new Map());
     useEffect(() => {
         if (files) {
-            setTotalFiles(files);
-            const formValueMap = createMapFromArray(files);
-            setLocalFileListMap(new Map(formValueMap));
+            const arrayFiles = Array.from(files.values());
+            console.log("array files", arrayFiles);
+            setTotalFiles(arrayFiles);
+            setLocalFileListMap(new Map(files));
         }
     }, [files]);
     useEffect(() => {
         if (files) {
-            setTotalFiles([...files, ...prepareImagesForRequest(uploadedLocalFiles)]);
+            setTotalFiles([...totalFiles, ...prepareImagesForRequest(uploadedLocalFiles)]);
         }
     }, [uploadedLocalFiles]);
     const prepareImagesForRequest = (uploadedFiles) => {

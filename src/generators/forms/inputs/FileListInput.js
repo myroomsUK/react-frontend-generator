@@ -14,19 +14,23 @@ export default function FileListInput({model, files, resourceName, resourceId, o
     const [totalFiles, setTotalFiles] = useState([]);
     const [localFileListMap, setLocalFileListMap] = useState(new Map());
 
+
+
     useEffect(() => {
         if (files) {
-            setTotalFiles(files);
-            const formValueMap = createMapFromArray(files);
-            setLocalFileListMap(new Map(formValueMap));
+            const arrayFiles = Array.from(files.values());
+            console.log("array files", arrayFiles);
+            setTotalFiles(arrayFiles);
+            setLocalFileListMap(new Map(files));
         }
     }, [files])
 
     useEffect(() => {
         if(files){
-            setTotalFiles([...files, ...prepareImagesForRequest(uploadedLocalFiles)])
+            setTotalFiles([...totalFiles, ...prepareImagesForRequest(uploadedLocalFiles)])
         }
     }, [uploadedLocalFiles])
+
     const prepareImagesForRequest = (uploadedFiles) => {
         if (!uploadedFiles.length) return [];
 
