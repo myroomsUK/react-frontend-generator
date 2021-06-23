@@ -62,13 +62,13 @@ export default function ImageDialog({open,setOpen, selectedImage, images}) {
         <div>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {selectedImage!==undefined && images[selectedImage].get("url")}
+                    {selectedImage!==undefined && images[selectedImage]["url"]}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Carousel index={selectedImage}>
                         {
                             images.map( (item, i) => {
-                                const {url} = getFromMap(item);
+                                const {url} = item;
                                 return <img width="100%" alt={url} key={i} src={url} />
                             } )
                         }

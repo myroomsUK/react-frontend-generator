@@ -9,7 +9,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import CustomDeleteButton from "../../../rendering/components/buttons/CustomDeleteButton";
@@ -17,6 +17,7 @@ import { createArrayFromMap } from "../../../utils/mapUtils";
 import { useDeleteFile } from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
+import ImageDialog from "../../fields/ImageDialog";
 export default function FileListInput(_a) {
     var { model, files, resourceName, resourceId, onChange, partialSubmitHandler, areImages = true, id = model.id, label = model.label } = _a, rest = __rest(_a, ["model", "files", "resourceName", "resourceId", "onChange", "partialSubmitHandler", "areImages", "id", "label"]);
     const { remove } = useDeleteFile(resourceName);
@@ -24,6 +25,12 @@ export default function FileListInput(_a) {
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);
     const [totalFiles, setTotalFiles] = useState([]);
     const [localFileListMap, setLocalFileListMap] = useState(new Map());
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState();
+    const selectElement = (key) => {
+        setSelectedImage(key);
+        setOpen(true);
+    };
     useEffect(() => {
         if (files) {
             const arrayFiles = Array.from(files.values());
@@ -78,8 +85,9 @@ export default function FileListInput(_a) {
         }).catch(e => console.log(e));
     };
     const list = areImages ?
-        _jsx(ImageGrid, { images: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0)
+        _jsx(ImageGrid, { images: filesList, onSelect: (index) => selectElement(index), onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0)
         :
             _jsx(FileList, { list: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0);
-    return _jsx(Grid, Object.assign({ container: true }, { children: _jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: list }), void 0) }), void 0);
+    return _jsxs(Grid, Object.assign({ container: true }, { children: [_jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: list }), void 0),
+            _jsx(ImageDialog, { images: filesList, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }), void 0);
 }

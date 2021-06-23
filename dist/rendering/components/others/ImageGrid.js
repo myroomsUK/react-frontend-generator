@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     }
 }));
-export default function ImageGrid({ images, onChange, fileObjects, onAdd, onDelete, saveImages }) {
+export default function ImageGrid({ images, onChange, onSelect, fileObjects, onAdd, onDelete, saveImages }) {
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);
     const cols = matches ? 6 : 3;
-    return (_jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(GridList, Object.assign({ cellHeight: 180, cols: cols, className: classes.gridList }, { children: [images.map(({ title, url, actionIcon }, index) => (_jsxs(GridListTile, { children: [_jsx("img", { src: url, alt: title }, void 0),
+    return (_jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(GridList, Object.assign({ cellHeight: 180, cols: cols, className: classes.gridList }, { children: [images.map(({ title, url, actionIcon }, index) => (_jsxs(GridListTile, { children: [_jsx("img", { src: url, alt: title, onClick: () => onSelect(index) }, void 0),
                         _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }, index))),
                 _jsxs(GridListTile, { children: [_jsx(Button, Object.assign({ className: classes.button, variant: "outlined", color: "primary", "aria-label": "upload picture", component: "span", onClick: () => setOpen(true) }, { children: _jsx(PhotoCamera, { fontSize: "large" }, void 0) }), void 0),
                         _jsx(AddImageDialog, { open: open, setOpen: setOpen, onChange: onChange, fileObjects: fileObjects, onAdd: onAdd, onDelete: onDelete, saveImages: saveImages }, void 0)] }, void 0)] }), void 0) }), void 0));

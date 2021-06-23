@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ImageGrid({images, onChange, fileObjects, onAdd, onDelete, saveImages}) {
+export default function ImageGrid({images, onChange, onSelect, fileObjects, onAdd, onDelete, saveImages}) {
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);
@@ -41,8 +41,8 @@ export default function ImageGrid({images, onChange, fileObjects, onAdd, onDelet
         <div className={classes.root}>
             <GridList cellHeight={180} cols={cols} className={classes.gridList}>
                 {images.map(({title, url, actionIcon},index) => (
-                    <GridListTile key={index}>
-                        <img src={url} alt={title} />
+                    <GridListTile key={index} >
+                        <img src={url} alt={title} onClick={()=>onSelect(index)} />
                         <GridListTileBar
                             title={title}
                             actionIcon={

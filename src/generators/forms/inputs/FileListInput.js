@@ -5,6 +5,7 @@ import {createArrayFromMap, createMapFromArray} from "../../../utils/mapUtils";
 import {useDeleteFile} from "../../../redux/actions/verbs/deleteFile";
 import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
+import ImageDialog from "../../fields/ImageDialog";
 
 export default function FileListInput({model, files, resourceName, resourceId, onChange, partialSubmitHandler, areImages=true, id= model.id, label = model.label, ...rest}) {
 
@@ -13,7 +14,13 @@ export default function FileListInput({model, files, resourceName, resourceId, o
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);
     const [totalFiles, setTotalFiles] = useState([]);
     const [localFileListMap, setLocalFileListMap] = useState(new Map());
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState();
 
+    const selectElement = (key) => {
+        setSelectedImage(key);
+        setOpen(true);
+    }
 
 
     useEffect(() => {
@@ -76,7 +83,7 @@ export default function FileListInput({model, files, resourceName, resourceId, o
     }
 
     const list = areImages ?
-        <ImageGrid images={filesList} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
+        <ImageGrid images={filesList} onSelect={(index)=>selectElement(index)} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
         :
         <FileList list={filesList} onChange={prepareImagesForRequest} filesLimit={10} fileObjects={uploadedLocalFiles} onAdd={addFile} onDelete={removeFile} saveImages={saveImages}/>
 
@@ -84,5 +91,6 @@ export default function FileListInput({model, files, resourceName, resourceId, o
         <Grid md={12} xs={12} item>
             {list}
         </Grid>
+        <ImageDialog images={filesList} open={open} selectedImage={selectedImage} setOpen={setOpen}/>
     </Grid>
 }

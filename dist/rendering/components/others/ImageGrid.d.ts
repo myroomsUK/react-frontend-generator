@@ -1,6 +1,7 @@
-export default function ImageGrid({ images, onChange, fileObjects, onAdd, onDelete, saveImages }: {
+export default function ImageGrid({ images, onChange, onSelect, fileObjects, onAdd, onDelete, saveImages }: {
     images: any;
     onChange: any;
+    onSelect: any;
     fileObjects: any;
     onAdd: any;
     onDelete: any;
