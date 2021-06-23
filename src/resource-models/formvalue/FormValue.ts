@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {Record} from "../Record";
 import {Model} from "../Model";
+import {REFERENCE} from "../../generators/forms/inputs/InputTypes";
 
 export class FormValue extends Object{
 
@@ -12,12 +13,27 @@ export class FormValue extends Object{
     static createFromRecord(record:Record, model: Model): FormValue{
         const formValue = new FormValue();
 
-        Object.keys(record).forEach(key =>{
+        Object.entries(record).forEach(([key, value]) =>{
 
             try{
                 const propertyModel = model.getProperty(key);
-                // @ts-ignore
-                formValue[key] =  propertyModel.getFormValue(record[key]);
+
+                if(propertyModel.write){
+                    if(propertyModel.type===REFERENCE){
+                        // @ts-ignore
+                        if( typeof value === "object"){
+                            // @ts-ignore
+                            formValue[key] =  propertyModel.getFormValue(value["id"]);
+                        }else{
+                            // @ts-ignore
+                            formValue[key] =  propertyModel.getFormValue(value);
+                        }
+                    }else{
+                        // @ts-ignore
+                        formValue[key] =  propertyModel.getFormValue(value);
+                    }
+                }
+
             }catch(error){
 
             }
