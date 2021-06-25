@@ -16,7 +16,9 @@ export interface StringInput{
 
 export const StringInput: React.FC<StringInput> = ({ model,id = model.id, label = model.label, onClick, value, hasError, errorMessage, adornment}) => {
     const [localValue, setLocalValue] = useState("");
-    useEffect(()=>setLocalValue(value),[value])
+    useEffect(()=>{
+        if(value) setLocalValue(value)
+    },[value])
 
     const debounced = useDebouncedCallback(
         onClick,

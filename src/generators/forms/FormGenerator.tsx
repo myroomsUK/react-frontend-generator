@@ -29,8 +29,6 @@ export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
             return !!pattern.test(value);
 
         });
-
-        console.log("formvalue", formValue);
         },[formValue])
 
     const validationSubmitHandler = (e:any) => {

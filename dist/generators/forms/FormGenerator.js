@@ -24,7 +24,6 @@ export const FormGenerator = (props) => {
                 '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
             return !!pattern.test(value);
         });
-        console.log("formvalue", formValue);
     }, [formValue]);
     const validationSubmitHandler = (e) => {
         submitHandler(e);

@@ -2,8 +2,11 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { TextValidator } from "react-material-ui-form-validator";
 import { useEffect, useState } from "react";
 export default function ({ model, id = model.id, onClick, value, label = model.label }) {
-    const [localValue, setLocalValue] = useState(0);
-    useEffect(() => { setLocalValue(value); }, [value]);
+    const [localValue, setLocalValue] = useState(1);
+    useEffect(() => {
+        if (value !== undefined)
+            setLocalValue(value);
+    }, [value]);
     const localOnChange = (event) => {
         const target = event.target;
         let value = target.value;

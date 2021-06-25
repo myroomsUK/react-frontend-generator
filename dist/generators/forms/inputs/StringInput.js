@@ -4,7 +4,10 @@ import { useDebouncedCallback } from "use-debounce";
 import { CustomTextValidator } from "../formHelpers";
 export const StringInput = ({ model, id = model.id, label = model.label, onClick, value, hasError, errorMessage, adornment }) => {
     const [localValue, setLocalValue] = useState("");
-    useEffect(() => setLocalValue(value), [value]);
+    useEffect(() => {
+        if (value)
+            setLocalValue(value);
+    }, [value]);
     const debounced = useDebouncedCallback(onClick, 1000);
     const localOnChange = (event) => {
         const target = event.target;

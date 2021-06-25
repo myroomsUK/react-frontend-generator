@@ -15,8 +15,10 @@ export interface NumberInput{
 
 export default function ({model, id= model.id, onClick, value, label=model.label}:NumberInput){
 
-    const [localValue, setLocalValue] = useState(0);
-    useEffect(()=>{setLocalValue(value)},[value])
+    const [localValue, setLocalValue] = useState(1);
+    useEffect(()=>{
+        if(value!==undefined) setLocalValue(value)
+    },[value])
 
     const localOnChange = (event:any) => {
         const target = event.target;
