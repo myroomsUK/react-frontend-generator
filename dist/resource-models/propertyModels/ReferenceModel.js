@@ -3,9 +3,16 @@ import ReferenceShow from "../../generators/fields/outputs/ReferenceShow";
 import { ListingOption } from "../listings/Listing";
 import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
 import { Record } from "../Record";
+import { Resource } from "../Resource";
 export class ReferenceModel extends SinglePropertyModel {
     constructor(id, other) {
         super(id, other);
+        this.resourceName = other.resourceName;
+        this.resource = (other.resource instanceof Resource) ? other.resource : new Resource(other.resource);
+    }
+    getResource() {
+        return this.resource;
+        throw new Error(`Accessing inexistent resource for ${this.resourceName}`);
     }
     setInputField(props) {
         const { inputHandler, value } = props;

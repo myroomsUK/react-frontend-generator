@@ -8,10 +8,21 @@ import ReferenceInput from "../../generators/forms/inputs/ReferenceInput";
 import {Record} from "../Record";
 import {SingleInputPropsInterface} from "../models/InputProps";
 import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
+import {Resource} from "../Resource";
 
 export class ReferenceModel extends SinglePropertyModel{
+    resourceName:string;
+    resource:Resource;
+
+    getResource(): Resource {
+        return this.resource;
+        throw new Error(`Accessing inexistent resource for ${this.resourceName}`);
+    }
+
     constructor(id:string, other:PropertyModelCore) {
         super(id, other);
+        this.resourceName = other.resourceName;
+        this.resource = (other.resource instanceof Resource) ? other.resource : new Resource(other.resource);
     }
 
     setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {

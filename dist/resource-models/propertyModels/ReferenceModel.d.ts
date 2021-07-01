@@ -3,7 +3,11 @@ import React from "react";
 import { SinglePropertyModel } from "./SinglePropertyModel";
 import { InputOnChangeHandler } from "../PropertyModel";
 import { SingleSetInputFieldProps } from "../models/SetInputFieldProps";
+import { Resource } from "../Resource";
 export declare class ReferenceModel extends SinglePropertyModel {
+    resourceName: string;
+    resource: Resource;
+    getResource(): Resource;
     constructor(id: string, other: PropertyModelCore);
     setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: InputOnChangeHandler): (vars: any) => void;

@@ -3,6 +3,7 @@ import { PropertyModelRegistry } from "./PropertyModelRegistry";
 import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
 import { PropertyProps } from "./models/PropertyProps";
 import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
+import { ReferenceModel } from "./propertyModels/ReferenceModel";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -21,7 +22,7 @@ export class Model {
                 throw new Error(`Undefined model for ${value} and name was ${name}`);
             }
             else {
-                if (accumulator instanceof EmbeddedPropertyModel) {
+                if (accumulator instanceof EmbeddedPropertyModel || accumulator instanceof ReferenceModel) {
                     const propertyModel = accumulator.getResource().getModel().getProperty(value);
                     if (propertyModel)
                         return propertyModel;

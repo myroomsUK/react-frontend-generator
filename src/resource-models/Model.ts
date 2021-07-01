@@ -6,6 +6,7 @@ import {DetailedReactHTMLElement, ReactElement} from "react";
 import {FieldProps} from "./models/FieldProps";
 import {PropertyProps} from "./models/PropertyProps";
 import {PropertyFieldConfiguration} from "./configurations/PropertyFieldConfiguration";
+import {ReferenceModel} from "./propertyModels/ReferenceModel";
 
 export interface Model{
     properties: PropertyModel[]
@@ -29,7 +30,7 @@ export class Model{
                 if(propertyModel) return propertyModel;
                 throw new Error(`Undefined model for ${value} and name was ${name}`);
             }else{
-                if(accumulator instanceof EmbeddedPropertyModel){
+                if(accumulator instanceof EmbeddedPropertyModel || accumulator instanceof ReferenceModel){
                     const propertyModel = accumulator.getResource().getModel().getProperty(value);
                     if(propertyModel) return propertyModel;
                     throw new Error(`Undefined model for ${value}`);
