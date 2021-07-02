@@ -4,7 +4,7 @@ import _ from "lodash";
  */
 export class PropertyModel {
     constructor(id, rest) {
-        const { type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap } = rest;
+        const { type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName } = rest;
         this.id = id;
         this.type = type;
         this.label = _.startCase(label);
@@ -18,6 +18,7 @@ export class PropertyModel {
         this.write = write;
         this.read = read;
         this.colorMap = colorMap;
+        this.modelResourceName = modelResourceName;
     }
     getPropertyField(props, isEdit = true) {
         return (isEdit) ? this.getInputField(props) : this.getOutputField(props);

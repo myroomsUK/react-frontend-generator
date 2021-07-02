@@ -1,7 +1,7 @@
 import { Model } from "./Model";
 export class Resource {
     constructor({ model, title, resourceName, filters, createPage, editPage, showPage, table = [] }) {
-        this.model = Model.createFromJson(model);
+        this.model = Model.createFromJson(model, resourceName);
         this.title = title;
         this.resourceName = resourceName;
         this.filters = filters;

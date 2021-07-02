@@ -6,7 +6,7 @@ export class MultipleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, errors } = props;
         // @ts-ignore
-        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, resourceName: this.resourceName, onChange: this.getInputOnChangeHandler({ formValue, setFormValue }), files: formValue[this.id] });
+        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, modelResourceName: this.modelResourceName, onChange: this.getInputOnChangeHandler({ formValue, setFormValue }), files: formValue[this.id] });
         // @ts-ignore
         return FileListInput(propsWithModel);
     }

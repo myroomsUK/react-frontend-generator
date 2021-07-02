@@ -24,7 +24,7 @@ export class Resource{
     table: string[];
 
     constructor({model, title, resourceName, filters, createPage, editPage, showPage, table=[]}:PropResource) {
-        this.model = Model.createFromJson(model)
+        this.model = Model.createFromJson(model, resourceName)
         this.title = title;
         this.resourceName = resourceName;
         this.filters = filters;

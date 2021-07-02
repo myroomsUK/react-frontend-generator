@@ -19,8 +19,9 @@ export declare class Model {
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
+     * @param resourceName
      */
-    static createFromJson(jsonModel: any): Model;
+    static createFromJson(jsonModel: any, resourceName: string): Model;
     setFieldProps(requestedName: string, props: FieldProps): PropertyProps;
     getInputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
     getOutputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;

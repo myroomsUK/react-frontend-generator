@@ -12,6 +12,7 @@ export interface PropertyModel{
     id:string;
     type:InputType;
     label:string;
+    modelResourceName: string;
     validators?: string[];
     errorMessages?: string[];
     resourceName:string;
@@ -57,9 +58,10 @@ export abstract class PropertyModel {
     write?: boolean;
     read?: boolean;
     colorMap ?: object;
+    modelResourceName: string;
 
     constructor(id: string, rest: any) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap} = rest;
+        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName} = rest;
         this.id = id;
         this.type = type;
         this.label = _.startCase(label);
@@ -73,6 +75,7 @@ export abstract class PropertyModel {
         this.write = write;
         this.read = read;
         this.colorMap = colorMap;
+        this.modelResourceName = modelResourceName;
     }
 
     abstract manipulateErrors(errors:Errors):any;

@@ -9,6 +9,7 @@ export interface PropertyModel {
     id: string;
     type: InputType;
     label: string;
+    modelResourceName: string;
     validators?: string[];
     errorMessages?: string[];
     resourceName: string;
@@ -52,6 +53,7 @@ export declare abstract class PropertyModel {
     write?: boolean;
     read?: boolean;
     colorMap?: object;
+    modelResourceName: string;
     constructor(id: string, rest: any);
     abstract manipulateErrors(errors: Errors): any;
     abstract setInputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;

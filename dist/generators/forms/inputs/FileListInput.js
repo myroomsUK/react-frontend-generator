@@ -19,8 +19,8 @@ import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
 import ImageDialog from "../../fields/ImageDialog";
 export default function FileListInput(_a) {
-    var { model, files, resourceName, resourceId, onChange, partialSubmitHandler, areImages = true, id = model.id, label = model.label } = _a, rest = __rest(_a, ["model", "files", "resourceName", "resourceId", "onChange", "partialSubmitHandler", "areImages", "id", "label"]);
-    const { remove } = useDeleteFile(resourceName);
+    var { model, files, modelResourceName, resourceId, onChange, partialSubmitHandler, areImages = true, id = model.id, label = model.label, refresh } = _a, rest = __rest(_a, ["model", "files", "modelResourceName", "resourceId", "onChange", "partialSubmitHandler", "areImages", "id", "label", "refresh"]);
+    const { remove } = useDeleteFile(modelResourceName);
     const creationTime = useRef(Date.now());
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);
     const [totalFiles, setTotalFiles] = useState([]);
@@ -34,7 +34,6 @@ export default function FileListInput(_a) {
     useEffect(() => {
         if (files) {
             const arrayFiles = Array.from(files.values());
-            console.log("array files", arrayFiles);
             setTotalFiles(arrayFiles);
             setLocalFileListMap(new Map(files));
         }

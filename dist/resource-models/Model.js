@@ -47,9 +47,13 @@ export class Model {
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
+     * @param resourceName
      */
-    static createFromJson(jsonModel) {
-        const properties = Object.keys(jsonModel).map(key => PropertyModelRegistry.get(key, jsonModel[key]));
+    static createFromJson(jsonModel, resourceName) {
+        const properties = Object.entries(jsonModel).map(([key, value]) => {
+            // @ts-ignore
+            return PropertyModelRegistry.get(key, Object.assign(Object.assign({}, value), { modelResourceName: resourceName }));
+        });
         return new Model(properties);
     }
     setFieldProps(requestedName, props) {

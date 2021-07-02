@@ -56,9 +56,13 @@ export class Model{
     /**
      * Create a Model from a valid json Model.
      * @param jsonModel
+     * @param resourceName
      */
-    static createFromJson(jsonModel:any):Model{
-        const properties =  Object.keys(jsonModel).map(key =>  PropertyModelRegistry.get(key, jsonModel[key]));
+    static createFromJson(jsonModel:any, resourceName:string):Model{
+        const properties =  Object.entries(jsonModel).map(([key, value]) =>  {
+            // @ts-ignore
+            return PropertyModelRegistry.get(key, {...value, modelResourceName:resourceName})
+        });
         return new Model(properties);
     }
 
