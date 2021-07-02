@@ -58,10 +58,11 @@ export default function FileListInput(_a) {
         return newDataFiles;
     };
     const deleteForm = (key) => {
-        const deleted = localFileListMap.delete(key);
+        localFileListMap.delete(key);
         if (key < creationTime.current) {
             remove(resourceId, id, key);
             setLocalFileListMap(new Map(localFileListMap));
+            refresh();
         }
         onChange(id, createArrayFromMap(localFileListMap));
     };
@@ -81,6 +82,7 @@ export default function FileListInput(_a) {
         partialSubmitHandler({ [id]: totalFiles }).then(response => {
             onChange(id, response[id]);
             setUploadedLocalFiles([]);
+            refresh();
         }).catch(e => console.log(e));
     };
     const list = areImages ?
