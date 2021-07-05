@@ -2,15 +2,37 @@ import React, {useEffect, useRef} from "react";
 import {Button} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {ValidatorForm} from "react-material-ui-form-validator";
-import {FormGeneratorProps} from "./FormGeneratorProps";
 import {FormContent} from "./FormContent";
 import {useFormStyles} from "../../rendering/styles/formStyles";
 import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHorizontalList";
 import {genericError} from "../../redux/actions/verbs/edit";
 import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
+import {Model} from "../../resource-models/Model";
+import {FormValue} from "../../resource-models/formvalue/FormValue";
+import {Record} from "../../resource-models/Record";
+import {Errors} from "../errors/Errors";
+
+export interface Props{
+    resourceId?: string;
+    submitHandler: (e: any) => Promise<any>;
+    partialSubmitHandler: (e: any) => Promise<any>;
+    model:Model;
+    referencesMap: Map<string, any>;
+    refreshReferencesMap:()=>void;
+    formValue: FormValue;
+    record?: Record;
+    lockedFormValue:FormValue;
+    setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
+    text?:string;
+    errors: Errors;
+    showButton?:boolean;
+    formContent?:any;
+    refresh: () => void,
+    isEdit?: boolean,
+}
 
 
-export const FormGenerator: React.FC<FormGeneratorProps> = (props) => {
+export const FormGenerator: React.FC<Props> = (props:Props) => {
 
     const {submitHandler, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Save", isEdit } = props
     const classes = useFormStyles();

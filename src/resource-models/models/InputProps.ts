@@ -1,5 +1,4 @@
 import React, {DetailedReactHTMLElement} from "react";
-import {PropertyProps, PropertyPropsInterface} from "./PropertyProps";
 import {FormValue} from "../formvalue/FormValue";
 import {SinglePropertyModel} from "../propertyModels/SinglePropertyModel";
 import _ from "lodash";
@@ -9,27 +8,30 @@ import {
     SingleSetInputFieldProps
 } from "./SetInputFieldProps";
 import {Record} from "../Record";
-import {EmbeddedSingleModel} from "../propertyModels/EmbeddedSingleModel";
 import {EmbeddedMultipleModel} from "../propertyModels/EmbeddedMultipleModel";
 import {Errors} from "../../generators/errors/Errors";
+import {PropertyModelInputInterface, PropertyModelInputProps} from "./PropertyModelInputProps";
+import {EmbeddedSingleModel} from "../propertyModels/EmbeddedSingleModel";
 
 /**
  * INPUT PROPS
  */
 
-export interface InputPropsInterface extends PropertyPropsInterface{
+export interface InputPropsInterface extends PropertyModelInputInterface{
     form?:React.DetailedReactHTMLElement<any, any>
     inputElement?: DetailedReactHTMLElement<any, any>
-    refresh?: () => void
+    refresh: () => void,
+    showLabel?: boolean
 }
 
-export class InputProps extends PropertyProps{
+export class InputProps extends PropertyModelInputProps{
     form?: React.DetailedReactHTMLElement<any, any>
     inputElement?: DetailedReactHTMLElement<any, any>
-    refresh?: () => void
+    refresh: () => void
 
     constructor(props:InputPropsInterface) {
         super(props);
+        this.refresh = props.refresh;
     }
 }
 
@@ -132,3 +134,5 @@ export class EmbeddedMultipleInputProps extends InputProps{
     }
 
 }
+
+

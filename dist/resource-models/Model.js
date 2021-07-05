@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { PropertyModelRegistry } from "./PropertyModelRegistry";
 import { EmbeddedPropertyModel } from "./propertyModels/NestedPropertyModel";
-import { PropertyProps } from "./models/PropertyProps";
 import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
 import { ReferenceModel } from "./propertyModels/ReferenceModel";
+import { PropertyModelInputProps } from "./models/PropertyModelInputProps";
 export class Model {
     constructor(properties) {
         this.properties = properties;
@@ -57,8 +57,14 @@ export class Model {
         return new Model(properties);
     }
     setFieldProps(requestedName, props) {
-        return PropertyProps.createFromFieldProps(requestedName, props);
+        return PropertyModelInputProps.createFromFieldProps(requestedName, props);
     }
+    /**
+     * This method allows to get a input field of a requested attribute directly from the model.
+     * @param requestedName
+     * @param props
+     * @param viewElement
+     */
     getInputField(requestedName, props, viewElement) {
         const newProps = this.setFieldProps(requestedName, props);
         return this.getProperty(requestedName).getInputField(newProps, new PropertyFieldConfiguration({ viewElement: viewElement }));

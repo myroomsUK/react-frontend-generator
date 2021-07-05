@@ -2,8 +2,8 @@ import React, { DetailedReactHTMLElement, ReactElement } from "react";
 import { Errors } from "../generators/errors/Errors";
 import { FormValue } from "./formvalue/FormValue";
 import { Record } from "./Record";
-import { InputPropsInterface } from "./models/InputProps";
 import { PropertyFieldConfiguration } from "./configurations/PropertyFieldConfiguration";
+import { PropertyModelInputInterface } from "./models/PropertyModelInputProps";
 export declare type InputType = "id" | "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" | "textarea" | "enum_single" | "enum_multiple";
 export interface PropertyModel {
     id: string;
@@ -56,14 +56,14 @@ export declare abstract class PropertyModel {
     modelResourceName: string;
     constructor(id: string, rest: any);
     abstract manipulateErrors(errors: Errors): any;
-    abstract setInputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
-    abstract getInputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
-    abstract getOutputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
-    abstract setOutputField(props: InputPropsInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract setInputField(props: PropertyModelInputInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract getInputField(props: PropertyModelInputInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract getOutputField(props: PropertyModelInputInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract setOutputField(props: PropertyModelInputInterface, configuration?: PropertyFieldConfiguration): ReactElement<any, any> | null;
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars: any) => void;
     abstract getRecord(jsonValue: any): any;
     abstract getFormValue(value: any): any;
-    getPropertyField(props: InputPropsInterface, isEdit?: boolean): React.ReactElement<any, any> | null;
+    getPropertyField(props: PropertyModelInputInterface, isEdit?: boolean): React.ReactElement<any, any> | null;
 }
 export interface InputOnChangeHandler {
     formValue: FormValue;

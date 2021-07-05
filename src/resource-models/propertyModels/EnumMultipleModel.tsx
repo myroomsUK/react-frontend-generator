@@ -22,7 +22,7 @@ export class EnumMultipleModel extends SinglePropertyModel{
     }
     setInputField(props: EnumMultipleInputFields): React.ReactElement<any, any> | null {
         const {formValue, setFormValue, errors, options, value} = props;
-        const valuePositionInOptions = getAutocompleteValuePosition(value, options);
+        const valuePositionInOptions = getAutocompleteValuePosition(value, this.options);
         const propsWithModel = {...props, model:this, inheritedValue:valuePositionInOptions, onChange:this.getInputOnChangeHandler({formValue, setFormValue})}
         return EnumInput(propsWithModel);
     }

@@ -4,11 +4,7 @@ import {IterableFormContent} from "../../generators/forms/IterableFormContent";
 import {IterableShowContent} from "../../generators/fields/IterableShowContent";
 import {Record} from "../Record";
 import {FormValue} from "../formvalue/FormValue";
-import {
-    EmbeddedMultipleInputProps,
-    EmbeddedMultipleInputPropsInterface, EmbeddedSingleInputProps,
-    EmbeddedSingleInputPropsInterface
-} from "../models/InputProps";
+import {EmbeddedMultipleInputProps, EmbeddedMultipleInputPropsInterface} from "../models/InputProps";
 import {EmbeddedMultipleSetInputFieldProps} from "../models/SetInputFieldProps";
 import {PropertyFieldConfigurationInterface} from "../configurations/PropertyFieldConfiguration";
 import {Typography} from "@material-ui/core";

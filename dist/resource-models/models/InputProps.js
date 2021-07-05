@@ -1,10 +1,11 @@
-import { PropertyProps } from "./PropertyProps";
 import _ from "lodash";
 import { EmbeddedMultipleSetInputFieldProps, EmbeddedSingleSetInputFieldProps, SingleSetInputFieldProps } from "./SetInputFieldProps";
 import { Errors } from "../../generators/errors/Errors";
-export class InputProps extends PropertyProps {
+import { PropertyModelInputProps } from "./PropertyModelInputProps";
+export class InputProps extends PropertyModelInputProps {
     constructor(props) {
         super(props);
+        this.refresh = props.refresh;
     }
 }
 export class SingleInputProps extends InputProps {

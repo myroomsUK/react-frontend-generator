@@ -39,10 +39,11 @@ export class SingleSetInputFieldProps implements SingleInputPropsInterface{
     record: Record | Map<number, Record> | undefined;
     referencesMap: Map<string, any>;
     refreshReferencesMap: ()=>void
+    refresh: () => void
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>
 
     constructor(props: SingleSetInputFieldPropsInterface) {
-        const {hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord} = props;
+        const {hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord, refresh} = props;
         this.hasError = hasError;
         this.errorMessage = errorMessage;
         this.value = value;
@@ -58,6 +59,7 @@ export class SingleSetInputFieldProps implements SingleInputPropsInterface{
         this.refreshReferencesMap = refreshReferencesMap;
         this.record = record;
         this.setFormValue = setFormValue
+        this.refresh = refresh
         this.propertyRecord = propertyRecord;
     }
 }
@@ -90,7 +92,7 @@ export class EmbeddedSingleSetInputFieldProps implements EmbeddedSingleInputProp
     referencesMap: Map<string, any>;
     refreshReferencesMap: ()=>void
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>
-    refresh?: ()=>void
+    refresh: ()=>void
 
     constructor(props: EmbeddedSingleSetInputFieldPropsInterface) {
         const {formValue, model, errors,lockedFormValue, partialSubmitHandler, referencesMap, refreshReferencesMap, submitHandler, record, setFormValue, refresh} = props
@@ -127,7 +129,7 @@ interface EmbeddedMultipleSetInputFieldPropsInterface extends InputPropsInterfac
     referencesMap: Map<string, any>;
     refreshReferencesMap: ()=>void
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>
-    refresh?: ()=>void
+    refresh: ()=>void
 }
 
 export class EmbeddedMultipleSetInputFieldProps implements EmbeddedMultipleSetInputFieldPropsInterface{
@@ -141,7 +143,7 @@ export class EmbeddedMultipleSetInputFieldProps implements EmbeddedMultipleSetIn
     referencesMap: Map<string, any>;
     refreshReferencesMap: ()=>void
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>
-    refresh?: ()=>void
+    refresh: ()=>void
     inputElement: any
 
     constructor(props: EmbeddedMultipleSetInputFieldPropsInterface) {

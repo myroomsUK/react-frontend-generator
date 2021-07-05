@@ -2,14 +2,13 @@ import {Record} from "../Record";
 import {FormValue} from "../formvalue/FormValue";
 import React from "react";
 import {Errors} from "../../generators/errors/Errors";
-import {Model} from "../Model";
-import {FieldProps} from "./FieldProps";
 import _ from "lodash";
 import {PropertyModel} from "../PropertyModel";
+import {ModelInputInterface} from "../interface/ModelInputInterface";
 
 export interface PropertyPropsInterface{
     model: PropertyModel,
-    record: Record | Map<number, Record> | undefined,
+    record:any,
     formValue: FormValue | Map<number, FormValue>,
     setFormValue:  React.Dispatch<React.SetStateAction<FormValue>>,
     lockedFormValue: FormValue,
@@ -19,9 +18,10 @@ export interface PropertyPropsInterface{
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     showLabel?: boolean;
+    refresh:()=> void,
 }
 
-export class PropertyProps{
+export class PropertyModelInputProps{
     model: PropertyModel
     record: Record | Map<number, Record> | undefined
     formValue: FormValue | Map<number, FormValue>
@@ -32,9 +32,10 @@ export class PropertyProps{
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
-    showlabel: boolean;
+    refresh:()=>void
+    showlabel?: boolean;
 
-    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, showLabel=true}:PropertyPropsInterface) {
+    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, showLabel=true, refresh}:PropertyPropsInterface) {
         this.model = model;
         this.record = record;
         this.formValue = formValue;
@@ -46,9 +47,10 @@ export class PropertyProps{
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;
         this.showlabel = showLabel;
+        this.refresh = refresh;
     }
 
-    static createFromFieldProps(requestedName:string, props:FieldProps): PropertyProps{
+    static createFromFieldProps(requestedName:string, props:ModelInputInterface): PropertyModelInputProps{
         const {formValue, record, setFormValue, model} = props
         const localFormValue = (formvalue:any)=>{
             const split = _.split(requestedName, ".");
@@ -58,7 +60,7 @@ export class PropertyProps{
             setFormValue(newFormValue)
         };
 
-        const propertyProps = new PropertyProps({...props, model:model.getProperty(requestedName)})
+        const propertyProps = new PropertyModelInputProps({...props, model:model.getProperty(requestedName)})
         propertyProps.formValue = (formValue) ? formValue.getPropertyFormValue(requestedName) : undefined;
         propertyProps.record = record ?  record.getPropertyRecord(requestedName) : undefined;
         propertyProps.setFormValue = localFormValue;
@@ -67,3 +69,5 @@ export class PropertyProps{
 
     }
 }
+
+export interface PropertyModelInputInterface extends PropertyModelInputProps{}

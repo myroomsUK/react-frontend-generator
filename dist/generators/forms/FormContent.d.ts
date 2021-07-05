@@ -15,7 +15,7 @@ interface FormContentProps {
     lockedFormValue: FormValue;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    refresh?: () => void;
+    refresh: () => void;
     configuration: PropertyFieldConfiguration;
 }
 /**

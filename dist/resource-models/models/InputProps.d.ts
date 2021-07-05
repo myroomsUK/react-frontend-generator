@@ -1,23 +1,24 @@
 import React, { DetailedReactHTMLElement } from "react";
-import { PropertyProps, PropertyPropsInterface } from "./PropertyProps";
 import { FormValue } from "../formvalue/FormValue";
 import { SinglePropertyModel } from "../propertyModels/SinglePropertyModel";
 import { EmbeddedMultipleSetInputFieldProps, EmbeddedSingleSetInputFieldProps, SingleSetInputFieldProps } from "./SetInputFieldProps";
 import { Record } from "../Record";
-import { EmbeddedSingleModel } from "../propertyModels/EmbeddedSingleModel";
 import { EmbeddedMultipleModel } from "../propertyModels/EmbeddedMultipleModel";
+import { PropertyModelInputInterface, PropertyModelInputProps } from "./PropertyModelInputProps";
+import { EmbeddedSingleModel } from "../propertyModels/EmbeddedSingleModel";
 /**
  * INPUT PROPS
  */
-export interface InputPropsInterface extends PropertyPropsInterface {
+export interface InputPropsInterface extends PropertyModelInputInterface {
     form?: React.DetailedReactHTMLElement<any, any>;
     inputElement?: DetailedReactHTMLElement<any, any>;
-    refresh?: () => void;
+    refresh: () => void;
+    showLabel?: boolean;
 }
-export declare class InputProps extends PropertyProps {
+export declare class InputProps extends PropertyModelInputProps {
     form?: React.DetailedReactHTMLElement<any, any>;
     inputElement?: DetailedReactHTMLElement<any, any>;
-    refresh?: () => void;
+    refresh: () => void;
     constructor(props: InputPropsInterface);
 }
 /**

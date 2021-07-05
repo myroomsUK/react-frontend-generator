@@ -14,6 +14,7 @@ interface Props {
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
+    refresh: () => void;
 }
 export declare class FieldProps {
     model: Model;
@@ -26,6 +27,7 @@ export declare class FieldProps {
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
-    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap }: Props);
+    refresh: () => void;
+    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, refresh }: Props);
 }
 export {};

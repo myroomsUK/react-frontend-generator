@@ -19,7 +19,7 @@ export interface IterableShowContentProps {
     modifyOnlyLastElement?: boolean;
     modifyRule?: (formvalue: any) => boolean;
     inputElement?: DetailedReactHTMLElement<any, any>;
-    refresh?: () => void;
+    refresh: () => void;
     showElement?: React.DetailedReactHTMLElement<any, any>;
 }
 export declare const IterableShowContent: React.FC<IterableShowContentProps>;

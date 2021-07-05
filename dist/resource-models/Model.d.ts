@@ -1,7 +1,7 @@
 import { PropertyModel } from "./PropertyModel";
 import { DetailedReactHTMLElement, ReactElement } from "react";
-import { FieldProps } from "./models/FieldProps";
-import { PropertyProps } from "./models/PropertyProps";
+import { ModelInputInterface } from "./interface/ModelInputInterface";
+import { PropertyModelInputProps } from "./models/PropertyModelInputProps";
 export interface Model {
     properties: PropertyModel[];
 }
@@ -22,9 +22,15 @@ export declare class Model {
      * @param resourceName
      */
     static createFromJson(jsonModel: any, resourceName: string): Model;
-    setFieldProps(requestedName: string, props: FieldProps): PropertyProps;
-    getInputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
-    getOutputField(requestedName: string, props: FieldProps, viewElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;
+    setFieldProps(requestedName: string, props: ModelInputInterface): PropertyModelInputProps;
+    /**
+     * This method allows to get a input field of a requested attribute directly from the model.
+     * @param requestedName
+     * @param props
+     * @param viewElement
+     */
+    getInputField(requestedName: string, props: ModelInputInterface, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any> | null;
+    getOutputField(requestedName: string, props: ModelInputInterface, viewElement: DetailedReactHTMLElement<any, any>, showLabel?: boolean): ReactElement<any, any> | null;
     getAllPropertiesReadableNames(): {
         id: string;
         label: string;

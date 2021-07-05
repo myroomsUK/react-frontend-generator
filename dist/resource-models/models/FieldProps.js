@@ -1,5 +1,5 @@
 export class FieldProps {
-    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap }) {
+    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, refresh }) {
         this.model = model;
         this.record = record;
         this.formValue = formValue;
@@ -10,5 +10,6 @@ export class FieldProps {
         this.partialSubmitHandler = partialSubmitHandler;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;
+        this.refresh = refresh;
     }
 }

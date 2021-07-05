@@ -15,6 +15,7 @@ interface Props{
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
+    refresh: ()=>void;
 }
 
 export class FieldProps{
@@ -28,8 +29,9 @@ export class FieldProps{
     partialSubmitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
+    refresh: ()=>void;
 
-    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap}:Props) {
+    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, refresh}:Props) {
         this.model = model;
         this.record = record;
         this.formValue = formValue;
@@ -40,6 +42,7 @@ export class FieldProps{
         this.partialSubmitHandler = partialSubmitHandler;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;
+        this.refresh = refresh;
     }
 
 }

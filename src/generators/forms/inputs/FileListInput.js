@@ -8,7 +8,6 @@ import FileList from "../../../rendering/components/others/FileList";
 import ImageDialog from "../../fields/ImageDialog";
 
 export default function FileListInput({model, files, modelResourceName, resourceId, onChange, partialSubmitHandler, areImages=true, id= model.id, label = model.label, refresh, ...rest}) {
-
     const {remove} = useDeleteFile(modelResourceName);
     const creationTime = useRef(Date.now());
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);

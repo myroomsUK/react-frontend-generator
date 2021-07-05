@@ -31,6 +31,7 @@ export declare class SingleSetInputFieldProps implements SingleInputPropsInterfa
     record: Record | Map<number, Record> | undefined;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
+    refresh: () => void;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     constructor(props: SingleSetInputFieldPropsInterface);
 }
@@ -56,7 +57,7 @@ export declare class EmbeddedSingleSetInputFieldProps implements EmbeddedSingleI
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    refresh?: () => void;
+    refresh: () => void;
     constructor(props: EmbeddedSingleSetInputFieldPropsInterface);
 }
 /**
@@ -73,7 +74,7 @@ interface EmbeddedMultipleSetInputFieldPropsInterface extends InputPropsInterfac
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    refresh?: () => void;
+    refresh: () => void;
 }
 export declare class EmbeddedMultipleSetInputFieldProps implements EmbeddedMultipleSetInputFieldPropsInterface {
     formValue: FormValue;
@@ -86,7 +87,7 @@ export declare class EmbeddedMultipleSetInputFieldProps implements EmbeddedMulti
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    refresh?: () => void;
+    refresh: () => void;
     inputElement: any;
     constructor(props: EmbeddedMultipleSetInputFieldPropsInterface);
 }

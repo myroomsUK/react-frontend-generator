@@ -19,7 +19,7 @@ interface FormContentProps {
     lockedFormValue:FormValue;
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
-    refresh?:()=>void,
+    refresh:()=>void,
     configuration: PropertyFieldConfiguration
 }
 
@@ -42,7 +42,7 @@ export const FormContent: React.FC<FormContentProps> = (props) => {
             .filter((propertyModel:PropertyModel) => propertyModel.write === true)
             .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
+                const props = new InputProps({showLabel:true, model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
                 return <Grid item xs={xs} md={md} key={index}>
                     {!lockedFormValue.has(propertyModel.id) && propertyModel.getPropertyField(props,configuration.isEdit)}
                 </Grid>

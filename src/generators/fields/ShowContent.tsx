@@ -1,4 +1,4 @@
-import React, {DetailedReactHTMLElement} from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {Model} from "../../resource-models/Model";
 import {Record} from "../../resource-models/Record";
@@ -19,7 +19,7 @@ export interface ShowContent{
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?:React.DetailedReactHTMLElement<any, any>;
-    refresh?:()=>void
+    refresh:()=>void
 }
 
 export const ShowContent: React.FC<ShowContent> = (props) => {
@@ -30,7 +30,7 @@ export const ShowContent: React.FC<ShowContent> = (props) => {
 
     return <Grid container spacing={2}>
         {model?.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
-            const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
+            const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh, showLabel:true})
             const {xs, md, id} = propertyModel;
             return <Grid key={index} item xs={xs} md={md}>
                 {propertyModel.getOutputField(props)}

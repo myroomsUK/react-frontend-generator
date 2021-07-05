@@ -19,7 +19,7 @@ interface IterableFormContentProps {
     modifyOnlyLastElement?: boolean;
     modifyRule?: (formvalue: any) => boolean;
     inputElement?: DetailedReactHTMLElement<any, any>;
-    refresh?: () => void;
+    refresh: () => void;
 }
 export declare const IterableFormContent: React.FC<IterableFormContentProps>;
 export {};

@@ -2,9 +2,6 @@ import {Record} from "../Record";
 import {FormValue} from "../formvalue/FormValue";
 import React from "react";
 import {Errors} from "../../generators/errors/Errors";
-import {Model} from "../Model";
-import {FieldProps} from "./FieldProps";
-import _ from "lodash";
 import {PropertyModel} from "../PropertyModel";
 
 interface Props{

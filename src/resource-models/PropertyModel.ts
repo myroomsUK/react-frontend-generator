@@ -5,6 +5,7 @@ import {Record} from "./Record";
 import {InputPropsInterface} from "./models/InputProps";
 import {PropertyFieldConfiguration} from "./configurations/PropertyFieldConfiguration";
 import _ from "lodash";
+import {PropertyModelInputInterface} from "./models/PropertyModelInputProps";
 
 export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embedded_multiple" | "file_single" | "file_multiple" | "integer" | "date" | "float" | "enum" | "string" | "phone" | "money" | "array" |"textarea" | "enum_single"| "enum_multiple";
 
@@ -80,13 +81,13 @@ export abstract class PropertyModel {
 
     abstract manipulateErrors(errors:Errors):any;
 
-    abstract setInputField(props: InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> | null;
+    abstract setInputField(props: PropertyModelInputInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> | null;
 
-    abstract getInputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any,any>|null;
+    abstract getInputField(props:PropertyModelInputInterface, configuration?:PropertyFieldConfiguration): ReactElement<any,any>|null;
 
-    abstract getOutputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
+    abstract getOutputField(props:PropertyModelInputInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
 
-    abstract setOutputField(props:InputPropsInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
+    abstract setOutputField(props:PropertyModelInputInterface, configuration?:PropertyFieldConfiguration): ReactElement<any, any> |null;
 
     abstract getInputOnChangeHandler(props: InputOnChangeHandler): (vars:any) => void;
 
@@ -94,7 +95,7 @@ export abstract class PropertyModel {
 
     abstract getFormValue(value: any):any;
 
-    getPropertyField(props:InputPropsInterface, isEdit: boolean = true ){
+    getPropertyField(props:PropertyModelInputInterface, isEdit: boolean = true ){
         return (isEdit) ? this.getInputField(props) : this.getOutputField(props)
     }
 

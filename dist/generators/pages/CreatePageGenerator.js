@@ -22,7 +22,6 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useState } from "react";
 import { useGetResourceModel } from "../../resource-models/modelsRegistry";
 import { useCreate } from "../../redux/actions/verbs/create";
-import { FormGeneratorPropsObject } from "../forms/FormGeneratorProps";
 import { FormGenerator } from "../forms/FormGenerator";
 import { UpdateListings } from "../../utils/referenceFieldUtils";
 import { Error, Errors } from "../errors/Errors";
@@ -37,16 +36,15 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     useEffect(() => {
         // @ts-ignore
         const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
-        // @ts-ignore
-        const newErrors = new Errors(Object.keys(errorFields).map((field) => new Error(field, errorFields[field])));
+        const newErrors = new Errors(Object.entries(errorFields).map(([field, value]) => new Error(field, value)));
         setErrors(newErrors);
     }, [responseErrors]);
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
     const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, FormValue.toJson(formValue)).then(thenFunction).catch(catchFunction); });
-    const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, formContent: createPageToUse, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandler, partialSubmitHandler: submitHandler, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, resourceName, errors, lockedFormValue]);
     useEffect(() => {
-        setGenericCreateRender(_jsx(FormGenerator, Object.assign({ formContent: createPageToUse }, createFormProps, { errors: errors }), void 0));
+        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
+        setGenericCreateRender(newFormGenerator);
     }, [model, referencesMap, formValue, resourceName, errors]);
     return genericCreateRender;
 };
@@ -57,9 +55,9 @@ export const GenericCreate = ({ model, submitHandler, errors = new Errors([]), p
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [model]);
     const submitHandlerFinal = () => submitHandler(formValue);
-    const createFormProps = useMemo(() => new FormGeneratorPropsObject({ model: model, formContent: createPageToUse, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, setFormValue: setFormValue, submitHandler: submitHandlerFinal, partialSubmitHandler: submitHandlerFinal, errors: errors, lockedFormValue: lockedFormValue }), [model, referencesMap, formValue, errors, lockedFormValue]);
     useEffect(() => {
-        setGenericCreateRender(_jsx(FormGenerator, Object.assign({ formContent: createPageToUse }, createFormProps, { errors: errors }), void 0));
+        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
+        setGenericCreateRender(newFormGenerator);
     }, [model, referencesMap, formValue, errors]);
     return genericCreateRender;
 };

@@ -3,10 +3,10 @@ import _ from 'lodash';
 import {PropertyModelRegistry} from "./PropertyModelRegistry";
 import {EmbeddedPropertyModel} from "./propertyModels/NestedPropertyModel";
 import {DetailedReactHTMLElement, ReactElement} from "react";
-import {FieldProps} from "./models/FieldProps";
-import {PropertyProps} from "./models/PropertyProps";
 import {PropertyFieldConfiguration} from "./configurations/PropertyFieldConfiguration";
 import {ReferenceModel} from "./propertyModels/ReferenceModel";
+import {ModelInputInterface} from "./interface/ModelInputInterface";
+import {PropertyModelInputProps} from "./models/PropertyModelInputProps";
 
 export interface Model{
     properties: PropertyModel[]
@@ -66,16 +66,22 @@ export class Model{
         return new Model(properties);
     }
 
-    setFieldProps(requestedName:string, props:FieldProps):PropertyProps{
-        return PropertyProps.createFromFieldProps(requestedName,props);
+    setFieldProps(requestedName:string, props:ModelInputInterface):PropertyModelInputProps{
+        return PropertyModelInputProps.createFromFieldProps(requestedName,props);
     }
 
-    getInputField(requestedName:string, props:FieldProps, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
+    /**
+     * This method allows to get a input field of a requested attribute directly from the model.
+     * @param requestedName
+     * @param props
+     * @param viewElement
+     */
+    getInputField(requestedName:string, props:ModelInputInterface, viewElement: DetailedReactHTMLElement<any, any>): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props)
         return this.getProperty(requestedName).getInputField(newProps, new PropertyFieldConfiguration({viewElement:viewElement}));
     }
 
-    getOutputField(requestedName:string, props: FieldProps, viewElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
+    getOutputField(requestedName:string, props: ModelInputInterface, viewElement:DetailedReactHTMLElement<any, any>, showLabel:boolean = true): ReactElement<any, any>|null{
         const newProps = this.setFieldProps(requestedName, props);
         return this.getProperty(requestedName).getOutputField(newProps,new PropertyFieldConfiguration({viewElement:viewElement, showLabel:showLabel}));
     }

@@ -16,6 +16,6 @@ export interface ShowContent {
     errors: Errors;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
     formContent?: React.DetailedReactHTMLElement<any, any>;
-    refresh?: () => void;
+    refresh: () => void;
 }
 export declare const ShowContent: React.FC<ShowContent>;

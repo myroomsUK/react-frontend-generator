@@ -1,6 +1,6 @@
 export class SingleSetInputFieldProps {
     constructor(props) {
-        const { hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord } = props;
+        const { hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord, refresh } = props;
         this.hasError = hasError;
         this.errorMessage = errorMessage;
         this.value = value;
@@ -16,6 +16,7 @@ export class SingleSetInputFieldProps {
         this.refreshReferencesMap = refreshReferencesMap;
         this.record = record;
         this.setFormValue = setFormValue;
+        this.refresh = refresh;
         this.propertyRecord = propertyRecord;
     }
 }
