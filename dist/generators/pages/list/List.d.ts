@@ -3,7 +3,7 @@ export function GenericList({ data: rows, totalItems, page, setPage, selected, s
     totalItems: any;
     page: any;
     setPage: any;
-    selected: any;
+    selected?: any[] | undefined;
     setSelected: any;
     title: any;
     itemOperations?: any[] | undefined;

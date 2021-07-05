@@ -14,6 +14,7 @@ import { SimpleTableToolbar } from "./listHelpers/SimpleToolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import { OperationButtonFactory } from "./listHelpers/OperationButtonFactory";
 import { makeStyles } from "@material-ui/core/styles";
+import { EnhancedTableHead } from "../ListPageGenerator";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         width: 1,
     },
 }));
-export function GenericList({ data: rows, totalItems, page, setPage, selected, setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable }) {
+export function GenericList({ data: rows, totalItems, page, setPage, selected = [], setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable }) {
     headCells = (itemOperations.length !== 0) ? headCells.concat({ numeric: true, disablePadding: false, label: "Actions" }) : headCells;
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');

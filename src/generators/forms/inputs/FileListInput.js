@@ -57,9 +57,9 @@ export default function FileListInput({model, files, modelResourceName, resource
         if (key < creationTime.current) {
             remove(resourceId, id, key);
             setLocalFileListMap(new Map(localFileListMap));
-            refresh();
         }
         onChange(id, createArrayFromMap(localFileListMap));
+        refresh();
     }
     const filesList = createArrayFromMap(localFileListMap).map((file, index) => {
         file.actionIcon = <CustomDeleteButton icon onClick={() => deleteForm(file.id)}/>

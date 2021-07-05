@@ -62,9 +62,9 @@ export default function FileListInput(_a) {
         if (key < creationTime.current) {
             remove(resourceId, id, key);
             setLocalFileListMap(new Map(localFileListMap));
-            refresh();
         }
         onChange(id, createArrayFromMap(localFileListMap));
+        refresh();
     };
     const filesList = createArrayFromMap(localFileListMap).map((file, index) => {
         file.actionIcon = _jsx(CustomDeleteButton, { icon: true, onClick: () => deleteForm(file.id) }, void 0);
