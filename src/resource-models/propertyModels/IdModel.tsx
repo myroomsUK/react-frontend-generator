@@ -1,5 +1,7 @@
 import {InputFields, PropertyModel} from "../PropertyModel";
 import {Errors} from "../../generators/errors/Errors";
+import {PropertyFieldConfiguration} from "../configurations/PropertyFieldConfiguration";
+import React from "react";
 
 export class IdModel extends PropertyModel{
     setInputField(props: InputFields): React.ReactElement<any, any> | null {
@@ -12,7 +14,7 @@ export class IdModel extends PropertyModel{
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {
-        return <>{props.propertyRecord}</>;
+        return <>{props.record}</>;
     }
 
     manipulateErrors(errors: Errors): any {
@@ -22,8 +24,11 @@ export class IdModel extends PropertyModel{
         return null;
     }
 
-    getOutputField(props: any): React.ReactElement<any, any> | null {
-        return null;
+    getOutputField(props: any, {viewElement}: PropertyFieldConfiguration): React.ReactElement<any, any> | null {
+        if(viewElement){
+            return React.cloneElement(viewElement, props)
+        }
+        return this.setOutputField(props);
     }
 
     getRecord(jsonValue: any): any {

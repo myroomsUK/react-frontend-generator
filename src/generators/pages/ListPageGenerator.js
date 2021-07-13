@@ -304,17 +304,13 @@ export function RouteFilterList({resourceName, filters:lockedFilters,  itemOpera
 
     const showClearFilters = !!components.length;
 
-    const getRowElement = (row, id, label, localModel)=> {
+    const getRowElement = (row, id, label, localModel, viewElement)=> {
         const record = Record.createFromJson(row, localModel);
-        const propertyModel = localModel.getProperty(id);
-
-        const configuration = new PropertyFieldConfiguration({showLabel:false})
-        return localModel.getOutputField(id, {record:record, model:localModel}, undefined, false);
-        return propertyModel.getOutputField({model: propertyModel, propertyRecord: record.getPropertyRecord(id)}, configuration)
+        return localModel.getOutputField(id, {record:record, model:localModel}, viewElement, false);
     }
 
-    const columns = useCallback((row) => localTable.map( ({id, label}) => {
-        return getRowElement(row, id, label, localModel)
+    const columns = useCallback((row) => localTable.map( ({id, label, viewElement}) => {
+        return getRowElement(row, id, label, localModel, viewElement)
         }),[localModel, localTable])
 
 

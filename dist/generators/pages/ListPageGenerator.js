@@ -33,7 +33,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { useCookies } from "react-cookie";
 import { Record } from "../../resource-models/Record";
 import OperationButton from "../../rendering/components/buttons/OperationButton";
-import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 export function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, filters = [] } = props;
     const createSortHandler = (property) => (event) => {
@@ -180,15 +179,12 @@ export function RouteFilterList({ resourceName, filters: lockedFilters, itemOper
     }, [data]);
     const filterBarComponents = components.filter(component => !headCells.some(headCell => headCell.id === component.name));
     const showClearFilters = !!components.length;
-    const getRowElement = (row, id, label, localModel) => {
+    const getRowElement = (row, id, label, localModel, viewElement) => {
         const record = Record.createFromJson(row, localModel);
-        const propertyModel = localModel.getProperty(id);
-        const configuration = new PropertyFieldConfiguration({ showLabel: false });
-        return localModel.getOutputField(id, { record: record, model: localModel }, undefined, false);
-        return propertyModel.getOutputField({ model: propertyModel, propertyRecord: record.getPropertyRecord(id) }, configuration);
+        return localModel.getOutputField(id, { record: record, model: localModel }, viewElement, false);
     };
-    const columns = useCallback((row) => localTable.map(({ id, label }) => {
-        return getRowElement(row, id, label, localModel);
+    const columns = useCallback((row) => localTable.map(({ id, label, viewElement }) => {
+        return getRowElement(row, id, label, localModel, viewElement);
     }), [localModel, localTable]);
     return _jsx(GenericList, { data: rows, totalItems: data.totalItems, getDataHandler: debounced, loading: loading, page: page, setPage: setPage, selected: selected, setSelected: setSelected, title: title, clearFilters: clearFilters, filterBarComponents: filterBarComponents, showClearFilters: showClearFilters, components: components, columns: columns, headCells: headCells, itemOperations: itemOperations, collectionOperations: collectionOperations, allColumns: tableWithStats, setTable: propSetLocalTable }, void 0);
 }
