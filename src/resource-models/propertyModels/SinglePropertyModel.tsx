@@ -26,6 +26,9 @@ export abstract class SinglePropertyModel extends PropertyModel{
 
     getOutputField(props:SingleInputPropsInterface, configuration?:PropertyFieldConfiguration): React.ReactElement<any, any> | null {
         const inputProps = new SingleInputProps(props);
+        if(configuration?.viewElement){
+            return React.cloneElement(configuration.viewElement, props);
+        }
         return <>
             {(configuration?.showLabel?? true)  && <Typography>{_.startCase(this.label)}</Typography>}
             {this.setOutputField(inputProps.handleForSet(), configuration)}
