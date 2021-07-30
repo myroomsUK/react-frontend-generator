@@ -13,8 +13,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import { SimpleTableToolbar } from "./listHelpers/SimpleToolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import { OperationButtonFactory } from "./listHelpers/OperationButtonFactory";
-import { makeStyles } from "@material-ui/core/styles";
 import { EnhancedTableHead } from "../ListPageGenerator";
+/*
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
         width: 1,
     },
 }));
+*/
 export function GenericList({ data: rows, totalItems, page, setPage, selected = [], setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable }) {
     headCells = (itemOperations.length !== 0) ? headCells.concat({ numeric: true, disablePadding: false, label: "Actions" }) : headCells;
-    const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
@@ -77,8 +77,8 @@ export function GenericList({ data: rows, totalItems, page, setPage, selected = 
     };
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(SimpleTableToolbar, { numSelected: selected.length, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
-                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { classes: classes, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
+    return (_jsx(_Fragment, { children: _jsx("div", { children: _jsxs(Paper, { children: [_jsx(SimpleTableToolbar, { numSelected: selected.length, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
+                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
                                 _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
                                         .slice(0, rowsPerPage)
                                         .map((row, index) => {
@@ -93,5 +93,5 @@ export function GenericList({ data: rows, totalItems, page, setPage, selected = 
                                                             return _jsx(Tooltip, Object.assign({ title: operation.text }, { children: OperationButtonFactory.getOperationButton(operation) }), void 0);
                                                         }) }, void 0) }), void 0)] }), index));
                                     }) }, void 0)] }), void 0) }, void 0),
-                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
+                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }, void 0) }, void 0) }, void 0));
 }

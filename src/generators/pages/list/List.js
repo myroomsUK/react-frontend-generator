@@ -15,6 +15,7 @@ import {OperationButtonFactory} from "./listHelpers/OperationButtonFactory";
 import {makeStyles} from "@material-ui/core/styles";
 import {EnhancedTableHead} from "../ListPageGenerator";
 
+/*
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -38,11 +39,11 @@ const useStyles = makeStyles((theme) => ({
         width: 1,
     },
 }));
+*/
 
 export function GenericList({data:rows, totalItems,  page, setPage, selected = [], setSelected, title, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
     headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells
 
-    const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
@@ -90,18 +91,18 @@ export function GenericList({data:rows, totalItems,  page, setPage, selected = [
 
     return  (
         <>
-            <div className={classes.root}>
-                <Paper className={classes.paper}>
+            <div >
+                <Paper >
                     <SimpleTableToolbar numSelected={selected.length} title={title} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} />
                     <TableContainer>
                         <Table
-                            className={classes.table}
+
                             aria-labelledby="tableTitle"
                             size={dense ? 'small' : 'medium'}
                             aria-label="enhanced table"
                         >
                             <EnhancedTableHead
-                                classes={classes}
+
                                 numSelected={selected.length}
                                 order={order}
                                 orderBy={orderBy}
