@@ -13,6 +13,8 @@
 
 /.idea
 /dist/mock
+/src/mock
+/yarn.lock
 
 # mock
 
