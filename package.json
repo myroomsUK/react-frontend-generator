@@ -2,16 +2,13 @@
   "name": "react-frontend-generator",
   "version": "0.1.0",
   "private": true,
-  "peerDependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/lab": "^4.0.0-alpha.57",
+  "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/history": "^4.7.8",
     "@types/jest": "^26.0.15",
     "@types/lodash": "^4.14.168",
-    "@types/material-ui": "^0.21.8",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -74,5 +71,10 @@
     "@babel/preset-react": "^7.13.13",
     "@material-ui/icons": "^4.11.2",
     "miragejs": "^0.1.41"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@types/material-ui": "^0.21.8"
   }
 }
