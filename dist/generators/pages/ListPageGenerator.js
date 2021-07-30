@@ -109,29 +109,6 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    paper: {
-        width: '100%',
-        marginBottom: theme.spacing(2),
-    },
-    table: {
-        minWidth: 750,
-    },
-    visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        height: 1,
-        margin: -1,
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        top: 20,
-        width: 1,
-    },
-}));
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -243,7 +220,6 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
     //get Data as a first step.
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(() => { setLocalLoading(loading); }, [loading]);
-    const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
@@ -280,8 +256,8 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
     };
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [_jsx(EnhancedTableToolbar, { selected: selected, numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
-                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { classes: classes, numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells, filters: components }, void 0),
+    return (_jsx(_Fragment, { children: _jsx("div", { children: _jsxs(Paper, { children: [_jsx(EnhancedTableToolbar, { selected: selected, numSelected: selected.length, title: title, clearFilters: clearFilters, components: filterBarComponents, showClearFilters: showClearFilters, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
+                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells, filters: components }, void 0),
                                 _jsx(TableBody, { children: localLoading ?
                                         (randomArray()).map((value, index) => _jsxs(TableRow, Object.assign({ hover: true, 
                                             //onClick={(event) => handleClick(event, row.id)}
@@ -300,7 +276,7 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
                                                         columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
                                                         _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility, requiresConfirmation }) => _jsx(OperationButton, { color: color, text: text, icon: icon, onClick: () => onClick(row), visible: visibility(row), requiresConfirmation: requiresConfirmation }, void 0)) }, void 0) }), void 0)] }), index));
                                             }) }, void 0)] }), void 0) }, void 0),
-                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
+                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }, void 0) }, void 0) }, void 0));
 }
 export function getOperationButton({ color, onClick, text, icon, visible = true }) {
     return;

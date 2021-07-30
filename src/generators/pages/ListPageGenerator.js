@@ -213,30 +213,6 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    paper: {
-        width: '100%',
-        marginBottom: theme.spacing(2),
-    },
-    table: {
-        minWidth: 750,
-    },
-    visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        height: 1,
-        margin: -1,
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        top: 20,
-        width: 1,
-    },
-}));
-
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -440,7 +416,6 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
     const [localLoading, setLocalLoading] = useState(false);
     useEffect(()=>{setLocalLoading(loading)},[loading])
 
-    const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [dense, setDense] = React.useState(false);
@@ -489,18 +464,16 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
 
     return  (
         <>
-            <div className={classes.root}>
-                <Paper className={classes.paper}>
+            <div>
+                <Paper>
                     <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} />
                     <TableContainer>
                         <Table
-                            className={classes.table}
                             aria-labelledby="tableTitle"
                             size={dense ? 'small' : 'medium'}
                             aria-label="enhanced table"
                         >
                             <EnhancedTableHead
-                                classes={classes}
                                 numSelected={selected.length}
                                 order={order}
                                 orderBy={orderBy}
