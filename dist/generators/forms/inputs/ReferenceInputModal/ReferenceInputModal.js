@@ -19,7 +19,5 @@ export default function ReferenceInputModal({ open, handleClose, resourceName })
         }
     }, [resourceName]);
     const classes = useDialogStyle();
-    return (_jsxs(Dialog, Object.assign({ className: classes.root, onClose: handleClose, "aria-labelledby": "simple-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "simple-dialog-title" }, { children: "Create new" }), void 0),
-            _jsx(DialogContent, { children: body }, void 0),
-            _jsx(DialogActions, {}, void 0)] }), void 0));
+    return (_jsxs(Dialog, Object.assign({ className: classes.root, onClose: handleClose, "aria-labelledby": "simple-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "simple-dialog-title" }, { children: "Create new" }), void 0), _jsx(DialogContent, { children: body }, void 0), _jsx(DialogActions, {}, void 0)] }), void 0));
 }

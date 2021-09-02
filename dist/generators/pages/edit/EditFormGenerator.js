@@ -33,13 +33,11 @@ import { Record } from "../../../resource-models/Record";
  * @param propId
  * @param propResourceName
  * @param propEditPage
- * @param catchfunction
- * @param thenFunction
  * @constructor
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.
  */
-export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, catchfunction = (error) => { throw new Error(error.message); }, thenFunction = (response) => { return response; }, isEdit = true }) => {
+export const EditForm = ({ record: recordJson, propId, propResourceName, propEditPage, refresh, isEdit = true }) => {
     const { model, resourceName, editPage } = useGetResourceModel(propResourceName);
     const createEditPageToUse = useMemo(() => propEditPage ? propEditPage : editPage, [propEditPage, editPage]);
     const initialValue = useRef(new FormValue());
@@ -69,7 +67,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             setRecord(record);
             setFormValue(FormValue.createFromRecord(record, model));
             return response;
-        }).then(thenFunction).catch(catchfunction);
+        });
     });
     const editFormProps = useMemo(() => {
         return {

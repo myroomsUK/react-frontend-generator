@@ -29,6 +29,5 @@ const useStyles = makeStyles({
 });
 export default function SimpleCard({ title, subTitle, avatar, children, elevation = 0, action, transparent = false }) {
     const classes = useStyles(transparent);
-    return (_jsxs(Card, Object.assign({ className: (transparent) ? classes.rootTransparent : classes.root, elevation: elevation }, { children: [_jsx(CardHeader, { avatar: avatar && _jsx(Avatar, Object.assign({ "aria-label": "recipe", className: classes.avatar }, { children: avatar }), void 0), title: _jsx(Typography, Object.assign({ color: "secondary", variant: "h5" }, { children: title }), void 0), subheader: subTitle, action: action }, void 0),
-            children && _jsx(CardContent, { children: children }, void 0)] }), void 0));
+    return (_jsxs(Card, Object.assign({ className: (transparent) ? classes.rootTransparent : classes.root, elevation: elevation }, { children: [_jsx(CardHeader, { avatar: avatar && _jsx(Avatar, Object.assign({ "aria-label": "recipe", className: classes.avatar }, { children: avatar }), void 0), title: _jsx(Typography, Object.assign({ color: "secondary", variant: "h5" }, { children: title }), void 0), subheader: subTitle, action: action }, void 0), children && _jsx(CardContent, { children: children }, void 0)] }), void 0));
 }

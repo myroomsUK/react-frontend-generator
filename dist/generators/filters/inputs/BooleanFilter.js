@@ -37,6 +37,5 @@ export default function BooleanFilter({ name, type, inputFieldOnChange, value })
             inputFieldOnChange(type)(name, "");
         }
     };
-    return _jsx(React.Fragment, { children: _jsxs(ListItem, { children: [_jsx(FormControlLabel, { control: _jsx(Checkbox, { checked: checkedTrue, id: name, name: name, onClick: onClickTrue }, void 0), label: "T" }, void 0),
-                _jsx(FormControlLabel, { control: _jsx(Checkbox, { checked: checkedFalse, id: name, name: name, onClick: onClickFalse }, void 0), label: "F" }, void 0)] }, void 0) }, name);
+    return _jsx(React.Fragment, { children: _jsxs(ListItem, { children: [_jsx(FormControlLabel, { control: _jsx(Checkbox, { checked: checkedTrue, id: name, name: name, onClick: onClickTrue }, void 0), label: "T" }, void 0), _jsx(FormControlLabel, { control: _jsx(Checkbox, { checked: checkedFalse, id: name, name: name, onClick: onClickFalse }, void 0), label: "F" }, void 0)] }, void 0) }, name);
 }

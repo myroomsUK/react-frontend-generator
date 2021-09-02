@@ -24,8 +24,7 @@ const store = createStore(combineReducers({
 }), composeEnhancers(applyMiddleware(routerMiddleware(history), thunk)));
 function ThemedApp() {
     const { appReducer } = useSelector(state => state);
-    return _jsxs(ThemeProvider, Object.assign({ theme: appReducer.theme }, { children: [_jsx(App, {}, void 0),
-            _jsx(ErrorBar, {}, void 0)] }), void 0);
+    return _jsxs(ThemeProvider, Object.assign({ theme: appReducer.theme }, { children: [_jsx(App, {}, void 0), _jsx(ErrorBar, {}, void 0)] }), void 0);
 }
 ReactDOM.render(_jsx(Provider, Object.assign({ store: store }, { children: _jsx(ConnectedRouter, Object.assign({ history: history }, { children: _jsx(ThemedApp, {}, void 0) }), void 0) }), void 0), document.getElementById('root'));
 // If you want to start measuring performance in your app, pass a function

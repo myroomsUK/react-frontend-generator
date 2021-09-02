@@ -9,11 +9,11 @@ import TableCell from "@material-ui/core/TableCell";
 import { getComparator, stableSort } from "../utils/ListPageGeneratorUtils";
 import Checkbox from "@material-ui/core/Checkbox";
 import ButtonsHorizontalList from "../../../rendering/components/buttons/ButtonsHorizontalList";
-import TablePagination from "@material-ui/core/TablePagination";
 import { SimpleTableToolbar } from "./listHelpers/SimpleToolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { SimpleTableHead } from "./listHelpers/SimpleTableHead";
 import OperationButton from "../../../rendering/components/buttons/OperationButton";
+import { TablePagination } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -79,18 +79,15 @@ export const SmallList = ({ data: rows, totalItems, page, setPage, selected, set
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => (selected) ? selected.indexOf(name) !== -1 : false;
     const numSelected = (selected) ? selected.length : 0;
-    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [!noToolbar && _jsx(SimpleTableToolbar, { selected: selected, numSelected: numSelected, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
-                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(SimpleTableHead, { useSelect: selected !== undefined, classes: classes, numSelected: numSelected, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
-                                _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
+    // @ts-ignore
+    const tablePagination = _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0);
+    return (_jsx(_Fragment, { children: _jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Paper, Object.assign({ className: classes.paper }, { children: [!noToolbar && _jsx(SimpleTableToolbar, { selected: selected, numSelected: numSelected, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0), _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ className: classes.table, "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(SimpleTableHead, { useSelect: selected !== undefined, classes: classes, numSelected: numSelected, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0), _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
                                         .slice(rowsPerPage * page, rowsPerPage * (page + 1))
                                         .map((row, index) => {
                                         const isItemSelected = isSelected(row.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (_jsxs(TableRow, Object.assign({ hover: true, 
                                             //onClick={(event) => handleClick(event, row.id)}
-                                            role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [selected && _jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
-                                                columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility, requiresConfirmation }, index) => _jsx(OperationButton, { color: color, text: text, icon: icon, onClick: () => onClick(row), visible: visibility(row), requiresConfirmation: requiresConfirmation }, index)) }, void 0) }), void 0)] }), index));
-                                    }) }, void 0)] }), void 0) }, void 0),
-                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }), void 0) }), void 0) }, void 0));
+                                            role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [selected && _jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0), columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)), (itemOperations === null || itemOperations === void 0 ? void 0 : itemOperations.length) !== 0 && _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map(({ color, icon, onClick, text, visibility, requiresConfirmation }, index) => _jsx(OperationButton, { color: color, text: text, icon: icon, onClick: () => onClick(row), visible: visibility(row), requiresConfirmation: requiresConfirmation }, index)) }, void 0) }), void 0)] }), index));
+                                    }) }, void 0)] }), void 0) }, void 0), tablePagination] }), void 0) }), void 0) }, void 0));
 };

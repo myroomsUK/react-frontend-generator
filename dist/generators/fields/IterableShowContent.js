@@ -12,8 +12,7 @@ export const IterableShowContent = ({ model, record, resourceName, setParentForm
     }
     if (showElement) {
         return _jsx(List, Object.assign({ style: { width: "100%" } }, { children: Array.from(recordsList.values()).map((singleRecord) => {
-                return _jsxs(_Fragment, { children: [_jsx(ListItem, Object.assign({ alignItems: "center" }, { children: React.cloneElement(showElement, Object.assign(Object.assign({}, showElement === null || showElement === void 0 ? void 0 : showElement.props), { record: singleRecord, model: model })) }), void 0),
-                        _jsx(Divider, { component: "li" }, void 0)] }, void 0);
+                return _jsxs(_Fragment, { children: [_jsx(ListItem, Object.assign({ alignItems: "center" }, { children: React.cloneElement(showElement, Object.assign(Object.assign({}, showElement === null || showElement === void 0 ? void 0 : showElement.props), { record: singleRecord, model: model })) }), void 0), _jsx(Divider, { component: "li" }, void 0)] }, void 0);
             }) }), void 0);
     }
     else {

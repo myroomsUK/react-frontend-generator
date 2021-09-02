@@ -35,8 +35,7 @@ export default function SingleFileInput({ file, label, onChange, resourceName, r
         };
         reader.readAsDataURL(file);
     };
-    return _jsx(Grid, Object.assign({ container: true }, { children: _jsxs(Grid, Object.assign({ item: true }, { children: [_jsx(Typography, { children: label }, void 0),
-                (localFile) ?
+    return _jsx(Grid, Object.assign({ container: true }, { children: _jsxs(Grid, Object.assign({ item: true }, { children: [_jsx(Typography, { children: label }, void 0), (localFile) ?
                     _jsxs("div", { children: [" ", _jsxs("a", Object.assign({ href: localFile.url, target: "_blank" }, { children: [" ", localFile.title, " "] }), void 0), " ", _jsx(CustomDeleteButton, { icon: true, onClick: () => deleteForm(file.id) }, void 0)] }, void 0)
                     :
                         _jsx(DropzoneArea, { onChange: dropZoneOnChange, filesLimit: 1 }, void 0)] }), void 0) }), void 0);

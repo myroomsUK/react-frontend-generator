@@ -20,6 +20,5 @@ export default function BooleanInput({ model, name = model.id, onClick, checked,
         setLocalErrorMessage("");
         onClick(e);
     };
-    return _jsxs(FormControl, { children: [_jsx(FormControlLabel, { control: _jsx(Checkbox, { id: name, name: name, onClick: onClickHandler, checked: checked }, void 0), label: label }, void 0),
-            _jsx(FormHelperText, { children: localErrorMessage }, void 0)] }, void 0);
+    return _jsxs(FormControl, { children: [_jsx(FormControlLabel, { control: _jsx(Checkbox, { id: name, name: name, onClick: onClickHandler, checked: checked }, void 0), label: label }, void 0), _jsx(FormHelperText, { children: localErrorMessage }, void 0)] }, void 0);
 }

@@ -16,6 +16,5 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function SimpleAccordion({ title, elevation = 0, children }) {
     const classes = useStyles();
-    return (_jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Accordion, Object.assign({ elevation: elevation }, { children: [_jsx(AccordionSummary, Object.assign({ expandIcon: _jsx(ExpandMoreIcon, {}, void 0), "aria-controls": "panel1a-content", id: "panel1a-header" }, { children: _jsx(Typography, Object.assign({ className: classes.heading }, { children: title }), void 0) }), void 0),
-                _jsx(AccordionDetails, { children: children }, void 0)] }), void 0) }), void 0));
+    return (_jsx("div", Object.assign({ className: classes.root }, { children: _jsxs(Accordion, Object.assign({ elevation: elevation }, { children: [_jsx(AccordionSummary, Object.assign({ expandIcon: _jsx(ExpandMoreIcon, {}, void 0), "aria-controls": "panel1a-content", id: "panel1a-header" }, { children: _jsx(Typography, Object.assign({ className: classes.heading }, { children: title }), void 0) }), void 0), _jsx(AccordionDetails, { children: children }, void 0)] }), void 0) }), void 0));
 }

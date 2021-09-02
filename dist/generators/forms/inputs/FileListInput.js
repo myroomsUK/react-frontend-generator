@@ -89,6 +89,5 @@ export default function FileListInput(_a) {
         _jsx(ImageGrid, { images: filesList, onSelect: (index) => selectElement(index), onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0)
         :
             _jsx(FileList, { list: filesList, onChange: prepareImagesForRequest, filesLimit: 10, fileObjects: uploadedLocalFiles, onAdd: addFile, onDelete: removeFile, saveImages: saveImages }, void 0);
-    return _jsxs(Grid, Object.assign({ container: true }, { children: [_jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: list }), void 0),
-            _jsx(ImageDialog, { images: filesList, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }), void 0);
+    return _jsxs(Grid, Object.assign({ container: true }, { children: [_jsx(Grid, Object.assign({ md: 12, xs: 12, item: true }, { children: list }), void 0), _jsx(ImageDialog, { images: filesList, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }), void 0);
 }

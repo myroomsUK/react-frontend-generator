@@ -77,21 +77,16 @@ export function GenericList({ data: rows, totalItems, page, setPage, selected = 
     };
     const handleChangePage = (event, newPage) => setPage(newPage);
     const isSelected = (name) => selected.indexOf(name) !== -1;
-    return (_jsx(_Fragment, { children: _jsx("div", { children: _jsxs(Paper, { children: [_jsx(SimpleTableToolbar, { numSelected: selected.length, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0),
-                    _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0),
-                                _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
+    return (_jsx(_Fragment, { children: _jsx("div", { children: _jsxs(Paper, { children: [_jsx(SimpleTableToolbar, { numSelected: selected.length, title: title, collectionOperations: collectionOperations, setTable: setTable, allColumns: allColumns }, void 0), _jsx(TableContainer, { children: _jsxs(Table, Object.assign({ "aria-labelledby": "tableTitle", size: dense ? 'small' : 'medium', "aria-label": "enhanced table" }, { children: [_jsx(EnhancedTableHead, { numSelected: selected.length, order: order, orderBy: orderBy, onSelectAllClick: handleSelectAllClick, onRequestSort: handleRequestSort, rowCount: rows.length, headCells: headCells }, void 0), _jsx(TableBody, { children: stableSort(rows, getComparator(order, orderBy))
                                         .slice(0, rowsPerPage)
                                         .map((row, index) => {
                                         const isItemSelected = isSelected(row.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (_jsxs(TableRow, Object.assign({ hover: true, 
                                             //onClick={(event) => handleClick(event, row.id)}
-                                            role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0),
-                                                columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)),
-                                                _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map((operation) => {
+                                            role: "checkbox", "aria-checked": isItemSelected, tabIndex: -1, selected: isItemSelected }, { children: [_jsx(TableCell, Object.assign({ padding: "checkbox", id: labelId }, { children: _jsx(Checkbox, { checked: isItemSelected, onClick: (event) => handleClick(event, row.id), inputProps: { 'aria-labelledby': labelId } }, void 0) }), void 0), columns(row).map((column, localIndex) => _jsx(TableCell, { children: column }, localIndex)), _jsx(TableCell, Object.assign({ align: "right" }, { children: _jsx(ButtonsHorizontalList, { children: itemOperations.map((operation) => {
                                                             operation.onClick = () => operation.onClick(row);
                                                             return _jsx(Tooltip, Object.assign({ title: operation.text }, { children: OperationButtonFactory.getOperationButton(operation) }), void 0);
                                                         }) }, void 0) }), void 0)] }), index));
-                                    }) }, void 0)] }), void 0) }, void 0),
-                    _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }, void 0) }, void 0) }, void 0));
+                                    }) }, void 0)] }), void 0) }, void 0), _jsx(TablePagination, { component: "div", count: totalItems, rowsPerPage: rowsPerPage, rowsPerPageOptions: [30], page: page, onChangePage: handleChangePage }, void 0)] }, void 0) }, void 0) }, void 0));
 }

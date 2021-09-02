@@ -41,8 +41,6 @@ function ShowImageGrid({ images }) {
                         const actionIcon = elements.actionIcon;
                         const url = elements.url;
                         const title = elements.title;
-                        return _jsxs(GridListTile, Object.assign({ onClick: () => selectElement(index) }, { children: [_jsx("img", { src: url, alt: title }, void 0),
-                                _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }), index);
-                    }) }), void 0) }), void 0),
-            _jsx(ImageDialog, { images: images, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }, void 0));
+                        return _jsxs(GridListTile, Object.assign({ onClick: () => selectElement(index) }, { children: [_jsx("img", { src: url, alt: title }, void 0), _jsx(GridListTileBar, { title: title, actionIcon: actionIcon }, void 0)] }), index);
+                    }) }), void 0) }), void 0), _jsx(ImageDialog, { images: images, open: open, selectedImage: selectedImage, setOpen: setOpen }, void 0)] }, void 0));
 }

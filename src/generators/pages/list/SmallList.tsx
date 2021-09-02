@@ -8,12 +8,13 @@ import TableCell from "@material-ui/core/TableCell";
 import {getComparator, stableSort} from "../utils/ListPageGeneratorUtils";
 import Checkbox from "@material-ui/core/Checkbox";
 import ButtonsHorizontalList from "../../../rendering/components/buttons/ButtonsHorizontalList";
-import TablePagination from "@material-ui/core/TablePagination";
+
 import {SimpleTableToolbar} from "./listHelpers/SimpleToolbar";
 import {makeStyles} from "@material-ui/core/styles";
 import {Operation} from "./listHelpers/Operation";
 import {Direction, SimpleTableHead} from "./listHelpers/SimpleTableHead";
 import OperationButton from "../../../rendering/components/buttons/OperationButton";
+import {TablePagination} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -107,6 +108,16 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
     const isSelected = (name: number) => (selected) ? selected.indexOf(name) !== -1 : false;
     const numSelected = (selected) ? selected.length : 0
 
+    // @ts-ignore
+    const tablePagination = <TablePagination
+        component="div"
+        count={totalItems}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[30]}
+        page={page}
+        onChangePage={handleChangePage}
+    />
+
     return  (
         <>
             <div className={classes.root}>
@@ -174,14 +185,7 @@ export const SmallList: React.FC<SmallListProps> = ({data:rows, totalItems,  pag
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <TablePagination
-                        component="div"
-                        count={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rowsPerPageOptions={[30]}
-                        page={page}
-                        onChangePage={handleChangePage}
-                    />
+                    {tablePagination}
                 </Paper>
             </div>
         </>

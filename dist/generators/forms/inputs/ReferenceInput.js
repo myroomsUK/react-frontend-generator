@@ -71,8 +71,7 @@ export default function ({ model, refreshReferencesMap, inheritedValue, createNe
     return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, newInputvalue) => autocompleteOnChange(newInputvalue), getOptionLabel: (option) => option.label, renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, renderInput: (_a) => {
                     var params = __rest(_a, []);
                     return _jsx(CustomTextValidator, Object.assign({}, params, { error: hasError, errorMessage: errorMessage, id: model.id, name: model.id, variant: "outlined", value: value, label: label, style: { width: "100%" }, autoComplete: "nope" }), void 0);
-                } }, void 0),
-            _jsx(ReferenceInputModal, { open: open, handleClose: handleClose, resourceName: modalResourceName }, void 0)] }, void 0);
+                } }, void 0), _jsx(ReferenceInputModal, { open: open, handleClose: handleClose, resourceName: modalResourceName }, void 0)] }, void 0);
 }
 /**
  * @param {int} value

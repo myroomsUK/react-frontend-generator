@@ -37,8 +37,7 @@ const styles = (theme) => ({
 });
 const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose } = props, other = __rest(props, ["children", "classes", "onClose"]);
-    return (_jsxs(MuiDialogTitle, Object.assign({ disableTypography: true, className: classes.root }, other, { children: [_jsx(Typography, Object.assign({ variant: "h6" }, { children: children }), void 0),
-            onClose ? (_jsx(IconButton, Object.assign({ "aria-label": "close", className: classes.closeButton, onClick: onClose }, { children: _jsx(CloseIcon, {}, void 0) }), void 0)) : null] }), void 0));
+    return (_jsxs(MuiDialogTitle, Object.assign({ disableTypography: true, className: classes.root }, other, { children: [_jsx(Typography, Object.assign({ variant: "h6" }, { children: children }), void 0), onClose ? (_jsx(IconButton, Object.assign({ "aria-label": "close", className: classes.closeButton, onClick: onClose }, { children: _jsx(CloseIcon, {}, void 0) }), void 0)) : null] }), void 0));
 });
 const DialogContent = withStyles((theme) => ({
     root: {
@@ -55,7 +54,5 @@ export default function AddImageDialog({ open, setOpen, onChange, fileObjects, o
     const handleClose = () => {
         setOpen(false);
     };
-    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ fullWidth: true, onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: "Add image" }), void 0),
-                _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(DropzoneAreaBase, { dropzoneText: "Upload images", onChange: onChange, filesLimit: 10, fileObjects: fileObjects, onAdd: onAdd, onDelete: onDelete }, void 0) }), void 0),
-                _jsx(DialogActions, { children: _jsx(Button, Object.assign({ color: "primary", variant: "contained", onClick: saveImages }, { children: "Save Images" }), void 0) }, void 0)] }), void 0) }, void 0));
+    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ fullWidth: true, onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: "Add image" }), void 0), _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(DropzoneAreaBase, { dropzoneText: "Upload images", onChange: onChange, filesLimit: 10, fileObjects: fileObjects, onAdd: onAdd, onDelete: onDelete }, void 0) }), void 0), _jsx(DialogActions, { children: _jsx(Button, Object.assign({ color: "primary", variant: "contained", onClick: saveImages }, { children: "Save Images" }), void 0) }, void 0)] }), void 0) }, void 0));
 }

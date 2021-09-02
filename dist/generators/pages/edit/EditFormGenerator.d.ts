@@ -4,8 +4,6 @@ interface EditFormGeneratorProps {
     propId: number;
     record: object;
     propEditPage?: any;
-    thenFunction?: any;
-    catchfunction?: any;
     refresh: () => void;
     isEdit?: boolean;
 }
@@ -15,8 +13,6 @@ interface EditFormGeneratorProps {
  * @param propId
  * @param propResourceName
  * @param propEditPage
- * @param catchfunction
- * @param thenFunction
  * @constructor
  *
  * This function returns a react component with the edit form. This component is not responsible for fetching previous data.

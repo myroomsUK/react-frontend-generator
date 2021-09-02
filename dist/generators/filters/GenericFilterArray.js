@@ -53,9 +53,7 @@ export const GenericFilterArray = ({ model, modelFilters, inputFieldOnChange, re
                 };
             }
             default: {
-                return _jsxs(React.Fragment, { children: [_jsxs(ListItem, Object.assign({ button: true }, { children: [_jsx(ListItemIcon, { children: _jsx(InboxIcon, {}, void 0) }, void 0),
-                                _jsx(ListItemText, { primary: name }, void 0)] }), void 0),
-                        _jsx(ListItem, { children: _jsx(TextField, { id: name, name: name, onChange: inputFieldOnChange, value: filterValue[name] }, void 0) }, void 0)] }, name);
+                return _jsxs(React.Fragment, { children: [_jsxs(ListItem, Object.assign({ button: true }, { children: [_jsx(ListItemIcon, { children: _jsx(InboxIcon, {}, void 0) }, void 0), _jsx(ListItemText, { primary: name }, void 0)] }), void 0), _jsx(ListItem, { children: _jsx(TextField, { id: name, name: name, onChange: inputFieldOnChange, value: filterValue[name] }, void 0) }, void 0)] }, name);
             }
         }
     };

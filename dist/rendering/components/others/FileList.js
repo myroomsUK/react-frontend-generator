@@ -25,8 +25,6 @@ export default function FileList({ list, onAdd, onDelete, saveImages, onChange, 
     const classes = useStyles();
     const matches = useMediaQuery('(min-width:900px)');
     const [open, setOpen] = useState(false);
-    const listItems = list.map(({ title, url, actionIcon }) => _jsxs(ListItem, { children: [_jsx(ListItemText, { primary: title }, void 0),
-            _jsxs(ListItemSecondaryAction, { children: [_jsx(IconButton, Object.assign({ edge: "end", "aria-label": "delete" }, { children: _jsx(FolderIcon, {}, void 0) }), void 0), actionIcon] }, void 0)] }, void 0));
-    return (_jsxs("div", Object.assign({ className: classes.root }, { children: [_jsx("div", Object.assign({ className: classes.demo }, { children: _jsxs(List, Object.assign({ dense: false }, { children: [listItems, _jsx(ListItem, { children: _jsx(Button, Object.assign({ variant: "contained", color: "primary", onClick: () => setOpen(true) }, { children: "Add" }), void 0) }, void 0)] }), void 0) }), void 0),
-            _jsx(AddImageDialog, { open: open, setOpen: setOpen, onChange: onChange, fileObjects: fileObjects, onAdd: onAdd, onDelete: onDelete, saveImages: saveImages }, void 0)] }), void 0));
+    const listItems = list.map(({ title, url, actionIcon }) => _jsxs(ListItem, { children: [_jsx(ListItemText, { primary: title }, void 0), _jsxs(ListItemSecondaryAction, { children: [_jsx(IconButton, Object.assign({ edge: "end", "aria-label": "delete" }, { children: _jsx(FolderIcon, {}, void 0) }), void 0), actionIcon] }, void 0)] }, void 0));
+    return (_jsxs("div", Object.assign({ className: classes.root }, { children: [_jsx("div", Object.assign({ className: classes.demo }, { children: _jsxs(List, Object.assign({ dense: false }, { children: [listItems, _jsx(ListItem, { children: _jsx(Button, Object.assign({ variant: "contained", color: "primary", onClick: () => setOpen(true) }, { children: "Add" }), void 0) }, void 0)] }), void 0) }), void 0), _jsx(AddImageDialog, { open: open, setOpen: setOpen, onChange: onChange, fileObjects: fileObjects, onAdd: onAdd, onDelete: onDelete, saveImages: saveImages }, void 0)] }), void 0));
 }

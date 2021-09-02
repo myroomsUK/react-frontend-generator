@@ -18,6 +18,5 @@ export default function Section({ title, children, elevation = 0, avatar }) {
         }
     }));
     const classes = useStyles();
-    return _jsxs(SimpleCard, Object.assign({ title: title, avatar: avatar, elevation: elevation, square: true, className: classes.root }, { children: [children && _jsx(Grid, Object.assign({ container: true }, { children: children }), void 0),
-            _jsx(Divider, {}, void 0)] }), void 0);
+    return _jsxs(SimpleCard, Object.assign({ title: title, avatar: avatar, elevation: elevation, square: true, className: classes.root }, { children: [children && _jsx(Grid, Object.assign({ container: true }, { children: children }), void 0), _jsx(Divider, {}, void 0)] }), void 0);
 }

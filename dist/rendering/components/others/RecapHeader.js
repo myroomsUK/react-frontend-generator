@@ -16,9 +16,7 @@ function RecapHeader({ primary, secondary, actions }) {
     let mda = 4;
     let mdp = 4;
     let mds = 4;
-    return _jsx(Paper, Object.assign({ className: classes.root, square: true, color: "red" }, { children: _jsxs(Grid, Object.assign({ container: true }, { children: [_jsx(Grid, Object.assign({ item: true, md: mdp }, { children: primary }), void 0),
-                _jsx(Grid, Object.assign({ item: true, md: mds }, { children: secondary }), void 0),
-                _jsx(Grid, Object.assign({ item: true, md: mda }, { children: actions }), void 0)] }), void 0) }), void 0);
+    return _jsx(Paper, Object.assign({ className: classes.root, square: true, color: "red" }, { children: _jsxs(Grid, Object.assign({ container: true }, { children: [_jsx(Grid, Object.assign({ item: true, md: mdp }, { children: primary }), void 0), _jsx(Grid, Object.assign({ item: true, md: mds }, { children: secondary }), void 0), _jsx(Grid, Object.assign({ item: true, md: mda }, { children: actions }), void 0)] }), void 0) }), void 0);
 }
 RecapHeader.propTypes = {
     primary: PropTypes.any.isRequired

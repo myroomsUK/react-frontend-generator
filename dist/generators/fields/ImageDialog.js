@@ -33,8 +33,7 @@ const styles = (theme) => ({
 });
 const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose } = props, other = __rest(props, ["children", "classes", "onClose"]);
-    return (_jsxs(MuiDialogTitle, Object.assign({ disableTypography: true, className: classes.root }, other, { children: [_jsx(Typography, Object.assign({ variant: "h6" }, { children: children }), void 0),
-            onClose ? (_jsx(IconButton, Object.assign({ "aria-label": "close", className: classes.closeButton, onClick: onClose }, { children: _jsx(CloseIcon, {}, void 0) }), void 0)) : null] }), void 0));
+    return (_jsxs(MuiDialogTitle, Object.assign({ disableTypography: true, className: classes.root }, other, { children: [_jsx(Typography, Object.assign({ variant: "h6" }, { children: children }), void 0), onClose ? (_jsx(IconButton, Object.assign({ "aria-label": "close", className: classes.closeButton, onClick: onClose }, { children: _jsx(CloseIcon, {}, void 0) }), void 0)) : null] }), void 0));
 });
 const DialogContent = withStyles((theme) => ({
     root: {
@@ -51,10 +50,8 @@ export default function ImageDialog({ open, setOpen, selectedImage, images }) {
     const handleClose = () => {
         setOpen(false);
     };
-    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: selectedImage !== undefined && images[selectedImage]["url"] }), void 0),
-                _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(Carousel, Object.assign({ index: selectedImage }, { children: images.map((item, i) => {
+    return (_jsx("div", { children: _jsxs(Dialog, Object.assign({ onClose: handleClose, "aria-labelledby": "customized-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "customized-dialog-title", onClose: handleClose }, { children: selectedImage !== undefined && images[selectedImage]["url"] }), void 0), _jsx(DialogContent, Object.assign({ dividers: true }, { children: _jsx(Carousel, Object.assign({ index: selectedImage }, { children: images.map((item, i) => {
                             const { url } = item;
                             return _jsx("img", { width: "100%", alt: url, src: url }, i);
-                        }) }), void 0) }), void 0),
-                _jsx(DialogActions, {}, void 0)] }), void 0) }, void 0));
+                        }) }), void 0) }), void 0), _jsx(DialogActions, {}, void 0)] }), void 0) }, void 0));
 }

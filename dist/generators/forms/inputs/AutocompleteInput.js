@@ -60,8 +60,7 @@ export function AutocompleteInput({ model, refreshReferencesMap, inheritedValue,
     return _jsxs(_Fragment, { children: [_jsx(Autocomplete, { value: value, inputValue: inputValue, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => setInputValue(newInputValue), onChange: (event, newInputvalue) => autocompleteOnChange(newInputvalue), getOptionLabel: (option) => option["label"], renderOption: (option) => (option.button) ? option.button : _jsx("div", { children: option.label }, void 0), style: { width: "100%" }, label: label, renderInput: (_a) => {
                     var params = __rest(_a, []);
                     return _jsx(TextValidator, Object.assign({}, params, { id: model.id, name: model.id, variant: "outlined", value: value, label: label, style: { width: "100%" }, autoComplete: "nope" }), void 0);
-                } }, void 0),
-            _jsx(SimpleModal, { open: open, handleClose: handleClose, resourceName: modalResourceName }, void 0)] }, void 0);
+                } }, void 0), _jsx(SimpleModal, { open: open, handleClose: handleClose, resourceName: modalResourceName }, void 0)] }, void 0);
 }
 const useDialogStyle = makeStyles((theme) => ({
     root: {
@@ -76,9 +75,7 @@ export default function SimpleModal({ open, handleClose, resourceName }) {
         }
     }, [resourceName]);
     const classes = useDialogStyle();
-    return (_jsxs(Dialog, Object.assign({ className: classes.root, onClose: handleClose, "aria-labelledby": "simple-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "simple-dialog-title" }, { children: "Create new" }), void 0),
-            _jsx(DialogContent, { children: body }, void 0),
-            _jsx(DialogActions, {}, void 0)] }), void 0));
+    return (_jsxs(Dialog, Object.assign({ className: classes.root, onClose: handleClose, "aria-labelledby": "simple-dialog-title", open: open }, { children: [_jsx(DialogTitle, Object.assign({ id: "simple-dialog-title" }, { children: "Create new" }), void 0), _jsx(DialogContent, { children: body }, void 0), _jsx(DialogActions, {}, void 0)] }), void 0));
 }
 /**
  * @param {int} value
