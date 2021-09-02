@@ -23,7 +23,7 @@ export function useCreate() {
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
-    const create = (resource:string,values:any) => {
+    const create = async (resource:string,values:any) => {
 
         setErrors({});
         return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values) })
