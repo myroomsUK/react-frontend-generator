@@ -42,7 +42,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
     const [genericCreateRender, setGenericCreateRender] = useState(<div/>)
     useEffect(()=>{ setGenericCreateRender(<div/>)},[resourceName])
 
-    const submitHandler = async ()=>create(resourceName, FormValue.toJson(formValue));
+    const submitHandler = ()=>create(resourceName, FormValue.toJson(formValue));
 
     useEffect(()=>{
         const newFormGenerator = <FormGenerator

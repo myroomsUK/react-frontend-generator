@@ -41,7 +41,7 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     }, [responseErrors]);
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
-    const submitHandler = () => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, FormValue.toJson(formValue)); });
+    const submitHandler = () => create(resourceName, FormValue.toJson(formValue));
     useEffect(() => {
         const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
         setGenericCreateRender(newFormGenerator);
