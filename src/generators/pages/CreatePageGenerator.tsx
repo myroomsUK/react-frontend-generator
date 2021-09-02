@@ -10,9 +10,7 @@ import {Model} from "../../resource-models/Model";
 interface Props{
     propResourceName:string,
     propCreatePage?:any,
-    lockedFormValue?:FormValue,
-    thenFunction?:any,
-    catchFunction?:any
+    lockedFormValue?:FormValue
 }
 
 
@@ -21,12 +19,10 @@ interface GenericProps{
     errors?: Errors,
     propCreatePage?:any,
     submitHandler: (formValue:FormValue)=>Promise<any>,
-    lockedFormValue?:FormValue,
-    thenFunction?:any,
-    catchFunction?:any
+    lockedFormValue?:FormValue
 }
 
-export const Create: React.FC<Props> = ({propResourceName:resourceName, propCreatePage, lockedFormValue=new FormValue(), thenFunction=()=>{}, catchFunction=()=>{}}) => {
+export const Create: React.FC<Props> = ({propResourceName:resourceName, propCreatePage, lockedFormValue=new FormValue()}) => {
     const {model, createPage} = useGetResourceModel(resourceName);
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
@@ -46,7 +42,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
     const [genericCreateRender, setGenericCreateRender] = useState(<div/>)
     useEffect(()=>{ setGenericCreateRender(<div/>)},[resourceName])
 
-    const submitHandler = async ()=>create(resourceName, FormValue.toJson(formValue)).then(thenFunction).catch(catchFunction);
+    const submitHandler = async ()=>create(resourceName, FormValue.toJson(formValue));
 
     useEffect(()=>{
         const newFormGenerator = <FormGenerator
@@ -70,7 +66,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
 
 }
 
-export const GenericCreate: React.FC<GenericProps> = ({model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue=new FormValue(), thenFunction=()=>{}, catchFunction=()=>{}}) => {
+export const GenericCreate: React.FC<GenericProps> = ({model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue=new FormValue()}) => {
     const createPageToUse:any = propCreatePage
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState<FormValue>(lockedFormValue);
@@ -101,7 +97,7 @@ export const GenericCreate: React.FC<GenericProps> = ({model, submitHandler, err
 
 }
 
-export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, propCreatePage, lockedFormValue=new FormValue(), thenFunction=()=>{}, catchFunction=()=>{}}) => {
+export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, propCreatePage, lockedFormValue=new FormValue()}) => {
     const {model, createPage} = useGetResourceModel(resourceName);
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
 
@@ -115,7 +111,7 @@ export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, 
         const newErrors: Errors =  new Errors(Object.keys(errorFields).map((field) => new Error(field,errorFields[field])))
         setErrors(newErrors)},[responseErrors])
 
-    const submitHandler = async (formValue:FormValue)=>create(resourceName, FormValue.toJson(formValue)).then(thenFunction).catch(catchFunction);
+    const submitHandler = async (formValue:FormValue)=>create(resourceName, FormValue.toJson(formValue));
 
     return GenericCreate({model:model, propCreatePage:createPageToUse, lockedFormValue, errors, submitHandler})
 }

@@ -6,8 +6,6 @@ interface Props {
     propResourceName: string;
     propCreatePage?: any;
     lockedFormValue?: FormValue;
-    thenFunction?: any;
-    catchFunction?: any;
 }
 interface GenericProps {
     model: Model;
@@ -15,8 +13,6 @@ interface GenericProps {
     propCreatePage?: any;
     submitHandler: (formValue: FormValue) => Promise<any>;
     lockedFormValue?: FormValue;
-    thenFunction?: any;
-    catchFunction?: any;
 }
 export declare const Create: React.FC<Props>;
 export declare const GenericCreate: React.FC<GenericProps>;
