@@ -1,4 +1,3 @@
-import { getThemeByName } from "../../../rendering/themes/themes";
 export const CHANGE_RESOURCE = "CHANGE_RESOURCE";
 export const CHANGE_RESOURCE_BUFFER = "CHANGE_RESOURCE_BUFFER";
 export const SWITCH_THEME = "SWITCH_THEME";
@@ -10,20 +9,6 @@ export const changeResource = (resource) => {
     return {
         type: CHANGE_RESOURCE,
         resource: resource
-    };
-};
-export const switchTheme = (themeName) => {
-    const newTheme = getThemeByName(themeName);
-    return {
-        type: SWITCH_THEME,
-        theme: newTheme
-    };
-};
-export const switchThemeBool = () => {
-    const newTheme = getThemeByName();
-    return {
-        type: SWITCH_THEME,
-        theme: newTheme
     };
 };
 export const changeResourceBuffer = (resource) => {

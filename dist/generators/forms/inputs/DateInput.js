@@ -1,23 +1,18 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useEffect, useState } from "react";
-import { getDateInputFormat } from "../../../utils/timeUtils";
+import 'date-fns';
 import { CustomTextValidator } from "../formHelpers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
+import moment from "moment";
 export default function ({ model, name = model.id, onClick, value, label = model.label, hasError, errorMessage }) {
-    const [localValue, setLocalvalue] = useState(getDateInputFormat());
-    const localChange = (event) => {
-        const target = event.target;
-        let value = target.value;
-        const name = target.id;
-        onClick(name, value);
+    const date = (value !== undefined) ? moment(value, "YYYY-MM-DD") : null;
+    const handleDateChange = (date) => {
+        onClick({ target: { value: date === null || date === void 0 ? void 0 : date.format("YYYY-MM-DD"), name: name } }, date);
     };
-    useEffect(() => {
-        if (value === undefined) {
-            const nwValue = getDateInputFormat();
-            setLocalvalue(nwValue);
-        }
-        else {
-            setLocalvalue(value);
-        }
-    }, [value]);
-    return _jsx(CustomTextValidator, { name: name, error: hasError, errorMessage: errorMessage, label: label, onChange: onClick, value: localValue, style: { width: "100%" }, type: "date" }, void 0);
+    return (_jsx(MuiPickersUtilsProvider, Object.assign({ utils: MomentUtils }, { children: _jsx(DatePicker, { style: { "width": "100%" }, name: name, disableToolbar: true, variant: "inline", format: "DD/MM/yyyy", margin: "normal", id: "date-picker-inline", label: label, value: date, onChange: handleDateChange, disablePast: true, error: hasError, helperText: errorMessage, TextFieldComponent: DateValidationInput }, void 0) }), void 0));
 }
+export const DateValidationInput = (props) => {
+    const newProps = Object.assign(Object.assign({}, props), { style: { width: "100%" }, variant: "outlined" });
+    // @ts-ignore
+    return _jsx(CustomTextValidator, Object.assign({}, newProps), void 0);
+};

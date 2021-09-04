@@ -109,7 +109,7 @@ export function filterOnChangeHandler(type, onChange, formValue, vars){
 
 }
 
-export function CustomTextValidator({error, errorMessage, ...rest}){
+export function CustomTextValidator({error, errorMessage, onClick= null, ...rest}){
 
     const [localError,setLocalError] = useState(false);
     const [localErrorMessage,setLocalErrorMessage] = useState();
@@ -123,15 +123,18 @@ export function CustomTextValidator({error, errorMessage, ...rest}){
         }
     },[error, errorMessage])
 
-    const onClick = () => {
+    const onClickHandler = (event) => {
         setLocalError(false);
         setLocalErrorMessage(undefined);
+        if(onClick){
+            onClick(event);
+        }
     }
 
 
     return <TextValidator
         autoComplete=""
-        {...rest} error={localError} onClick={onClick} helperText={localErrorMessage}
+        {...rest} error={localError} onClick={onClickHandler} helperText={localErrorMessage}
     />
 
 }

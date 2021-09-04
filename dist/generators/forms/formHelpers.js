@@ -94,7 +94,7 @@ export function filterOnChangeHandler(type, onChange, formValue, vars) {
     }
 }
 export function CustomTextValidator(_a) {
-    var { error, errorMessage } = _a, rest = __rest(_a, ["error", "errorMessage"]);
+    var { error, errorMessage, onClick = null } = _a, rest = __rest(_a, ["error", "errorMessage", "onClick"]);
     const [localError, setLocalError] = useState(false);
     const [localErrorMessage, setLocalErrorMessage] = useState();
     useEffect(() => {
@@ -105,9 +105,12 @@ export function CustomTextValidator(_a) {
             setLocalErrorMessage(errorMessage);
         }
     }, [error, errorMessage]);
-    const onClick = () => {
+    const onClickHandler = (event) => {
         setLocalError(false);
         setLocalErrorMessage(undefined);
+        if (onClick) {
+            onClick(event);
+        }
     };
-    return _jsx(TextValidator, Object.assign({ autoComplete: "" }, rest, { error: localError, onClick: onClick, helperText: localErrorMessage }), void 0);
+    return _jsx(TextValidator, Object.assign({ autoComplete: "" }, rest, { error: localError, onClick: onClickHandler, helperText: localErrorMessage }), void 0);
 }

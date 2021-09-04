@@ -9,14 +9,6 @@ export function changeResource(resource: any): {
     type: string;
     resource: any;
 };
-export function switchTheme(themeName: any): {
-    type: string;
-    theme: any;
-};
-export function switchThemeBool(): {
-    type: string;
-    theme: any;
-};
 export function changeResourceBuffer(resource: any): {
     type: string;
     resource: any;

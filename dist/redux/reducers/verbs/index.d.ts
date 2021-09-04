@@ -6,14 +6,14 @@ declare var _default: import("redux").Reducer<import("redux").CombinedState<{
         eventSource: any;
     }>;
     create: import("redux").CombinedState<{
-        error: any;
+        error: never;
         loading: never;
-        created: any;
+        created: never;
     }>;
     update: import("redux").CombinedState<{
-        error: any;
+        error: never;
         loading: never;
-        created: any;
+        created: never;
     }>;
     del: import("redux").CombinedState<{
         error: any;
