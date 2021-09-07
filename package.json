@@ -30,7 +30,6 @@
     "react-material-ui-carousel": "^2.2.4",
     "react-material-ui-form-validator": "^2.1.4",
     "react-number-format": "^4.7.3",
-    "react-redux": "^7.2.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -83,6 +82,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.3.10",
-    "@types/material-ui": "^0.21.8"
+    "@types/material-ui": "^0.21.8",
+    "react-redux": "^7.2.3"
   }
 }
