@@ -21,6 +21,7 @@ export interface IterableShowContentProps{
     label:string,
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading:boolean
     modifyOnlyLastElement?:boolean;
     modifyRule?: (formvalue:any)=> boolean,
     inputElement?: DetailedReactHTMLElement<any, any>,
@@ -29,7 +30,7 @@ export interface IterableShowContentProps{
 
 }
 
-export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue:any) => true, inputElement, refresh,showElement}) => {
+export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement=false, modifyRule=(formvalue:any) => true, inputElement, refresh,showElement, loading}) => {
 
     const recordsList = record;
     if(recordsList.size===0){
@@ -63,7 +64,7 @@ export const IterableShowContent: React.FC<IterableShowContentProps> = ({model, 
                                 const formValue = formValueArray[index]
 
                                 return <Grid item xs={xs} md={md}>
-                                    <ShowContent setFormValue={setParentFormValue} refresh={refresh} record={record.get(index) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap}  model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler}></ShowContent>
+                                    <ShowContent setFormValue={setParentFormValue} refresh={refresh} record={record.get(index) ?? new Record()} lockedFormValue={new FormValue()} formContent={inputElement} referencesMap={referencesMap}  model={model}  refreshReferencesMap={refreshReferencesMap}  partialSubmitHandler={partialSubmitHandler} key={index} formValue={formValue} errors={errors} submitHandler={submitHandler} loading={loading}></ShowContent>
                                 </Grid>
                             })
                         }

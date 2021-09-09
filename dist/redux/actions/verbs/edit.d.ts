@@ -8,7 +8,7 @@ export declare function genericSuccess(): {
     message: string;
     severity: string;
 };
-export declare function loading(resource: string, loading: boolean): {
+export declare function loadingMessage(resource: string, loading: boolean): {
     type: string;
     resource: string;
     loading: boolean;
@@ -22,4 +22,5 @@ export declare function useEdit(): {
     data: never[];
     edit: (resource: string, id: number, values: any, sendDispatch?: boolean) => Promise<any>;
     errors: {};
+    loading: boolean;
 };

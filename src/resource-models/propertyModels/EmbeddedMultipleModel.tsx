@@ -18,7 +18,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
 
     setInputField(props: EmbeddedMultipleSetInputFieldProps, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
 
-        const {formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler,  record, refresh} =  props;
+        const {formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, loading, record, refresh} =  props;
         const setParentFormValue = (values:any) => {
             setFormValue( formValue.updateFormValue(props.model.id, values));
         }
@@ -43,7 +43,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
             submitHandler:submitHandler,
             inputElement:configuration?.viewElement,
             record: recordMap,
-            refresh:refresh
+            refresh:refresh,
+            loading:loading
         })
     }
 
@@ -66,7 +67,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
         </>
     }
 
-    setOutputField({record, model, setFormValue, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler  }: EmbeddedMultipleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
+    setOutputField({record, model, setFormValue, loading, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler  }: EmbeddedMultipleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
         const setParentFormValue = (values:any) => {setFormValue( formValue.updateFormValue(model.id, values));}
 
         const newErrors = this.manipulateErrors(errors);
@@ -92,7 +93,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel{
                 inputElement:configuration?.viewElement,
                 showElement: configuration?.viewElement,
                 record: recordMap,
-                refresh:refresh
+                refresh:refresh,
+                loading:loading
             })}
         </>
 

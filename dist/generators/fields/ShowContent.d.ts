@@ -7,6 +7,7 @@ export interface ShowContent {
     showElement?: React.DetailedReactHTMLElement<any, any>;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     model: Model;
     record?: Record;
     referencesMap: any;

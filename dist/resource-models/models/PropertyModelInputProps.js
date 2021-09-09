@@ -1,6 +1,6 @@
 import _ from "lodash";
 export class PropertyModelInputProps {
-    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, showLabel = true, refresh }) {
+    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, loading, referencesMap, refreshReferencesMap, showLabel = true, refresh }) {
         this.model = model;
         this.record = record;
         this.formValue = formValue;
@@ -8,6 +8,7 @@ export class PropertyModelInputProps {
         this.lockedFormValue = lockedFormValue;
         this.errors = errors;
         this.submitHandler = submitHandler;
+        this.loading = loading;
         this.partialSubmitHandler = partialSubmitHandler;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;

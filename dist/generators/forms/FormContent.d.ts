@@ -6,6 +6,7 @@ import { Record } from "../../resource-models/Record";
 import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 interface FormContentProps {
     submitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     partialSubmitHandler: (e: any) => Promise<any>;
     model: Model;
     record?: Record;

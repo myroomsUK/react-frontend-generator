@@ -28,6 +28,7 @@ export declare class SingleSetInputFieldProps implements SingleInputPropsInterfa
     model: PropertyModel;
     partialSubmitHandler: (e: any) => Promise<any>;
     submitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     record: Record | Map<number, Record> | undefined;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
@@ -54,6 +55,7 @@ export declare class EmbeddedSingleSetInputFieldProps implements EmbeddedSingleI
     lockedFormValue: FormValue;
     partialSubmitHandler: (e: any) => Promise<any>;
     submitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     setFormValue: React.Dispatch<React.SetStateAction<FormValue>>;
@@ -83,6 +85,7 @@ export declare class EmbeddedMultipleSetInputFieldProps implements EmbeddedMulti
     errors: Errors;
     lockedFormValue: FormValue;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     submitHandler: (e: any) => Promise<any>;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;

@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {genericError} from "./edit";
 import {FEEDBACK_MESSAGE} from "../app/actions";
 
-export function loading(resource:string, loading:boolean) {
+export function loadingMessage(resource:string, loading:boolean) {
     return { type: 'CREATE_LOADING', resource:resource, loading:loading };
 }
 
@@ -21,14 +21,17 @@ export function genericSuccess() {
 export function useCreate() {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const create = async (resource:string,values:any) => {
 
         setErrors({});
+        setLoading(true);
         return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values) })
             .then(response => {
-                dispatch(loading(resource,false));
+                dispatch(loadingMessage(resource,false));
+                setLoading(false);
                 return response.json();
             })
             .then(retrieved => {
@@ -37,6 +40,7 @@ export function useCreate() {
                 return retrieved;
             })
             .catch(e => {
+                setLoading(false);
                 if(e instanceof SubmissionError){
                     dispatch(genericError(e.message))
                     setErrors(e.errors);
@@ -46,5 +50,5 @@ export function useCreate() {
                 throw new Error(e.message);
             });
     }
-    return {data, create, errors};
+    return {data, create, errors, loading};
 }

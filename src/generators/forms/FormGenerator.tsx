@@ -16,6 +16,7 @@ export interface Props{
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     model:Model;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
@@ -34,7 +35,7 @@ export interface Props{
 
 export const FormGenerator: React.FC<Props> = (props:Props) => {
 
-    const {submitHandler, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Save", isEdit } = props
+    const {submitHandler, loading, refresh, formContent,partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue,  errors, text= "Save", isEdit } = props
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref= useRef(null);
@@ -67,7 +68,7 @@ export const FormGenerator: React.FC<Props> = (props:Props) => {
     const configuration = new PropertyFieldConfiguration({viewElement:formContent, isEdit: isEdit});
 
     return <ValidatorForm ref={ref} className={classes.form} onSubmit={validationSubmitHandler} onError={()=>dispatch(genericError("Validation Error"))}>
-        <FormContent configuration={configuration} refresh={refresh} model={model} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} record={record} lockedFormValue={lockedFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler}/>
+        <FormContent configuration={configuration} refresh={refresh} model={model} referencesMap={referencesMap} refreshReferencesMap={refreshReferencesMap} setFormValue={setFormValue} formValue={formValue} record={record} lockedFormValue={lockedFormValue} errors={errors} partialSubmitHandler={partialSubmitHandler} submitHandler={submitHandler} loading={loading}/>
         {!formContent && isEdit && <div style={{margin: "10px 0"}}>
             <ButtonsHorizontalList>
                 <Button variant="contained" color="secondary" onClick={onClickHandler}>{text}</Button>

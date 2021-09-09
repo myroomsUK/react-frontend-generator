@@ -8,6 +8,7 @@ import {Errors} from "../errors/Errors";
 interface EmbeddedShowContentProps{
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean
     model: Model;
     record?: Record;
     referencesMap: any;

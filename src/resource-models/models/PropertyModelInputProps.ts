@@ -15,6 +15,7 @@ export interface PropertyPropsInterface{
     errors: Errors,
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     showLabel?: boolean;
@@ -30,12 +31,13 @@ export class PropertyModelInputProps{
     errors: Errors
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     refresh:()=>void
     showlabel?: boolean;
 
-    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, showLabel=true, refresh}:PropertyPropsInterface) {
+    constructor({model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler,loading, referencesMap, refreshReferencesMap, showLabel=true, refresh}:PropertyPropsInterface) {
         this.model = model;
         this.record = record;
         this.formValue = formValue;
@@ -43,6 +45,7 @@ export class PropertyModelInputProps{
         this.lockedFormValue = lockedFormValue;
         this.errors = errors;
         this.submitHandler = submitHandler;
+        this.loading = loading;
         this.partialSubmitHandler = partialSubmitHandler;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;

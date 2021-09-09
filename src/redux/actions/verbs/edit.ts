@@ -13,7 +13,7 @@ export function genericSuccess() {
     return { type: FEEDBACK_MESSAGE, message:"Edit Success", severity:"success"};
 }
 
-export function loading(resource:string, loading:boolean) {
+export function loadingMessage(resource:string, loading:boolean) {
     return { type: 'PATCH_LOADING', resource:resource, loading:loading };
 }
 
@@ -26,12 +26,15 @@ export function useEdit() {
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const edit = async (resource:string,id:number,values:any, sendDispatch:boolean = true) => {
         setErrors({});
+        setLoading(true);
         return fetch(`/api/${resource}/${id}`, { method: 'PATCH', body: JSON.stringify(values) })
             .then(response => {
-                if(sendDispatch)dispatch(loading(resource,false));
+                if(sendDispatch)dispatch(loadingMessage(resource,false));
+                setLoading(false);
                 return response.json();
             })
             .then(retrieved => {
@@ -40,7 +43,7 @@ export function useEdit() {
                 return retrieved;
             })
             .catch(e => {
-
+                setLoading(false);
                 if(e instanceof SubmissionError){
                     if(sendDispatch)dispatch(genericError(e.message))
                     setErrors(e.errors);
@@ -51,5 +54,5 @@ export function useEdit() {
                 throw new Error(e.message);
             });
     }
-    return {data, edit, errors};
+    return {data, edit, errors, loading};
 }

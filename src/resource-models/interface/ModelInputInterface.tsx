@@ -13,6 +13,7 @@ export interface ModelInputInterface{
     errors: Errors,
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap:()=>void;
     refresh: ()=>void;

@@ -9,7 +9,7 @@ import ButtonsHorizontalList from "../../rendering/components/buttons/ButtonsHor
 import { genericError } from "../../redux/actions/verbs/edit";
 import { PropertyFieldConfiguration } from "../../resource-models/configurations/PropertyFieldConfiguration";
 export const FormGenerator = (props) => {
-    const { submitHandler, refresh, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Save", isEdit } = props;
+    const { submitHandler, loading, refresh, formContent, partialSubmitHandler, model, referencesMap, refreshReferencesMap, formValue, record, lockedFormValue, setFormValue, errors, text = "Save", isEdit } = props;
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -35,5 +35,5 @@ export const FormGenerator = (props) => {
         }
     };
     const configuration = new PropertyFieldConfiguration({ viewElement: formContent, isEdit: isEdit });
-    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { configuration: configuration, refresh: refresh, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, record: record, lockedFormValue: lockedFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler }, void 0), !formContent && isEdit && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsx(ButtonsHorizontalList, { children: _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: onClickHandler }, { children: text }), void 0) }, void 0) }), void 0)] }), void 0);
+    return _jsxs(ValidatorForm, Object.assign({ ref: ref, className: classes.form, onSubmit: validationSubmitHandler, onError: () => dispatch(genericError("Validation Error")) }, { children: [_jsx(FormContent, { configuration: configuration, refresh: refresh, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, setFormValue: setFormValue, formValue: formValue, record: record, lockedFormValue: lockedFormValue, errors: errors, partialSubmitHandler: partialSubmitHandler, submitHandler: submitHandler, loading: loading }, void 0), !formContent && isEdit && _jsx("div", Object.assign({ style: { margin: "10px 0" } }, { children: _jsx(ButtonsHorizontalList, { children: _jsx(Button, Object.assign({ variant: "contained", color: "secondary", onClick: onClickHandler }, { children: text }), void 0) }, void 0) }), void 0)] }), void 0);
 };

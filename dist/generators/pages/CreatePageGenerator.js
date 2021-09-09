@@ -31,7 +31,7 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     const createPageToUse = useMemo(() => propCreatePage ? propCreatePage : createPage, [createPage, propCreatePage]);
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const [formValue, setFormValue] = useState(lockedFormValue);
-    const { create, errors: responseErrors } = useCreate();
+    const { create, errors: responseErrors, loading } = useCreate();
     const [errors, setErrors] = useState(new Errors([]));
     useEffect(() => {
         // @ts-ignore
@@ -43,20 +43,19 @@ export const Create = ({ propResourceName: resourceName, propCreatePage, lockedF
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [resourceName]);
     const submitHandler = () => create(resourceName, FormValue.toJson(formValue));
     useEffect(() => {
-        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
+        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, loading: loading, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
         setGenericCreateRender(newFormGenerator);
     }, [model, referencesMap, formValue, resourceName, errors]);
     return genericCreateRender;
 };
-export const GenericCreate = ({ model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue = new FormValue() }) => {
+export const GenericCreate = ({ model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue = new FormValue(), loading }) => {
     const createPageToUse = propCreatePage;
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
     const [formValue, setFormValue] = useState(lockedFormValue);
     const [genericCreateRender, setGenericCreateRender] = useState(_jsx("div", {}, void 0));
     useEffect(() => { setGenericCreateRender(_jsx("div", {}, void 0)); }, [model]);
-    const submitHandlerFinal = () => submitHandler(formValue);
     useEffect(() => {
-        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
+        const newFormGenerator = _jsx(FormGenerator, { submitHandler: submitHandler, loading: loading, partialSubmitHandler: submitHandler, model: model, referencesMap: referencesMap, refreshReferencesMap: refreshReferencesMap, formValue: formValue, lockedFormValue: lockedFormValue, setFormValue: setFormValue, errors: errors, formContent: createPageToUse, refresh: () => console.log("there is no refresh in creation") }, void 0);
         setGenericCreateRender(newFormGenerator);
     }, [model, referencesMap, formValue, errors]);
     return genericCreateRender;
@@ -64,7 +63,7 @@ export const GenericCreate = ({ model, submitHandler, errors = new Errors([]), p
 export const CreateResource = ({ propResourceName: resourceName, propCreatePage, lockedFormValue = new FormValue() }) => {
     const { model, createPage } = useGetResourceModel(resourceName);
     const createPageToUse = useMemo(() => propCreatePage ? propCreatePage : createPage, [createPage, propCreatePage]);
-    const { create, errors: responseErrors } = useCreate();
+    const { create, errors: responseErrors, loading } = useCreate();
     const [errors, setErrors] = useState(new Errors([]));
     useEffect(() => {
         // @ts-ignore
@@ -74,5 +73,5 @@ export const CreateResource = ({ propResourceName: resourceName, propCreatePage,
         setErrors(newErrors);
     }, [responseErrors]);
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () { return create(resourceName, FormValue.toJson(formValue)); });
-    return GenericCreate({ model: model, propCreatePage: createPageToUse, lockedFormValue, errors, submitHandler });
+    return GenericCreate({ model: model, propCreatePage: createPageToUse, lockedFormValue, errors, submitHandler, loading });
 };

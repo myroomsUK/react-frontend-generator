@@ -12,6 +12,7 @@ interface GenericProps {
     errors?: Errors;
     propCreatePage?: any;
     submitHandler: (formValue: FormValue) => Promise<any>;
+    loading: boolean;
     lockedFormValue?: FormValue;
 }
 export declare const Create: React.FC<Props>;

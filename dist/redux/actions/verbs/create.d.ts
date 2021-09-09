@@ -1,4 +1,4 @@
-export declare function loading(resource: string, loading: boolean): {
+export declare function loadingMessage(resource: string, loading: boolean): {
     type: string;
     resource: string;
     loading: boolean;
@@ -17,4 +17,5 @@ export declare function useCreate(): {
     data: never[];
     create: (resource: string, values: any) => Promise<any>;
     errors: {};
+    loading: boolean;
 };

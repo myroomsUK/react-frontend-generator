@@ -35,7 +35,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
     const [record, setRecord] = useState<Record>(initialValueRecord.current);
     const [errors, setErrors] = useState(new Errors([]));
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
-    const {edit, errors:responseErrors} = useEdit();
+    const {edit, errors:responseErrors, loading} = useEdit();
 
 
     useEffect(()=>{
@@ -70,13 +70,14 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             record:record,
             refresh:refresh,
             lockedFormValue: new FormValue(),
+            loading:loading,
             setFormValue: setFormValue,
             submitHandler:()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
             resourceId:propId.toString()
         }
-    },[model,referencesMap, formValue, record, resourceName, propId, refresh])
+    },[model,loading,referencesMap, formValue, record, resourceName, propId, refresh])
 
 
     useEffect(()=>{

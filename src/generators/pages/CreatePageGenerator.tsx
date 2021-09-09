@@ -19,6 +19,7 @@ interface GenericProps{
     errors?: Errors,
     propCreatePage?:any,
     submitHandler: (formValue:FormValue)=>Promise<any>,
+    loading: boolean,
     lockedFormValue?:FormValue
 }
 
@@ -27,7 +28,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState<FormValue>(lockedFormValue);
-    const {create, errors:responseErrors} = useCreate();
+    const {create, errors:responseErrors, loading} = useCreate();
     const [errors, setErrors] = useState(new Errors([]));
 
     useEffect(()=>
@@ -47,6 +48,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
     useEffect(()=>{
         const newFormGenerator = <FormGenerator
             submitHandler={submitHandler}
+            loading={loading}
             partialSubmitHandler={submitHandler}
             model={model}
             referencesMap={referencesMap}
@@ -66,18 +68,17 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
 
 }
 
-export const GenericCreate: React.FC<GenericProps> = ({model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue=new FormValue()}) => {
+export const GenericCreate: React.FC<GenericProps> = ({model, submitHandler, errors = new Errors([]), propCreatePage, lockedFormValue=new FormValue(), loading}) => {
     const createPageToUse:any = propCreatePage
     const {listings:referencesMap, updateListings:refreshReferencesMap} = UpdateListings();
     const [formValue, setFormValue] = useState<FormValue>(lockedFormValue);
     const [genericCreateRender, setGenericCreateRender] = useState(<div/>)
     useEffect(()=>{ setGenericCreateRender(<div/>)},[model])
 
-    const submitHandlerFinal = ()=> submitHandler(formValue);
-
     useEffect(()=>{
         const newFormGenerator = <FormGenerator
             submitHandler={submitHandler}
+            loading={loading}
             partialSubmitHandler={submitHandler}
             model={model}
             referencesMap={referencesMap}
@@ -101,7 +102,7 @@ export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, 
     const {model, createPage} = useGetResourceModel(resourceName);
     const createPageToUse:any = useMemo(()=> propCreatePage ? propCreatePage: createPage,[createPage, propCreatePage])
 
-    const {create, errors:responseErrors} = useCreate();
+    const {create, errors:responseErrors, loading} = useCreate();
     const [errors, setErrors] = useState(new Errors([]));
 
     useEffect(()=>{
@@ -113,5 +114,5 @@ export const CreateResource: React.FC<Props> = ({propResourceName:resourceName, 
 
     const submitHandler = async (formValue:FormValue)=>create(resourceName, FormValue.toJson(formValue));
 
-    return GenericCreate({model:model, propCreatePage:createPageToUse, lockedFormValue, errors, submitHandler})
+    return GenericCreate({model:model, propCreatePage:createPageToUse, lockedFormValue, errors, submitHandler, loading})
 }

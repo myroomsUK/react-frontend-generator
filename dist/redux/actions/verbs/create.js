@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { genericError } from "./edit";
 import { FEEDBACK_MESSAGE } from "../app/actions";
-export function loading(resource, loading) {
+export function loadingMessage(resource, loading) {
     return { type: 'CREATE_LOADING', resource: resource, loading: loading };
 }
 export function success(resource, created) {
@@ -24,13 +24,16 @@ export function genericSuccess() {
 }
 export function useCreate() {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const create = (resource, values) => __awaiter(this, void 0, void 0, function* () {
         setErrors({});
+        setLoading(true);
         return fetch(`/api/${resource}`, { method: 'POST', body: JSON.stringify(values) })
             .then(response => {
-            dispatch(loading(resource, false));
+            dispatch(loadingMessage(resource, false));
+            setLoading(false);
             return response.json();
         })
             .then(retrieved => {
@@ -39,6 +42,7 @@ export function useCreate() {
             return retrieved;
         })
             .catch(e => {
+            setLoading(false);
             if (e instanceof SubmissionError) {
                 dispatch(genericError(e.message));
                 setErrors(e.errors);
@@ -49,5 +53,5 @@ export function useCreate() {
             throw new Error(e.message);
         });
     });
-    return { data, create, errors };
+    return { data, create, errors, loading };
 }

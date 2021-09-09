@@ -1,8 +1,9 @@
 export class SingleSetInputFieldProps {
     constructor(props) {
-        const { hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord, refresh } = props;
+        const { hasError, errorMessage, value, inputHandler, errors, formValue, label, lockedFormValue, model, partialSubmitHandler, submitHandler, record, referencesMap, refreshReferencesMap, setFormValue, propertyRecord, refresh, loading } = props;
         this.hasError = hasError;
         this.errorMessage = errorMessage;
+        this.loading = loading;
         this.value = value;
         this.inputHandler = inputHandler;
         this.errors = errors;
@@ -22,9 +23,10 @@ export class SingleSetInputFieldProps {
 }
 export class EmbeddedSingleSetInputFieldProps {
     constructor(props) {
-        const { formValue, model, errors, lockedFormValue, partialSubmitHandler, referencesMap, refreshReferencesMap, submitHandler, record, setFormValue, refresh } = props;
+        const { formValue, model, errors, lockedFormValue, partialSubmitHandler, referencesMap, refreshReferencesMap, submitHandler, loading, record, setFormValue, refresh } = props;
         this.formValue = formValue;
         this.model = model;
+        this.loading = loading;
         this.errors = errors;
         this.formValue = formValue;
         this.lockedFormValue = lockedFormValue;
@@ -40,7 +42,7 @@ export class EmbeddedSingleSetInputFieldProps {
 }
 export class EmbeddedMultipleSetInputFieldProps {
     constructor(props) {
-        const { formValue, model, errors, lockedFormValue, partialSubmitHandler, referencesMap, refreshReferencesMap, submitHandler, record, setFormValue, refresh, inputElement } = props;
+        const { formValue, model, errors, lockedFormValue, partialSubmitHandler, loading, referencesMap, refreshReferencesMap, submitHandler, record, setFormValue, refresh, inputElement } = props;
         this.formValue = formValue;
         this.model = model;
         this.errors = errors;
@@ -48,6 +50,7 @@ export class EmbeddedMultipleSetInputFieldProps {
         this.lockedFormValue = lockedFormValue;
         this.model = model;
         this.partialSubmitHandler = partialSubmitHandler;
+        this.loading = loading;
         this.submitHandler = submitHandler;
         this.referencesMap = referencesMap;
         this.refreshReferencesMap = refreshReferencesMap;

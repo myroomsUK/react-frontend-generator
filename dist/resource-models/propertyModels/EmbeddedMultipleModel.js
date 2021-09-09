@@ -13,7 +13,7 @@ import { PropertyModelCore } from "../PropertyModelCore";
 import { EMBEDDED_SINGLE } from "../../generators/forms/inputs/InputTypes";
 export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     setInputField(props, configuration) {
-        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const { formValue, inputElement, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, loading, record, refresh } = props;
         const setParentFormValue = (values) => {
             setFormValue(formValue.updateFormValue(props.model.id, values));
         };
@@ -36,7 +36,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
             submitHandler: submitHandler,
             inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
             record: recordMap,
-            refresh: refresh
+            refresh: refresh,
+            loading: loading
         });
     }
     getInputField(props, configuration) {
@@ -52,7 +53,7 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
         const newProps = new EmbeddedMultipleSetInputFieldProps(props);
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps, configuration)] }, void 0);
     }
-    setOutputField({ record, model, setFormValue, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }, configuration) {
+    setOutputField({ record, model, setFormValue, loading, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }, configuration) {
         const setParentFormValue = (values) => { setFormValue(formValue.updateFormValue(model.id, values)); };
         const newErrors = this.manipulateErrors(errors);
         // @ts-ignore
@@ -74,7 +75,8 @@ export class EmbeddedMultipleModel extends EmbeddedPropertyModel {
                 inputElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
                 showElement: configuration === null || configuration === void 0 ? void 0 : configuration.viewElement,
                 record: recordMap,
-                refresh: refresh
+                refresh: refresh,
+                loading: loading
             }) }, void 0);
     }
     getRecord(jsonValue) {

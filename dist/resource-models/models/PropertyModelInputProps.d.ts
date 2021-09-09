@@ -13,6 +13,7 @@ export interface PropertyPropsInterface {
     errors: Errors;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     showLabel?: boolean;
@@ -27,11 +28,12 @@ export declare class PropertyModelInputProps {
     errors: Errors;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;
     refresh: () => void;
     showlabel?: boolean;
-    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, referencesMap, refreshReferencesMap, showLabel, refresh }: PropertyPropsInterface);
+    constructor({ model, record, formValue, setFormValue, lockedFormValue, errors, submitHandler, partialSubmitHandler, loading, referencesMap, refreshReferencesMap, showLabel, refresh }: PropertyPropsInterface);
     static createFromFieldProps(requestedName: string, props: ModelInputInterface): PropertyModelInputProps;
 }
 export interface PropertyModelInputInterface extends PropertyModelInputProps {

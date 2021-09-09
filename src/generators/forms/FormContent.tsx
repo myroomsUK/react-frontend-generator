@@ -10,6 +10,7 @@ import {PropertyFieldConfiguration} from "../../resource-models/configurations/P
 
 interface FormContentProps {
     submitHandler: (e:any) => Promise<any>;
+    loading: boolean,
     partialSubmitHandler: (e: any) => Promise<any>;
     model: Model;
     record?: Record;
@@ -32,7 +33,7 @@ interface FormContentProps {
  */
 export const FormContent: React.FC<FormContentProps> = (props) => {
 
-    const {partialSubmitHandler, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, configuration, record, refresh}=props;
+    const {partialSubmitHandler,loading, submitHandler, model, referencesMap ,refreshReferencesMap, formValue, lockedFormValue, setFormValue, errors, configuration, record, refresh}=props;
     if(configuration.viewElement){
         return React.cloneElement(configuration.viewElement, props);
     }
@@ -42,7 +43,7 @@ export const FormContent: React.FC<FormContentProps> = (props) => {
             .filter((propertyModel:PropertyModel) => propertyModel.write === true)
             .map((propertyModel:PropertyModel, index:number) => {
                 const {xs,md} = propertyModel;
-                const props = new InputProps({showLabel:true, model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
+                const props = new InputProps({showLabel:true, model:propertyModel,partialSubmitHandler, submitHandler, loading, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh})
                 return <Grid item xs={xs} md={md} key={index}>
                     {!lockedFormValue.has(propertyModel.id) && propertyModel.getPropertyField(props,configuration.isEdit)}
                 </Grid>

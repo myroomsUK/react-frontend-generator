@@ -10,7 +10,7 @@ export declare class EmbeddedMultipleModel extends EmbeddedPropertyModel {
     getInputField(props: EmbeddedMultipleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
     getInputOnChangeHandler({ formValue, setFormValue }: any): (vars: any) => void;
     getOutputField(props: EmbeddedMultipleInputPropsInterface, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
-    setOutputField({ record, model, setFormValue, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }: EmbeddedMultipleSetInputFieldProps, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
+    setOutputField({ record, model, setFormValue, loading, formValue, errors, referencesMap, refreshReferencesMap, refresh, partialSubmitHandler, submitHandler }: EmbeddedMultipleSetInputFieldProps, configuration?: PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null;
     getRecord(jsonValue: any[]): Map<number, Record>;
     getFormValue(value: Map<string, Record>): any;
     getEmbeddedSingleModel(id: string): EmbeddedSingleModel;

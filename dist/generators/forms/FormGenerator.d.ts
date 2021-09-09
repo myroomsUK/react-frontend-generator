@@ -7,6 +7,7 @@ export interface Props {
     resourceId?: string;
     submitHandler: (e: any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean;
     model: Model;
     referencesMap: Map<string, any>;
     refreshReferencesMap: () => void;

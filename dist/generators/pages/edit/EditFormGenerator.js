@@ -46,7 +46,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     const [record, setRecord] = useState(initialValueRecord.current);
     const [errors, setErrors] = useState(new Errors([]));
     const { listings: referencesMap, updateListings: refreshReferencesMap } = UpdateListings();
-    const { edit, errors: responseErrors } = useEdit();
+    const { edit, errors: responseErrors, loading } = useEdit();
     useEffect(() => {
         // @ts-ignore
         const { _error } = responseErrors, errorFields = __rest(responseErrors, ["_error"]);
@@ -78,13 +78,14 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             record: record,
             refresh: refresh,
             lockedFormValue: new FormValue(),
+            loading: loading,
             setFormValue: setFormValue,
             submitHandler: () => submitHandler(formValue),
             partialSubmitHandler: submitHandler,
             resourceName: resourceName,
             resourceId: propId.toString()
         };
-    }, [model, referencesMap, formValue, record, resourceName, propId, refresh]);
+    }, [model, loading, referencesMap, formValue, record, resourceName, propId, refresh]);
     useEffect(() => {
         if (formValue !== initialValue.current) {
             setGenericEditRender(_jsx(FormGenerator, Object.assign({}, editFormProps, { formContent: createEditPageToUse, isEdit: isEdit, errors: errors, text: "Save" }), void 0));

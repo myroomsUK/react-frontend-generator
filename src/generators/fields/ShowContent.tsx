@@ -10,6 +10,7 @@ export interface ShowContent{
     showElement?:  React.DetailedReactHTMLElement<any, any>
     submitHandler: (e:any) => Promise<any>;
     partialSubmitHandler: (e: any) => Promise<any>;
+    loading: boolean
     model: Model;
     record?: Record;
     referencesMap: any;
@@ -23,14 +24,14 @@ export interface ShowContent{
 }
 
 export const ShowContent: React.FC<ShowContent> = (props) => {
-    const {model, refresh, formValue, lockedFormValue, setFormValue, showElement, formContent, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler, errors, record} = props
+    const {model, refresh, formValue, lockedFormValue, setFormValue, showElement, formContent, referencesMap, refreshReferencesMap, partialSubmitHandler, submitHandler, errors, record, loading} = props
     if(showElement){
         return React.cloneElement(showElement, props);
     }
 
     return <Grid container spacing={2}>
         {model?.properties.filter(propertyModel => propertyModel.read === true).map((propertyModel, index) => {
-            const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh, showLabel:true})
+            const props = new InputProps({model:propertyModel,partialSubmitHandler, submitHandler, referencesMap ,refreshReferencesMap, formValue, record:record?.getPropertyRecord(propertyModel.id), lockedFormValue, setFormValue, errors, refresh, showLabel:true, loading:loading})
             const {xs, md, id} = propertyModel;
             return <Grid key={index} item xs={xs} md={md}>
                 {propertyModel.getOutputField(props)}

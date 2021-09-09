@@ -12,10 +12,12 @@ import {
     PropertyFieldConfiguration,
     PropertyFieldConfigurationInterface
 } from "../configurations/PropertyFieldConfiguration";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
-        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh} =  props;
+        const {formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh, loading} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
 
         // @ts-ignore
@@ -32,7 +34,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
             partialSubmitHandler:partialSubmitHandler,
             submitHandler:submitHandler,
             record: record ?? new Record(),
-            refresh: refresh
+            refresh: refresh,
+            loading:loading
         })
     }
 
@@ -52,7 +55,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
 
     setOutputField(props: EmbeddedSingleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
 
-        const {formValue, refreshReferencesMap, referencesMap,setFormValue, errors, lockedFormValue, partialSubmitHandler, submitHandler, record, refresh} =  props;
+        const {formValue, refreshReferencesMap, referencesMap,setFormValue, errors, lockedFormValue, partialSubmitHandler, submitHandler, record, refresh, loading} =  props;
         const setParentFormValue = (values:any) => setFormValue( formValue.updateFormValue(props.model.id, values));
 
         // @ts-ignore
@@ -73,7 +76,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel{
                 partialSubmitHandler: partialSubmitHandler,
                 submitHandler: submitHandler,
                 record: record ?? new Record(),
-                refresh: refresh
+                refresh: refresh,
+                loading: loading
             })}
             </>
     }

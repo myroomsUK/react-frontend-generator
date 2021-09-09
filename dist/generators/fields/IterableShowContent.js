@@ -5,7 +5,7 @@ import { Divider, List, ListItem } from "@material-ui/core";
 import { Record } from "../../resource-models/Record";
 import { FormValue } from "../../resource-models/formvalue/FormValue";
 import { ShowContent } from "./ShowContent";
-export const IterableShowContent = ({ model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true, inputElement, refresh, showElement }) => {
+export const IterableShowContent = ({ model, record, resourceName, setParentFormValue, formContent, referencesMap, refreshReferencesMap, formValueArray, label, partialSubmitHandler, submitHandler, errors, modifyOnlyLastElement = false, modifyRule = (formvalue) => true, inputElement, refresh, showElement, loading }) => {
     const recordsList = record;
     if (recordsList.size === 0) {
         return _jsx("div", { children: "No elements found" }, void 0);
@@ -21,7 +21,7 @@ export const IterableShowContent = ({ model, record, resourceName, setParentForm
                         const { xs, md, id } = propertyModel;
                         // @ts-ignore
                         const formValue = formValueArray[index];
-                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: _jsx(ShowContent, { setFormValue: setParentFormValue, refresh: refresh, record: (_a = record.get(index)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler }, index) }), void 0);
+                        return _jsx(Grid, Object.assign({ item: true, xs: xs, md: md }, { children: _jsx(ShowContent, { setFormValue: setParentFormValue, refresh: refresh, record: (_a = record.get(index)) !== null && _a !== void 0 ? _a : new Record(), lockedFormValue: new FormValue(), formContent: inputElement, referencesMap: referencesMap, model: model, refreshReferencesMap: refreshReferencesMap, partialSubmitHandler: partialSubmitHandler, formValue: formValue, errors: errors, submitHandler: submitHandler, loading: loading }, index) }), void 0);
                     }) }), void 0) }), void 0)) }), void 0);
     }
     ;

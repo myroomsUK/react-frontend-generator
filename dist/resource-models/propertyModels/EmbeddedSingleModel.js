@@ -9,7 +9,7 @@ import { Typography } from "@material-ui/core";
 import _ from "lodash";
 export class EmbeddedSingleModel extends EmbeddedPropertyModel {
     setInputField(props, configuration) {
-        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const { formValue, setFormValue, refreshReferencesMap, referencesMap, errors, partialSubmitHandler, submitHandler, record, refresh, loading } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         // @ts-ignore
         const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
@@ -24,7 +24,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
             partialSubmitHandler: partialSubmitHandler,
             submitHandler: submitHandler,
             record: record !== null && record !== void 0 ? record : new Record(),
-            refresh: refresh
+            refresh: refresh,
+            loading: loading
         });
     }
     getInputField(props, configuration) {
@@ -38,7 +39,7 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
         return _jsxs(_Fragment, { children: [showLabel && _jsx(Typography, { children: _.startCase(this.label) }, void 0), this.setOutputField(newProps, configuration)] }, void 0);
     }
     setOutputField(props, configuration) {
-        const { formValue, refreshReferencesMap, referencesMap, setFormValue, errors, lockedFormValue, partialSubmitHandler, submitHandler, record, refresh } = props;
+        const { formValue, refreshReferencesMap, referencesMap, setFormValue, errors, lockedFormValue, partialSubmitHandler, submitHandler, record, refresh, loading } = props;
         const setParentFormValue = (values) => setFormValue(formValue.updateFormValue(props.model.id, values));
         // @ts-ignore
         const finalFormValue = (formValue) ? formValue[this.id] : new FormValue();
@@ -55,7 +56,8 @@ export class EmbeddedSingleModel extends EmbeddedPropertyModel {
                 partialSubmitHandler: partialSubmitHandler,
                 submitHandler: submitHandler,
                 record: record !== null && record !== void 0 ? record : new Record(),
-                refresh: refresh
+                refresh: refresh,
+                loading: loading
             }) }, void 0);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
