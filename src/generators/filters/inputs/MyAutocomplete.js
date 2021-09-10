@@ -60,8 +60,7 @@ export function MyAutocomplete({modelItem, inheritedOptions, inheritedValue, var
             setInputValue(newInputValue);
         }}
         onChange={(event,value)=>autocompleteOnChange(value)}
-        getOptionLabel={getOptionLabel}
         style={{ width: "100%", minWidth:150 }}
-        renderInput={(params) => <TextField {...params} label={noLabel ? null: label} variant={variant} />}
+        renderInput={(params) => <TextField {...params} variant={variant} label={""} />}
     />
 }

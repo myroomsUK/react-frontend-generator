@@ -33,7 +33,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {useCookies} from "react-cookie";
 import {Record} from "../../resource-models/Record";
 import OperationButton from "../../rendering/components/buttons/OperationButton";
-import {PropertyFieldConfiguration} from "../../resource-models/configurations/PropertyFieldConfiguration";
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 
 export function EnhancedTableHead(props) {
@@ -63,7 +63,8 @@ export function EnhancedTableHead(props) {
                         <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
+                            /*onClick={createSortHandler(headCell.id)}*/
+                            hideSortIcon={true}
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
@@ -137,7 +138,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected,clearFilters, components, showClearFilters, collectionOperations, selected, setTable, allColumns = [] } = props;
+    const { numSelected,clearFilters, components, showClearFilters, collectionOperations, selected, setTable, allColumns = [] , title, getDataHandler} = props;
     const selectedColumns = allColumns.filter(column => column.inColumn === true)
     const handleChangeCols = (event)=>{
         const newValues = event.target.value
@@ -172,10 +173,11 @@ const EnhancedTableToolbar = (props) => {
                             </Paper>
                         ) : (
                             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                                {props.title}
+                                {title}
                             </Typography>
+
                         )}
-                        {setTable && <TextField
+                        { false && setTable && <TextField
                             id="standard-select-currency"
                             select
                             label=""
@@ -192,6 +194,7 @@ const EnhancedTableToolbar = (props) => {
                             ))}
                         </TextField> }
                         {(showClearFilters) && (<Button onClick={clearFilters}>Clear filters</Button>)}
+                        <IconButton onClick={() => getDataHandler()}><RefreshIcon></RefreshIcon></IconButton>
                         {(!!components.length) && <Tooltip title="Filter list">
                             <IconButton aria-label="filter list" onClick={handleChange}>
                                 <FilterListIcon />
@@ -387,7 +390,8 @@ export function FilterList({resourceName, filters:lockedFilters,  itemOperations
     return <GenericList
         data={rows}
         totalItems={data.totalItems}
-        getDataHandler={debounced}
+        getDataHandler={() => get(resourceName, page + 1, filters)}
+        getDataHandlerDebounced={debounced}
         loading={loading}
         page={page}
         setPage={setPage}
@@ -410,7 +414,7 @@ export function FilterList({resourceName, filters:lockedFilters,  itemOperations
 
 
 
-export function GenericList({data:rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable}) {
+export function GenericList({data:rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations = [], collectionOperations = [], headCells, columns, allColumns, setTable, getDataHandler, getDataHandlerDebounced}) {
     headCells = (itemOperations.length!==0) ?  headCells.concat({ numeric:true, disablePadding:false, label:"Actions"}) : headCells
     //get Data as a first step.
     const [localLoading, setLocalLoading] = useState(false);
@@ -466,7 +470,7 @@ export function GenericList({data:rows, totalItems, loading, page, setPage, sele
         <>
             <div>
                 <Paper>
-                    <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} />
+                    <EnhancedTableToolbar selected={selected} numSelected={selected.length} title={title} clearFilters={clearFilters} components={filterBarComponents} showClearFilters={showClearFilters} collectionOperations={collectionOperations} setTable={setTable} allColumns={allColumns} getDataHandler={getDataHandler} />
                     <TableContainer>
                         <Table
                             aria-labelledby="tableTitle"

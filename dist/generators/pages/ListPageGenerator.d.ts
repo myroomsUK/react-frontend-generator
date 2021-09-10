@@ -23,7 +23,7 @@ export function FilterList({ resourceName, filters: lockedFilters, itemOperation
     itemOperations?: any[] | undefined;
     collectionOperations?: any[] | undefined;
 }): JSX.Element;
-export function GenericList({ data: rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns, allColumns, setTable }: {
+export function GenericList({ data: rows, totalItems, loading, page, setPage, selected, setSelected, title, clearFilters, filterBarComponents, showClearFilters, components, itemOperations, collectionOperations, headCells, columns, allColumns, setTable, getDataHandler, getDataHandlerDebounced }: {
     data: any;
     totalItems: any;
     loading: any;
@@ -42,6 +42,8 @@ export function GenericList({ data: rows, totalItems, loading, page, setPage, se
     columns: any;
     allColumns: any;
     setTable: any;
+    getDataHandler: any;
+    getDataHandlerDebounced: any;
 }): JSX.Element;
 export function getOperationButton({ color, onClick, text, icon, visible }: {
     color: any;

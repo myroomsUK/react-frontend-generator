@@ -15,8 +15,6 @@ export const AutoCompleteFilter: React.FC<Props> = ({name,options, inputFieldOnC
     return <TextField
         style={{width:100}}
         select
-        placeholder="BOH"
-        label={name}
         name={name}
         id={name}
         value={(value)? value:""}

@@ -56,5 +56,5 @@ export function MyAutocomplete(_a) {
     };
     return _jsx(Autocomplete, { id: id, value: value, inputValue: inputValue, multiple: multiple, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => {
             setInputValue(newInputValue);
-        }, onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: getOptionLabel, style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { label: noLabel ? null : label, variant: variant }), void 0) }, void 0);
+        }, onChange: (event, value) => autocompleteOnChange(value), style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { variant: variant, label: "" }), void 0) }, void 0);
 }

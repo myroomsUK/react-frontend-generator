@@ -8,12 +8,7 @@ import {EmbeddedSingleSetInputFieldProps} from "../models/SetInputFieldProps";
 import {EmbeddedSingleInputProps, EmbeddedSingleInputPropsInterface} from "../models/InputProps";
 import {Typography} from "@material-ui/core";
 import _ from "lodash";
-import {
-    PropertyFieldConfiguration,
-    PropertyFieldConfigurationInterface
-} from "../configurations/PropertyFieldConfiguration";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
+import {PropertyFieldConfigurationInterface} from "../configurations/PropertyFieldConfiguration";
 
 export class EmbeddedSingleModel extends EmbeddedPropertyModel{
     setInputField(props: EmbeddedSingleSetInputFieldProps, configuration?:PropertyFieldConfigurationInterface): React.ReactElement<any, any> | null {
