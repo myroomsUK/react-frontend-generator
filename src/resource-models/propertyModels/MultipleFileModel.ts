@@ -5,6 +5,7 @@ import React from "react";
 import {InputOnChangeHandler} from "../PropertyModel";
 import {Record} from "../Record";
 import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
+import {createMapFromArray} from "../../utils/mapUtils";
 
 export class MultipleFileModel extends SinglePropertyModel{
     setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
@@ -18,8 +19,10 @@ export class MultipleFileModel extends SinglePropertyModel{
 
     getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
         return (vars:any) => {
+
             const [name, value] = vars;
-            setFormValue( formValue.updateFormValue(name, value));
+            const mapValue = createMapFromArray(value)
+            setFormValue( formValue.updateFormValue(name, mapValue));
         }
     }
 

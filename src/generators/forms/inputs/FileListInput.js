@@ -7,7 +7,7 @@ import ImageGrid from "../../../rendering/components/others/ImageGrid";
 import FileList from "../../../rendering/components/others/FileList";
 import ImageDialog from "../../fields/ImageDialog";
 
-export default function FileListInput({model, files, modelResourceName, resourceId, onChange, partialSubmitHandler, areImages=true, id= model.id, label = model.label, refresh, ...rest}) {
+export default function FileListInput({model, files, modelResourceName, resourceId, onChange, partialSubmitHandler, areImages=true, id= model.id, label = model.label, refresh, submitHandler, ...rest}) {
     const {remove} = useDeleteFile(modelResourceName);
     const creationTime = useRef(Date.now());
     const [uploadedLocalFiles, setUploadedLocalFiles] = useState([]);
@@ -21,28 +21,22 @@ export default function FileListInput({model, files, modelResourceName, resource
         setOpen(true);
     }
 
-
     useEffect(() => {
         if (files) {
-            const arrayFiles = Array.from(files.values());
+            const arrayFiles = Array.from(files.values())
+            setLocalFileListMap(new Map(files)); // maybe useless
             setTotalFiles(arrayFiles);
-            setLocalFileListMap(new Map(files));
         }
     }, [files])
-
-    useEffect(() => {
-        if(files){
-            setTotalFiles([...totalFiles, ...prepareImagesForRequest(uploadedLocalFiles)])
-        }
-    }, [uploadedLocalFiles])
 
     const prepareImagesForRequest = (uploadedFiles) => {
         if (!uploadedFiles.length) return [];
 
         const newDataFiles = [];
 
-        uploadedFiles.forEach((file) => {
+        uploadedFiles.forEach((file,index) => {
             const newFile = {
+                fid: `${Date.now()}${index}`,
                 base64: file.data,
                 title: file.file.name,
                 filename: file.file.name,
@@ -58,15 +52,19 @@ export default function FileListInput({model, files, modelResourceName, resource
             remove(resourceId, id, key);
             setLocalFileListMap(new Map(localFileListMap));
         }
-        onChange(id, createArrayFromMap(localFileListMap));
+        onChange([id, createArrayFromMap(localFileListMap)]);
         refresh();
     }
     const filesList = createArrayFromMap(localFileListMap).map((file, index) => {
         file.actionIcon = <CustomDeleteButton icon onClick={() => deleteForm(file.id)}/>
         return file;
     })
+
     const addFile = (files) => {
         setUploadedLocalFiles([...uploadedLocalFiles, ...files])
+        const newTotalFiles = [...totalFiles, ...prepareImagesForRequest([...uploadedLocalFiles, ...files])]
+        setTotalFiles(newTotalFiles)
+        onChange([id, newTotalFiles ]);
     }
     const removeFile = (file, index) => {
         let files = [...uploadedLocalFiles];
@@ -74,9 +72,8 @@ export default function FileListInput({model, files, modelResourceName, resource
         setUploadedLocalFiles(files);
     }
     const saveImages = () => {
-        partialSubmitHandler({[id]: totalFiles}).then(response =>
+        submitHandler().then(response =>
         {
-            onChange(id, response[id]);
             setUploadedLocalFiles([]);
             refresh()
         }).catch(e => console.log(e));

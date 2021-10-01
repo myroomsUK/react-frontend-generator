@@ -2,6 +2,7 @@ import { SinglePropertyModel } from "./SinglePropertyModel";
 import FileListInput from "../../generators/forms/inputs/FileListInput";
 import MultipleFileShow from "../../generators/fields/outputs/MultipleFileShow";
 import { Record } from "../Record";
+import { createMapFromArray } from "../../utils/mapUtils";
 export class MultipleFileModel extends SinglePropertyModel {
     setInputField(props) {
         const { formValue, setFormValue, errors } = props;
@@ -13,7 +14,8 @@ export class MultipleFileModel extends SinglePropertyModel {
     getInputOnChangeHandler({ formValue, setFormValue }) {
         return (vars) => {
             const [name, value] = vars;
-            setFormValue(formValue.updateFormValue(name, value));
+            const mapValue = createMapFromArray(value);
+            setFormValue(formValue.updateFormValue(name, mapValue));
         };
     }
     setOutputField(props) {
