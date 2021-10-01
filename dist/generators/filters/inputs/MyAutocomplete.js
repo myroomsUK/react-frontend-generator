@@ -46,15 +46,7 @@ export function MyAutocomplete(_a) {
             rest.onChange(id, item.id);
         }
     };
-    const getOptionLabel = (option) => {
-        if (value === null) {
-            return option["label"];
-        }
-        else {
-            return option["label"];
-        }
-    };
     return _jsx(Autocomplete, { id: id, value: value, inputValue: inputValue, multiple: multiple, disableClearable: true, options: localOptions, onInputChange: (event, newInputValue) => {
             setInputValue(newInputValue);
-        }, onChange: (event, value) => autocompleteOnChange(value), style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { variant: variant, label: "" }), void 0) }, void 0);
+        }, onChange: (event, value) => autocompleteOnChange(value), getOptionLabel: (option) => option["label"], style: { width: "100%", minWidth: 150 }, renderInput: (params) => _jsx(TextField, Object.assign({}, params, { variant: variant, label: "" }), void 0) }, void 0);
 }
