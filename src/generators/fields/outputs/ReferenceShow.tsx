@@ -8,7 +8,7 @@ export default function ReferenceShow({model,record}:SingleSetInputFieldProps){
         const id = (typeof record==="number") ? record : record["id"]
         // @ts-ignore
         const name = (typeof record==="number") ? record : record[model.optionText]
-        return <Link color="secondary" href={`/${model.resourceName}/${id}/show`}>{name}</Link>
+        return <Link color="secondary" href={`/${model.resourceName}/${id}/edit`}>{name}</Link>
     }
     return <></>
 }

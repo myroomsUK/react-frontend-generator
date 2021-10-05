@@ -6,7 +6,7 @@ export default function ReferenceShow({ model, record }) {
         const id = (typeof record === "number") ? record : record["id"];
         // @ts-ignore
         const name = (typeof record === "number") ? record : record[model.optionText];
-        return _jsx(Link, Object.assign({ color: "secondary", href: `/${model.resourceName}/${id}/show` }, { children: name }), void 0);
+        return _jsx(Link, Object.assign({ color: "secondary", href: `/${model.resourceName}/${id}/edit` }, { children: name }), void 0);
     }
     return _jsx(_Fragment, {}, void 0);
 }
