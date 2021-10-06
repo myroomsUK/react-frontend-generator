@@ -67,7 +67,7 @@ export default function AddImageDialog({open,setOpen, onChange, fileObjects, onA
                     Add image
                 </DialogTitle>
                 <DialogContent dividers>
-                    <DropzoneAreaBase dropzoneText={"Upload images"} onChange={onChange} filesLimit={10}
+                    <DropzoneAreaBase maxFileSize={40000000000} dropzoneText={"Upload images"} onChange={onChange} filesLimit={10}
                                       fileObjects={fileObjects} onAdd={onAdd} onDelete={onDelete}/>
                 </DialogContent>
                 <DialogActions>
