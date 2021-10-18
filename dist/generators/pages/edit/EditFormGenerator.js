@@ -63,7 +63,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
     const [genericEditRender, setGenericEditRender] = useState(_jsx("div", {}, void 0));
     const submitHandler = (formValue) => __awaiter(void 0, void 0, void 0, function* () {
         return edit(resourceName, propId, FormValue.toJson(formValue)).then((response) => {
-            refresh();
+            return response;
         });
     }); /*.then(response => {
         const record = Record.createFromJson(response, model)
