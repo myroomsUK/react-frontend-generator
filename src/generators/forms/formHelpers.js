@@ -19,7 +19,7 @@ export function initializeReferenceFields(model){
 }
 
 export function getReferenceKeys(model){
-    return model.properties.filter((item)=> item.type ===REFERENCE);
+    return model.properties.filter((item)=> item.filterType ===REFERENCE);
 }
 
 

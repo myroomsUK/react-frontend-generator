@@ -6,6 +6,9 @@ import {updateResourceListings} from "../redux/actions/app/actions";
 import {Listings} from "../resource-models/listings/Listings";
 import {Listing} from "../resource-models/listings/Listing";
 
+/*
+This is used for filters
+ */
 export function GetListingsMap(model){
     const {getListingGroup} = useGetListingGroup();
     const initialReferenceMap = useMemo(()=>{return initializeReferenceFields(model)},[model]); //map with all reference fields

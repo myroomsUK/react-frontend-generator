@@ -20,7 +20,7 @@ export function initializeReferenceFields(model) {
     return referenceMap;
 }
 export function getReferenceKeys(model) {
-    return model.properties.filter((item) => item.type === REFERENCE);
+    return model.properties.filter((item) => item.filterType === REFERENCE);
 }
 export function getFormValueFromRecord(record, model) {
     const formattedFormValue = record;
