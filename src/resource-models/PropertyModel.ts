@@ -12,6 +12,7 @@ export type InputType ="id"| "boolean" | "reference" | "embedded_single" | "embe
 export interface PropertyModel{
     id:string;
     type:InputType;
+    filterType:InputType;
     label:string;
     modelResourceName: string;
     validators?: string[];
@@ -48,6 +49,7 @@ export type Option = {
 export abstract class PropertyModel {
     id: string;
     type: InputType;
+    filterType:InputType;
     label: string;
     validators?: string[];
     errorMessages?: string[];
@@ -62,9 +64,10 @@ export abstract class PropertyModel {
     modelResourceName: string;
 
     constructor(id: string, rest: any) {
-        const {type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName} = rest;
+        const {type,filterType, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName} = rest;
         this.id = id;
         this.type = type;
+        this.filterType=filterType;
         this.label = _.startCase(label);
         this.validators = validators;
         this.errorMessages = errorMessages;

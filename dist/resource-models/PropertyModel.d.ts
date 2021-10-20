@@ -8,6 +8,7 @@ export declare type InputType = "id" | "boolean" | "reference" | "embedded_singl
 export interface PropertyModel {
     id: string;
     type: InputType;
+    filterType: InputType;
     label: string;
     modelResourceName: string;
     validators?: string[];
@@ -42,6 +43,7 @@ export declare type Option = {
 export declare abstract class PropertyModel {
     id: string;
     type: InputType;
+    filterType: InputType;
     label: string;
     validators?: string[];
     errorMessages?: string[];

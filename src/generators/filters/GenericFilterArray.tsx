@@ -35,7 +35,7 @@ export const GenericFilterArray = ({model, modelFilters, inputFieldOnChange, ref
                 }
                 case "text": {
                         const propertyModel = model.getProperty(name);
-                        if (propertyModel.type === "reference") {
+                        if (propertyModel.filterType === "reference") {
                             const options = referencesMap.get(propertyModel.resourceName);
                             return {
                                 name: name,

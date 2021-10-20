@@ -4,9 +4,10 @@ import _ from "lodash";
  */
 export class PropertyModel {
     constructor(id, rest) {
-        const { type, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName } = rest;
+        const { type, filterType, label, validators = [], errorMessages = [], resourceName, optionText, form, xs = 12, md = 6, write = false, read = false, colorMap, modelResourceName } = rest;
         this.id = id;
         this.type = type;
+        this.filterType = filterType;
         this.label = _.startCase(label);
         this.validators = validators;
         this.errorMessages = errorMessages;
