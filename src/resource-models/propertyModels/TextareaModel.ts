@@ -6,18 +6,12 @@ import {SingleSetInputFieldProps} from "../models/SetInputFieldProps";
 
 export class TextareaModel extends SinglePropertyModel{
     setInputField(props: SingleSetInputFieldProps): React.ReactElement<any, any> | null {
-        const {formValue, inputHandler} = props;
-        const propsWithModel = {...props, model:this, onClick:inputHandler}
+        const propsWithModel = {...props, model:this, onClick:this.getInputOnChangeHandler(props)}
         return TextareaInput(propsWithModel);
     }
 
     getInputOnChangeHandler({formValue, setFormValue}: InputOnChangeHandler): any {
-        return (vars:any)=>{
-            const target = vars.target;
-            let value = target.value;
-            const name = target.id;
-            setFormValue( formValue.updateFormValue(name, value));
-        }
+        return (value:any)=>setFormValue( formValue.updateFormValue(this.id, value));
     }
 
     setOutputField(props: any): React.ReactElement<any, any> | null {

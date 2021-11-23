@@ -1,18 +1,16 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { CustomTextValidator } from "../formHelpers";
+import MyCkEditor from "./CkEditor/MyCkEditor";
 export const TextareaInput = ({ model, label = model.label, onClick, value, hasError, errorMessage, adornment }) => {
-    const [localValue, setLocalValue] = useState(value);
-    useEffect(() => setLocalValue(value), [value]);
+    const [localValue, setLocalValue] = useState("");
+    useEffect(() => {
+        setLocalValue(value !== null && value !== void 0 ? value : "");
+    }, [value]);
     const debounced = useDebouncedCallback(onClick, 1000);
-    const localOnChange = (event) => {
-        const target = event.target;
-        let value = target.value;
-        setLocalValue(value);
-        debounced(event);
+    const localOnChange = (data) => {
+        setLocalValue(data);
+        debounced(data);
     };
-    return _jsx(CustomTextValidator, { autoComplete: "nope", error: hasError, name: model.id, id: model.id, errorMessage: errorMessage, variant: "outlined", label: label, onChange: localOnChange, value: localValue, style: { width: "100%" }, multiline: true, rows: 4, InputProps: {
-            startAdornment: adornment
-        } }, void 0);
+    return _jsx(MyCkEditor, { value: localValue, onChange: localOnChange }, void 0);
 };

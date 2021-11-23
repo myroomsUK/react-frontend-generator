@@ -3,17 +3,11 @@ import { TextareaInput } from "../../generators/forms/inputs/TextareaInput";
 import TextareaShow from "../../generators/fields/outputs/TextareaShow";
 export class TextareaModel extends SinglePropertyModel {
     setInputField(props) {
-        const { formValue, inputHandler } = props;
-        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, onClick: inputHandler });
+        const propsWithModel = Object.assign(Object.assign({}, props), { model: this, onClick: this.getInputOnChangeHandler(props) });
         return TextareaInput(propsWithModel);
     }
     getInputOnChangeHandler({ formValue, setFormValue }) {
-        return (vars) => {
-            const target = vars.target;
-            let value = target.value;
-            const name = target.id;
-            setFormValue(formValue.updateFormValue(name, value));
-        };
+        return (value) => setFormValue(formValue.updateFormValue(this.id, value));
     }
     setOutputField(props) {
         return TextareaShow(props);
