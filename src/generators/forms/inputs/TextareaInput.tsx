@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDebouncedCallback} from "use-debounce";
 import {TextareaModel} from "../../../resource-models/propertyModels/TextareaModel";
 import MyCkEditor from "./CkEditor/MyCkEditor";
+import {Grid} from "@material-ui/core";
 
 
 interface Props{
@@ -18,9 +19,11 @@ interface Props{
 
 export const TextareaInput: React.FC<Props> = ({model, label = model.label, onClick, value, hasError, errorMessage, adornment}) => {
 
-    const [localValue, setLocalValue] = useState("");
+    const [localValue, setLocalValue] = useState(value);
     useEffect(()=>{
-            setLocalValue(value ?? "")
+        if(value){
+            setLocalValue(value)
+        }
     },[value])
 
     const debounced = useDebouncedCallback(
@@ -33,5 +36,10 @@ export const TextareaInput: React.FC<Props> = ({model, label = model.label, onCl
         debounced(data)
     }
 
-    return <MyCkEditor value={localValue} onChange={localOnChange}/>
+    return <Grid container spacing={2}>
+        <Grid item xs={12}>{label}</Grid>
+        <Grid item xs={12}>
+            <MyCkEditor value={localValue} onChange={localOnChange}/>
+        </Grid>
+    </Grid>
 };
