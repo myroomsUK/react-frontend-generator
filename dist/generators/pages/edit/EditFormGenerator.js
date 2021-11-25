@@ -82,7 +82,7 @@ export const EditForm = ({ record: recordJson, propId, propResourceName, propEdi
             lockedFormValue: new FormValue(),
             loading: loading,
             setFormValue: setFormValue,
-            submitHandler: () => submitHandler(formValue),
+            submitHandler: () => __awaiter(void 0, void 0, void 0, function* () { return submitHandler(formValue); }),
             partialSubmitHandler: submitHandler,
             resourceName: resourceName,
             resourceId: propId.toString()

@@ -74,7 +74,7 @@ export const EditForm: React.FC<EditFormGeneratorProps> = ({record:recordJson, p
             lockedFormValue: new FormValue(),
             loading:loading,
             setFormValue: setFormValue,
-            submitHandler:()=>submitHandler(formValue),
+            submitHandler: async ()=>submitHandler(formValue),
             partialSubmitHandler:submitHandler,
             resourceName: resourceName,
             resourceId:propId.toString()
