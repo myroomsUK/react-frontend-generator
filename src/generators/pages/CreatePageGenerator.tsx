@@ -61,7 +61,7 @@ export const Create: React.FC<Props> = ({propResourceName:resourceName, propCrea
             refresh={()=>console.log("there is no refresh in creation")}>
         </FormGenerator>
         setGenericCreateRender(newFormGenerator);
-    }, [model, referencesMap, formValue, resourceName, errors])
+    }, [model, referencesMap, formValue, resourceName, errors, loading])
 
 
     return genericCreateRender;
