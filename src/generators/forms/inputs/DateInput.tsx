@@ -22,13 +22,13 @@ export interface DateInput{
 }
 
 
-export default function ({model,name = model.id, onClick, value, label = model.label, hasError ,errorMessage}:DateInput){
+export default function (props:DateInput){
+    const {model,name = model.id, onClick, value, label = model.label, hasError ,errorMessage} = props
     const date = (value !== undefined) ? moment(value, "YYYY-MM-DD") : null;
 
     const handleDateChange = (date: MaterialUiPickersDate | null) => {
         onClick({target:{value:date?.format("YYYY-MM-DD"), name:name}}, date);
     };
-
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
                 <DatePicker
@@ -54,6 +54,6 @@ export default function ({model,name = model.id, onClick, value, label = model.l
 export const DateValidationInput: React.FC<TextFieldProps> = (props) => {
     const newProps = {...props, style:{width:"100%"}, variant:"outlined"};
     // @ts-ignore
-    return <CustomTextValidator {...newProps}/>
+    return <CustomTextValidator errorMessage={props.helperText} {...newProps}/>
 }
 
